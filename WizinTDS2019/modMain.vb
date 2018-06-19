@@ -85,10 +85,10 @@ Module modMain
         End If
         ''** here the commented code ends
         'only one instance of the program should run on one machine..
-        If PrevInstance() Then
-            MsgBox("This Program is already running", vbCritical, "Double Instance of " & Application.ProductName)
-            End
-        End If
+        'If PrevInstance() Then
+        '    MsgBox("This Program is already running", vbCritical, "Double Instance of " & Application.ProductName)
+        '    End
+        'End If
         'set the connection to the database,
         'Single user connection string, uses mdb exclusively.
         'Cnn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & App.Path & "\Database\easyTDS.mdb;Mode=Share Deny Read|Share Deny Write;Persist Security Info=False"
