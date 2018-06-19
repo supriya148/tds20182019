@@ -101,6 +101,8 @@ Partial Class FRM16Detail
         Me.txtgrd80CCGCal = New System.Windows.Forms.TextBox()
         Me.txtgrd80CCal = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.txtAllTax = New System.Windows.Forms.TextBox()
+        Me.Label54 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -146,12 +148,11 @@ Partial Class FRM16Detail
         Me.txtdesig = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel15 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txt16ToDt = New System.Windows.Forms.MaskedTextBox()
         Me.txt16AY = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.txt16ToDt = New System.Windows.Forms.PictureBox()
-        Me.txt16FrmDt = New System.Windows.Forms.PictureBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.txt16FrmDt = New System.Windows.Forms.MaskedTextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel18 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -175,16 +176,15 @@ Partial Class FRM16Detail
         Me.txt16CoAdd2 = New System.Windows.Forms.TextBox()
         Me.txt16CoAdd1 = New System.Windows.Forms.TextBox()
         Me.grdPRNdet = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.tabForm16 = New System.Windows.Forms.TabControl()
         Me.TableLayoutPanel16 = New System.Windows.Forms.TableLayoutPanel()
         Me.popupmenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnucontext = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label54 = New System.Windows.Forms.Label()
-        Me.txtAllTax = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage5.SuspendLayout()
         CType(Me.grd16ManualTax, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage4.SuspendLayout()
@@ -213,8 +213,6 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel14.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel15.SuspendLayout()
-        CType(Me.txt16ToDt, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txt16FrmDt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel18.SuspendLayout()
         Me.TableLayoutPanel17.SuspendLayout()
@@ -315,7 +313,7 @@ Partial Class FRM16Detail
         Me.TabPage5.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(670, 389)
+        Me.TabPage5.Size = New System.Drawing.Size(691, 434)
         Me.TabPage5.TabIndex = 5
         Me.TabPage5.Text = "Manual Tax"
         '
@@ -348,7 +346,7 @@ Partial Class FRM16Detail
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(670, 389)
+        Me.TabPage4.Size = New System.Drawing.Size(691, 434)
         Me.TabPage4.TabIndex = 4
         Me.TabPage4.Text = "Tax Deposited"
         '
@@ -380,7 +378,7 @@ Partial Class FRM16Detail
         Me.TabPage3.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(670, 389)
+        Me.TabPage3.Size = New System.Drawing.Size(691, 434)
         Me.TabPage3.TabIndex = 3
         Me.TabPage3.Text = "Tax & Summary"
         '
@@ -550,7 +548,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel1.ColumnCount = 3
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.89457!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.10543!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 419.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 431.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.txtTotTax, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.Label39, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label43, 0, 4)
@@ -580,7 +578,7 @@ Partial Class FRM16Detail
         'txtTotTax
         '
         Me.txtTotTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotTax.Location = New System.Drawing.Point(59, 131)
+        Me.txtTotTax.Location = New System.Drawing.Point(47, 131)
         Me.txtTotTax.MaxLength = 15
         Me.txtTotTax.Name = "txtTotTax"
         Me.txtTotTax.Size = New System.Drawing.Size(206, 21)
@@ -591,7 +589,7 @@ Partial Class FRM16Detail
         Me.Label39.AutoSize = True
         Me.Label39.Location = New System.Drawing.Point(6, 3)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(13, 29)
+        Me.Label39.Size = New System.Drawing.Size(8, 29)
         Me.Label39.TabIndex = 3
         Me.Label39.Text = "Total Taxable Income"
         '
@@ -600,7 +598,7 @@ Partial Class FRM16Detail
         Me.Label43.AutoSize = True
         Me.Label43.Location = New System.Drawing.Point(6, 128)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(13, 27)
+        Me.Label43.Size = New System.Drawing.Size(8, 27)
         Me.Label43.TabIndex = 8
         Me.Label43.Text = "Total Tax Payble"
         '
@@ -609,14 +607,14 @@ Partial Class FRM16Detail
         Me.Label40.AutoSize = True
         Me.Label40.Location = New System.Drawing.Point(6, 35)
         Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(13, 27)
+        Me.Label40.Size = New System.Drawing.Size(8, 27)
         Me.Label40.TabIndex = 2
         Me.Label40.Text = "Tax on Total Income"
         '
         'txtEd
         '
         Me.txtEd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtEd.Location = New System.Drawing.Point(59, 100)
+        Me.txtEd.Location = New System.Drawing.Point(47, 100)
         Me.txtEd.MaxLength = 15
         Me.txtEd.Name = "txtEd"
         Me.txtEd.Size = New System.Drawing.Size(206, 21)
@@ -625,7 +623,7 @@ Partial Class FRM16Detail
         'txtSurcharge
         '
         Me.txtSurcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSurcharge.Location = New System.Drawing.Point(59, 68)
+        Me.txtSurcharge.Location = New System.Drawing.Point(47, 68)
         Me.txtSurcharge.MaxLength = 15
         Me.txtSurcharge.Name = "txtSurcharge"
         Me.txtSurcharge.Size = New System.Drawing.Size(206, 21)
@@ -636,7 +634,7 @@ Partial Class FRM16Detail
         Me.Label41.AutoSize = True
         Me.Label41.Location = New System.Drawing.Point(6, 65)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(13, 29)
+        Me.Label41.Size = New System.Drawing.Size(8, 29)
         Me.Label41.TabIndex = 4
         Me.Label41.Text = "Surcharge"
         '
@@ -645,14 +643,14 @@ Partial Class FRM16Detail
         Me.Label42.AutoSize = True
         Me.Label42.Location = New System.Drawing.Point(6, 97)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(13, 28)
+        Me.Label42.Size = New System.Drawing.Size(8, 28)
         Me.Label42.TabIndex = 6
         Me.Label42.Text = "Education Cess"
         '
         'txtTax
         '
         Me.txtTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTax.Location = New System.Drawing.Point(59, 38)
+        Me.txtTax.Location = New System.Drawing.Point(47, 38)
         Me.txtTax.MaxLength = 15
         Me.txtTax.Name = "txtTax"
         Me.txtTax.Size = New System.Drawing.Size(206, 21)
@@ -661,34 +659,34 @@ Partial Class FRM16Detail
         'txt16Tax
         '
         Me.txt16Tax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Tax.Location = New System.Drawing.Point(28, 38)
+        Me.txt16Tax.Location = New System.Drawing.Point(23, 38)
         Me.txt16Tax.MaxLength = 15
         Me.txt16Tax.Name = "txt16Tax"
-        Me.txt16Tax.Size = New System.Drawing.Size(22, 21)
+        Me.txt16Tax.Size = New System.Drawing.Size(15, 21)
         Me.txt16Tax.TabIndex = 2
         '
         'txt16Surcharge
         '
         Me.txt16Surcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Surcharge.Location = New System.Drawing.Point(28, 68)
+        Me.txt16Surcharge.Location = New System.Drawing.Point(23, 68)
         Me.txt16Surcharge.MaxLength = 15
         Me.txt16Surcharge.Name = "txt16Surcharge"
-        Me.txt16Surcharge.Size = New System.Drawing.Size(22, 21)
+        Me.txt16Surcharge.Size = New System.Drawing.Size(15, 21)
         Me.txt16Surcharge.TabIndex = 4
         '
         'txt16EduCess
         '
         Me.txt16EduCess.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16EduCess.Location = New System.Drawing.Point(28, 100)
+        Me.txt16EduCess.Location = New System.Drawing.Point(23, 100)
         Me.txt16EduCess.MaxLength = 15
         Me.txt16EduCess.Name = "txt16EduCess"
-        Me.txt16EduCess.Size = New System.Drawing.Size(22, 21)
+        Me.txt16EduCess.Size = New System.Drawing.Size(15, 21)
         Me.txt16EduCess.TabIndex = 6
         '
         'Label51
         '
         Me.Label51.AutoSize = True
-        Me.Label51.Location = New System.Drawing.Point(59, 3)
+        Me.Label51.Location = New System.Drawing.Point(47, 3)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(202, 29)
         Me.Label51.TabIndex = 25
@@ -697,19 +695,19 @@ Partial Class FRM16Detail
         'txtincome
         '
         Me.txtincome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtincome.Location = New System.Drawing.Point(28, 6)
+        Me.txtincome.Location = New System.Drawing.Point(23, 6)
         Me.txtincome.MaxLength = 15
         Me.txtincome.Name = "txtincome"
-        Me.txtincome.Size = New System.Drawing.Size(22, 21)
+        Me.txtincome.Size = New System.Drawing.Size(15, 21)
         Me.txtincome.TabIndex = 1
         '
         'txt16TotalTax
         '
         Me.txt16TotalTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16TotalTax.Location = New System.Drawing.Point(28, 131)
+        Me.txt16TotalTax.Location = New System.Drawing.Point(23, 131)
         Me.txt16TotalTax.MaxLength = 15
         Me.txt16TotalTax.Name = "txt16TotalTax"
-        Me.txt16TotalTax.Size = New System.Drawing.Size(22, 21)
+        Me.txt16TotalTax.Size = New System.Drawing.Size(15, 21)
         Me.txt16TotalTax.TabIndex = 0
         '
         'cmdCopyCal
@@ -761,7 +759,7 @@ Partial Class FRM16Detail
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(670, 389)
+        Me.TabPage1.Size = New System.Drawing.Size(691, 434)
         Me.TabPage1.TabIndex = 2
         Me.TabPage1.Text = "VI-A Deductions"
         '
@@ -1054,9 +1052,25 @@ Partial Class FRM16Detail
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(670, 434)
+        Me.TabPage2.Size = New System.Drawing.Size(691, 434)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Salary Income"
+        '
+        'txtAllTax
+        '
+        Me.txtAllTax.Location = New System.Drawing.Point(488, 411)
+        Me.txtAllTax.Name = "txtAllTax"
+        Me.txtAllTax.Size = New System.Drawing.Size(125, 21)
+        Me.txtAllTax.TabIndex = 35
+        '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.Location = New System.Drawing.Point(330, 412)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(152, 15)
+        Me.Label54.TabIndex = 34
+        Me.Label54.Text = "Taxable Salary All Qtrs"
         '
         'TableLayoutPanel10
         '
@@ -1447,7 +1461,7 @@ Partial Class FRM16Detail
         Me.tabBasicData.Location = New System.Drawing.Point(4, 22)
         Me.tabBasicData.Name = "tabBasicData"
         Me.tabBasicData.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabBasicData.Size = New System.Drawing.Size(670, 389)
+        Me.tabBasicData.Size = New System.Drawing.Size(691, 434)
         Me.tabBasicData.TabIndex = 0
         Me.tabBasicData.Text = "Basic Data"
         '
@@ -1455,9 +1469,9 @@ Partial Class FRM16Detail
         '
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel14)
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
-        Me.GroupBox2.Location = New System.Drawing.Point(410, 6)
+        Me.GroupBox2.Location = New System.Drawing.Point(419, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(254, 240)
+        Me.GroupBox2.Size = New System.Drawing.Size(269, 388)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Employee Details"
@@ -1466,8 +1480,8 @@ Partial Class FRM16Detail
         '
         Me.TableLayoutPanel14.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
         Me.TableLayoutPanel14.ColumnCount = 2
-        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.76271!))
-        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.23729!))
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.01195!))
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.98805!))
         Me.TableLayoutPanel14.Controls.Add(Me.Label9, 0, 0)
         Me.TableLayoutPanel14.Controls.Add(Me.Label10, 0, 1)
         Me.TableLayoutPanel14.Controls.Add(Me.txt16pan, 1, 1)
@@ -1475,9 +1489,9 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel14.Location = New System.Drawing.Point(9, 22)
         Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
         Me.TableLayoutPanel14.RowCount = 2
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.36842!))
-        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.63158!))
-        Me.TableLayoutPanel14.Size = New System.Drawing.Size(239, 73)
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.19277!))
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.80723!))
+        Me.TableLayoutPanel14.Size = New System.Drawing.Size(254, 86)
         Me.TableLayoutPanel14.TabIndex = 0
         '
         'Label9
@@ -1487,25 +1501,25 @@ Partial Class FRM16Detail
         Me.Label9.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label9.Location = New System.Drawing.Point(6, 3)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(90, 30)
+        Me.Label9.Size = New System.Drawing.Size(106, 32)
         Me.Label9.TabIndex = 2
-        Me.Label9.Text = "Designation of the " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Employee"
+        Me.Label9.Text = "Designation of the Employee"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label10.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label10.Location = New System.Drawing.Point(6, 36)
+        Me.Label10.Location = New System.Drawing.Point(6, 43)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(82, 34)
+        Me.Label10.Size = New System.Drawing.Size(106, 32)
         Me.Label10.TabIndex = 5
-        Me.Label10.Text = "PAN No. of the      " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Employee  "
+        Me.Label10.Text = "PAN No. of the Employee"
         '
         'txt16pan
         '
         Me.txt16pan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16pan.Location = New System.Drawing.Point(114, 39)
+        Me.txt16pan.Location = New System.Drawing.Point(124, 46)
         Me.txt16pan.MaxLength = 10
         Me.txt16pan.Name = "txt16pan"
         Me.txt16pan.Size = New System.Drawing.Size(119, 21)
@@ -1514,7 +1528,7 @@ Partial Class FRM16Detail
         'txtdesig
         '
         Me.txtdesig.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtdesig.Location = New System.Drawing.Point(114, 6)
+        Me.txtdesig.Location = New System.Drawing.Point(124, 6)
         Me.txtdesig.MaxLength = 25
         Me.txtdesig.Name = "txtdesig"
         Me.txtdesig.Size = New System.Drawing.Size(119, 21)
@@ -1524,9 +1538,9 @@ Partial Class FRM16Detail
         '
         Me.GroupBox3.Controls.Add(Me.TableLayoutPanel15)
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.GroupBox3.Location = New System.Drawing.Point(9, 95)
+        Me.GroupBox3.Location = New System.Drawing.Point(9, 108)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(239, 131)
+        Me.GroupBox3.Size = New System.Drawing.Size(254, 142)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Period"
@@ -1535,75 +1549,67 @@ Partial Class FRM16Detail
         '
         Me.TableLayoutPanel15.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
         Me.TableLayoutPanel15.ColumnCount = 2
-        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.05357!))
-        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.94643!))
-        Me.TableLayoutPanel15.Controls.Add(Me.txt16AY, 1, 2)
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.04602!))
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.95398!))
         Me.TableLayoutPanel15.Controls.Add(Me.Label11, 0, 0)
         Me.TableLayoutPanel15.Controls.Add(Me.txt16ToDt, 1, 1)
-        Me.TableLayoutPanel15.Controls.Add(Me.txt16FrmDt, 1, 0)
+        Me.TableLayoutPanel15.Controls.Add(Me.txt16AY, 1, 2)
         Me.TableLayoutPanel15.Controls.Add(Me.Label13, 0, 2)
+        Me.TableLayoutPanel15.Controls.Add(Me.txt16FrmDt, 1, 0)
         Me.TableLayoutPanel15.Controls.Add(Me.Label12, 0, 1)
-        Me.TableLayoutPanel15.Location = New System.Drawing.Point(6, 19)
+        Me.TableLayoutPanel15.Location = New System.Drawing.Point(6, 24)
         Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
         Me.TableLayoutPanel15.RowCount = 3
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.51515!))
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.48485!))
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
-        Me.TableLayoutPanel15.Size = New System.Drawing.Size(227, 106)
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel15.Size = New System.Drawing.Size(242, 112)
         Me.TableLayoutPanel15.TabIndex = 0
+        '
+        'txt16ToDt
+        '
+        Me.txt16ToDt.Location = New System.Drawing.Point(127, 43)
+        Me.txt16ToDt.Mask = "00/00/00"
+        Me.txt16ToDt.Name = "txt16ToDt"
+        Me.txt16ToDt.Size = New System.Drawing.Size(100, 21)
+        Me.txt16ToDt.TabIndex = 3
         '
         'txt16AY
         '
         Me.txt16AY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16AY.Location = New System.Drawing.Point(89, 72)
+        Me.txt16AY.Location = New System.Drawing.Point(127, 78)
         Me.txt16AY.MaxLength = 10
         Me.txt16AY.Name = "txt16AY"
-        Me.txt16AY.Size = New System.Drawing.Size(132, 21)
+        Me.txt16AY.Size = New System.Drawing.Size(109, 21)
         Me.txt16AY.TabIndex = 1
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(6, 3)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(40, 15)
-        Me.Label11.TabIndex = 0
-        Me.Label11.Text = "From"
-        '
-        'txt16ToDt
-        '
-        Me.txt16ToDt.Location = New System.Drawing.Point(89, 40)
-        Me.txt16ToDt.Name = "txt16ToDt"
-        Me.txt16ToDt.Size = New System.Drawing.Size(132, 22)
-        Me.txt16ToDt.TabIndex = 4
-        Me.txt16ToDt.TabStop = False
-        '
-        'txt16FrmDt
-        '
-        Me.txt16FrmDt.Location = New System.Drawing.Point(89, 6)
-        Me.txt16FrmDt.Name = "txt16FrmDt"
-        Me.txt16FrmDt.Size = New System.Drawing.Size(132, 22)
-        Me.txt16FrmDt.TabIndex = 5
-        Me.txt16FrmDt.TabStop = False
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label13.Location = New System.Drawing.Point(6, 69)
+        Me.Label13.Location = New System.Drawing.Point(6, 75)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(71, 34)
+        Me.Label13.Size = New System.Drawing.Size(87, 30)
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Assessment " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Year"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(6, 37)
+        Me.Label12.Location = New System.Drawing.Point(6, 40)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(23, 15)
         Me.Label12.TabIndex = 1
         Me.Label12.Text = "To"
+        '
+        'txt16FrmDt
+        '
+        Me.txt16FrmDt.Location = New System.Drawing.Point(127, 6)
+        Me.txt16FrmDt.Mask = "00/00/00"
+        Me.txt16FrmDt.Name = "txt16FrmDt"
+        Me.txt16FrmDt.Size = New System.Drawing.Size(100, 21)
+        Me.txt16FrmDt.TabIndex = 2
         '
         'GroupBox1
         '
@@ -1616,7 +1622,7 @@ Partial Class FRM16Detail
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.GroupBox1.Location = New System.Drawing.Point(3, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(384, 311)
+        Me.GroupBox1.Size = New System.Drawing.Size(412, 311)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Basic Information"
@@ -1625,15 +1631,15 @@ Partial Class FRM16Detail
         '
         Me.TableLayoutPanel18.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset
         Me.TableLayoutPanel18.ColumnCount = 2
-        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186.0!))
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel18.Controls.Add(Me.Label5, 0, 0)
         Me.TableLayoutPanel18.Controls.Add(Me.txt16CoPin, 1, 0)
-        Me.TableLayoutPanel18.Location = New System.Drawing.Point(174, 127)
+        Me.TableLayoutPanel18.Location = New System.Drawing.Point(208, 128)
         Me.TableLayoutPanel18.Name = "TableLayoutPanel18"
         Me.TableLayoutPanel18.RowCount = 1
-        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.42553!))
-        Me.TableLayoutPanel18.Size = New System.Drawing.Size(144, 33)
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel18.Size = New System.Drawing.Size(190, 33)
         Me.TableLayoutPanel18.TabIndex = 151
         '
         'Label5
@@ -1641,32 +1647,30 @@ Partial Class FRM16Detail
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(5, 2)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(1, 15)
+        Me.Label5.Size = New System.Drawing.Size(65, 15)
         Me.Label5.TabIndex = 7
         Me.Label5.Text = "Pin Code"
         '
         'txt16CoPin
         '
-        Me.txt16CoPin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16CoPin.Location = New System.Drawing.Point(-41, 5)
-        Me.txt16CoPin.MaxLength = 6
+        Me.txt16CoPin.Location = New System.Drawing.Point(78, 5)
         Me.txt16CoPin.Name = "txt16CoPin"
-        Me.txt16CoPin.Size = New System.Drawing.Size(76, 21)
-        Me.txt16CoPin.TabIndex = 2
+        Me.txt16CoPin.Size = New System.Drawing.Size(102, 21)
+        Me.txt16CoPin.TabIndex = 8
         '
         'TableLayoutPanel17
         '
         Me.TableLayoutPanel17.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset
         Me.TableLayoutPanel17.ColumnCount = 2
-        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 227.0!))
+        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel17.Controls.Add(Me.State, 0, 0)
         Me.TableLayoutPanel17.Controls.Add(Me.cbo16CoState, 1, 0)
-        Me.TableLayoutPanel17.Location = New System.Drawing.Point(6, 127)
+        Me.TableLayoutPanel17.Location = New System.Drawing.Point(6, 129)
         Me.TableLayoutPanel17.Name = "TableLayoutPanel17"
         Me.TableLayoutPanel17.RowCount = 1
-        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.42553!))
-        Me.TableLayoutPanel17.Size = New System.Drawing.Size(167, 33)
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel17.Size = New System.Drawing.Size(206, 33)
         Me.TableLayoutPanel17.TabIndex = 150
         '
         'State
@@ -1674,16 +1678,16 @@ Partial Class FRM16Detail
         Me.State.AutoSize = True
         Me.State.Location = New System.Drawing.Point(5, 2)
         Me.State.Name = "State"
-        Me.State.Size = New System.Drawing.Size(1, 15)
+        Me.State.Size = New System.Drawing.Size(40, 15)
         Me.State.TabIndex = 5
         Me.State.Text = "State"
         '
         'cbo16CoState
         '
         Me.cbo16CoState.FormattingEnabled = True
-        Me.cbo16CoState.Location = New System.Drawing.Point(-59, 5)
+        Me.cbo16CoState.Location = New System.Drawing.Point(53, 5)
         Me.cbo16CoState.Name = "cbo16CoState"
-        Me.cbo16CoState.Size = New System.Drawing.Size(117, 23)
+        Me.cbo16CoState.Size = New System.Drawing.Size(143, 23)
         Me.cbo16CoState.TabIndex = 1
         '
         'TableLayoutPanel13
@@ -1701,7 +1705,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel13.RowCount = 2
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.63636!))
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.36364!))
-        Me.TableLayoutPanel13.Size = New System.Drawing.Size(312, 58)
+        Me.TableLayoutPanel13.Size = New System.Drawing.Size(396, 58)
         Me.TableLayoutPanel13.TabIndex = 2
         '
         'Label6
@@ -1711,7 +1715,7 @@ Partial Class FRM16Detail
         Me.Label6.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label6.Location = New System.Drawing.Point(6, 3)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(106, 21)
+        Me.Label6.Size = New System.Drawing.Size(164, 17)
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "PAN No. of the Deductor"
         '
@@ -1720,9 +1724,9 @@ Partial Class FRM16Detail
         Me.Label7.AutoSize = True
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label7.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label7.Location = New System.Drawing.Point(160, 3)
+        Me.Label7.Location = New System.Drawing.Point(202, 3)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(105, 21)
+        Me.Label7.Size = New System.Drawing.Size(163, 17)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "TAN No. of the Deductor"
         '
@@ -1738,7 +1742,7 @@ Partial Class FRM16Detail
         'txt16CoTan
         '
         Me.txt16CoTan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16CoTan.Location = New System.Drawing.Point(160, 30)
+        Me.txt16CoTan.Location = New System.Drawing.Point(202, 30)
         Me.txt16CoTan.MaxLength = 10
         Me.txt16CoTan.Name = "txt16CoTan"
         Me.txt16CoTan.Size = New System.Drawing.Size(146, 21)
@@ -1852,22 +1856,12 @@ Partial Class FRM16Detail
         '
         Me.grdPRNdet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdPRNdet.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2})
-        Me.grdPRNdet.Location = New System.Drawing.Point(226, 225)
+        Me.grdPRNdet.Location = New System.Drawing.Point(190, 225)
         Me.grdPRNdet.Name = "grdPRNdet"
         Me.grdPRNdet.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.grdPRNdet.Size = New System.Drawing.Size(152, 80)
+        Me.grdPRNdet.Size = New System.Drawing.Size(212, 163)
         Me.grdPRNdet.TabIndex = 14
         Me.grdPRNdet.TabStop = False
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Quarter"
-        Me.Column1.Name = "Column1"
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Acknowledgement No."
-        Me.Column2.Name = "Column2"
         '
         'Label8
         '
@@ -1876,10 +1870,10 @@ Partial Class FRM16Detail
         Me.Label8.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label8.Location = New System.Drawing.Point(6, 221)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(214, 92)
+        Me.Label8.Size = New System.Drawing.Size(190, 92)
         Me.Label8.TabIndex = 13
         Me.Label8.Text = "Acknowledgement Ns. of all " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "quarterly statments of TDS " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "under sub-section (3) o" &
-    "f " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "section 200 as provided by " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "TIN Facilitation Centre or NSDL " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "web-site"
+    "f " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "section 200 as provided by " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "TIN Facilitation Centre or " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "NSDL web-site"
         '
         'tabForm16
         '
@@ -1894,7 +1888,7 @@ Partial Class FRM16Detail
         Me.tabForm16.Location = New System.Drawing.Point(15, 74)
         Me.tabForm16.Name = "tabForm16"
         Me.tabForm16.SelectedIndex = 0
-        Me.tabForm16.Size = New System.Drawing.Size(678, 460)
+        Me.tabForm16.Size = New System.Drawing.Size(699, 460)
         Me.tabForm16.TabIndex = 1
         Me.tabForm16.TabStop = False
         '
@@ -1937,21 +1931,26 @@ Partial Class FRM16Detail
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
         '
-        'Label54
+        'Label11
         '
-        Me.Label54.AutoSize = True
-        Me.Label54.Location = New System.Drawing.Point(330, 412)
-        Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(152, 15)
-        Me.Label54.TabIndex = 34
-        Me.Label54.Text = "Taxable Salary All Qtrs"
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(6, 3)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(40, 15)
+        Me.Label11.TabIndex = 4
+        Me.Label11.Text = "From"
         '
-        'txtAllTax
+        'Column1
         '
-        Me.txtAllTax.Location = New System.Drawing.Point(488, 411)
-        Me.txtAllTax.Name = "txtAllTax"
-        Me.txtAllTax.Size = New System.Drawing.Size(125, 21)
-        Me.txtAllTax.TabIndex = 35
+        Me.Column1.HeaderText = "Quarter"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 80
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Acknowledgement No."
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 90
         '
         'FRM16Detail
         '
@@ -2020,8 +2019,6 @@ Partial Class FRM16Detail
         Me.GroupBox3.ResumeLayout(False)
         Me.TableLayoutPanel15.ResumeLayout(False)
         Me.TableLayoutPanel15.PerformLayout()
-        CType(Me.txt16ToDt, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txt16FrmDt, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TableLayoutPanel18.ResumeLayout(False)
@@ -2148,11 +2145,8 @@ Partial Class FRM16Detail
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents txt16AY As System.Windows.Forms.TextBox
-    Friend WithEvents txt16FrmDt As System.Windows.Forms.PictureBox
-    Friend WithEvents txt16ToDt As System.Windows.Forms.PictureBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txt16pan As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents txtdesig As System.Windows.Forms.TextBox
@@ -2164,7 +2158,6 @@ Partial Class FRM16Detail
     Friend WithEvents txt16CoPan As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents txt16CoPin As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents cbo16CoState As System.Windows.Forms.ComboBox
     Friend WithEvents State As System.Windows.Forms.Label
@@ -2193,8 +2186,6 @@ Partial Class FRM16Detail
     Friend WithEvents txt16CoAdd1 As System.Windows.Forms.TextBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents TableLayoutPanel16 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtTotTax As System.Windows.Forms.TextBox
     Friend WithEvents TableLayoutPanel18 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents TableLayoutPanel17 As System.Windows.Forms.TableLayoutPanel
@@ -2206,4 +2197,10 @@ Partial Class FRM16Detail
     Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents txtAllTax As TextBox
     Friend WithEvents Label54 As Label
+    Friend WithEvents txt16ToDt As MaskedTextBox
+    Friend WithEvents txt16FrmDt As MaskedTextBox
+    Friend WithEvents txt16CoPin As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
 End Class

@@ -158,6 +158,138 @@ Partial Class frmTDS24Q
         Me.cmdShwfrm = New System.Windows.Forms.Button()
         Me.cboDedName = New System.Windows.Forms.ComboBox()
         Me.dtpAmtPayDt = New System.Windows.Forms.MaskedTextBox()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.ChkHigRate = New System.Windows.Forms.CheckBox()
+        Me.lvwSD = New System.Windows.Forms.ListView()
+        Me.cmdmismatch = New System.Windows.Forms.Button()
+        Me.cmdSDCancel = New System.Windows.Forms.Button()
+        Me.cmdSD2XL = New System.Windows.Forms.Button()
+        Me.cmdSDAdd = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtSDTDSPreEmp = New System.Windows.Forms.TextBox()
+        Me.txtSDNetTax = New System.Windows.Forms.TextBox()
+        Me.txtSDTDS = New System.Windows.Forms.TextBox()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.txtSDTDSCurEmp = New System.Windows.Forms.TextBox()
+        Me.txtSDShortfall = New System.Windows.Forms.TextBox()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.txtSDRelief = New System.Windows.Forms.TextBox()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtSD80CCG = New System.Windows.Forms.TextBox()
+        Me.txtSDTax = New System.Windows.Forms.TextBox()
+        Me.txtSDSurcharge = New System.Windows.Forms.TextBox()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.Label51 = New System.Windows.Forms.Label()
+        Me.Label52 = New System.Windows.Forms.Label()
+        Me.Label53 = New System.Windows.Forms.Label()
+        Me.Label54 = New System.Windows.Forms.Label()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.txtSDEduCess = New System.Windows.Forms.TextBox()
+        Me.txtSDOtherIVA = New System.Windows.Forms.TextBox()
+        Me.txtSDTotalTax = New System.Windows.Forms.TextBox()
+        Me.txtSDTotalTaxableIncome = New System.Windows.Forms.TextBox()
+        Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtSDProfTax = New System.Windows.Forms.TextBox()
+        Me.txtSDGTI = New System.Windows.Forms.TextBox()
+        Me.txtSD80CCE = New System.Windows.Forms.TextBox()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.Label62 = New System.Windows.Forms.Label()
+        Me.txtSDOtherIncome = New System.Windows.Forms.TextBox()
+        Me.txtSD80CCF = New System.Windows.Forms.TextBox()
+        Me.txtSDTaxableSalary = New System.Windows.Forms.TextBox()
+        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtSDTotalSal = New System.Windows.Forms.TextBox()
+        Me.txtSDTotalSalPreEmp = New System.Windows.Forms.TextBox()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.txtSDTotalSalBoth = New System.Windows.Forms.TextBox()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.txtSDEntAllow = New System.Windows.Forms.TextBox()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.txtSDDedCateg = New System.Windows.Forms.TextBox()
+        Me.txtSDDedPAN = New System.Windows.Forms.TextBox()
+        Me.cboSDDedName = New System.Windows.Forms.ComboBox()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.txtSDEmpFrm = New System.Windows.Forms.MaskedTextBox()
+        Me.txtSDEmpTo = New System.Windows.Forms.MaskedTextBox()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.lvwForm16 = New System.Windows.Forms.ListView()
+        Me.cmdAddNewForm16 = New System.Windows.Forms.Button()
+        Me.cmd162XL = New System.Windows.Forms.Button()
+        Me.cmdmismachForm16 = New System.Windows.Forms.Button()
+        Me.cmdform16 = New System.Windows.Forms.Button()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.txttotdepos = New System.Windows.Forms.MaskedTextBox()
+        Me.txtSDcount = New System.Windows.Forms.MaskedTextBox()
+        Me.CHkSAFund = New System.Windows.Forms.CheckBox()
+        Me.ChkIncomeFromHouseProperty = New System.Windows.Forms.CheckBox()
+        Me.ChkRent = New System.Windows.Forms.CheckBox()
+        Me.cbo16Ded = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmdExit = New System.Windows.Forms.Button()
+        Me.cmdDelete = New System.Windows.Forms.Button()
+        Me.cmdSave = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel16 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TxtAmtRepaid = New System.Windows.Forms.TextBox()
+        Me.Label84 = New System.Windows.Forms.Label()
+        Me.TxtFundNm = New System.Windows.Forms.TextBox()
+        Me.Label85 = New System.Windows.Forms.Label()
+        Me.Label86 = New System.Windows.Forms.Label()
+        Me.Label87 = New System.Windows.Forms.Label()
+        Me.Label88 = New System.Windows.Forms.Label()
+        Me.txtContriFrm = New System.Windows.Forms.MaskedTextBox()
+        Me.TxtRateOfDeduction = New System.Windows.Forms.TextBox()
+        Me.Label89 = New System.Windows.Forms.Label()
+        Me.txtContriTo = New System.Windows.Forms.MaskedTextBox()
+        Me.TxtTaxDeducted = New System.Windows.Forms.TextBox()
+        Me.TableLayoutPanel15 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TxtLender1PAN = New System.Windows.Forms.TextBox()
+        Me.TxtLender1Nm = New System.Windows.Forms.TextBox()
+        Me.Label83 = New System.Windows.Forms.Label()
+        Me.Label81 = New System.Windows.Forms.Label()
+        Me.Label82 = New System.Windows.Forms.Label()
+        Me.Label80 = New System.Windows.Forms.Label()
+        Me.Label79 = New System.Windows.Forms.Label()
+        Me.Label78 = New System.Windows.Forms.Label()
+        Me.Label77 = New System.Windows.Forms.Label()
+        Me.Label76 = New System.Windows.Forms.Label()
+        Me.TxtLender3PAN = New System.Windows.Forms.TextBox()
+        Me.TxtLender4PAN = New System.Windows.Forms.TextBox()
+        Me.TxtLender2Nm = New System.Windows.Forms.TextBox()
+        Me.TxtLender3Nm = New System.Windows.Forms.TextBox()
+        Me.TxtLender4Nm = New System.Windows.Forms.TextBox()
+        Me.TxtLender2PAN = New System.Windows.Forms.TextBox()
+        Me.TableLayoutPanel14 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TxtLL4Nm = New System.Windows.Forms.TextBox()
+        Me.TxtLL3Nm = New System.Windows.Forms.TextBox()
+        Me.TxtLL2Nm = New System.Windows.Forms.TextBox()
+        Me.TxtLL1Nm = New System.Windows.Forms.TextBox()
+        Me.TxtLL1PAN = New System.Windows.Forms.TextBox()
+        Me.Label686 = New System.Windows.Forms.Label()
+        Me.Label684 = New System.Windows.Forms.Label()
+        Me.Label682 = New System.Windows.Forms.Label()
+        Me.Label680 = New System.Windows.Forms.Label()
+        Me.Label687 = New System.Windows.Forms.Label()
+        Me.Label685 = New System.Windows.Forms.Label()
+        Me.Label683 = New System.Windows.Forms.Label()
+        Me.Label681 = New System.Windows.Forms.Label()
+        Me.TxtLL2PAN = New System.Windows.Forms.TextBox()
+        Me.TxtLL3PAN = New System.Windows.Forms.TextBox()
+        Me.TxtLL4PAN = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
@@ -169,6 +301,11 @@ Partial Class frmTDS24Q
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdBack = New System.Windows.Forms.Button()
         Me.cmdNext = New System.Windows.Forms.Button()
+        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer4 = New System.Windows.Forms.Timer(Me.components)
+        Me.PopupmenuS = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tabMain.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.PanelCheckBox.SuspendLayout()
@@ -187,8 +324,20 @@ Partial Class frmTDS24Q
         Me.framedt.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.TableLayoutPanel10.SuspendLayout()
+        Me.TableLayoutPanel8.SuspendLayout()
+        Me.TableLayoutPanel9.SuspendLayout()
+        Me.TableLayoutPanel7.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
+        Me.TabPage6.SuspendLayout()
+        Me.TableLayoutPanel16.SuspendLayout()
+        Me.TableLayoutPanel15.SuspendLayout()
+        Me.TableLayoutPanel14.SuspendLayout()
         Me.popupmenu.SuspendLayout()
         Me.popupmenuD.SuspendLayout()
+        Me.PopupmenuS.SuspendLayout()
         Me.SuspendLayout()
         '
         'tabMain
@@ -197,11 +346,14 @@ Partial Class frmTDS24Q
         Me.tabMain.Controls.Add(Me.TabPage1)
         Me.tabMain.Controls.Add(Me.TabPage2)
         Me.tabMain.Controls.Add(Me.TabPage3)
+        Me.tabMain.Controls.Add(Me.TabPage4)
+        Me.tabMain.Controls.Add(Me.TabPage5)
+        Me.tabMain.Controls.Add(Me.TabPage6)
         Me.tabMain.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabMain.Location = New System.Drawing.Point(2, 3)
         Me.tabMain.Name = "tabMain"
         Me.tabMain.SelectedIndex = 0
-        Me.tabMain.Size = New System.Drawing.Size(857, 512)
+        Me.tabMain.Size = New System.Drawing.Size(857, 525)
         Me.tabMain.TabIndex = 0
         '
         'TabPage1
@@ -216,7 +368,7 @@ Partial Class frmTDS24Q
         Me.TabPage1.Location = New System.Drawing.Point(4, 24)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(849, 484)
+        Me.TabPage1.Size = New System.Drawing.Size(849, 497)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Deductor Details"
         '
@@ -241,7 +393,7 @@ Partial Class frmTDS24Q
         Me.PanelCheckBox.Name = "PanelCheckBox"
         Me.PanelCheckBox.RowCount = 1
         Me.PanelCheckBox.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.PanelCheckBox.Size = New System.Drawing.Size(188, 33)
+        Me.PanelCheckBox.Size = New System.Drawing.Size(188, 46)
         Me.PanelCheckBox.TabIndex = 191
         Me.PanelCheckBox.Visible = False
         '
@@ -255,7 +407,7 @@ Partial Class frmTDS24Q
         Me.chkSection1.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.chkSection1.Location = New System.Drawing.Point(6, 6)
         Me.chkSection1.Name = "chkSection1"
-        Me.chkSection1.Size = New System.Drawing.Size(54, 21)
+        Me.chkSection1.Size = New System.Drawing.Size(54, 34)
         Me.chkSection1.TabIndex = 0
         Me.chkSection1.TabStop = False
         Me.chkSection1.Text = "92A"
@@ -271,7 +423,7 @@ Partial Class frmTDS24Q
         Me.chkSection2.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.chkSection2.Location = New System.Drawing.Point(69, 6)
         Me.chkSection2.Name = "chkSection2"
-        Me.chkSection2.Size = New System.Drawing.Size(51, 21)
+        Me.chkSection2.Size = New System.Drawing.Size(51, 34)
         Me.chkSection2.TabIndex = 1
         Me.chkSection2.TabStop = False
         Me.chkSection2.Text = "92B"
@@ -287,7 +439,7 @@ Partial Class frmTDS24Q
         Me.chkSection3.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.chkSection3.Location = New System.Drawing.Point(129, 6)
         Me.chkSection3.Name = "chkSection3"
-        Me.chkSection3.Size = New System.Drawing.Size(53, 21)
+        Me.chkSection3.Size = New System.Drawing.Size(53, 34)
         Me.chkSection3.TabIndex = 2
         Me.chkSection3.TabStop = False
         Me.chkSection3.Text = "92C"
@@ -338,13 +490,9 @@ Partial Class frmTDS24Q
         '
         'cboGovtDetails
         '
-        Me.cboGovtDetails.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-        Me.cboGovtDetails.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboGovtDetails.Enabled = False
         Me.cboGovtDetails.FormattingEnabled = True
-        Me.cboGovtDetails.IntegralHeight = False
         Me.cboGovtDetails.Location = New System.Drawing.Point(164, 6)
-        Me.cboGovtDetails.MaxLength = 20
         Me.cboGovtDetails.Name = "cboGovtDetails"
         Me.cboGovtDetails.Size = New System.Drawing.Size(254, 23)
         Me.cboGovtDetails.TabIndex = 0
@@ -639,7 +787,7 @@ Partial Class frmTDS24Q
         Me.TabPage2.Location = New System.Drawing.Point(4, 24)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(849, 484)
+        Me.TabPage2.Size = New System.Drawing.Size(849, 497)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Challan Details"
         '
@@ -1310,10 +1458,10 @@ Partial Class frmTDS24Q
         Me.chkMinorHead.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.chkMinorHead.Location = New System.Drawing.Point(6, 125)
         Me.chkMinorHead.Name = "chkMinorHead"
-        Me.chkMinorHead.Size = New System.Drawing.Size(181, 30)
+        Me.chkMinorHead.Size = New System.Drawing.Size(170, 30)
         Me.chkMinorHead.TabIndex = 17
         Me.chkMinorHead.TabStop = False
-        Me.chkMinorHead.Text = "Is Paid against demand raised by" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "IT Deptt (400)"
+        Me.chkMinorHead.Text = "Is Paid against demand raised " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "by IT Deptt (400)"
         Me.chkMinorHead.UseVisualStyleBackColor = True
         '
         'chkBookEntry
@@ -1353,7 +1501,7 @@ Partial Class frmTDS24Q
         Me.TabPage3.Controls.Add(Me.TableLayoutPanel4)
         Me.TabPage3.Location = New System.Drawing.Point(4, 24)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(849, 484)
+        Me.TabPage3.Size = New System.Drawing.Size(849, 497)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Deductee Details"
         '
@@ -2064,6 +2212,1496 @@ Partial Class frmTDS24Q
         Me.dtpAmtPayDt.Size = New System.Drawing.Size(112, 13)
         Me.dtpAmtPayDt.TabIndex = 8
         '
+        'TabPage4
+        '
+        Me.TabPage4.BackColor = System.Drawing.Color.Lavender
+        Me.TabPage4.Controls.Add(Me.ChkHigRate)
+        Me.TabPage4.Controls.Add(Me.lvwSD)
+        Me.TabPage4.Controls.Add(Me.cmdmismatch)
+        Me.TabPage4.Controls.Add(Me.cmdSDCancel)
+        Me.TabPage4.Controls.Add(Me.cmdSD2XL)
+        Me.TabPage4.Controls.Add(Me.cmdSDAdd)
+        Me.TabPage4.Controls.Add(Me.TableLayoutPanel10)
+        Me.TabPage4.Controls.Add(Me.TableLayoutPanel8)
+        Me.TabPage4.Controls.Add(Me.TableLayoutPanel9)
+        Me.TabPage4.Controls.Add(Me.TableLayoutPanel7)
+        Me.TabPage4.Controls.Add(Me.TableLayoutPanel3)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(849, 497)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Annual Salary detail"
+        '
+        'ChkHigRate
+        '
+        Me.ChkHigRate.AutoSize = True
+        Me.ChkHigRate.Location = New System.Drawing.Point(745, 6)
+        Me.ChkHigRate.Name = "ChkHigRate"
+        Me.ChkHigRate.Size = New System.Drawing.Size(95, 49)
+        Me.ChkHigRate.TabIndex = 15
+        Me.ChkHigRate.Text = "Higher Rate " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Deduction " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PAN"
+        Me.ChkHigRate.UseVisualStyleBackColor = True
+        '
+        'lvwSD
+        '
+        Me.lvwSD.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lvwSD.Location = New System.Drawing.Point(9, 332)
+        Me.lvwSD.Name = "lvwSD"
+        Me.lvwSD.Size = New System.Drawing.Size(820, 137)
+        Me.lvwSD.TabIndex = 14
+        Me.lvwSD.UseCompatibleStateImageBehavior = False
+        '
+        'cmdmismatch
+        '
+        Me.cmdmismatch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmdmismatch.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.cmdmismatch.Location = New System.Drawing.Point(489, 290)
+        Me.cmdmismatch.Name = "cmdmismatch"
+        Me.cmdmismatch.Size = New System.Drawing.Size(196, 23)
+        Me.cmdmismatch.TabIndex = 13
+        Me.cmdmismatch.TabStop = False
+        Me.cmdmismatch.Text = "Mismatch Report To Excel"
+        Me.cmdmismatch.UseVisualStyleBackColor = True
+        '
+        'cmdSDCancel
+        '
+        Me.cmdSDCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmdSDCancel.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.cmdSDCancel.Location = New System.Drawing.Point(284, 290)
+        Me.cmdSDCancel.Name = "cmdSDCancel"
+        Me.cmdSDCancel.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSDCancel.TabIndex = 11
+        Me.cmdSDCancel.TabStop = False
+        Me.cmdSDCancel.Text = "Cancel"
+        Me.cmdSDCancel.UseVisualStyleBackColor = True
+        '
+        'cmdSD2XL
+        '
+        Me.cmdSD2XL.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmdSD2XL.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.cmdSD2XL.Location = New System.Drawing.Point(387, 290)
+        Me.cmdSD2XL.Name = "cmdSD2XL"
+        Me.cmdSD2XL.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSD2XL.TabIndex = 12
+        Me.cmdSD2XL.TabStop = False
+        Me.cmdSD2XL.Text = "To Excel"
+        Me.cmdSD2XL.UseVisualStyleBackColor = True
+        '
+        'cmdSDAdd
+        '
+        Me.cmdSDAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.cmdSDAdd.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.cmdSDAdd.Location = New System.Drawing.Point(173, 290)
+        Me.cmdSDAdd.Name = "cmdSDAdd"
+        Me.cmdSDAdd.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSDAdd.TabIndex = 10
+        Me.cmdSDAdd.TabStop = False
+        Me.cmdSDAdd.Text = "Add"
+        Me.cmdSDAdd.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel10
+        '
+        Me.TableLayoutPanel10.BackColor = System.Drawing.Color.Lavender
+        Me.TableLayoutPanel10.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
+        Me.TableLayoutPanel10.ColumnCount = 6
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 178.0!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 179.0!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141.0!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139.0!))
+        Me.TableLayoutPanel10.Controls.Add(Me.txtSDTDSPreEmp, 3, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.txtSDNetTax, 1, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.txtSDTDS, 4, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label64, 4, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label65, 3, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label67, 1, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label69, 5, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.txtSDTDSCurEmp, 2, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.txtSDShortfall, 5, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label68, 0, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.txtSDRelief, 0, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.Label66, 2, 0)
+        Me.TableLayoutPanel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.TableLayoutPanel10.Location = New System.Drawing.Point(3, 221)
+        Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
+        Me.TableLayoutPanel10.RowCount = 2
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.42553!))
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 59.57447!))
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(846, 56)
+        Me.TableLayoutPanel10.TabIndex = 6
+        '
+        'txtSDTDSPreEmp
+        '
+        Me.txtSDTDSPreEmp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTDSPreEmp.Location = New System.Drawing.Point(381, 27)
+        Me.txtSDTDSPreEmp.MaxLength = 15
+        Me.txtSDTDSPreEmp.Name = "txtSDTDSPreEmp"
+        Me.txtSDTDSPreEmp.Size = New System.Drawing.Size(168, 21)
+        Me.txtSDTDSPreEmp.TabIndex = 3
+        '
+        'txtSDNetTax
+        '
+        Me.txtSDNetTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDNetTax.Enabled = False
+        Me.txtSDNetTax.Location = New System.Drawing.Point(106, 27)
+        Me.txtSDNetTax.MaxLength = 15
+        Me.txtSDNetTax.Name = "txtSDNetTax"
+        Me.txtSDNetTax.Size = New System.Drawing.Size(85, 21)
+        Me.txtSDNetTax.TabIndex = 1
+        '
+        'txtSDTDS
+        '
+        Me.txtSDTDS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTDS.Enabled = False
+        Me.txtSDTDS.Location = New System.Drawing.Point(563, 27)
+        Me.txtSDTDS.MaxLength = 15
+        Me.txtSDTDS.Name = "txtSDTDS"
+        Me.txtSDTDS.Size = New System.Drawing.Size(129, 21)
+        Me.txtSDTDS.TabIndex = 4
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label64.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label64.Location = New System.Drawing.Point(563, 3)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(123, 15)
+        Me.Label64.TabIndex = 8
+        Me.Label64.Text = "Total TDS (Yearly)"
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label65.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label65.Location = New System.Drawing.Point(381, 3)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(167, 15)
+        Me.Label65.TabIndex = 9
+        Me.Label65.Text = "TDS (Previous Employer)"
+        '
+        'Label67
+        '
+        Me.Label67.AutoSize = True
+        Me.Label67.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label67.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label67.Location = New System.Drawing.Point(106, 3)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(85, 18)
+        Me.Label67.TabIndex = 4
+        Me.Label67.Text = "Net Income Tax Payable"
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label69.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label69.Location = New System.Drawing.Point(707, 3)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(110, 15)
+        Me.Label69.TabIndex = 7
+        Me.Label69.Text = "Excess/Shortfall"
+        '
+        'txtSDTDSCurEmp
+        '
+        Me.txtSDTDSCurEmp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTDSCurEmp.Location = New System.Drawing.Point(200, 27)
+        Me.txtSDTDSCurEmp.MaxLength = 15
+        Me.txtSDTDSCurEmp.Name = "txtSDTDSCurEmp"
+        Me.txtSDTDSCurEmp.Size = New System.Drawing.Size(170, 21)
+        Me.txtSDTDSCurEmp.TabIndex = 2
+        '
+        'txtSDShortfall
+        '
+        Me.txtSDShortfall.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDShortfall.Enabled = False
+        Me.txtSDShortfall.Location = New System.Drawing.Point(707, 27)
+        Me.txtSDShortfall.MaxLength = 15
+        Me.txtSDShortfall.Name = "txtSDShortfall"
+        Me.txtSDShortfall.Size = New System.Drawing.Size(126, 21)
+        Me.txtSDShortfall.TabIndex = 5
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.BackColor = System.Drawing.Color.Lavender
+        Me.Label68.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label68.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label68.Location = New System.Drawing.Point(6, 3)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(88, 15)
+        Me.Label68.TabIndex = 4
+        Me.Label68.Text = "Relief u/s 89"
+        '
+        'txtSDRelief
+        '
+        Me.txtSDRelief.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDRelief.Location = New System.Drawing.Point(6, 27)
+        Me.txtSDRelief.MaxLength = 15
+        Me.txtSDRelief.Name = "txtSDRelief"
+        Me.txtSDRelief.Size = New System.Drawing.Size(91, 21)
+        Me.txtSDRelief.TabIndex = 0
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label66.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label66.Location = New System.Drawing.Point(200, 3)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(159, 15)
+        Me.Label66.TabIndex = 10
+        Me.Label66.Text = "TDS (Current Employer)"
+        '
+        'TableLayoutPanel8
+        '
+        Me.TableLayoutPanel8.BackColor = System.Drawing.Color.Lavender
+        Me.TableLayoutPanel8.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
+        Me.TableLayoutPanel8.ColumnCount = 7
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153.0!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 131.0!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73.0!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82.0!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109.0!))
+        Me.TableLayoutPanel8.Controls.Add(Me.txtSD80CCG, 0, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtSDTax, 3, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtSDSurcharge, 4, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label45, 4, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label51, 3, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label52, 2, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label53, 1, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label54, 0, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label55, 5, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.Label56, 6, 0)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtSDEduCess, 5, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtSDOtherIVA, 1, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtSDTotalTax, 6, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.txtSDTotalTaxableIncome, 2, 1)
+        Me.TableLayoutPanel8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.TableLayoutPanel8.Location = New System.Drawing.Point(0, 162)
+        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
+        Me.TableLayoutPanel8.RowCount = 2
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.93617!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.06383!))
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(849, 60)
+        Me.TableLayoutPanel8.TabIndex = 5
+        '
+        'txtSD80CCG
+        '
+        Me.txtSD80CCG.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSD80CCG.Location = New System.Drawing.Point(6, 33)
+        Me.txtSD80CCG.MaxLength = 15
+        Me.txtSD80CCG.Name = "txtSD80CCG"
+        Me.txtSD80CCG.Size = New System.Drawing.Size(131, 21)
+        Me.txtSD80CCG.TabIndex = 1
+        '
+        'txtSDTax
+        '
+        Me.txtSDTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTax.Location = New System.Drawing.Point(445, 33)
+        Me.txtSDTax.MaxLength = 15
+        Me.txtSDTax.Name = "txtSDTax"
+        Me.txtSDTax.Size = New System.Drawing.Size(124, 21)
+        Me.txtSDTax.TabIndex = 4
+        '
+        'txtSDSurcharge
+        '
+        Me.txtSDSurcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDSurcharge.Location = New System.Drawing.Point(579, 33)
+        Me.txtSDSurcharge.MaxLength = 15
+        Me.txtSDSurcharge.Name = "txtSDSurcharge"
+        Me.txtSDSurcharge.Size = New System.Drawing.Size(67, 21)
+        Me.txtSDSurcharge.TabIndex = 5
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label45.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label45.Location = New System.Drawing.Point(579, 3)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(65, 13)
+        Me.Label45.TabIndex = 8
+        Me.Label45.Text = "Surcharge"
+        '
+        'Label51
+        '
+        Me.Label51.AutoSize = True
+        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label51.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label51.Location = New System.Drawing.Point(445, 3)
+        Me.Label51.Name = "Label51"
+        Me.Label51.Size = New System.Drawing.Size(124, 13)
+        Me.Label51.TabIndex = 9
+        Me.Label51.Text = "Tax on Total Income"
+        '
+        'Label52
+        '
+        Me.Label52.AutoSize = True
+        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label52.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label52.Location = New System.Drawing.Point(289, 3)
+        Me.Label52.Name = "Label52"
+        Me.Label52.Size = New System.Drawing.Size(145, 15)
+        Me.Label52.TabIndex = 10
+        Me.Label52.Text = "Total Taxable Income"
+        '
+        'Label53
+        '
+        Me.Label53.AutoSize = True
+        Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label53.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label53.Location = New System.Drawing.Point(146, 3)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(132, 13)
+        Me.Label53.TabIndex = 4
+        Me.Label53.Text = "Other VI-A deductions"
+        '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label54.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label54.Location = New System.Drawing.Point(6, 3)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(131, 13)
+        Me.Label54.TabIndex = 4
+        Me.Label54.Text = "Deduction u/s 80CCG"
+        '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label55.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label55.Location = New System.Drawing.Point(655, 3)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(60, 13)
+        Me.Label55.TabIndex = 7
+        Me.Label55.Text = "Edu Cess"
+        '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label56.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label56.Location = New System.Drawing.Point(740, 3)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(61, 13)
+        Me.Label56.TabIndex = 6
+        Me.Label56.Text = "Total Tax"
+        '
+        'txtSDEduCess
+        '
+        Me.txtSDEduCess.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDEduCess.Location = New System.Drawing.Point(655, 33)
+        Me.txtSDEduCess.MaxLength = 15
+        Me.txtSDEduCess.Name = "txtSDEduCess"
+        Me.txtSDEduCess.Size = New System.Drawing.Size(76, 21)
+        Me.txtSDEduCess.TabIndex = 6
+        '
+        'txtSDOtherIVA
+        '
+        Me.txtSDOtherIVA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDOtherIVA.Location = New System.Drawing.Point(146, 33)
+        Me.txtSDOtherIVA.MaxLength = 15
+        Me.txtSDOtherIVA.Name = "txtSDOtherIVA"
+        Me.txtSDOtherIVA.Size = New System.Drawing.Size(132, 21)
+        Me.txtSDOtherIVA.TabIndex = 2
+        '
+        'txtSDTotalTax
+        '
+        Me.txtSDTotalTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTotalTax.Enabled = False
+        Me.txtSDTotalTax.Location = New System.Drawing.Point(740, 33)
+        Me.txtSDTotalTax.MaxLength = 15
+        Me.txtSDTotalTax.Name = "txtSDTotalTax"
+        Me.txtSDTotalTax.Size = New System.Drawing.Size(103, 21)
+        Me.txtSDTotalTax.TabIndex = 7
+        '
+        'txtSDTotalTaxableIncome
+        '
+        Me.txtSDTotalTaxableIncome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTotalTaxableIncome.Enabled = False
+        Me.txtSDTotalTaxableIncome.Location = New System.Drawing.Point(289, 33)
+        Me.txtSDTotalTaxableIncome.MaxLength = 15
+        Me.txtSDTotalTaxableIncome.Name = "txtSDTotalTaxableIncome"
+        Me.txtSDTotalTaxableIncome.Size = New System.Drawing.Size(146, 21)
+        Me.txtSDTotalTaxableIncome.TabIndex = 3
+        '
+        'TableLayoutPanel9
+        '
+        Me.TableLayoutPanel9.BackColor = System.Drawing.Color.Lavender
+        Me.TableLayoutPanel9.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
+        Me.TableLayoutPanel9.ColumnCount = 6
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152.0!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
+        Me.TableLayoutPanel9.Controls.Add(Me.txtSDProfTax, 0, 1)
+        Me.TableLayoutPanel9.Controls.Add(Me.txtSDGTI, 3, 1)
+        Me.TableLayoutPanel9.Controls.Add(Me.txtSD80CCE, 4, 1)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label57, 4, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label58, 3, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label59, 2, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label60, 1, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label61, 0, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.Label62, 5, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.txtSDOtherIncome, 2, 1)
+        Me.TableLayoutPanel9.Controls.Add(Me.txtSD80CCF, 5, 1)
+        Me.TableLayoutPanel9.Controls.Add(Me.txtSDTaxableSalary, 1, 1)
+        Me.TableLayoutPanel9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.TableLayoutPanel9.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.TableLayoutPanel9.Location = New System.Drawing.Point(3, 111)
+        Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
+        Me.TableLayoutPanel9.RowCount = 2
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.55319!))
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.44681!))
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(850, 51)
+        Me.TableLayoutPanel9.TabIndex = 4
+        '
+        'txtSDProfTax
+        '
+        Me.txtSDProfTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDProfTax.Location = New System.Drawing.Point(6, 26)
+        Me.txtSDProfTax.MaxLength = 15
+        Me.txtSDProfTax.Name = "txtSDProfTax"
+        Me.txtSDProfTax.Size = New System.Drawing.Size(146, 21)
+        Me.txtSDProfTax.TabIndex = 0
+        '
+        'txtSDGTI
+        '
+        Me.txtSDGTI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDGTI.Enabled = False
+        Me.txtSDGTI.Location = New System.Drawing.Point(402, 26)
+        Me.txtSDGTI.MaxLength = 15
+        Me.txtSDGTI.Name = "txtSDGTI"
+        Me.txtSDGTI.Size = New System.Drawing.Size(127, 21)
+        Me.txtSDGTI.TabIndex = 3
+        '
+        'txtSD80CCE
+        '
+        Me.txtSD80CCE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSD80CCE.Location = New System.Drawing.Point(545, 26)
+        Me.txtSD80CCE.MaxLength = 15
+        Me.txtSD80CCE.Name = "txtSD80CCE"
+        Me.txtSD80CCE.Size = New System.Drawing.Size(142, 21)
+        Me.txtSD80CCE.TabIndex = 4
+        '
+        'Label57
+        '
+        Me.Label57.AutoSize = True
+        Me.Label57.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label57.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label57.Location = New System.Drawing.Point(545, 3)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(142, 15)
+        Me.Label57.TabIndex = 8
+        Me.Label57.Text = "Deduction u/s 80CCE"
+        '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label58.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label58.Location = New System.Drawing.Point(402, 3)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(131, 15)
+        Me.Label58.TabIndex = 9
+        Me.Label58.Text = "Gross Total Income"
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label59.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label59.Location = New System.Drawing.Point(281, 3)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(110, 15)
+        Me.Label59.TabIndex = 10
+        Me.Label59.Text = "Other Income(s)"
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label60.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label60.Location = New System.Drawing.Point(161, 3)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(102, 15)
+        Me.Label60.TabIndex = 4
+        Me.Label60.Text = "Taxable Salary"
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label61.Location = New System.Drawing.Point(6, 3)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(133, 15)
+        Me.Label61.TabIndex = 4
+        Me.Label61.Text = "Tax on Employment"
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label62.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label62.Location = New System.Drawing.Point(700, 3)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(141, 15)
+        Me.Label62.TabIndex = 7
+        Me.Label62.Text = "Deduction u/s 80CCF"
+        '
+        'txtSDOtherIncome
+        '
+        Me.txtSDOtherIncome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDOtherIncome.Location = New System.Drawing.Point(281, 26)
+        Me.txtSDOtherIncome.MaxLength = 15
+        Me.txtSDOtherIncome.Name = "txtSDOtherIncome"
+        Me.txtSDOtherIncome.Size = New System.Drawing.Size(110, 21)
+        Me.txtSDOtherIncome.TabIndex = 2
+        '
+        'txtSD80CCF
+        '
+        Me.txtSD80CCF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSD80CCF.Enabled = False
+        Me.txtSD80CCF.Location = New System.Drawing.Point(700, 26)
+        Me.txtSD80CCF.MaxLength = 15
+        Me.txtSD80CCF.Name = "txtSD80CCF"
+        Me.txtSD80CCF.Size = New System.Drawing.Size(141, 21)
+        Me.txtSD80CCF.TabIndex = 5
+        '
+        'txtSDTaxableSalary
+        '
+        Me.txtSDTaxableSalary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTaxableSalary.Enabled = False
+        Me.txtSDTaxableSalary.Location = New System.Drawing.Point(161, 26)
+        Me.txtSDTaxableSalary.MaxLength = 15
+        Me.txtSDTaxableSalary.Name = "txtSDTaxableSalary"
+        Me.txtSDTaxableSalary.Size = New System.Drawing.Size(100, 21)
+        Me.txtSDTaxableSalary.TabIndex = 1
+        '
+        'TableLayoutPanel7
+        '
+        Me.TableLayoutPanel7.BackColor = System.Drawing.Color.Lavender
+        Me.TableLayoutPanel7.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
+        Me.TableLayoutPanel7.ColumnCount = 4
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 181.0!))
+        Me.TableLayoutPanel7.Controls.Add(Me.txtSDTotalSal, 0, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.txtSDTotalSalPreEmp, 1, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label48, 2, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label49, 1, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label50, 0, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.txtSDTotalSalBoth, 2, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label46, 3, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.txtSDEntAllow, 3, 1)
+        Me.TableLayoutPanel7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 58)
+        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
+        Me.TableLayoutPanel7.RowCount = 2
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.09804!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.90196!))
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(776, 54)
+        Me.TableLayoutPanel7.TabIndex = 2
+        '
+        'txtSDTotalSal
+        '
+        Me.txtSDTotalSal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTotalSal.Location = New System.Drawing.Point(6, 29)
+        Me.txtSDTotalSal.MaxLength = 9
+        Me.txtSDTotalSal.Name = "txtSDTotalSal"
+        Me.txtSDTotalSal.Size = New System.Drawing.Size(201, 21)
+        Me.txtSDTotalSal.TabIndex = 0
+        '
+        'txtSDTotalSalPreEmp
+        '
+        Me.txtSDTotalSalPreEmp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTotalSalPreEmp.Location = New System.Drawing.Point(216, 29)
+        Me.txtSDTotalSalPreEmp.MaxLength = 15
+        Me.txtSDTotalSalPreEmp.Name = "txtSDTotalSalPreEmp"
+        Me.txtSDTotalSalPreEmp.Size = New System.Drawing.Size(209, 21)
+        Me.txtSDTotalSalPreEmp.TabIndex = 1
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label48.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label48.Location = New System.Drawing.Point(438, 3)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(83, 15)
+        Me.Label48.TabIndex = 10
+        Me.Label48.Text = "Total Salary"
+        '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label49.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label49.Location = New System.Drawing.Point(216, 3)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(209, 15)
+        Me.Label49.TabIndex = 4
+        Me.Label49.Text = "Taxbale Amt Previous Employer"
+        '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label50.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label50.Location = New System.Drawing.Point(6, 3)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(201, 15)
+        Me.Label50.TabIndex = 3
+        Me.Label50.Text = "Taxbale Amt Current Employer"
+        '
+        'txtSDTotalSalBoth
+        '
+        Me.txtSDTotalSalBoth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDTotalSalBoth.Enabled = False
+        Me.txtSDTotalSalBoth.Location = New System.Drawing.Point(438, 29)
+        Me.txtSDTotalSalBoth.MaxLength = 15
+        Me.txtSDTotalSalBoth.Name = "txtSDTotalSalBoth"
+        Me.txtSDTotalSalBoth.Size = New System.Drawing.Size(148, 21)
+        Me.txtSDTotalSalBoth.TabIndex = 2
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label46.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label46.Location = New System.Drawing.Point(595, 3)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(166, 15)
+        Me.Label46.TabIndex = 9
+        Me.Label46.Text = "Entertainment Allowance"
+        '
+        'txtSDEntAllow
+        '
+        Me.txtSDEntAllow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDEntAllow.Location = New System.Drawing.Point(595, 29)
+        Me.txtSDEntAllow.MaxLength = 15
+        Me.txtSDEntAllow.Name = "txtSDEntAllow"
+        Me.txtSDEntAllow.Size = New System.Drawing.Size(169, 21)
+        Me.txtSDEntAllow.TabIndex = 3
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.BackColor = System.Drawing.Color.Lavender
+        Me.TableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
+        Me.TableLayoutPanel3.ColumnCount = 5
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.Label11, 4, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label30, 3, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label44, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label47, 2, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.txtSDDedCateg, 2, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.txtSDDedPAN, 1, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.cboSDDedName, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Label43, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.txtSDEmpFrm, 3, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.txtSDEmpTo, 4, 1)
+        Me.TableLayoutPanel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.66667!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.33333!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(736, 57)
+        Me.TableLayoutPanel3.TabIndex = 1
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label11.Location = New System.Drawing.Point(625, 3)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(57, 15)
+        Me.Label11.TabIndex = 8
+        Me.Label11.Text = "To Date"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label30.Location = New System.Drawing.Point(486, 3)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(123, 15)
+        Me.Label30.TabIndex = 9
+        Me.Label30.Text = "Employment From"
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label44.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label44.Location = New System.Drawing.Point(6, 3)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(124, 15)
+        Me.Label44.TabIndex = 9
+        Me.Label44.Text = "Name of deductee"
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label47.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label47.Location = New System.Drawing.Point(325, 3)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(144, 15)
+        Me.Label47.TabIndex = 4
+        Me.Label47.Text = "Category of Deductee"
+        '
+        'txtSDDedCateg
+        '
+        Me.txtSDDedCateg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDDedCateg.Location = New System.Drawing.Point(325, 29)
+        Me.txtSDDedCateg.MaxLength = 15
+        Me.txtSDDedCateg.Name = "txtSDDedCateg"
+        Me.txtSDDedCateg.Size = New System.Drawing.Size(145, 21)
+        Me.txtSDDedCateg.TabIndex = 2
+        '
+        'txtSDDedPAN
+        '
+        Me.txtSDDedPAN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSDDedPAN.Location = New System.Drawing.Point(189, 29)
+        Me.txtSDDedPAN.MaxLength = 10
+        Me.txtSDDedPAN.Name = "txtSDDedPAN"
+        Me.txtSDDedPAN.Size = New System.Drawing.Size(122, 21)
+        Me.txtSDDedPAN.TabIndex = 1
+        '
+        'cboSDDedName
+        '
+        Me.cboSDDedName.FormattingEnabled = True
+        Me.cboSDDedName.Location = New System.Drawing.Point(6, 29)
+        Me.cboSDDedName.Name = "cboSDDedName"
+        Me.cboSDDedName.Size = New System.Drawing.Size(174, 23)
+        Me.cboSDDedName.TabIndex = 11
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label43.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label43.Location = New System.Drawing.Point(189, 3)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(115, 15)
+        Me.Label43.TabIndex = 10
+        Me.Label43.Text = "PAN of Deductee"
+        '
+        'txtSDEmpFrm
+        '
+        Me.txtSDEmpFrm.Location = New System.Drawing.Point(486, 29)
+        Me.txtSDEmpFrm.Mask = "00/00/00"
+        Me.txtSDEmpFrm.Name = "txtSDEmpFrm"
+        Me.txtSDEmpFrm.Size = New System.Drawing.Size(123, 21)
+        Me.txtSDEmpFrm.TabIndex = 12
+        '
+        'txtSDEmpTo
+        '
+        Me.txtSDEmpTo.Location = New System.Drawing.Point(625, 29)
+        Me.txtSDEmpTo.Mask = "00/00/00"
+        Me.txtSDEmpTo.Name = "txtSDEmpTo"
+        Me.txtSDEmpTo.Size = New System.Drawing.Size(100, 21)
+        Me.txtSDEmpTo.TabIndex = 13
+        '
+        'TabPage5
+        '
+        Me.TabPage5.BackColor = System.Drawing.Color.Lavender
+        Me.TabPage5.Controls.Add(Me.lvwForm16)
+        Me.TabPage5.Controls.Add(Me.cmdAddNewForm16)
+        Me.TabPage5.Controls.Add(Me.cmd162XL)
+        Me.TabPage5.Controls.Add(Me.cmdmismachForm16)
+        Me.TabPage5.Controls.Add(Me.cmdform16)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(849, 497)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Form 16 Details"
+        '
+        'lvwForm16
+        '
+        Me.lvwForm16.Location = New System.Drawing.Point(6, 6)
+        Me.lvwForm16.Name = "lvwForm16"
+        Me.lvwForm16.Size = New System.Drawing.Size(622, 335)
+        Me.lvwForm16.TabIndex = 9
+        Me.lvwForm16.UseCompatibleStateImageBehavior = False
+        '
+        'cmdAddNewForm16
+        '
+        Me.cmdAddNewForm16.Location = New System.Drawing.Point(455, 347)
+        Me.cmdAddNewForm16.Name = "cmdAddNewForm16"
+        Me.cmdAddNewForm16.Size = New System.Drawing.Size(156, 23)
+        Me.cmdAddNewForm16.TabIndex = 6
+        Me.cmdAddNewForm16.Text = "&Add New Data for Form 16"
+        Me.cmdAddNewForm16.UseVisualStyleBackColor = True
+        '
+        'cmd162XL
+        '
+        Me.cmd162XL.Location = New System.Drawing.Point(374, 376)
+        Me.cmd162XL.Name = "cmd162XL"
+        Me.cmd162XL.Size = New System.Drawing.Size(75, 23)
+        Me.cmd162XL.TabIndex = 8
+        Me.cmd162XL.Text = "To Excel"
+        Me.cmd162XL.UseVisualStyleBackColor = True
+        '
+        'cmdmismachForm16
+        '
+        Me.cmdmismachForm16.Location = New System.Drawing.Point(455, 376)
+        Me.cmdmismachForm16.Name = "cmdmismachForm16"
+        Me.cmdmismachForm16.Size = New System.Drawing.Size(156, 23)
+        Me.cmdmismachForm16.TabIndex = 7
+        Me.cmdmismachForm16.Text = "Mismatch Report To Excel"
+        Me.cmdmismachForm16.UseVisualStyleBackColor = True
+        '
+        'cmdform16
+        '
+        Me.cmdform16.Location = New System.Drawing.Point(374, 347)
+        Me.cmdform16.Name = "cmdform16"
+        Me.cmdform16.Size = New System.Drawing.Size(75, 23)
+        Me.cmdform16.TabIndex = 5
+        Me.cmdform16.Text = "Form16"
+        Me.cmdform16.UseVisualStyleBackColor = True
+        '
+        'TabPage6
+        '
+        Me.TabPage6.BackColor = System.Drawing.Color.Lavender
+        Me.TabPage6.Controls.Add(Me.txttotdepos)
+        Me.TabPage6.Controls.Add(Me.txtSDcount)
+        Me.TabPage6.Controls.Add(Me.CHkSAFund)
+        Me.TabPage6.Controls.Add(Me.ChkIncomeFromHouseProperty)
+        Me.TabPage6.Controls.Add(Me.ChkRent)
+        Me.TabPage6.Controls.Add(Me.cbo16Ded)
+        Me.TabPage6.Controls.Add(Me.Label6)
+        Me.TabPage6.Controls.Add(Me.cmdExit)
+        Me.TabPage6.Controls.Add(Me.cmdDelete)
+        Me.TabPage6.Controls.Add(Me.cmdSave)
+        Me.TabPage6.Controls.Add(Me.TableLayoutPanel16)
+        Me.TabPage6.Controls.Add(Me.TableLayoutPanel15)
+        Me.TabPage6.Controls.Add(Me.TableLayoutPanel14)
+        Me.TabPage6.Location = New System.Drawing.Point(4, 24)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Size = New System.Drawing.Size(849, 497)
+        Me.TabPage6.TabIndex = 5
+        Me.TabPage6.Text = "HRA/Interest Details"
+        '
+        'txttotdepos
+        '
+        Me.txttotdepos.Location = New System.Drawing.Point(128, 465)
+        Me.txttotdepos.Name = "txttotdepos"
+        Me.txttotdepos.Size = New System.Drawing.Size(137, 21)
+        Me.txttotdepos.TabIndex = 61
+        Me.txttotdepos.TabStop = False
+        '
+        'txtSDcount
+        '
+        Me.txtSDcount.Location = New System.Drawing.Point(3, 465)
+        Me.txtSDcount.Name = "txtSDcount"
+        Me.txtSDcount.Size = New System.Drawing.Size(120, 21)
+        Me.txtSDcount.TabIndex = 60
+        Me.txtSDcount.TabStop = False
+        '
+        'CHkSAFund
+        '
+        Me.CHkSAFund.AutoSize = True
+        Me.CHkSAFund.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CHkSAFund.Location = New System.Drawing.Point(20, 299)
+        Me.CHkSAFund.Name = "CHkSAFund"
+        Me.CHkSAFund.Size = New System.Drawing.Size(561, 20)
+        Me.CHkSAFund.TabIndex = 59
+        Me.CHkSAFund.Text = "Whether Contribution Paid By Trustees of an Approved Superannuation Fund?"
+        Me.CHkSAFund.UseVisualStyleBackColor = True
+        '
+        'ChkIncomeFromHouseProperty
+        '
+        Me.ChkIncomeFromHouseProperty.AutoSize = True
+        Me.ChkIncomeFromHouseProperty.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkIncomeFromHouseProperty.Location = New System.Drawing.Point(20, 168)
+        Me.ChkIncomeFromHouseProperty.Name = "ChkIncomeFromHouseProperty"
+        Me.ChkIncomeFromHouseProperty.Size = New System.Drawing.Size(581, 20)
+        Me.ChkIncomeFromHouseProperty.TabIndex = 58
+        Me.ChkIncomeFromHouseProperty.Text = "Whether Interest paid to the Lender Under Head ""Income From House Property""?"
+        Me.ChkIncomeFromHouseProperty.UseVisualStyleBackColor = True
+        '
+        'ChkRent
+        '
+        Me.ChkRent.AutoSize = True
+        Me.ChkRent.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkRent.Location = New System.Drawing.Point(23, 28)
+        Me.ChkRent.Name = "ChkRent"
+        Me.ChkRent.Size = New System.Drawing.Size(249, 20)
+        Me.ChkRent.TabIndex = 57
+        Me.ChkRent.Text = "House Rent Exceeds One Lakh?"
+        Me.ChkRent.UseVisualStyleBackColor = True
+        '
+        'cbo16Ded
+        '
+        Me.cbo16Ded.FormattingEnabled = True
+        Me.cbo16Ded.Location = New System.Drawing.Point(184, 5)
+        Me.cbo16Ded.Name = "cbo16Ded"
+        Me.cbo16Ded.Size = New System.Drawing.Size(121, 23)
+        Me.cbo16Ded.TabIndex = 56
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label6.Location = New System.Drawing.Point(24, 8)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(137, 16)
+        Me.Label6.TabIndex = 55
+        Me.Label6.Text = "Name of Deductee"
+        '
+        'cmdExit
+        '
+        Me.cmdExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdExit.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.cmdExit.Location = New System.Drawing.Point(498, 470)
+        Me.cmdExit.Name = "cmdExit"
+        Me.cmdExit.Size = New System.Drawing.Size(75, 23)
+        Me.cmdExit.TabIndex = 54
+        Me.cmdExit.Text = "Exit"
+        Me.cmdExit.UseVisualStyleBackColor = True
+        '
+        'cmdDelete
+        '
+        Me.cmdDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdDelete.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.cmdDelete.Location = New System.Drawing.Point(382, 470)
+        Me.cmdDelete.Name = "cmdDelete"
+        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDelete.TabIndex = 53
+        Me.cmdDelete.Text = "Delete"
+        Me.cmdDelete.UseVisualStyleBackColor = True
+        '
+        'cmdSave
+        '
+        Me.cmdSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSave.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.cmdSave.Location = New System.Drawing.Point(275, 470)
+        Me.cmdSave.Name = "cmdSave"
+        Me.cmdSave.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSave.TabIndex = 52
+        Me.cmdSave.Text = "Save"
+        Me.cmdSave.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel16
+        '
+        Me.TableLayoutPanel16.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
+        Me.TableLayoutPanel16.ColumnCount = 3
+        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.35593!))
+        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.64407!))
+        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 226.0!))
+        Me.TableLayoutPanel16.Controls.Add(Me.TxtAmtRepaid, 0, 3)
+        Me.TableLayoutPanel16.Controls.Add(Me.Label84, 0, 0)
+        Me.TableLayoutPanel16.Controls.Add(Me.TxtFundNm, 0, 1)
+        Me.TableLayoutPanel16.Controls.Add(Me.Label85, 1, 0)
+        Me.TableLayoutPanel16.Controls.Add(Me.Label86, 2, 0)
+        Me.TableLayoutPanel16.Controls.Add(Me.Label87, 0, 2)
+        Me.TableLayoutPanel16.Controls.Add(Me.Label88, 1, 2)
+        Me.TableLayoutPanel16.Controls.Add(Me.txtContriFrm, 1, 1)
+        Me.TableLayoutPanel16.Controls.Add(Me.TxtRateOfDeduction, 2, 1)
+        Me.TableLayoutPanel16.Controls.Add(Me.Label89, 2, 2)
+        Me.TableLayoutPanel16.Controls.Add(Me.txtContriTo, 1, 3)
+        Me.TableLayoutPanel16.Controls.Add(Me.TxtTaxDeducted, 2, 3)
+        Me.TableLayoutPanel16.Location = New System.Drawing.Point(20, 321)
+        Me.TableLayoutPanel16.Name = "TableLayoutPanel16"
+        Me.TableLayoutPanel16.RowCount = 4
+        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.7027!))
+        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.2973!))
+        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
+        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel16.Size = New System.Drawing.Size(824, 133)
+        Me.TableLayoutPanel16.TabIndex = 2
+        '
+        'TxtAmtRepaid
+        '
+        Me.TxtAmtRepaid.Location = New System.Drawing.Point(6, 107)
+        Me.TxtAmtRepaid.Name = "TxtAmtRepaid"
+        Me.TxtAmtRepaid.Size = New System.Drawing.Size(236, 21)
+        Me.TxtAmtRepaid.TabIndex = 57
+        '
+        'Label84
+        '
+        Me.Label84.AutoSize = True
+        Me.Label84.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label84.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label84.Location = New System.Drawing.Point(6, 3)
+        Me.Label84.Name = "Label84"
+        Me.Label84.Size = New System.Drawing.Size(216, 16)
+        Me.Label84.TabIndex = 38
+        Me.Label84.Text = "Name of Superannuation Fund"
+        '
+        'TxtFundNm
+        '
+        Me.TxtFundNm.Location = New System.Drawing.Point(6, 40)
+        Me.TxtFundNm.Name = "TxtFundNm"
+        Me.TxtFundNm.Size = New System.Drawing.Size(183, 21)
+        Me.TxtFundNm.TabIndex = 40
+        '
+        'Label85
+        '
+        Me.Label85.AutoSize = True
+        Me.Label85.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label85.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label85.Location = New System.Drawing.Point(251, 3)
+        Me.Label85.Name = "Label85"
+        Me.Label85.Size = New System.Drawing.Size(260, 31)
+        Me.Label85.TabIndex = 41
+        Me.Label85.Text = "Date From Which Employee has " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Contributed To Superannuation Fund"
+        '
+        'Label86
+        '
+        Me.Label86.AutoSize = True
+        Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label86.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label86.Location = New System.Drawing.Point(597, 3)
+        Me.Label86.Name = "Label86"
+        Me.Label86.Size = New System.Drawing.Size(216, 31)
+        Me.Label86.TabIndex = 43
+        Me.Label86.Text = "Average Rate of Deduction of " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Tax During Preceeding three Years"
+        '
+        'Label87
+        '
+        Me.Label87.AutoSize = True
+        Me.Label87.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label87.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label87.Location = New System.Drawing.Point(6, 68)
+        Me.Label87.Name = "Label87"
+        Me.Label87.Size = New System.Drawing.Size(214, 33)
+        Me.Label87.TabIndex = 44
+        Me.Label87.Text = "The Amount of Contribution Repaid on Account" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "of Principal and Interest From Supe" &
+    "rannuation Fund" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'Label88
+        '
+        Me.Label88.AutoSize = True
+        Me.Label88.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label88.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label88.Location = New System.Drawing.Point(251, 68)
+        Me.Label88.Name = "Label88"
+        Me.Label88.Size = New System.Drawing.Size(260, 32)
+        Me.Label88.TabIndex = 46
+        Me.Label88.Text = "Date To which Employee has " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Contributed To Superannuation Fund"
+        '
+        'txtContriFrm
+        '
+        Me.txtContriFrm.Location = New System.Drawing.Point(251, 40)
+        Me.txtContriFrm.Mask = "00/00/0000"
+        Me.txtContriFrm.Name = "txtContriFrm"
+        Me.txtContriFrm.Size = New System.Drawing.Size(202, 21)
+        Me.txtContriFrm.TabIndex = 53
+        Me.txtContriFrm.ValidatingType = GetType(Date)
+        '
+        'TxtRateOfDeduction
+        '
+        Me.TxtRateOfDeduction.Location = New System.Drawing.Point(597, 40)
+        Me.TxtRateOfDeduction.Name = "TxtRateOfDeduction"
+        Me.TxtRateOfDeduction.Size = New System.Drawing.Size(179, 21)
+        Me.TxtRateOfDeduction.TabIndex = 54
+        '
+        'Label89
+        '
+        Me.Label89.AutoSize = True
+        Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label89.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label89.Location = New System.Drawing.Point(597, 68)
+        Me.Label89.Name = "Label89"
+        Me.Label89.Size = New System.Drawing.Size(220, 33)
+        Me.Label89.TabIndex = 55
+        Me.Label89.Text = "Amount of Tax Deducted on " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Repayment of Superannuation Fund"
+        '
+        'txtContriTo
+        '
+        Me.txtContriTo.Location = New System.Drawing.Point(251, 107)
+        Me.txtContriTo.Mask = "00/00/0000"
+        Me.txtContriTo.Name = "txtContriTo"
+        Me.txtContriTo.Size = New System.Drawing.Size(202, 21)
+        Me.txtContriTo.TabIndex = 56
+        Me.txtContriTo.ValidatingType = GetType(Date)
+        '
+        'TxtTaxDeducted
+        '
+        Me.TxtTaxDeducted.Location = New System.Drawing.Point(597, 107)
+        Me.TxtTaxDeducted.Name = "TxtTaxDeducted"
+        Me.TxtTaxDeducted.Size = New System.Drawing.Size(177, 21)
+        Me.TxtTaxDeducted.TabIndex = 58
+        '
+        'TableLayoutPanel15
+        '
+        Me.TableLayoutPanel15.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
+        Me.TableLayoutPanel15.ColumnCount = 4
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 173.0!))
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 189.0!))
+        Me.TableLayoutPanel15.Controls.Add(Me.TxtLender1PAN, 1, 0)
+        Me.TableLayoutPanel15.Controls.Add(Me.TxtLender1Nm, 3, 0)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label83, 0, 0)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label81, 0, 2)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label82, 0, 1)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label80, 0, 3)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label79, 2, 0)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label78, 2, 1)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label77, 2, 2)
+        Me.TableLayoutPanel15.Controls.Add(Me.Label76, 2, 3)
+        Me.TableLayoutPanel15.Controls.Add(Me.TxtLender3PAN, 1, 2)
+        Me.TableLayoutPanel15.Controls.Add(Me.TxtLender4PAN, 1, 3)
+        Me.TableLayoutPanel15.Controls.Add(Me.TxtLender2Nm, 3, 1)
+        Me.TableLayoutPanel15.Controls.Add(Me.TxtLender3Nm, 3, 2)
+        Me.TableLayoutPanel15.Controls.Add(Me.TxtLender4Nm, 3, 3)
+        Me.TableLayoutPanel15.Controls.Add(Me.TxtLender2PAN, 1, 1)
+        Me.TableLayoutPanel15.Location = New System.Drawing.Point(20, 184)
+        Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
+        Me.TableLayoutPanel15.RowCount = 4
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.36842!))
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.63158!))
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel15.Size = New System.Drawing.Size(764, 119)
+        Me.TableLayoutPanel15.TabIndex = 1
+        '
+        'TxtLender1PAN
+        '
+        Me.TxtLender1PAN.Location = New System.Drawing.Point(202, 6)
+        Me.TxtLender1PAN.Name = "TxtLender1PAN"
+        Me.TxtLender1PAN.Size = New System.Drawing.Size(176, 21)
+        Me.TxtLender1PAN.TabIndex = 39
+        '
+        'TxtLender1Nm
+        '
+        Me.TxtLender1Nm.Location = New System.Drawing.Point(574, 6)
+        Me.TxtLender1Nm.Name = "TxtLender1Nm"
+        Me.TxtLender1Nm.Size = New System.Drawing.Size(165, 21)
+        Me.TxtLender1Nm.TabIndex = 33
+        '
+        'Label83
+        '
+        Me.Label83.AutoSize = True
+        Me.Label83.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label83.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label83.Location = New System.Drawing.Point(6, 3)
+        Me.Label83.Name = "Label83"
+        Me.Label83.Size = New System.Drawing.Size(99, 16)
+        Me.Label83.TabIndex = 24
+        Me.Label83.Text = "Lender1 PAN"
+        '
+        'Label81
+        '
+        Me.Label81.AutoSize = True
+        Me.Label81.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label81.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label81.Location = New System.Drawing.Point(6, 61)
+        Me.Label81.Name = "Label81"
+        Me.Label81.Size = New System.Drawing.Size(103, 16)
+        Me.Label81.TabIndex = 26
+        Me.Label81.Text = "Lender3 PAN "
+        '
+        'Label82
+        '
+        Me.Label82.AutoSize = True
+        Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label82.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label82.Location = New System.Drawing.Point(6, 31)
+        Me.Label82.Name = "Label82"
+        Me.Label82.Size = New System.Drawing.Size(99, 16)
+        Me.Label82.TabIndex = 25
+        Me.Label82.Text = "Lender2 PAN"
+        '
+        'Label80
+        '
+        Me.Label80.AutoSize = True
+        Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label80.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label80.Location = New System.Drawing.Point(6, 89)
+        Me.Label80.Name = "Label80"
+        Me.Label80.Size = New System.Drawing.Size(99, 16)
+        Me.Label80.TabIndex = 27
+        Me.Label80.Text = "Lender4 PAN"
+        '
+        'Label79
+        '
+        Me.Label79.AutoSize = True
+        Me.Label79.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label79.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label79.Location = New System.Drawing.Point(398, 3)
+        Me.Label79.Name = "Label79"
+        Me.Label79.Size = New System.Drawing.Size(109, 16)
+        Me.Label79.TabIndex = 28
+        Me.Label79.Text = "Lender1 Name"
+        '
+        'Label78
+        '
+        Me.Label78.AutoSize = True
+        Me.Label78.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label78.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label78.Location = New System.Drawing.Point(398, 31)
+        Me.Label78.Name = "Label78"
+        Me.Label78.Size = New System.Drawing.Size(109, 16)
+        Me.Label78.TabIndex = 29
+        Me.Label78.Text = "Lender2 Name"
+        '
+        'Label77
+        '
+        Me.Label77.AutoSize = True
+        Me.Label77.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label77.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label77.Location = New System.Drawing.Point(398, 61)
+        Me.Label77.Name = "Label77"
+        Me.Label77.Size = New System.Drawing.Size(109, 16)
+        Me.Label77.TabIndex = 30
+        Me.Label77.Text = "Lender3 Name"
+        '
+        'Label76
+        '
+        Me.Label76.AutoSize = True
+        Me.Label76.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label76.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label76.Location = New System.Drawing.Point(398, 89)
+        Me.Label76.Name = "Label76"
+        Me.Label76.Size = New System.Drawing.Size(109, 16)
+        Me.Label76.TabIndex = 31
+        Me.Label76.Text = "Lender4 Name"
+        '
+        'TxtLender3PAN
+        '
+        Me.TxtLender3PAN.Location = New System.Drawing.Point(202, 64)
+        Me.TxtLender3PAN.Name = "TxtLender3PAN"
+        Me.TxtLender3PAN.Size = New System.Drawing.Size(176, 21)
+        Me.TxtLender3PAN.TabIndex = 34
+        '
+        'TxtLender4PAN
+        '
+        Me.TxtLender4PAN.Location = New System.Drawing.Point(202, 92)
+        Me.TxtLender4PAN.Name = "TxtLender4PAN"
+        Me.TxtLender4PAN.Size = New System.Drawing.Size(176, 21)
+        Me.TxtLender4PAN.TabIndex = 35
+        '
+        'TxtLender2Nm
+        '
+        Me.TxtLender2Nm.Location = New System.Drawing.Point(574, 34)
+        Me.TxtLender2Nm.Name = "TxtLender2Nm"
+        Me.TxtLender2Nm.Size = New System.Drawing.Size(165, 21)
+        Me.TxtLender2Nm.TabIndex = 36
+        '
+        'TxtLender3Nm
+        '
+        Me.TxtLender3Nm.Location = New System.Drawing.Point(574, 64)
+        Me.TxtLender3Nm.Name = "TxtLender3Nm"
+        Me.TxtLender3Nm.Size = New System.Drawing.Size(165, 21)
+        Me.TxtLender3Nm.TabIndex = 37
+        '
+        'TxtLender4Nm
+        '
+        Me.TxtLender4Nm.Location = New System.Drawing.Point(574, 92)
+        Me.TxtLender4Nm.Name = "TxtLender4Nm"
+        Me.TxtLender4Nm.Size = New System.Drawing.Size(165, 21)
+        Me.TxtLender4Nm.TabIndex = 38
+        '
+        'TxtLender2PAN
+        '
+        Me.TxtLender2PAN.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtLender2PAN.Location = New System.Drawing.Point(202, 34)
+        Me.TxtLender2PAN.Name = "TxtLender2PAN"
+        Me.TxtLender2PAN.Size = New System.Drawing.Size(176, 21)
+        Me.TxtLender2PAN.TabIndex = 33
+        '
+        'TableLayoutPanel14
+        '
+        Me.TableLayoutPanel14.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
+        Me.TableLayoutPanel14.ColumnCount = 4
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 173.0!))
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 189.0!))
+        Me.TableLayoutPanel14.Controls.Add(Me.TxtLL4Nm, 3, 3)
+        Me.TableLayoutPanel14.Controls.Add(Me.TxtLL3Nm, 3, 2)
+        Me.TableLayoutPanel14.Controls.Add(Me.TxtLL2Nm, 3, 1)
+        Me.TableLayoutPanel14.Controls.Add(Me.TxtLL1Nm, 3, 0)
+        Me.TableLayoutPanel14.Controls.Add(Me.TxtLL1PAN, 1, 0)
+        Me.TableLayoutPanel14.Controls.Add(Me.Label686, 0, 3)
+        Me.TableLayoutPanel14.Controls.Add(Me.Label684, 0, 2)
+        Me.TableLayoutPanel14.Controls.Add(Me.Label682, 0, 1)
+        Me.TableLayoutPanel14.Controls.Add(Me.Label680, 0, 0)
+        Me.TableLayoutPanel14.Controls.Add(Me.Label687, 2, 3)
+        Me.TableLayoutPanel14.Controls.Add(Me.Label685, 2, 2)
+        Me.TableLayoutPanel14.Controls.Add(Me.Label683, 2, 1)
+        Me.TableLayoutPanel14.Controls.Add(Me.Label681, 2, 0)
+        Me.TableLayoutPanel14.Controls.Add(Me.TxtLL2PAN, 1, 1)
+        Me.TableLayoutPanel14.Controls.Add(Me.TxtLL3PAN, 1, 2)
+        Me.TableLayoutPanel14.Controls.Add(Me.TxtLL4PAN, 1, 3)
+        Me.TableLayoutPanel14.Location = New System.Drawing.Point(20, 47)
+        Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
+        Me.TableLayoutPanel14.RowCount = 4
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.0!))
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.0!))
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
+        Me.TableLayoutPanel14.Size = New System.Drawing.Size(764, 117)
+        Me.TableLayoutPanel14.TabIndex = 0
+        '
+        'TxtLL4Nm
+        '
+        Me.TxtLL4Nm.Location = New System.Drawing.Point(574, 92)
+        Me.TxtLL4Nm.Name = "TxtLL4Nm"
+        Me.TxtLL4Nm.Size = New System.Drawing.Size(165, 21)
+        Me.TxtLL4Nm.TabIndex = 23
+        '
+        'TxtLL3Nm
+        '
+        Me.TxtLL3Nm.Location = New System.Drawing.Point(574, 63)
+        Me.TxtLL3Nm.Name = "TxtLL3Nm"
+        Me.TxtLL3Nm.Size = New System.Drawing.Size(165, 21)
+        Me.TxtLL3Nm.TabIndex = 22
+        '
+        'TxtLL2Nm
+        '
+        Me.TxtLL2Nm.Location = New System.Drawing.Point(574, 36)
+        Me.TxtLL2Nm.Name = "TxtLL2Nm"
+        Me.TxtLL2Nm.Size = New System.Drawing.Size(165, 21)
+        Me.TxtLL2Nm.TabIndex = 21
+        '
+        'TxtLL1Nm
+        '
+        Me.TxtLL1Nm.Location = New System.Drawing.Point(574, 6)
+        Me.TxtLL1Nm.Name = "TxtLL1Nm"
+        Me.TxtLL1Nm.Size = New System.Drawing.Size(165, 21)
+        Me.TxtLL1Nm.TabIndex = 20
+        '
+        'TxtLL1PAN
+        '
+        Me.TxtLL1PAN.Location = New System.Drawing.Point(202, 6)
+        Me.TxtLL1PAN.Name = "TxtLL1PAN"
+        Me.TxtLL1PAN.Size = New System.Drawing.Size(176, 21)
+        Me.TxtLL1PAN.TabIndex = 16
+        '
+        'Label686
+        '
+        Me.Label686.AutoSize = True
+        Me.Label686.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label686.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label686.Location = New System.Drawing.Point(6, 89)
+        Me.Label686.Name = "Label686"
+        Me.Label686.Size = New System.Drawing.Size(139, 16)
+        Me.Label686.TabIndex = 10
+        Me.Label686.Text = "Lan Lord4 PAN No."
+        '
+        'Label684
+        '
+        Me.Label684.AutoSize = True
+        Me.Label684.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label684.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label684.Location = New System.Drawing.Point(6, 60)
+        Me.Label684.Name = "Label684"
+        Me.Label684.Size = New System.Drawing.Size(139, 16)
+        Me.Label684.TabIndex = 9
+        Me.Label684.Text = "Lan Lord3 PAN No."
+        '
+        'Label682
+        '
+        Me.Label682.AutoSize = True
+        Me.Label682.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label682.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label682.Location = New System.Drawing.Point(6, 33)
+        Me.Label682.Name = "Label682"
+        Me.Label682.Size = New System.Drawing.Size(139, 16)
+        Me.Label682.TabIndex = 8
+        Me.Label682.Text = "Lan Lord2 PAN No."
+        '
+        'Label680
+        '
+        Me.Label680.AutoSize = True
+        Me.Label680.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label680.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label680.Location = New System.Drawing.Point(6, 3)
+        Me.Label680.Name = "Label680"
+        Me.Label680.Size = New System.Drawing.Size(139, 16)
+        Me.Label680.TabIndex = 7
+        Me.Label680.Text = "Lan Lord1 PAN No."
+        '
+        'Label687
+        '
+        Me.Label687.AutoSize = True
+        Me.Label687.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label687.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label687.Location = New System.Drawing.Point(398, 89)
+        Me.Label687.Name = "Label687"
+        Me.Label687.Size = New System.Drawing.Size(121, 16)
+        Me.Label687.TabIndex = 14
+        Me.Label687.Text = "Lan Lord4 Name"
+        '
+        'Label685
+        '
+        Me.Label685.AutoSize = True
+        Me.Label685.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label685.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label685.Location = New System.Drawing.Point(398, 60)
+        Me.Label685.Name = "Label685"
+        Me.Label685.Size = New System.Drawing.Size(121, 16)
+        Me.Label685.TabIndex = 13
+        Me.Label685.Text = "Lan Lord3 Name"
+        '
+        'Label683
+        '
+        Me.Label683.AutoSize = True
+        Me.Label683.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label683.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label683.Location = New System.Drawing.Point(398, 33)
+        Me.Label683.Name = "Label683"
+        Me.Label683.Size = New System.Drawing.Size(121, 16)
+        Me.Label683.TabIndex = 12
+        Me.Label683.Text = "Lan Lord2 Name"
+        '
+        'Label681
+        '
+        Me.Label681.AutoSize = True
+        Me.Label681.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label681.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label681.Location = New System.Drawing.Point(398, 3)
+        Me.Label681.Name = "Label681"
+        Me.Label681.Size = New System.Drawing.Size(121, 16)
+        Me.Label681.TabIndex = 11
+        Me.Label681.Text = "Lan Lord1 Name"
+        '
+        'TxtLL2PAN
+        '
+        Me.TxtLL2PAN.Location = New System.Drawing.Point(202, 36)
+        Me.TxtLL2PAN.Name = "TxtLL2PAN"
+        Me.TxtLL2PAN.Size = New System.Drawing.Size(176, 21)
+        Me.TxtLL2PAN.TabIndex = 17
+        '
+        'TxtLL3PAN
+        '
+        Me.TxtLL3PAN.Location = New System.Drawing.Point(202, 63)
+        Me.TxtLL3PAN.Name = "TxtLL3PAN"
+        Me.TxtLL3PAN.Size = New System.Drawing.Size(176, 21)
+        Me.TxtLL3PAN.TabIndex = 18
+        '
+        'TxtLL4PAN
+        '
+        Me.TxtLL4PAN.Location = New System.Drawing.Point(202, 92)
+        Me.TxtLL4PAN.Name = "TxtLL4PAN"
+        Me.TxtLL4PAN.Size = New System.Drawing.Size(176, 21)
+        Me.TxtLL4PAN.TabIndex = 19
+        '
         'Label26
         '
         Me.Label26.BackColor = System.Drawing.SystemColors.ActiveCaptionText
@@ -2130,7 +3768,7 @@ Partial Class frmTDS24Q
         Me.cmdBack.Enabled = False
         Me.cmdBack.Image = Global.WizinTDS2019.My.Resources.Resources.Knob_Fast_Rewind_icon
         Me.cmdBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.cmdBack.Location = New System.Drawing.Point(694, 521)
+        Me.cmdBack.Location = New System.Drawing.Point(694, 527)
         Me.cmdBack.Name = "cmdBack"
         Me.cmdBack.Size = New System.Drawing.Size(75, 35)
         Me.cmdBack.TabIndex = 11
@@ -2143,12 +3781,39 @@ Partial Class frmTDS24Q
         Me.cmdNext.CausesValidation = False
         Me.cmdNext.Image = Global.WizinTDS2019.My.Resources.Resources.Knob_Fast_Forward_icon
         Me.cmdNext.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdNext.Location = New System.Drawing.Point(775, 521)
+        Me.cmdNext.Location = New System.Drawing.Point(775, 527)
         Me.cmdNext.Name = "cmdNext"
         Me.cmdNext.Size = New System.Drawing.Size(75, 35)
         Me.cmdNext.TabIndex = 12
         Me.cmdNext.Text = "Next  "
         Me.cmdNext.UseVisualStyleBackColor = True
+        '
+        'Timer3
+        '
+        '
+        'Timer4
+        '
+        '
+        'PopupmenuS
+        '
+        Me.PopupmenuS.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.PopupmenuS.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripMenuItem4})
+        Me.PopupmenuS.Name = "popupmenu"
+        Me.PopupmenuS.Size = New System.Drawing.Size(116, 48)
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(115, 22)
+        Me.ToolStripMenuItem3.Text = "Edit"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(115, 22)
+        Me.ToolStripMenuItem4.Text = "Delete"
         '
         'frmTDS24Q
         '
@@ -2161,7 +3826,7 @@ Partial Class frmTDS24Q
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "frmTDS24Q"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmTDS24Q"
         Me.tabMain.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
@@ -2196,8 +3861,30 @@ Partial Class frmTDS24Q
         Me.TableLayoutPanel5.PerformLayout()
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanel4.PerformLayout()
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
+        Me.TableLayoutPanel10.ResumeLayout(False)
+        Me.TableLayoutPanel10.PerformLayout()
+        Me.TableLayoutPanel8.ResumeLayout(False)
+        Me.TableLayoutPanel8.PerformLayout()
+        Me.TableLayoutPanel9.ResumeLayout(False)
+        Me.TableLayoutPanel9.PerformLayout()
+        Me.TableLayoutPanel7.ResumeLayout(False)
+        Me.TableLayoutPanel7.PerformLayout()
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.TableLayoutPanel3.PerformLayout()
+        Me.TabPage5.ResumeLayout(False)
+        Me.TabPage6.ResumeLayout(False)
+        Me.TabPage6.PerformLayout()
+        Me.TableLayoutPanel16.ResumeLayout(False)
+        Me.TableLayoutPanel16.PerformLayout()
+        Me.TableLayoutPanel15.ResumeLayout(False)
+        Me.TableLayoutPanel15.PerformLayout()
+        Me.TableLayoutPanel14.ResumeLayout(False)
+        Me.TableLayoutPanel14.PerformLayout()
         Me.popupmenu.ResumeLayout(False)
         Me.popupmenuD.ResumeLayout(False)
+        Me.PopupmenuS.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -2347,4 +4034,141 @@ Partial Class frmTDS24Q
     Friend WithEvents cmdBack As Button
     Friend WithEvents cmdNext As Button
     Friend WithEvents Label2 As Label
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents ChkHigRate As CheckBox
+    Friend WithEvents lvwSD As ListView
+    Friend WithEvents cmdmismatch As Button
+    Friend WithEvents cmdSDCancel As Button
+    Friend WithEvents cmdSD2XL As Button
+    Friend WithEvents cmdSDAdd As Button
+    Friend WithEvents TableLayoutPanel10 As TableLayoutPanel
+    Friend WithEvents txtSDTDSPreEmp As TextBox
+    Friend WithEvents txtSDNetTax As TextBox
+    Friend WithEvents txtSDTDS As TextBox
+    Friend WithEvents Label64 As Label
+    Friend WithEvents Label65 As Label
+    Friend WithEvents Label67 As Label
+    Friend WithEvents Label69 As Label
+    Friend WithEvents txtSDTDSCurEmp As TextBox
+    Friend WithEvents txtSDShortfall As TextBox
+    Friend WithEvents Label68 As Label
+    Friend WithEvents txtSDRelief As TextBox
+    Friend WithEvents Label66 As Label
+    Friend WithEvents TableLayoutPanel8 As TableLayoutPanel
+    Friend WithEvents txtSD80CCG As TextBox
+    Friend WithEvents txtSDTax As TextBox
+    Friend WithEvents txtSDSurcharge As TextBox
+    Friend WithEvents Label45 As Label
+    Friend WithEvents Label51 As Label
+    Friend WithEvents Label52 As Label
+    Friend WithEvents Label53 As Label
+    Friend WithEvents Label54 As Label
+    Friend WithEvents Label55 As Label
+    Friend WithEvents Label56 As Label
+    Friend WithEvents txtSDTotalTaxableIncome As TextBox
+    Friend WithEvents txtSDEduCess As TextBox
+    Friend WithEvents txtSDOtherIVA As TextBox
+    Friend WithEvents txtSDTotalTax As TextBox
+    Friend WithEvents TableLayoutPanel9 As TableLayoutPanel
+    Friend WithEvents txtSDProfTax As TextBox
+    Friend WithEvents txtSDGTI As TextBox
+    Friend WithEvents txtSD80CCE As TextBox
+    Friend WithEvents Label57 As Label
+    Friend WithEvents Label58 As Label
+    Friend WithEvents Label59 As Label
+    Friend WithEvents Label60 As Label
+    Friend WithEvents Label61 As Label
+    Friend WithEvents Label62 As Label
+    Friend WithEvents txtSDOtherIncome As TextBox
+    Friend WithEvents txtSD80CCF As TextBox
+    Friend WithEvents txtSDTaxableSalary As TextBox
+    Friend WithEvents TableLayoutPanel7 As TableLayoutPanel
+    Friend WithEvents txtSDTotalSal As TextBox
+    Friend WithEvents txtSDTotalSalPreEmp As TextBox
+    Friend WithEvents Label48 As Label
+    Friend WithEvents Label49 As Label
+    Friend WithEvents Label50 As Label
+    Friend WithEvents txtSDTotalSalBoth As TextBox
+    Friend WithEvents Label46 As Label
+    Friend WithEvents txtSDEntAllow As TextBox
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents Label44 As Label
+    Friend WithEvents Label47 As Label
+    Friend WithEvents txtSDDedCateg As TextBox
+    Friend WithEvents txtSDDedPAN As TextBox
+    Friend WithEvents cboSDDedName As ComboBox
+    Friend WithEvents Label43 As Label
+    Friend WithEvents txtSDEmpFrm As MaskedTextBox
+    Friend WithEvents txtSDEmpTo As MaskedTextBox
+    Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents lvwForm16 As ListView
+    Friend WithEvents cmdAddNewForm16 As Button
+    Friend WithEvents cmd162XL As Button
+    Friend WithEvents cmdmismachForm16 As Button
+    Friend WithEvents cmdform16 As Button
+    Friend WithEvents TabPage6 As TabPage
+    Friend WithEvents ChkRent As CheckBox
+    Friend WithEvents cbo16Ded As ComboBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents cmdExit As Button
+    Friend WithEvents cmdDelete As Button
+    Friend WithEvents cmdSave As Button
+    Friend WithEvents TableLayoutPanel16 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel15 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel14 As TableLayoutPanel
+    Friend WithEvents Label686 As Label
+    Friend WithEvents Label684 As Label
+    Friend WithEvents Label682 As Label
+    Friend WithEvents Label680 As Label
+    Friend WithEvents Label80 As Label
+    Friend WithEvents Label81 As Label
+    Friend WithEvents Label82 As Label
+    Friend WithEvents Label83 As Label
+    Friend WithEvents TxtLL4Nm As TextBox
+    Friend WithEvents TxtLL3Nm As TextBox
+    Friend WithEvents TxtLL2Nm As TextBox
+    Friend WithEvents TxtLL1Nm As TextBox
+    Friend WithEvents TxtLL1PAN As TextBox
+    Friend WithEvents Label687 As Label
+    Friend WithEvents Label685 As Label
+    Friend WithEvents Label683 As Label
+    Friend WithEvents Label681 As Label
+    Friend WithEvents TxtLL2PAN As TextBox
+    Friend WithEvents TxtLL3PAN As TextBox
+    Friend WithEvents TxtLL4PAN As TextBox
+    Friend WithEvents CHkSAFund As CheckBox
+    Friend WithEvents ChkIncomeFromHouseProperty As CheckBox
+    Friend WithEvents TxtAmtRepaid As TextBox
+    Friend WithEvents Label84 As Label
+    Friend WithEvents TxtFundNm As TextBox
+    Friend WithEvents Label85 As Label
+    Friend WithEvents Label86 As Label
+    Friend WithEvents Label87 As Label
+    Friend WithEvents Label88 As Label
+    Friend WithEvents txtContriFrm As MaskedTextBox
+    Friend WithEvents TxtRateOfDeduction As TextBox
+    Friend WithEvents Label89 As Label
+    Friend WithEvents txtContriTo As MaskedTextBox
+    Friend WithEvents TxtTaxDeducted As TextBox
+    Friend WithEvents TxtLender1Nm As TextBox
+    Friend WithEvents Label79 As Label
+    Friend WithEvents Label78 As Label
+    Friend WithEvents Label77 As Label
+    Friend WithEvents Label76 As Label
+    Friend WithEvents TxtLender2PAN As TextBox
+    Friend WithEvents TxtLender3PAN As TextBox
+    Friend WithEvents TxtLender4PAN As TextBox
+    Friend WithEvents TxtLender2Nm As TextBox
+    Friend WithEvents TxtLender3Nm As TextBox
+    Friend WithEvents TxtLender4Nm As TextBox
+    Friend WithEvents txttotdepos As MaskedTextBox
+    Friend WithEvents txtSDcount As MaskedTextBox
+    Friend WithEvents TxtLender1PAN As TextBox
+    Friend WithEvents Timer3 As Timer
+    Friend WithEvents Timer4 As Timer
+    Friend WithEvents PopupmenuS As ContextMenuStrip
+    Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem4 As ToolStripMenuItem
 End Class

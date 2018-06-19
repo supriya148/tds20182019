@@ -158,6 +158,7 @@ Partial Class frm16A
         Me.Label13.Size = New System.Drawing.Size(221, 32)
         Me.Label13.TabIndex = 11
         Me.Label13.Text = "Remark:- Tick this for deductees not " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "              having PAN."
+        Me.Label13.Visible = False
         '
         'cmdgen
         '
@@ -190,10 +191,13 @@ Partial Class frm16A
         Me.chkpanvalid.TabIndex = 14
         Me.chkpanvalid.Text = "Tick this to include deductee not " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "having valid PAN in the display list."
         Me.chkpanvalid.UseVisualStyleBackColor = True
+        Me.chkpanvalid.Visible = False
         '
         'chkXLOverWrite
         '
         Me.chkXLOverWrite.AutoSize = True
+        Me.chkXLOverWrite.Checked = True
+        Me.chkXLOverWrite.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkXLOverWrite.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkXLOverWrite.Location = New System.Drawing.Point(131, 256)
         Me.chkXLOverWrite.Name = "chkXLOverWrite"
@@ -201,6 +205,7 @@ Partial Class frm16A
         Me.chkXLOverWrite.TabIndex = 15
         Me.chkXLOverWrite.Text = "Check here to overwrite Excel files(if exits)."
         Me.chkXLOverWrite.UseVisualStyleBackColor = True
+        Me.chkXLOverWrite.Visible = False
         '
         'chkOpenXL
         '
@@ -237,11 +242,10 @@ Partial Class frm16A
         'certidt
         '
         Me.certidt.Location = New System.Drawing.Point(240, 163)
-        Me.certidt.Mask = "00/00/0000"
+        Me.certidt.Mask = "00/00/00"
         Me.certidt.Name = "certidt"
         Me.certidt.Size = New System.Drawing.Size(203, 20)
         Me.certidt.TabIndex = 19
-        Me.certidt.ValidatingType = GetType(Date)
         '
         'lblMsg
         '
@@ -278,7 +282,7 @@ Partial Class frm16A
         Me.Controls.Add(Me.txtSignByFatherName)
         Me.Controls.Add(Me.txtSignByName)
         Me.Name = "frm16A"
-        Me.Text = "frm16A"
+        Me.Text = "Certificate"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

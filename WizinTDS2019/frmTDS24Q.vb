@@ -14,10 +14,12 @@ Public Class frmTDS24Q
     Public CO As String
     Dim WithEvents oChln As ClsChallan24QObj
     Dim WithEvents oDed As clsDeductee24QObj
+    Dim WithEvents oSD As ClsSalaryDetail24QObj
     Dim AutoCalcReqd As Boolean
     Dim dedcboIndex As Long
     Dim strFrmCaption As String
     Dim AllowBSREntry As Boolean
+    Dim F16ID, RETN As Integer
     'Dim ChqBoxChecked As Integer
     'Dim ChqBoxUnChecked As Integer
     'Dim sec() As String
@@ -427,9 +429,9 @@ canerr:
         Dim oCoMst As New clsCoMst
         oCoMst = oCoMst.FetchCo(selectedcoid)
         ' Me.Location = New Point(221, 81)
-        ' Me.Location = New Point(180, 210)
+        Me.Location = New Point(180, 210)
         Dim nds As New DataSet
-        txtCoName.Focus()
+
         'Set the dates..
         dtpAmtPayDt.AutoSize = False
         dtpAmtPayDt.Height = 20
@@ -441,6 +443,10 @@ canerr:
         dtpChallanDate.Text = (Now().ToString("dd/MM/yy"))
         dtpAmtPayDt.Text = FromDateQ.ToString("dd/MM/yy")
         dtpTDSDedDt.Text = Format(FromDateQ, "dd/MM/yy")
+        txtSDEmpFrm.Text = Format(FromDate, "dd/MM/yy")
+        txtSDEmpTo.Text = Format(ToDate, "dd/MM/yy")
+        txtContriTo.Text = (Now().ToString("dd/MM/yy"))
+        txtContriFrm.Text = (Now().ToString("dd/MM/yy"))
         'Set next btn to false of tab0
         'cmdNext.Enabled = False
 
@@ -461,13 +467,17 @@ canerr:
         FillGovtDedrType()
         'Code
         NormalMode()
+        NormalModeSD()
         NormalModeDeductee()
         ClearChallanCtrls()
         clearDeducteeCtrls()
+        ClearSDCtrls()
         CopyCoDetails()
         EnableDisableTabContents()
         lvwchallanHead()
         lvwDeducteeHead()
+        lvwSDHead()
+        lvwForm16Head()
         chkBookEntry_Click(sender, e)
         Counter = 0
         Select Case oCoMst.CoStatus
@@ -478,7 +488,7 @@ canerr:
             Case "A", "D", "G", "L"
                 chkSection3.Checked = True
         End Select
-
+        salary()
         SectionChecked()
         If cboDedSection.Items.Count > 0 Then
             cboDedSection.SelectedIndex = 0
@@ -486,39 +496,29 @@ canerr:
         End If
         'SectionChecked()
         cmdBack.Enabled = False
-
+        If cbo16Ded.Text = "" Then
+            ChkRent.Enabled = False
+            ChkIncomeFromHouseProperty.Enabled = False
+            CHkSAFund.Enabled = False
+        Else
+            ChkRent.Enabled = True
+            ChkIncomeFromHouseProperty.Enabled = True
+            CHkSAFund.Enabled = True
+        End If
         tabMain.SelectedIndex = 0
     End Sub
-    'Private Sub ToolTipforcheckbox()
-    '    Dim toolTip1 As New ToolTip()
-    '    toolTip1.AutoPopDelay = 5000
-    '    toolTip1.InitialDelay = 1000
-    '    toolTip1.ReshowDelay = 500
-    '    toolTip1.ShowAlways = True
 
-    '    ' Set up the ToolTip text for the Button and Checkbox.
-    '    ' toolTip1.SetToolTip(Me.chkSection0, "Check this if you have deducted Tax on payment of Salary")
-    '    toolTip1.SetToolTip(Me.chkSection1, "FC")
-    '    toolTip1.SetToolTip(Me.chkSection2, "Check this if you have deducted Tax on payment of Dividends")
-    '    toolTip1.SetToolTip(Me.chkSection3, "Check this if you have deducted Tax on payment of Interest other than Interest on securities")
-    '    toolTip1.SetToolTip(Me.chkSection4, "Check this if you have deducted Tax on payment of Winning from lottery or crossword puzzle")
-    '    toolTip1.SetToolTip(Me.chkSection5, "Check this if you have deducted Tax on payment of Winning from Horse Race")
-    '    toolTip1.SetToolTip(Me.chkSection6, "Check this if you have deducted Tax on payment of Payments to contractors and sub-contractors.")
-    '    toolTip1.SetToolTip(Me.chkSection7, "Check this if you have deducted Tax on payment of Insurance Commission")
-    '    toolTip1.SetToolTip(Me.chkSection8, "Payments to Non resident sportsmen or sports associations.")
-    '    toolTip1.SetToolTip(Me.chkSection8, "Check this if you have deducted Tax on payment of Payments in respect of deposits under NSS, etc.")
-    '    toolTip1.SetToolTip(Me.chkSection9, "Check this if you have deducted Tax on payment of Payments on account of repurchase of units by MF or UTI")
-    '    toolTip1.SetToolTip(Me.chkSection11, "Check this if you have deducted Tax on payment of Commission etc. on the sale of lottery tickets")
-    '    toolTip1.SetToolTip(Me.chkSection12, "Check this if you have deducted Tax on payment of Commission or brokerage")
-    '    toolTip1.SetToolTip(Me.chkSection13, "Check this if you have deducted Tax on payment of Rent")
-    '    toolTip1.SetToolTip(Me.chkSection14, "Check this if you have deducted Tax on payment of Other sums")
-    '    toolTip1.SetToolTip(Me.chkSection15, "Check this if you have deducted Tax on payment of Fees for professional or technical services")
-    '    toolTip1.SetToolTip(Me.chkSection16, "Check this if you have deducted Tax on payment of Land Acquisition.")
-    '    toolTip1.SetToolTip(Me.chkSection17, "Check this if you have deducted Tax on payment from units of a business trust")
-    '    toolTip1.SetToolTip(Me.chkSection18, "Payment in respect of life insurance policy")
-    'End Sub
-
-
+    Private Sub salary()
+        Dim j As Integer
+        Dim sumDCount As Double
+        Dim SumdTDSDeposited As Double
+        sumDCount = lvwSD.Items.Count
+        txtSDcount.Text = "Total Deductee's Records =" & sumDCount
+        For j = 1 To lvwSD.Items.Count - 1
+            SumdTDSDeposited = SumdTDSDeposited + Val(lvwSD.Items(j).SubItems(17).Text)
+        Next j
+        txttotdepos.Text = "Total Tax Deposited=" & SumdTDSDeposited
+    End Sub
 
     Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
 
@@ -528,10 +528,14 @@ canerr:
         nds = FetchDataSet("select DName,DId from DeductMst Where CoId = " & selectedcoid & "  ORDER BY DName ")
         cboDedName.DataSource = Nothing
         cboDedName.Items().Clear()
+        cboSDDedName.Items().Clear()
         If nds.Tables(0).Rows.Count > 0 Then
             cboDedName.DataSource = nds.Tables(0)
             cboDedName.DisplayMember = "DName"
             cboDedName.ValueMember = "DId"
+            cboSDDedName.DataSource = nds.Tables(0)
+            cboSDDedName.DisplayMember = "DName"
+            cboSDDedName.ValueMember = "DId"
         End If
 
         nds.Dispose()
@@ -717,6 +721,8 @@ canerr:
                     cboDedSection.SelectedIndex = 0
                 End If
                 cboDedName.SelectedIndex = -1
+            Case 3
+                cboSDDedName.Focus()
                 cmdNext.Enabled = False
         End Select
     End Sub
@@ -1267,6 +1273,91 @@ canerr:
             .FullRowSelect = True
         End With
     End Sub
+    Public Sub lvwSDHead()
+        With lvwSD
+            .Columns.Clear()
+            .Columns.Add("Name of Deductee", 100, HorizontalAlignment.Left)
+            .Columns.Add("PAN of Deductee", 60, HorizontalAlignment.Left)
+            .Columns.Add("Category", 60, HorizontalAlignment.Right)
+            .Columns.Add("From Dt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("To Dt.", 60, HorizontalAlignment.Right)
+            .Columns.Add("Total Salary", 60, HorizontalAlignment.Right)
+            .Columns.Add("Ent. Allowances", 60, HorizontalAlignment.Right)
+            .Columns.Add("Tax On Emp.", 60, HorizontalAlignment.Right)
+            .Columns.Add("", 0, HorizontalAlignment.Left)
+            .Columns.Add("Taxable Salary", 60, HorizontalAlignment.Left)
+            .Columns.Add("Other Income", 60, HorizontalAlignment.Right)
+            .Columns.Add("Gross Total Income", 60, HorizontalAlignment.Right)
+            .Columns.Add("80CCE Amt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("80CCF Amt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("80CCG Amt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("Chp. VI-A Amt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("Taxable Income", 60, HorizontalAlignment.Left)
+            .Columns.Add("Income Tax", 60, HorizontalAlignment.Left)
+            .Columns.Add("Surcharge", 60, HorizontalAlignment.Left)
+            .Columns.Add("Edu. Cess", 60, HorizontalAlignment.Left)
+            .Columns.Add("Total Tax", 60, HorizontalAlignment.Left)
+            .Columns.Add("89 Relief", 60, HorizontalAlignment.Left)
+            .Columns.Add("Net Tax", 60, HorizontalAlignment.Left)
+            .Columns.Add("TDS Amt. Balance", 60, HorizontalAlignment.Left)
+            .Columns.Add("Excess/Short", 60, HorizontalAlignment.Left)
+            .Columns.Add("Total Salary By Previous Employer", 60, HorizontalAlignment.Left)
+            .Columns.Add("TDS Amt. By Previous Employer", 60, HorizontalAlignment.Left)
+            .Columns.Add("High Rate PAN", 60, HorizontalAlignment.Left)
+            .Columns.Add("TDS Yearly", 60, HorizontalAlignment.Left)
+
+            'Display listview in details view
+            .View = View.Details
+            'display grid lines
+            .GridLines = True
+            'allow full row selection
+            .FullRowSelect = True
+        End With
+    End Sub
+
+    Public Sub lvwForm16Head()
+        With lvwForm16
+            .Columns.Clear()
+            .Columns.Add("Name of Deductee", 100, HorizontalAlignment.Left)
+            .Columns.Add("PAN of Deductee", 60, HorizontalAlignment.Left)
+            .Columns.Add("Category", 60, HorizontalAlignment.Right)
+            .Columns.Add("From Dt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("To Dt.", 60, HorizontalAlignment.Right)
+            .Columns.Add("Total Salary", 60, HorizontalAlignment.Right)
+            .Columns.Add("Allowances", 60, HorizontalAlignment.Right)
+            .Columns.Add("Ent. Allowances", 60, HorizontalAlignment.Right)
+            .Columns.Add("Tax On Emp.", 60, HorizontalAlignment.Right)
+            .Columns.Add("Taxable Salary", 60, HorizontalAlignment.Left)
+            .Columns.Add("Other Income", 60, HorizontalAlignment.Right)
+            .Columns.Add("Gross Total Income", 60, HorizontalAlignment.Right)
+            .Columns.Add("80CCE Amt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("80CCF Amt.", 60, HorizontalAlignment.Left)
+            '.Columns.Add("80CCG Amt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("Chp. VI-A Amt.", 60, HorizontalAlignment.Left)
+            .Columns.Add("Taxable Income", 60, HorizontalAlignment.Left)
+            .Columns.Add("Income Tax", 60, HorizontalAlignment.Left)
+            .Columns.Add("Surcharge", 60, HorizontalAlignment.Left)
+            .Columns.Add("Edu. Cess", 60, HorizontalAlignment.Left)
+            .Columns.Add("Total Tax", 60, HorizontalAlignment.Left)
+            .Columns.Add("89 Relief", 60, HorizontalAlignment.Left)
+            .Columns.Add("Net Tax", 60, HorizontalAlignment.Left)
+            .Columns.Add("TDS Yearly", 60, HorizontalAlignment.Left)
+            .Columns.Add("Excess/Short", 60, HorizontalAlignment.Left)
+            .Columns.Add("", 0, HorizontalAlignment.Left)
+            .Columns.Add("Total Salary By Previous Employer", 60, HorizontalAlignment.Left)
+            .Columns.Add("TDS Amt. By Previous Employer", 60, HorizontalAlignment.Left)
+            '.Columns.Add("TDS Amt. Balance", 60, HorizontalAlignment.Left)
+            .Columns.Add("High Rate PAN", 60, HorizontalAlignment.Left)
+
+
+            'Display listview in details view
+            .View = View.Details
+            'display grid lines
+            .GridLines = True
+            'allow full row selection
+            .FullRowSelect = True
+        End With
+    End Sub
 
     Private Sub lvwChallan_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvwChallan.SelectedIndexChanged
 
@@ -1382,8 +1473,6 @@ canerr:
     End Function
 
     Private Sub lvwChallan_DoubleClick(sender As Object, e As EventArgs) Handles lvwChallan.DoubleClick
-
-
         Call EditRow("C")
         Call EditMode()
         'End If
@@ -1531,13 +1620,53 @@ canerr:
                 'Next
                 'cboChallanNo.SelectedIndex = i
                 cboChallanNo.SelectedValue = lvwDeductee.SelectedItems(0).SubItems(13).Text
-
                 cboChallanNo.Tag = lvwDeductee.SelectedItems(0).SubItems(13).Text
             End If
+        ElseIf typ = "SD" Then
+            If lvwSD.SelectedItems(0).SubItems(0).Text = "" Then
+                cboSDDedName.SelectedIndex = -1
+            Else
+                cboSDDedName.SelectedIndex = cboSDDedName.FindString(lvwSD.SelectedItems(0).SubItems(0).Text)
 
+            End If
+            'For i = 0 To cboSDDedName.SelectedIndex - 1
+            '    If cboSDDedName.SelectedIndex = lvwSD.SelectedItems(0).SubItems(1).Text Then
+            '        cboSDDedName.SelectedIndex = i
+            '        cboSDDedName.Tag = cboSDDedName.Items.Add(i)
+            '        Exit For
+            '    End If
+            'Next i
+            On Error Resume Next
+            txtSDDedPAN.Text = lvwSD.SelectedItems(0).SubItems(1).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(1)
+            txtSDDedCateg.Text = lvwSD.SelectedItems(0).SubItems(2).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(2)
+            dt = lvwSD.SelectedItems(0).SubItems(3).Text
+            txtSDEmpFrm.Text = Format(dt, "dd/MM/yy")
+            dt = lvwSD.SelectedItems(0).SubItems(4).Text
+            txtSDEmpTo.Text = Format(dt, "dd/MM/yy")
+            'txtSDEmpFrm.Text = lvwSD.SelectedItems(0).SubItems(3).Text 'Format(lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(3), "dd/MM/yy")
+            'txtSDEmpTo.Text = lvwSD.SelectedItems(0).SubItems(4).Text 'Format(lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(4), "dd/MM/yy")
+            txtSDTotalSal.Text = lvwSD.SelectedItems(0).SubItems(5).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(5)
+            txtSDEntAllow.Text = lvwSD.SelectedItems(0).SubItems(6).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(6)
+            txtSDProfTax.Text = lvwSD.SelectedItems(0).SubItems(7).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(7)
+            txtSDOtherIncome.Text = lvwSD.SelectedItems(0).SubItems(10).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(9)
+            txtSD80CCE.Text = lvwSD.SelectedItems(0).SubItems(12).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(11)
+            txtSD80CCF.Text = lvwSD.SelectedItems(0).SubItems(13).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(12)
+            txtSD80CCG.Text = lvwSD.SelectedItems(0).SubItems(14).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(13)
+            txtSDOtherIVA.Text = lvwSD.SelectedItems(0).SubItems(15).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(14)
+            txtSDTax.Text = lvwSD.SelectedItems(0).SubItems(17).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(16)
+            txtSDSurcharge.Text = lvwSD.SelectedItems(0).SubItems(18).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(17)
+            txtSDEduCess.Text = lvwSD.SelectedItems(0).SubItems(19).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(18)
+            txtSDRelief.Text = lvwSD.SelectedItems(0).SubItems(21).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(20)
+            txtSDTDSCurEmp.Text = lvwSD.SelectedItems(0).SubItems(23).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(22)
+            'txtSDID.Text = lvwSD.SelectedItems(0).SubItems(24).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(24)
+            txtSDTotalSalPreEmp.Text = lvwSD.SelectedItems(0).SubItems(25).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(25)
+            txtSDTDSPreEmp.Text = lvwSD.SelectedItems(0).SubItems(26).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(26)
+            ChkHigRate.Checked = lvwSD.SelectedItems(0).SubItems(27).Text 'IIf(lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(27) = True, vbChecked, vbUnchecked)
+            txtSDTDS.Text = lvwSD.SelectedItems(0).SubItems(28).Text 'lvwSD.ListItems(lvwSD.SelectedItem.Index).SubItems(28)
         End If
         AutoCalcReqd = False
     End Sub
+
     Private Sub CalcTotalDeducteeTDS()
         txtTotalTaxDeducted.Text = Val(txtTDSAmt.Text) + Val(txtDSurchrge.Text) + Val(txtDECess.Text)
         '   If cmdDedAdd.Caption = "Add" Then
@@ -2048,6 +2177,13 @@ canerr:
             .cboDedSection.Focus()
         End With
     End Sub
+    Private Sub EditModeSD()
+        With Me
+            .lvwSD.Enabled = False
+            .cmdSDAdd.Text = "Save"
+            .cmdSDCancel.Enabled = True
+        End With
+    End Sub
     Private Sub frmTDS24Q_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         ' GetSecWiseCount()
         Dim i As Integer, SumChallan As Double, SumDeductee As Double
@@ -2059,9 +2195,9 @@ canerr:
             SumDeductee = SumDeductee + Val(lvwDeductee.Items(i).SubItems(12).Text)
         Next i
         If (SumChallan + SumDeductee) <> 0 Then
-            If MsgBox("Total of Challans: Rs." & Format(SumChallan, "###########0.00") _
+            If MsgBox("               Total of Challans: Rs." & Format(SumChallan, "###########0.00") _
                    & vbCrLf & "Total TDS Deposited: Rs." & Format(SumDeductee, "###########0.00") _
-                   & vbCrLf & "Difference: Rs." & Format(SumChallan - SumDeductee, "###########0.00") _
+                   & vbCrLf & "                           Difference: Rs." & Format(SumChallan - SumDeductee, "###########0.00") _
                    & vbCrLf & txtDCountSec.Text _
                    & vbCrLf _
                    & vbCrLf & "Do You Want To Exit?" _
@@ -3166,7 +3302,7 @@ excelerr:
                     End If
                     '.Cells(rw, Col) = lvsub.Text
                     '  End If
-                    '.Cells(rw, Col).Font.Underline = True
+                    .Cells(rw, Col).Font.Underline = True
                     .Range(.Cells(rw, Col), .Cells(rw, Col)).BorderAround()
                     If rw = NRW + 9 Then
                         Col = Col + 3
@@ -3368,7 +3504,9 @@ excelerr:
         Dim pfc As New PrivateFontCollection()
         If dpiX = 96 Then
 
-
+            ' On Form1 shown, start applying font 
+            'Dim CFontPath As String = Application.StartupPath
+            'pfc.AddFontFile("C:\JAKINFO\WizinTDS 2018\WizinTDS2018\Resources\Fonts\Roboto.ttf")
             Dim allCtrl As New List(Of Control)
             For Each ctrl As Control In FindALLControlRecursive(allCtrl, Me)
                 ' You need to define which control type to change it's font family; not recommendd to just change all controls' fonts, it will create a missy shape
@@ -3382,7 +3520,9 @@ excelerr:
             allCtrl.Clear()
         Else
 
-
+            ' On Form1 shown, start applying font 
+            'Dim CFontPath As String = Application.StartupPath
+            'pfc.AddFontFile("C:\JAKINFO\WizinTDS 2018\WizinTDS2018\Resources\Fonts\Roboto.ttf")
             Dim allCtrl As New List(Of Control)
             For Each ctrl As Control In FindALLControlRecursive(allCtrl, Me)
                 ' You need to define which control type to change it's font family; not recommendd to just change all controls' fonts, it will create a missy shape
@@ -3866,6 +4006,9 @@ excelerr:
         Timer2.Enabled = True
         Timer2.Interval = 300
         Timer2.Start()
+        Timer4.Enabled = True
+        Timer4.Interval = 300
+        Timer4.Start()
     End Sub
 
     Private Sub cmdNext_Click(sender As Object, e As EventArgs) Handles cmdNext.Click
@@ -3917,5 +4060,1132 @@ excelerr:
 
     Private Sub TableLayoutPanel22_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel22.Paint
 
+    End Sub
+
+    Private Sub Label682_Click(sender As Object, e As EventArgs) Handles Label682.Click
+
+    End Sub
+
+    Private Sub Label83_Click_1(sender As Object, e As EventArgs) Handles Label83.Click
+
+    End Sub
+
+    Private Sub Label81_Click_1(sender As Object, e As EventArgs) Handles Label81.Click
+
+    End Sub
+
+    Private Sub Label82_Click_1(sender As Object, e As EventArgs) Handles Label82.Click
+
+    End Sub
+
+    Private Sub Label80_Click_1(sender As Object, e As EventArgs) Handles Label80.Click
+
+    End Sub
+
+    Private Sub txttotdepos_MaskInputRejected_1(sender As Object, e As MaskInputRejectedEventArgs) Handles txttotdepos.MaskInputRejected
+
+    End Sub
+
+    Private Sub cmdSave_Click1(sender As Object, e As EventArgs) Handles cmdSave.Click
+        Dim sql As String
+        Dim rs As New DataSet
+        Dim transaction As OleDb.OleDbTransaction
+        Dim cmd As New OleDb.OleDbCommand
+        '    chkvalidation
+        If ChkRent.Checked = 1 And TxtLL1PAN.Text = "" Then
+            MsgBox("LandLord1 PAN Can't blank, if you wish to continue Please Untick 'House Rent Exceeds 1 Lakhs'")
+            Exit Sub
+        End If
+        If ChkIncomeFromHouseProperty.Checked = 1 And TxtLender1PAN.Text = "" Then
+            MsgBox("Lender1 PAN Can't blank, if you wish to continue Please Untick 'Income From House Property'?")
+        End If
+        If TxtFundNm.Text = "" And CHkSAFund.Checked = 1 Then
+            MsgBox("Name Of Superannuation Fund can't Blank, if you wish to continue Please Untick 'Superannuation Fund'")
+            Exit Sub
+        End If
+        sql = "SELECT * FROM F16XTRADETAILS WHERE DID= (SELECT DID FROM DEDUCTMST WHERE DNAME='" & cbo16Ded.Text & "' AND COID=" & selectedcoid & ")"
+        'If rs.State = adStateOpen Then
+        rs.Dispose()
+        ' End If
+        rs = FetchDataSet(sql)
+        If Not rs.Tables(0).Rows.Count Then '.EOF Or Not rs.BOF Then
+            sql = "DELETE FROM F16XTRADETAILS WHERE F16ID=" & rs.Tables(0).Rows(0)("F16ID")
+            cmd.Connection = cn
+            transaction = cn.BeginTransaction()
+            cmd.Transaction = transaction
+
+            Try
+                cmd.CommandText = sql
+                cmd.ExecuteNonQuery()
+                transaction.Commit()
+
+            Catch ex As Exception
+                MessageBox.Show("Message:", ex.Message)
+                transaction.Rollback()
+            End Try
+
+            cmd.Dispose()
+            transaction.Dispose()
+            'Cnn.Execute sql
+        End If
+        sql = "INSERT INTO F16XTRADETAILS (F16ID,DID,RETNID"
+        If (ChkRent.Checked = 1) Then
+            sql = sql & ",RENTEXCEEDS,LANDLORD1PAN,LANDLORD1NAME,LANDLORD2PAN,LANDLORD2NAME,LANDLORD3PAN,LANDLORD3NAME,LANDLORD4PAN,LANDLORD4NAME"
+        End If
+        If ChkIncomeFromHouseProperty.Checked = 1 Then
+            sql = sql & ",INTTPAIDONHP,LENDER1PAN,LENDER1NAME,LENDER2PAN,LENDER2NAME,LENDER3PAN,LENDER3NAME,LENDER4PAN,LENDER4NAME"
+        End If
+        If CHkSAFund.Checked = 1 Then
+            sql = sql & ",HASSAFUNDPAID,FUNDNAME,DATEFROM,DATETO,AMTREPAID,AVGRATE,TAXDEDAMT"
+        Else
+            sql = sql & ",AVGRATE"
+        End If
+        sql = sql & ") VALUES("
+        sql = sql & F16ID & ","
+        sql = sql & did & ","
+        sql = sql & RETN
+        If (ChkRent.Checked = 1) Then
+            sql = sql & IIf((ChkRent.Checked = 1), ",Yes", ",NO") & ","
+            sql = sql & "'" & IIf(TxtLL1PAN.ToString(), vbNullString, TxtLL1PAN) & "',"
+            sql = sql & "'" & IIf(TxtLL1Nm.ToString(), vbNullString, TxtLL1Nm) & "',"
+            sql = sql & "'" & IIf(TxtLL2PAN.ToString(), vbNullString, TxtLL2PAN) & "',"
+            sql = sql & "'" & IIf(TxtLL2Nm.ToString(), vbNullString, TxtLL2Nm) & "',"
+            sql = sql & "'" & IIf(TxtLL3PAN.ToString(), vbNullString, TxtLL3PAN) & "',"
+            sql = sql & "'" & IIf(TxtLL3Nm.ToString(), vbNullString, TxtLL3Nm) & "',"
+            sql = sql & "'" & IIf(TxtLL4PAN.ToString(), vbNullString, TxtLL4PAN) & "',"
+            sql = sql & "'" & IIf(TxtLL4Nm.ToString(), vbNullString, TxtLL4Nm) & "'"
+        End If
+        If ChkIncomeFromHouseProperty.Checked = 1 Then
+            sql = sql & IIf((ChkIncomeFromHouseProperty.Checked = 1), ",Yes", ",NO") & ","
+            sql = sql & "'" & IIf(TxtLender1PAN.ToString(), vbNullString, TxtLender1PAN) & "',"
+            sql = sql & "'" & IIf(TxtLender1Nm.ToString(), vbNullString, TxtLender1Nm) & "',"
+            sql = sql & "'" & IIf(TxtLender2PAN.ToString(), vbNullString, TxtLender2PAN) & "',"
+            sql = sql & "'" & IIf(TxtLender2Nm.ToString(), vbNullString, TxtLender2Nm) & "',"
+            sql = sql & "'" & IIf(TxtLender3PAN.ToString(), vbNullString, TxtLender3PAN) & "',"
+            sql = sql & "'" & IIf(TxtLender3Nm.ToString(), vbNullString, TxtLender3Nm) & "',"
+            sql = sql & "'" & IIf(TxtLender4PAN.ToString(), vbNullString, TxtLender4PAN) & "',"
+            sql = sql & "'" & IIf(TxtLender4Nm.ToString(), vbNullString, TxtLender4Nm) & "'"
+        End If
+        If CHkSAFund.Checked = 1 Then
+            sql = sql & IIf((CHkSAFund.Checked = 1), ",Yes", ",NO") & ","
+            sql = sql & "'" & IIf(TxtFundNm.ToString(), vbNullString, TxtFundNm) & "',"
+            If txtContriFrm.Text = "__/__/__" Then
+                sql = sql & vbNull & ","
+            Else
+                sql = sql & "#" & IIf(txtContriFrm.Text = "__/__/__", vbNull, Format(CDate(txtContriFrm.Text), "MM/dd/yy")) & "#,"
+            End If
+            If txtContriTo.Text = "__/__/__" Then
+                sql = sql & vbNull & ","
+            Else
+                sql = sql & "#" & IIf(txtContriTo.Text = "__/__/__", vbNull, Format(CDate(txtContriTo.Text), "MM/dd/yy")) & "#,"
+            End If
+            sql = sql & IIf(Val(TxtAmtRepaid) = 0, 0, TxtAmtRepaid) & ","
+            sql = sql & IIf(Val(TxtRateOfDeduction) = 0, 0, TxtRateOfDeduction) & ","
+            sql = sql & IIf(Val(TxtTaxDeducted) = 0, 0, TxtTaxDeducted) & ""
+        Else
+            sql = sql & ",0"
+        End If
+        sql = sql & ")"
+        cmd.CommandText = sql
+        cmd.Connection = cn
+        transaction = cn.BeginTransaction()
+        cmd.Transaction = transaction
+
+        Try
+            cmd.ExecuteNonQuery()
+            transaction.Commit()
+        Catch ex As Exception
+
+            transaction.Rollback()
+            MessageBox.Show(ex.Message)
+        End Try
+        cmd.Dispose()
+        transaction.Dispose()
+        ' Cnn.Execute sql
+        cmdSave.Enabled = False
+    End Sub
+
+    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+        Dim sql As String
+        Dim cnl As Boolean
+        If MsgBox("Are You Sure You Want To Delete This Record?", vbYesNo) = vbYes Then
+            'Cnn.Execute sql
+            Dim transaction As OleDb.OleDbTransaction
+            Dim cmd As New OleDb.OleDbCommand
+            sql = "DELETE FROM F16XtraDetails WHERE F16Id=" & F16ID
+            cmd.Connection = cn
+            transaction = cn.BeginTransaction()
+            cmd.Transaction = transaction
+            Try
+                cmd.CommandText = sql
+                cmd.ExecuteNonQuery()
+                transaction.Commit()
+            Catch ex As Exception
+                MessageBox.Show("Message:", ex.Message)
+                transaction.Rollback()
+            End Try
+            cmd.Dispose()
+            transaction.Dispose()
+        End If
+    End Sub
+
+    Private Sub cmdExit_Click_1(sender As Object, e As EventArgs) Handles cmdExit.Click
+        Me.Close()
+    End Sub
+
+    Private Sub cmdform16_Click(sender As Object, e As EventArgs) Handles cmdform16.Click
+        If lvwForm16.Items.Count > 0 Then
+            Call frm16A.Show()
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub cmdAddNewForm16_Click(sender As Object, e As EventArgs) Handles cmdAddNewForm16.Click
+        FRM16Detail.Show()
+        'frm16Details.Show()
+        'frm16Details.xMode = "A"
+        'frm16Details.FillDeducteeCombo(frm16Details.xMode)
+        FRM16Detail.cmd16delete.Enabled = False
+        FRM16Detail.Show()
+    End Sub
+
+    Private Sub cmd162XL_Click(sender As Object, e As EventArgs) Handles cmd162XL.Click
+        Dim CntLstItem As Long
+        Dim i As Integer
+        On Error GoTo excelerr
+        Dim xlapp As Excel.Application
+        Dim xlBook As Excel.Workbook
+        Dim xlSheet As Excel.Worksheet
+        Dim rs As New DataSet
+        Dim R As Integer
+
+        'Set xlapp = Nothing
+        'Set xlBook = Nothing
+        'Set xlSheet = Nothing
+        'Set xlapp = New Excel.Application
+        'Set xlBook = xlapp.Workbooks.Add
+        'Set xlSheet = xlBook.Worksheets("Sheet1")
+
+        With lvwForm16
+            CntLstItem = .Items.Count
+
+            i = 0
+            For i = 1 To .Columns.Count - 1
+                xlSheet.Cells(3, i) = .Columns(i)
+            Next i
+
+            i = 0
+            For i = 1 To .Columns.Count - 1     'for bold
+                xlSheet.Cells(3, i).Font.Bold = True
+                xlSheet.Range(xlSheet.Cells(3, i), xlSheet.Cells(3, i)).BorderAround()
+
+            Next i
+            i = 1
+            xlSheet.Range(xlSheet.Cells(3, 1), xlSheet.Cells(3, 30)).WrapText = True
+            'xlSheet.Range(xlSheet.Cells(3, 1), xlSheet.Cells(3, 30)).VerticalAlignment = xlTop
+            For R = 1 To CntLstItem
+                For i = 1 To .Columns.Count - 2
+                    xlSheet.Cells(R + 3, 1) = .Items(R)
+                    If i < 5 Then
+                        xlSheet.Cells(R + 3, i + 1) = .Items(R).SubItems(i)
+                    Else
+                        xlSheet.Cells(R + 3, i + 1) = Val(.Items(R).SubItems(i))
+                    End If
+                    xlSheet.Range(xlSheet.Cells(R + 3, i), xlSheet.Cells(R + 3, i)).BorderAround()
+                    If i = .Columns.Count - 2 Then
+                        xlSheet.Range(xlSheet.Cells(R + 3, i + 1), xlSheet.Cells(R + 3, i + 1)).BorderAround()
+                    End If
+                Next
+                xlSheet.Range(xlSheet.Cells(R + 3, .Columns.Count - 2), xlSheet.Cells(R + 3, .Columns.Count - 2)).BorderAround()
+            Next
+            Dim mKeyChar As Long
+            mKeyChar = 70
+            For i = 6 To .Columns.Count - 1
+                'xlSheet.Cells(R + 3, i) = "=sum(" & Chr$(mKeyChar) & 4 & ":" & Chr$(mKeyChar) & R + 2 & ")"
+                xlSheet.Range(xlSheet.Cells(R + 3, i), xlSheet.Cells(R + 3, i)).Font.Bold = True
+                xlSheet.Range(xlSheet.Cells(R + 3, i), xlSheet.Cells(R + 3, i)).Font.Color = &H80&
+                xlSheet.Range(xlSheet.Cells(R + 3, i), xlSheet.Cells(R + 3, i)).BorderAround()
+                ' mKeyChar = mKeyChar + 1
+            Next i
+            For i = 6 To .Columns.Count - 2
+                '***xlSheet.Cells(R + 3, i) = "=sum(" & Chr$(mKeyChar) & 4 & ":" & Chr$(mKeyChar) & R + 2 & ")"
+                mKeyChar = mKeyChar + 1
+            Next i
+            xlSheet.Cells(R + 3, 1) = "Total" : xlSheet.Cells(R + 3, 1).Font.Bold = True
+            xlSheet.Range(xlSheet.Cells(R + 3, 1), xlSheet.Cells(R + 3, 5)).Merge()
+            xlSheet.Range(xlSheet.Cells(R + 3, 1), xlSheet.Cells(R + 3, i - 1)).BorderAround()
+            xlSheet.Range("A1", "X999").Font.Size = 8
+            xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(1, 6)).Merge()
+            xlSheet.Cells(1, 1) = "Form16 Details For Quarter 4"
+            xlSheet.Cells(1, 1).Font.Bold = True : xlSheet.Cells(1, 1).Font.Color = &H8000&
+
+        End With
+        xlSheet.Columns(1).ColumnWidth = 20
+        xlSheet.Columns(2).ColumnWidth = 10
+        xlSheet.Columns(3).ColumnWidth = 5
+        xlSheet.Columns(4).ColumnWidth = 9
+        xlSheet.Columns(5).ColumnWidth = 9
+        xlSheet.Columns(6).ColumnWidth = 9
+        xlSheet.Columns(7).ColumnWidth = 5
+        xlSheet.Columns(8).ColumnWidth = 5
+        xlSheet.Columns(9).ColumnWidth = 5
+        xlSheet.Columns(10).ColumnWidth = 9
+        xlSheet.Columns(11).ColumnWidth = 9
+        xlSheet.Columns(12).ColumnWidth = 9
+        xlSheet.Columns(13).ColumnWidth = 7
+        xlSheet.Columns(15).ColumnWidth = 7
+        xlSheet.Columns(16).ColumnWidth = 7
+        xlSheet.Columns(17).ColumnWidth = 7
+        xlSheet.Columns(18).ColumnWidth = 3
+        xlSheet.Columns(19).ColumnWidth = 5
+        xlSheet.Columns(20).ColumnWidth = 7
+        xlSheet.Columns(21).ColumnWidth = 3
+        xlSheet.Columns(22).ColumnWidth = 7
+        xlSheet.Columns(23).ColumnWidth = 7
+        xlSheet.Columns(24).ColumnWidth = 7
+        xlSheet.Columns(1).WrapText = True
+        xlSheet.PageSetup.TopMargin = 18
+        xlSheet.PageSetup.BottomMargin = 18
+        xlSheet.PageSetup.LeftMargin = 18
+        xlSheet.PageSetup.RightMargin = 18
+        'xlSheet.PageSetup.Orientation = xlLandscape
+        xlapp.Application.Visible = True
+        xlSheet.PageSetup.Zoom = 72
+        Exit Sub
+excelerr:
+        MsgBox("Cannot open Excel", vbCritical)
+    End Sub
+
+    Private Sub cmdmismachForm16_Click(sender As Object, e As EventArgs) Handles cmdmismachForm16.Click
+        cmdmismatch_Click()
+    End Sub
+    Private Sub cmdmismatch_Click()
+        Dim xlapp As Excel.Application
+        Dim xlBook As Excel.Workbook
+        Dim xlSheet As Excel.Worksheet
+        Dim rs As New DataSet
+        Dim R As Long, c As Long
+        xlapp = Nothing
+        xlBook = Nothing
+        xlSheet = Nothing
+        xlapp = New Excel.Application
+        xlBook = xlapp.Workbooks.Add
+        xlSheet = xlBook.Worksheets("Sheet1")
+        Dim m As Integer, N As Integer, i As Integer
+        xlSheet.Cells(1, 10) = "Company Name" & "  :=  " & txtCoName.Text & "(FY- " & FY & ")"
+        xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(1, 10)).Merge()
+        xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(1, 10)).HorizontalAlignment = HorizontalAlignment.Center
+        xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(1, 10)).Font.Bold = True
+        xlSheet.Cells(3, 1) = "Deductee's Name"
+        xlSheet.Range(xlSheet.Cells(3, 1), xlSheet.Cells(3, 1)).Font.Bold = True
+        xlSheet.Range(xlSheet.Cells(3, 1), xlSheet.Cells(3, 1)).BorderAround()
+        xlSheet.Cells(3, 2) = "PAN No."
+        xlSheet.Range(xlSheet.Cells(3, 2), xlSheet.Cells(3, 2)).Font.Bold = True
+        xlSheet.Range(xlSheet.Cells(3, 2), xlSheet.Cells(3, 2)).BorderAround()
+        xlSheet.Cells(3, 3) = "Total Tax Deposited"
+        xlSheet.Range(xlSheet.Cells(3, 3), xlSheet.Cells(3, 3)).Font.Bold = True
+        xlSheet.Range(xlSheet.Cells(3, 3), xlSheet.Cells(3, 3)).BorderAround()
+        xlSheet.Cells(3, 4) = "Total TDS(Yearly)"
+        xlSheet.Range(xlSheet.Cells(3, 4), xlSheet.Cells(3, 4)).Font.Bold = True
+        xlSheet.Range(xlSheet.Cells(3, 4), xlSheet.Cells(3, 4)).BorderAround()
+        xlSheet.Cells(3, 5) = "Difference"
+        xlSheet.Range(xlSheet.Cells(3, 5), xlSheet.Cells(3, 5)).Font.Bold = True
+        xlSheet.Range(xlSheet.Cells(3, 5), xlSheet.Cells(3, 5)).BorderAround()
+        xlSheet.Cells(2, 1) = "Mismatch Deductee Report for SalaryDetail24Q"
+        xlSheet.Range(xlSheet.Cells(2, 1), xlSheet.Cells(2, 1)).Font.Bold = True
+        xlSheet.Range(xlSheet.Cells(2, 1), xlSheet.Cells(2, 3)).Merge()
+        '  xlSheet.Range(xlSheet.Cells(2, 1), xlSheet.Cells(2, 1)).BorderAround , xlThin, xlColorIndexAutomatic, 1
+        'xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(1, 5)) = CO
+        'Dim rs As New ADODB.Recordset
+        Dim sql As String
+        If frmCoMst.chkUseForm16.Checked = False Then
+            'sql = "SELECT DeductMst.DName, DeductMst.DPan, Sum(Deductee24Q.TotalTaxDeposited) AS SumOfTotalTaxDeposited, SalaryDetail24Q.TDSAmt, Deductee24Q.DId" _
+            '    & " FROM Deductee24Q,SalaryDetail24Q,DeductMst,retnmst where retnmst.coid=DeductMst.coid and " _
+            '    & " Deductee24Q.retnid=retnmst.retnid and Deductee24Q.DId = SalaryDetail24Q.DID and SalaryDetail24Q.DID = DeductMst.DId" _
+            '    & " and DeductMst.coid=" & selectedcoid & " GROUP BY DeductMst.DName, DeductMst.DPan, SalaryDetail24Q.TDSAmt, Deductee24Q.DId"
+            sql = " SELECT DeductMst.DName, DeductMst.DPan, Sum(Deductee24Q.TotalTaxDeposited) AS SumOfTotalTaxDeposited, SalaryDetail24Q.TDSAmt, Deductee24Q.DId" _
+                & " FROM DeductMst INNER JOIN (Deductee24Q INNER JOIN SalaryDetail24Q ON Deductee24Q.DId = SalaryDetail24Q.DID) ON DeductMst.DId = Deductee24Q.DId" _
+                & " Where DeductMst.coid=" & selectedcoid & " GROUP BY DeductMst.DName, DeductMst.DPan, Deductee24Q.DId, SalaryDetail24Q.TDSAmt" _
+                & " Union All SELECT DeductMst.DName, DeductMst.DPan, Sum(Deductee24Q.TotalTaxDeposited) AS SumOfTotalTaxDeposited, SalaryDetail24Q.TdsAmt, Deductee24Q.DId" _
+                & " FROM DeductMst INNER JOIN (Deductee24Q LEFT JOIN SalaryDetail24Q ON Deductee24Q.DId = SalaryDetail24Q.DID) ON DeductMst.DId = Deductee24Q.DId" _
+                & " Where DeductMst.coid = " & selectedcoid & " And SalaryDetail24Q.DID Is Null" _
+                & " GROUP BY DeductMst.DName, DeductMst.DPan, Deductee24Q.DId, SalaryDetail24Q.TDSAmt" _
+                & " Union All SELECT DeductMst.DName, DeductMst.DPan, Sum(Deductee24Q.TotalTaxDeposited) AS SumOfTotalTaxDeposited, SalaryDetail24Q.TDSAmt, Deductee24Q.DId" _
+                & " FROM (DeductMst INNER JOIN SalaryDetail24Q ON DeductMst.DId = SalaryDetail24Q.DID) LEFT JOIN Deductee24Q ON SalaryDetail24Q.DID = Deductee24Q.DId" _
+                & " Where DeductMst.coid =" & selectedcoid & " And Deductee24Q.DID Is Null" _
+                & " GROUP BY DeductMst.DName, DeductMst.DPan, SalaryDetail24Q.TDSAmt, Deductee24Q.DId"
+        Else
+            sql = " SELECT DeductMst.DName, DeductMst.DPan, Sum(Deductee24Q.TotalTaxDeposited) AS SumOfTotalTaxDeposited,Form16Details.TaxAmt as TDSAmt, Deductee24Q.DId " _
+                & " FROM DeductMst INNER JOIN (Deductee24Q INNER JOIN Form16Details ON Deductee24Q.DId = Form16Details.DID) ON DeductMst.DId = Deductee24Q.DId " _
+                & " Where DeductMst.coid=2 GROUP BY DeductMst.DName, DeductMst.DPan, Deductee24Q.DId, Form16Details.TaxAmt " _
+                & " Union All SELECT DeductMst.DName, DeductMst.DPan, Sum(Deductee24Q.TotalTaxDeposited) AS SumOfTotalTaxDeposited, Form16Details.TaxAmt as TDSAmt, Deductee24Q.DId " _
+                & " FROM DeductMst INNER JOIN (Deductee24Q LEFT JOIN Form16Details ON Deductee24Q.DId = Form16Details.DID) ON DeductMst.DId = Deductee24Q.DId Where DeductMst.coid = 2 " _
+                & " And Form16Details.DID Is Null GROUP BY DeductMst.DName, DeductMst.DPan, Deductee24Q.DId, Form16Details.TaxAmt" _
+                & " Union All SELECT DeductMst.DName, DeductMst.DPan, Sum(Deductee24Q.TotalTaxDeposited) AS SumOfTotalTaxDeposited, Form16Details.TaxAmt as TDSAmt, Deductee24Q.DId" _
+                & " FROM (DeductMst INNER JOIN Form16Details ON DeductMst.DId = Form16Details.DID) LEFT JOIN Deductee24Q ON Form16Details.DID = Deductee24Q.DId Where DeductMst.coid =2" _
+                & " And Deductee24Q.DID Is Null GROUP BY DeductMst.DName, DeductMst.DPan, Form16Details.TaxAmt, Deductee24Q.DId"
+        End If
+        rs = FetchDataSet(sql)
+        ' rs.Open(sql, cn)
+        m = 4 : N = 1
+        If Not rs.Tables(0).Rows.Count Then 'Or rs.BOF Then
+            For i = 0 To rs.Tables(0).Rows.Count - 1
+                If IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("SumOfTotalTaxDeposited").ToString()), 0, (rs.Tables(0).Rows(0)("SumOfTotalTaxDeposited").ToString())) <> IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("TDSAmt").ToString()), 0, (rs.Tables(0).Rows(0)("TDSAmt").ToString())) Then
+                    xlSheet.Cells(m, N) = rs.Tables(0).Rows(i)("DName")
+                    'xlSheet.Range(xlSheet.Cells(m, N), xlSheet.Cells(m, N)) = DName
+                    xlSheet.Range(xlSheet.Cells(m, N), xlSheet.Cells(m, N)).BorderAround()
+                    xlSheet.Cells(m, N + 1) = rs.Tables(0).Rows(i)("DPan")
+                    'xlSheet.Range(xlSheet.Cells(m, N + 1), xlSheet.Cells(m, N + 1)) = rs!DPan
+                    xlSheet.Range(xlSheet.Cells(m, N + 1), xlSheet.Cells(m, N + 1)).BorderAround()
+                    xlSheet.Cells(m, N + 2) = rs.Tables(0).Rows(i)("SumOfTotalTaxDeposited")
+                    ' xlSheet.Range(xlSheet.Cells(m, N + 2), xlSheet.Cells(m, N + 2)) = rs!SumOfTotalTaxDeposited
+                    xlSheet.Range(xlSheet.Cells(m, N + 2), xlSheet.Cells(m, N + 2)).BorderAround()
+                    xlSheet.Cells(m, N + 3) = rs.Tables(0).Rows(i)("TDSAmt")
+                    'xlSheet.Range(xlSheet.Cells(m, N + 3), xlSheet.Cells(m, N + 3)) = rs!TDSAmt
+                    xlSheet.Range(xlSheet.Cells(m, N + 3), xlSheet.Cells(m, N + 3)).BorderAround()
+                    'xlSheet.Cells(m, N) = rs.Tables(0).Rows(0)("DName")
+                    xlSheet.Cells(m, N + 4) = xlSheet.Cells(m, N + 2).value - xlSheet.Cells(m, N + 3).value
+                    xlSheet.Range(xlSheet.Cells(m, N + 4), xlSheet.Cells(m, N + 4)).BorderAround()
+                    m = m + 1
+
+                End If
+                ' rs.MoveNext()
+            Next
+        End If
+
+        xlapp.Application.Visible = True
+
+    End Sub
+
+    Private Sub cmdSDAdd_Click_1(sender As Object, e As EventArgs) Handles cmdSDAdd.Click
+        Dim Itm As New ListViewItem
+        Dim item14 As String
+        oSD = New ClsSalaryDetail24QObj
+        'check dates...
+        If CDate(txtSDEmpFrm.Text) < FromDate Then
+            MsgBox("Employement From Date cannot be less than " & Format(FromDate, "dd/MM/yyyy"), vbExclamation, "Date Error")
+            txtSDEmpFrm.Focus()
+            Exit Sub
+        ElseIf CDate(txtSDEmpTo.Text) > ToDate Then
+            MsgBox("Employment To Date cannot be beyond  " & Format(ToDate, "dd/MM/yyyy"), vbExclamation, "Date Error")
+            txtSDEmpTo.Focus()
+            Exit Sub
+        ElseIf CDate(txtSDEmpTo.Text) < CDate(txtSDEmpFrm.Text) Then
+            MsgBox("Employment To Date cannot be less than  " & Format(txtSDEmpFrm, "dd/MM/yyyy"), vbExclamation, "Date Error")
+            txtSDEmpTo.Focus()
+            Exit Sub
+        End If
+        'check other data
+        If cboSDDedName.SelectedIndex = -1 Then
+            MsgBox("Please select Deductee first", vbInformation, "NO DEDUCTEE")
+            cboSDDedName.Focus()
+            Exit Sub
+        End If
+        If Val(txtSDTotalSal.Text) <= 0 Then
+            MsgBox("Total Salary cannot be left blank or cannot be zero", vbInformation, "ZERO AMT")
+            txtSDTotalSal.Focus()
+            Exit Sub
+        End If
+        If Val(txtSDTaxableSalary.Text) <= 0 Then
+            MsgBox("Wrong figures results in Taxable salary going Negative, Check Again", vbInformation, "WRONG AMTS")
+            txtSDTotalSal.Focus()
+            Exit Sub
+        End If
+        If Val(txtSD80CCE.Text) > 150000 Then
+            MsgBox("Deductible amount u/s 80CCE cannot exceed Rs. 150000, for this AY")
+            txtSD80CCE.Focus()
+            Exit Sub
+        End If
+        If Val(txtSD80CCF.Text) > 20000 Then
+            MsgBox("Deductible amount u/s 80CCF cannot exceed Rs. 20000, for this AY")
+            txtSD80CCE.Focus()
+            Exit Sub
+        End If
+        ' Added on 11-05-2013
+        If Val(txtSD80CCG.Text) > 25000 Then
+            MsgBox("Deductible amount u/s 80CCG cannot exceed Rs. 25000, for this AY")
+            txtSD80CCG.Focus()
+            Exit Sub
+        End If
+        ' uptill here added on 11-05-2013
+
+        If (Val(txtSD80CCE.Text) + Val(txtSDOtherIVA.Text)) > Val(txtSDGTI.Text) Then
+            MsgBox("Total Deductions u/chapter IV-A cannot be greater than Gross Total Income", vbInformation, "WRONG AMTS")
+            txtSD80CCE.Focus()
+            Exit Sub
+        End If
+        If cmdSDAdd.Text = "Add" Then
+            'Add item..
+            If oSD.Insert(oSD) = False Then
+                MsgBox("Unable to Insert Salary Details in DataBase" & vbCrLf & "Call JAK Infosolutions", vbCritical, "CANNOT ADD NOW")
+            Else
+                Dim dt, dt1 As Date
+                Itm.Text = cboSDDedName.Text
+                Itm.SubItems.Add(txtSDDedPAN.Text)
+                Itm.SubItems.Add(txtSDDedCateg.Text)
+                dt = txtSDEmpFrm.Text
+                Itm.SubItems.Add(dt.ToString("dd/MMM/yyyy"))
+                dt1 = txtSDEmpTo.Text
+                Itm.SubItems.Add(dt1.ToString("dd/MMM/yyyy"))
+                Itm.SubItems.Add(txtSDTotalSal.Text)
+                Itm.SubItems.Add(txtSDEntAllow.Text)
+                Itm.SubItems.Add(txtSDProfTax.Text)
+                Itm.SubItems.Add("")
+                Itm.SubItems.Add(txtSDTaxableSalary.Text)
+                Itm.SubItems.Add(txtSDOtherIncome.Text)
+                Itm.SubItems.Add(txtSDGTI.Text)
+                Itm.SubItems.Add(txtSD80CCE.Text)
+                Itm.SubItems.Add(txtSD80CCF.Text)
+                Itm.SubItems.Add(txtSD80CCG.Text)
+                Itm.SubItems.Add(txtSDOtherIVA.Text)
+                Itm.SubItems.Add(txtSDTotalTaxableIncome.Text)
+                Itm.SubItems.Add(txtSDTax.Text)
+                Itm.SubItems.Add(txtSDSurcharge.Text)
+                Itm.SubItems.Add(txtSDEduCess.Text)
+                Itm.SubItems.Add(txtSDTotalTax.Text)
+                Itm.SubItems.Add(txtSDRelief.Text)
+                Itm.SubItems.Add(txtSDNetTax.Text)
+                Itm.SubItems.Add(txtSDTDSCurEmp.Text)
+                Itm.SubItems.Add(txtSDShortfall.Text)
+                Itm.SubItems.Add(txtSDTotalSalPreEmp.Text)
+                Itm.SubItems.Add(txtSDTDSPreEmp.Text)
+                Itm.SubItems.Add(IIf(ChkHigRate.Checked = True, True, False))
+                Itm.SubItems.Add(txtSDTDS.Text)
+                Itm.SubItems.Add(oSD.SDID)
+                lvwSD.Items.Add(Itm)
+
+            End If
+            Call ClearSDCtrls()
+            Call NormalModeSD()
+        Else
+            'Edit Item..
+            If oSD.Update(oSD) = False Then
+                MsgBox("Unable to update Annual Salary Details in database" & vbCrLf & "Call JAK Infosolutions", vbCritical, "CANNOT UPDATE NOW")
+            Else
+                Dim dt, dt1 As Date
+                lvwSD.SelectedItems(0).SubItems(0).Text = cboSDDedName.Text
+                lvwSD.SelectedItems(0).SubItems(1).Text = txtSDDedPAN.Text
+                lvwSD.SelectedItems(0).SubItems(2).Text = txtSDDedCateg.Text
+                dt = txtSDEmpFrm.Text
+                lvwSD.SelectedItems(0).SubItems(3).Text = Format(dt, "dd/MMM/yyyy")
+                dt1 = txtSDEmpTo.Text
+                lvwSD.SelectedItems(0).SubItems(4).Text = Format(dt, "dd/MMM/yyyy")
+                lvwSD.SelectedItems(0).SubItems(5).Text = txtSDTotalSal.Text
+                lvwSD.SelectedItems(0).SubItems(6).Text = txtSDEntAllow.Text
+                lvwSD.SelectedItems(0).SubItems(7).Text = txtSDProfTax.Text
+                lvwSD.SelectedItems(0).SubItems(9).Text = txtSDTaxableSalary.Text
+                lvwSD.SelectedItems(0).SubItems(10).Text = txtSDOtherIncome.Text
+                lvwSD.SelectedItems(0).SubItems(11).Text = txtSDGTI.Text
+                lvwSD.SelectedItems(0).SubItems(12).Text = txtSD80CCE.Text
+                lvwSD.SelectedItems(0).SubItems(13).Text = txtSD80CCF.Text
+                lvwSD.SelectedItems(0).SubItems(14).Text = txtSD80CCG.Text
+                lvwSD.SelectedItems(0).SubItems(15).Text = txtSDOtherIVA.Text
+                lvwSD.SelectedItems(0).SubItems(16).Text = txtSDTotalTaxableIncome.Text
+                lvwSD.SelectedItems(0).SubItems(17).Text = txtSDTax.Text
+                lvwSD.SelectedItems(0).SubItems(18).Text = txtSDSurcharge.Text
+                lvwSD.SelectedItems(0).SubItems(19).Text = txtSDEduCess.Text
+                lvwSD.SelectedItems(0).SubItems(20).Text = txtSDTotalTax.Text
+                lvwSD.SelectedItems(0).SubItems(21).Text = txtSDRelief.Text
+                lvwSD.SelectedItems(0).SubItems(22).Text = txtSDNetTax.Text
+                lvwSD.SelectedItems(0).SubItems(23).Text = txtSDTDSCurEmp.Text
+                lvwSD.SelectedItems(0).SubItems(25).Text = txtSDTotalSalPreEmp.Text
+                lvwSD.SelectedItems(0).SubItems(26).Text = txtSDTDSPreEmp.Text
+                lvwSD.SelectedItems(0).SubItems(27).Text = IIf(ChkHigRate.Checked = True, True, False)
+                lvwSD.SelectedItems(0).SubItems(29).Text = oSD.SDID
+                lvwSD.SelectedItems(0).SubItems(24).Text = txtSDShortfall.Text
+                lvwSD.SelectedItems(0).SubItems(28).Text = txtSDTDS.Text 'Val(txtSDTDSPreEmp) + Val(txtSDTDSCurEmp)
+            End If
+            Call ClearSDCtrls()
+            Call NormalModeSD()
+        End If
+        cboSDDedName.Focus()
+        clearDeducteeCtrls()
+    End Sub
+
+    Private Sub cmdSDCancel_Click_1(sender As Object, e As EventArgs) Handles cmdSDCancel.Click
+        Call ClearSDCtrls()
+        Call NormalModeSD()
+        cboSDDedName.Focus()
+    End Sub
+
+    Private Sub ClearSDCtrls()
+        'txtSDID.Text = ""
+        cboSDDedName.Text = ""
+        txtSD80CCE.Text = ""
+        txtSDDedCateg.Text = ""
+        txtSDDedPAN.Text = ""
+        txtSDEduCess.Text = ""
+        'txtSDEmpFrm.Text = "##/##/##"
+        'txtSDEmpTo.Text = ""
+        txtSDEntAllow.Text = ""
+        txtSDGTI.Text = ""
+        txtSDNetTax.Text = ""
+        txtSDOtherIncome.Text = ""
+        txtSDOtherIVA.Text = ""
+        txtSDProfTax.Text = ""
+        txtSDRelief.Text = ""
+        txtSDShortfall.Text = ""
+        txtSDSurcharge.Text = ""
+        txtSDTax.Text = ""
+        txtSDTaxableSalary.Text = ""
+        txtSDTDS.Text = ""
+        txtSDTotalSal.Text = ""
+        txtSDTotalTax.Text = ""
+        txtSDTotalTaxableIncome.Text = ""
+        txtSurcharge.Text = ""
+        txtSD80CCF.Text = ""
+        txtSD80CCG.Text = ""
+        txtSDTotalSalPreEmp.Text = ""
+        txtSDTDSPreEmp.Text = ""
+        ChkHigRate.Checked = False
+        txtSDTDSCurEmp.Text = ""
+    End Sub
+    Private Sub NormalModeSD()
+        With Me
+            .lvwSD.Enabled = True
+            .cmdSDAdd.Text = "Add"
+            .cmdSDCancel.Enabled = False
+        End With
+    End Sub
+
+    Private Sub cmdSD2XL_Click_1(sender As Object, e As EventArgs) Handles cmdSD2XL.Click
+        detail()
+    End Sub
+
+    Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
+        If Me.tabMain.SelectedIndex = 2 Then
+            'If cmdperprint.BackColor = SystemColors.ButtonFace Then
+            '    cmdperprint.BackColor = SystemColors.HighlightText
+            '    cmdsumm.BackColor = SystemColors.HighlightText
+            'Else
+            '    cmdperprint.BackColor = SystemColors.ButtonFace
+            '    cmdsumm.BackColor = SystemColors.ButtonFace
+            'End If
+
+            'Counter1 = Counter1 + 1
+            'If Counter1 > 10 Then
+            '    cmdperprint.BackColor = SystemColors.ButtonFace
+            '    cmdsumm.BackColor = SystemColors.ButtonFace
+            '    cmdperprint.Visible = False
+            '    cmdsumm.Visible = False
+            '    Timer4.Enabled = False
+            '    Counter1 = 0
+            'End If
+        End If
+    End Sub
+
+    Private Sub cbo16Ded_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbo16Ded.SelectedIndexChanged
+
+        Dim rst, rs As New DataSet
+        rs.Dispose()
+        rs = FetchDataSet("SELECT * FROM F16XtraDetails WHERE DID=(SELECT DID FROM DEDUCTMST WHERE DNAME='" & cbo16Ded.Text & "' AND COID=" & selectedcoid & ")")
+        If rs.Tables(0).Rows.Count Then
+            TxtLL1Nm.Text = vbNullString
+            TxtLL2Nm.Text = vbNullString
+            TxtLL3Nm.Text = vbNullString
+            TxtLL4Nm.Text = vbNullString
+            TxtLL1PAN.Text = vbNullString
+            TxtLL2PAN.Text = vbNullString
+            TxtLL3PAN.Text = vbNullString
+            TxtLL4PAN.Text = vbNullString
+            TxtLender1PAN.Text = vbNullString
+            TxtLender2PAN.Text = vbNullString
+            TxtLender3PAN.Text = vbNullString
+            TxtLender4PAN.Text = vbNullString
+            TxtLender1PAN.Text = vbNullString
+            TxtLender2PAN.Text = vbNullString
+            TxtLender3PAN.Text = vbNullString
+            TxtLender4PAN.Text = vbNullString
+            TxtFundNm.Text = vbNullString
+            txtContriFrm.Mask = vbNullString
+            txtContriTo.Mask = vbNullString
+            TxtRateOfDeduction.Text = vbNullString
+            TxtAmtRepaid.Text = vbNullString
+            TxtTaxDeducted.Text = vbNullString
+            'If rst.State = adStateOpen Then
+            rst.Dispose()
+            'End If
+            rst = FetchDataSet("SELECT F16ID,RetnId,DID FROM Form16Details WHERE DID=(SELECT DID FROM DEDUCTMST WHERE DNAME='" & cbo16Ded.Text & "' AND COID=" & selectedcoid & ")")
+            If Not rst.Tables(0).Rows.Count Then 'Not rst.BOF Then
+                F16ID = rst.Tables(0).Rows(0)("F16ID")
+                RETN = rst.Tables(0).Rows(0)("RetnID")
+                did = rst.Tables(0).Rows(0)("did")
+            Else
+                'If rst.State = adStateOpen Then
+                rst.Dispose()
+                ' End If
+                rst = FetchDataSet("SELECT F16ID,RetnId,Did FROM Form16Details WHERE DID=(SELECT DID FROM DEDUCTMST WHERE DNAME='" & cbo16Ded.Text & "' AND COID=" & selectedcoid & ")")
+                F16ID = rst.Tables(0).Rows(0)("F16ID")
+                RETN = rst.Tables(0).Rows(0)("RetnID")
+                did = rst.Tables(0).Rows(0)("did")
+            End If
+        Else
+            F16ID = rs.Tables(0).Rows(0)("F16ID")
+            RETN = rs.Tables(0).Rows(0)("RetnID")
+            did = rs.Tables(0).Rows(0)("did")
+            If rs.Tables(0).Rows(0)("rentexceeds").ToString() = True Then
+
+                For i = 0 To 7
+                    Label68.Visible = True
+                Next
+
+                ChkRent.Checked = 1
+                TxtLL1Nm.Text = IIf((rs.Tables(0).Rows(0)("Landlord1Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord1Name").ToString())
+                TxtLL2Nm.Text = IIf((rs.Tables(0).Rows(0)("Landlord2Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord2Name").ToString())
+                TxtLL3Nm.Text = IIf((rs.Tables(0).Rows(0)("Landlord3Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord3Name").ToString())
+                TxtLL4Nm.Text = IIf((rs.Tables(0).Rows(0)("Landlord4Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord4Name").ToString())
+                TxtLL1PAN.Text = IIf((rs.Tables(0).Rows(0)("Landlord1PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord1PAN").ToString())
+                TxtLL2PAN.Text = IIf((rs.Tables(0).Rows(0)("LANDLORD2PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD2PAN").ToString())
+                TxtLL3PAN.Text = IIf((rs.Tables(0).Rows(0)("Landlord3PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD3PAN").ToString())
+                TxtLL4PAN.Text = IIf((rs.Tables(0).Rows(0)("Landlord4PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD4PAN").ToString())
+
+                TxtLL1Nm.Visible = True
+                TxtLL2Nm.Visible = True
+                TxtLL3Nm.Visible = True
+                TxtLL4Nm.Visible = True
+                TxtLL1PAN.Visible = True
+                TxtLL2PAN.Visible = True
+                TxtLL3PAN.Visible = True
+                TxtLL4PAN.Visible = True
+
+            End If
+            If rs.Tables(0).Rows(0)("InttPaidOnHP").ToString() = True Then
+                For i = 8 To 15
+                    Label68.Visible = True
+                Next
+                ChkIncomeFromHouseProperty.Checked = 1
+                TxtLender1PAN.Text = IIf((rs.Tables(0).Rows(0)("Lender1PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender1PAN").ToString())
+                TxtLender2PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender2PAN").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender2PAN").ToString())
+                TxtLender3PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender3PAN").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender3PAN").ToString())
+                TxtLender4PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender4PAN").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender4PAN").ToString())
+                TxtLender1PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender1Name").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender1Name").ToString())
+                TxtLender2PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender2Name").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender2Name").ToString())
+                TxtLender3PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender3Name").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender3Name").ToString())
+                TxtLender4PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender4Name").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender4Name").ToString())
+
+                TxtLender1PAN.Visible = True
+                TxtLender2PAN.Visible = True
+                TxtLender3PAN.Visible = True
+                TxtLender4PAN.Visible = True
+                TxtLender1PAN.Visible = True
+                TxtLender2PAN.Visible = True
+                TxtLender3PAN.Visible = True
+                TxtLender4PAN.Visible = True
+
+            End If
+
+            If rs.Tables(0).Rows(0)("HasSAFundPaid").ToString = True Then
+                For i = 16 To 22
+                    Label68.Visible = True
+                Next
+                CHkSAFund.Checked = 1
+                TxtFundNm.Text = IIf(rs.Tables(0).Rows(0)("FundName").ToString(), vbNullString, rs.Tables(0).Rows(0)("FundName").ToString())
+                txtContriFrm.Text = IIf(rs.Tables(0).Rows(0)("DateFrom").ToString(), vbNullString, rs.Tables(0).Rows(0)("DateFrom").ToString())
+                txtContriTo.Text = IIf(rs.Tables(0).Rows(0)("DateTO").ToString(), vbNullString, rs.Tables(0).Rows(0)("DateTo").ToString())
+                TxtRateOfDeduction.Text = IIf(rs.Tables(0).Rows(0)("AvgRate").ToString(), vbNullString, rs.Tables(0).Rows(0)("AvgRate").ToString())
+                TxtAmtRepaid.Text = IIf(rs.Tables(0).Rows(0)("AmtRepaid").ToString(), vbNullString, rs.Tables(0).Rows(0)("AmtRepaid").ToString())
+                TxtTaxDeducted.Text = IIf(rs.Tables(0).Rows(0)("TaxDedAmt").ToString(), vbNullString, rs.Tables(0).Rows(0)("TaxDedAmt").ToString())
+
+
+                TxtFundNm.Visible = True
+                txtContriFrm.Visible = True
+                txtContriTo.Visible = True
+                TxtRateOfDeduction.Visible = True
+                TxtAmtRepaid.Visible = True
+                TxtTaxDeducted.Visible = True
+
+            End If
+
+        End If
+    End Sub
+
+    Private Sub oSD_PrepareDataForSave(Cancel As Boolean) Handles oSD.PrepareDataForSave
+        With oSD
+            If lvwSD.Items.Count > 0 Then
+                If lvwDeductee.SelectedIndices.Count > 0 Then
+                    .SDID = lvwSD.SelectedItems(0).SubItems(29).Text
+                End If
+            Else
+                    .SDID = 0
+            End If
+            .RetnID = Me.Tag
+            .did = cboSDDedName.SelectedValue
+            Dim dt As Date
+            dt = txtSDEmpFrm.Text
+            .EmpFrDt = dt.ToString("dd/MMM/yyyy")
+            Dim dt1 As Date
+            dt1 = txtSDEmpTo.Text
+            .EmpToDt = dt1.ToString("dd/MMM/yyyy")
+            .TotalSalary = Val(txtSDTotalSal.Text)
+            .Sec16ii = Val(txtSDEntAllow.Text)
+            .Sec16iii = Val(txtSDProfTax.Text)
+            .OtherIncome = Val(txtSDOtherIncome.Text)
+            .Sec80CCEAmt = Val(txtSD80CCE.Text)
+            .Sec80CCFAmt = Val(txtSD80CCF.Text)
+            .Sec80CCGAmt = Val(txtSD80CCG.Text)
+            .OtherVIA = Val(txtSDOtherIVA.Text)
+            .TaxAmt = Val(txtSDTax.Text)
+            .Surcharge = Val(txtSDSurcharge.Text)
+            .ECess = Val(txtSDEduCess.Text)
+            .Relief89 = Val(txtSDRelief.Text)
+            .TDSAmt = Val(txtSDTDSCurEmp.Text)
+            .TotalSalaryPreEmp = Val(txtSDTotalSalPreEmp.Text)
+            .TDSAmtPreEmp = Val(txtSDTDSPreEmp.Text)
+            '.HighRatePAN = IIf(ChkHigRate = True, vbTrue, vbFalse)
+            .HighRatePAN = IIf(ChkHigRate.Checked = True, True, False)
+            '.tdsamtcurEmp = Val(txtSDTDS) + Val(txtSDTDSPreEmp)
+        End With
+    End Sub
+
+    Private Sub cboSDDedName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSDDedName.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub fillcboSDDedName(Sec As String)
+        Dim sql As String
+        Dim sql1 As String
+        Dim nds As New DataSet
+        Dim nds1 As New DataSet         'For getting the totals of deductee challan
+        Dim CBalance As Long, i As Integer                   'For getting the balance of unallocated challan amount
+        'Filling Challan in Deductee Detail
+        sql1 = " And  RetnID=" & Me.Tag & " "
+
+        sql = " SELECT challanid,iif(isnull(BankChallanNo),Null,BankChallanNo),DtOfChallan,TotalTax" _
+      & " FROM Challan24Q WHERE (BankChallanNo<>Null or BankChallanNo<>0)" & sql1 _
+      & " UNION ALL SELECT challanid,iif(isnull(BankChallanNo),Null,BankChallanNo),DtOfChallan,TotalTax" _
+      & " FROM Challan24Q WHERE (Taxamt = 0 and (isnull(BankChallanNo) or BankChallanNo=0))" & sql1 _
+      & " UNION ALL SELECT challanid,TranVouNo,DtOfChallan,TotalTax " _
+      & " FROM Challan24Q WHERE (TranVouNo<>Null and TranVouNo<>0)" & sql1 _
+      & " order by ChallanID"
+        nds = FetchDataSet(sql)
+        cboChallanNo.Items.Clear()
+
+        For i = 0 To nds.Tables(0).Rows.Count - 1
+            nds1 = FetchDataSet("select sum(TotalTaxDeposited) as TChallan from Deductee24Q WHERE ChallanID=" & nds.Tables(0).Rows(i)("ChallanID"))
+            CBalance = Format(nds.Tables(0).Rows(i)("TotalTax") - IIf(nds1.Tables(0).Rows(0)("TChallan").ToString() = "", 0, nds1.Tables(0).Rows(0)("TChallan")), "0")
+            cboChallanNo.Items.Add(nds.Tables(0).Rows(i)(1) & " - " & Format(nds.Tables(0).Rows(i)("DtOfChallan"), "dd/MM/yy") & "- Rs." & CBalance)
+            'cboChallanNo.ValueMember = nds.Tables(0).Rows(i)("ChallanID")
+            cboChallanNo.SelectedIndex = i
+
+        Next
+        nds.Dispose()
+        nds1.Dispose()
+    End Sub
+
+    'export Annual Salary deductee list to export
+    Private Sub detail()
+        Dim CntLstItem As Long, CntColHed As Integer
+        Dim tot As Double, totsal As Double, entallow As Double, taxemp As Double, taxsal As Double, othicm As Double
+        Dim Gtotsal As Double, CCEamt As Double, CCFamt As Double, chpamt As Double, taxicm As Double, icmtax As Double, sur As Double, eduec As Double
+        Dim tottax As Double, reli As Double, ntax As Double
+        Timer3.Enabled = False
+        On Error GoTo excelerr
+        Dim xlapp As Excel.Application
+        Dim xlBook As Excel.Workbook
+        Dim xlSheet As Excel.Worksheet
+        Dim rs As New DataSet
+        Dim R, c As Integer
+        xlapp = Nothing
+        xlBook = Nothing
+        xlSheet = Nothing
+        xlapp = New Excel.Application
+        xlBook = xlapp.Workbooks.Add
+        xlSheet = xlBook.Worksheets("Sheet1")
+        With lvwSD
+            CntLstItem = .Items.Count
+            CntColHed = .Columns.Count - 2
+            xlSheet.Cells(4, 1) = .Columns(0).Text
+            xlSheet.Cells(4, 2) = .Columns(1).Text
+            xlSheet.Cells(4, 3) = .Columns(2).Text
+            xlSheet.Cells(4, 4) = .Columns(3).Text
+            xlSheet.Cells(4, 5) = .Columns(4).Text
+            xlSheet.Cells(4, 6) = .Columns(5).Text
+            xlSheet.Cells(4, 7) = .Columns(25).Text
+            xlSheet.Cells(4, 8) = .Columns(6).Text
+            xlSheet.Cells(4, 9) = .Columns(7).Text
+            xlSheet.Cells(4, 10) = .Columns(9).Text
+            xlSheet.Cells(4, 11) = .Columns(10).Text
+            xlSheet.Cells(4, 12) = .Columns(11).Text
+            xlSheet.Cells(4, 13) = .Columns(12).Text
+            xlSheet.Cells(4, 14) = .Columns(13).Text
+            xlSheet.Cells(4, 15) = .Columns(14).Text
+            xlSheet.Cells(4, 16) = .Columns(15).Text
+            xlSheet.Cells(4, 17) = .Columns(16).Text
+            xlSheet.Cells(4, 18) = .Columns(17).Text
+            xlSheet.Cells(4, 19) = .Columns(18).Text
+            xlSheet.Cells(4, 20) = .Columns(19).Text
+            xlSheet.Cells(4, 21) = .Columns(20).Text
+            xlSheet.Cells(4, 22) = .Columns(21).Text
+            xlSheet.Cells(4, 23) = .Columns(22).Text
+            xlSheet.Cells(4, 24) = .Columns(23).Text
+            xlSheet.Cells(4, 25) = .Columns(26).Text
+            xlSheet.Cells(4, 26) = .Columns(24).Text
+            xlSheet.Cells(4, 27) = .Columns(27).Text
+            For R = 0 To CntLstItem - 1
+                xlSheet.Cells(R + 5, 1) = lvwSD.Items(R).SubItems(0).Text
+                xlSheet.Cells(R + 5, 2) = lvwSD.Items(R).SubItems(1).Text
+                xlSheet.Cells(R + 5, 3) = lvwSD.Items(R).SubItems(2).Text
+                xlSheet.Cells(R + 5, 4) = (lvwSD.Items(R).SubItems(3).Text)
+                xlSheet.Cells(R + 5, 5) = lvwSD.Items(R).SubItems(4).Text
+                xlSheet.Cells(R + 5, 6) = Val(lvwSD.Items(R).SubItems(5).Text)
+                xlSheet.Cells(R + 5, 7) = Val(lvwSD.Items(R).SubItems(25).Text)
+                xlSheet.Cells(R + 5, 8) = Val(lvwSD.Items(R).SubItems(6).Text)
+                xlSheet.Cells(R + 5, 9) = Val(lvwSD.Items(R).SubItems(7).Text)
+                xlSheet.Cells(R + 5, 10) = Val(lvwSD.Items(R).SubItems(9).Text)
+                xlSheet.Cells(R + 5, 11) = Val(lvwSD.Items(R).SubItems(10).Text)
+                xlSheet.Cells(R + 5, 12) = lvwSD.Items(R).SubItems(11).Text
+                xlSheet.Cells(R + 5, 13) = Val(lvwSD.Items(R).SubItems(12).Text)
+                xlSheet.Cells(R + 5, 14) = Val(lvwSD.Items(R).SubItems(13).Text)
+                xlSheet.Cells(R + 5, 15) = Val(lvwSD.Items(R).SubItems(14).Text)
+                xlSheet.Cells(R + 5, 16) = Val(lvwSD.Items(R).SubItems(15).Text)
+                xlSheet.Cells(R + 5, 17) = Val(lvwSD.Items(R).SubItems(16).Text)
+                xlSheet.Cells(R + 5, 18) = Val(lvwSD.Items(R).SubItems(17).Text)
+                xlSheet.Cells(R + 5, 19) = Val(lvwSD.Items(R).SubItems(18).Text)
+                xlSheet.Cells(R + 5, 20) = lvwSD.Items(R).SubItems(19).Text
+                xlSheet.Cells(R + 5, 21) = lvwSD.Items(R).SubItems(20).Text
+                xlSheet.Cells(R + 5, 22) = lvwSD.Items(R).SubItems(21).Text
+                xlSheet.Cells(R + 5, 23) = Val(lvwSD.Items(R).SubItems(22).Text)
+                xlSheet.Cells(R + 5, 24) = Val(lvwSD.Items(R).SubItems(23).Text)
+                xlSheet.Cells(R + 5, 25) = Val(lvwSD.Items(R).SubItems(26).Text)
+                xlSheet.Cells(R + 5, 26) = Val(lvwSD.Items(R).SubItems(21).Text) - (Val(lvwSD.Items(R).SubItems(26).Text) + Val(lvwSD.Items(R).SubItems(22).Text))
+                xlSheet.Cells(R + 5, 27) = IIf(lvwSD.Items(R).SubItems(27).Text = "True", "Yes", "No")
+                ' xlSheet.Cells(r + 5, 28) = .ListItems(r).ListSubItems(28)
+                totsal = totsal + xlSheet.Cells(R + 5, 6).value
+                entallow = entallow + xlSheet.Cells(R + 5, 7).value
+                taxemp = taxemp + xlSheet.Cells(R + 5, 8).value
+                taxsal = taxsal + xlSheet.Cells(R + 5, 9).value
+                othicm = othicm + xlSheet.Cells(R + 5, 10).value
+                Gtotsal = Gtotsal + xlSheet.Cells(R + 5, 11).value
+                CCEamt = CCEamt + xlSheet.Cells(R + 5, 12).value
+                CCFamt = CCFamt + xlSheet.Cells(R + 5, 13).value
+                '                chpamt = chpamt + xlSheet.Cells(R + 7, 14)
+                chpamt = chpamt + IIf(xlSheet.Cells(R + 5, 14).value = vbNullString, 0, xlSheet.Cells(R + 5, 14).value)
+                taxicm = taxicm + xlSheet.Cells(R + 5, 15).value
+                icmtax = icmtax + xlSheet.Cells(R + 5, 16).value
+                sur = sur + xlSheet.Cells(R + 5, 17).value
+                eduec = eduec + xlSheet.Cells(R + 5, 18).value
+                tot = tot + xlSheet.Cells(R + 5, 19).value
+                tottax = tottax + xlSheet.Cells(R + 5, 20).value
+                reli = reli + xlSheet.Cells(R + 5, 21).value
+                ntax = ntax + xlSheet.Cells(R + 5, 22).value
+                For c = 1 To 23
+                    xlSheet.Cells(R + 5, c).HorizontalAlignment = HorizontalAlignment.Right
+                Next
+            Next R
+            xlSheet.Cells(R + 5, 6) = totsal
+            xlSheet.Cells(R + 5, 7) = entallow
+            xlSheet.Cells(R + 5, 8) = taxemp
+            xlSheet.Cells(R + 5, 9) = taxsal
+            xlSheet.Cells(R + 5, 10) = othicm
+            xlSheet.Cells(R + 5, 11) = Gtotsal
+            xlSheet.Cells(R + 5, 12) = CCEamt
+            xlSheet.Cells(R + 5, 13) = CCFamt
+            xlSheet.Cells(R + 5, 14) = chpamt
+            xlSheet.Cells(R + 5, 15) = taxicm
+            xlSheet.Cells(R + 5, 16) = icmtax
+            xlSheet.Cells(R + 5, 17) = sur
+            xlSheet.Cells(R + 5, 18) = eduec
+            xlSheet.Cells(R + 5, 19) = tot
+            xlSheet.Cells(R + 5, 20) = tottax
+            xlSheet.Cells(R + 5, 21) = reli
+            xlSheet.Cells(R + 5, 22) = ntax
+            xlSheet.Cells(R + 5, 23) = "=sum(w6:w" & R + 4 & ")"
+            xlSheet.Cells(R + 5, 6).Font.Bold = True : xlSheet.Cells(R + 5, 6).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 7).Font.Bold = True : xlSheet.Cells(R + 5, 7).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 8).Font.Bold = True : xlSheet.Cells(R + 5, 8).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 9).Font.Bold = True : xlSheet.Cells(R + 5, 9).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 10).Font.Bold = True : xlSheet.Cells(R + 5, 10).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 11).Font.Bold = True : xlSheet.Cells(R + 5, 11).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 12).Font.Bold = True : xlSheet.Cells(R + 5, 12).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 13).Font.Bold = True : xlSheet.Cells(R + 5, 13).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 14).Font.Bold = True : xlSheet.Cells(R + 5, 14).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 15).Font.Bold = True : xlSheet.Cells(R + 5, 15).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 16).Font.Bold = True : xlSheet.Cells(R + 5, 16).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 17).Font.Bold = True : xlSheet.Cells(R + 5, 17).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 18).Font.Bold = True : xlSheet.Cells(R + 5, 18).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 19).Font.Bold = True : xlSheet.Cells(R + 5, 19).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 20).Font.Bold = True : xlSheet.Cells(R + 5, 20).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 21).Font.Bold = True : xlSheet.Cells(R + 5, 21).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 22).Font.Bold = True : xlSheet.Cells(R + 5, 22).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Cells(R + 5, 23).Font.Bold = True : xlSheet.Cells(R + 5, 23).HorizontalAlignment = HorizontalAlignment.Right
+            xlSheet.Range(xlSheet.Cells(R + 4, 1), xlSheet.Cells(R + 4, .Columns.Count - 2)).BorderAround()
+
+            xlSheet.Cells(3, 1) = "Deductee's Detail List Of Form 24Q4"
+            xlSheet.Cells(1, 1) = txtCoName.Text
+            xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(1, .Columns.Count - 2)).Merge()
+            xlSheet.Range(xlSheet.Cells(5, 1), xlSheet.Cells(5, .Columns.Count - 2)).BorderAround()
+            xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(1, .Columns.Count - 1)).HorizontalAlignment = HorizontalAlignment.Center
+            xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(1, .Columns.Count - 1)).Font.Bold = True
+            '        xlSheet.Range(xlSheet.Cells(7, 1), xlSheet.Cells(7, .ColumnHeaders.Count - 1)).Font.Bold = True
+            xlSheet.Range(xlSheet.Cells(3, 1), xlSheet.Cells(3, .Columns.Count - 1)).Font.Bold = True
+        End With
+        xlSheet.Range("A1", "AE999").Font.Size = 8
+        xlSheet.Columns(1).ColumnWidth = 20
+        xlSheet.Columns(2).ColumnWidth = 10
+        xlSheet.Columns(3).ColumnWidth = 2
+        xlSheet.Columns(4).ColumnWidth = 9
+        xlSheet.Columns(5).ColumnWidth = 9
+        xlSheet.Columns(6).ColumnWidth = 9
+        xlSheet.Columns(7).ColumnWidth = 5
+        xlSheet.Columns(8).ColumnWidth = 5
+        xlSheet.Columns(9).ColumnWidth = 5
+        xlSheet.Columns(10).ColumnWidth = 7
+        xlSheet.Columns(11).ColumnWidth = 7
+        xlSheet.Columns(12).ColumnWidth = 7
+        xlSheet.Columns(13).ColumnWidth = 5
+        xlSheet.Columns(14).ColumnWidth = 2
+        xlSheet.Columns(15).ColumnWidth = 5
+        xlSheet.Columns(16).ColumnWidth = 7
+        xlSheet.Columns(17).ColumnWidth = 7
+        xlSheet.Columns(18).ColumnWidth = 7
+        xlSheet.Columns(19).ColumnWidth = 2
+        xlSheet.Columns(20).ColumnWidth = 5
+        xlSheet.Columns(21).ColumnWidth = 5
+        xlSheet.Columns(22).ColumnWidth = 3
+        xlSheet.Columns(23).ColumnWidth = 7
+        xlSheet.Columns(24).ColumnWidth = 7
+        xlSheet.Columns(25).ColumnWidth = 7
+        xlSheet.Columns(26).ColumnWidth = 5
+        xlSheet.Columns(27).ColumnWidth = 7
+        xlSheet.Rows(5).WrapText = True
+        xlSheet.PageSetup.TopMargin = 18
+        xlSheet.PageSetup.BottomMargin = 18
+        xlSheet.PageSetup.LeftMargin = 18
+        xlSheet.PageSetup.RightMargin = 18
+        xlSheet.PageSetup.Orientation = Microsoft.Office.Interop.Excel.XlPageOrientation.xlLandscape
+        xlapp.Application.Visible = True
+        'xlSheet.Range(xlSheet.Cells(1, 1), xlSheet.Cells(lvwSD.ListItems.Count + 7, lvwSD.ColumnHeaders.Count - 1 + 1)).Columns.AutoFit
+        Exit Sub
+excelerr:
+        MsgBox("Cannot open Excel", vbCritical)
+    End Sub
+
+    Private Sub cboSDDedName_GotFocus(sender As Object, e As EventArgs) Handles cboSDDedName.GotFocus
+        'SendKeys "{f4}"
+        Call CtrlGotFocusC(cboSDDedName)
+    End Sub
+
+    Private Sub cboSDDedName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboSDDedName.KeyPress
+        e.KeyChar = UCase(e.KeyChar)
+
+        If Asc(e.KeyChar) = 34 Or Asc(e.KeyChar) = 39 Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub Timer4_Tick(sender As Object, e As EventArgs) Handles Timer4.Tick
+        Call calcSD()
+    End Sub
+    Private Sub calcSD()
+        txtSDTaxableSalary.Text = Val(txtSDTotalSal.Text) + Val(txtSDTotalSalPreEmp.Text) - Val(txtSDEntAllow.Text) - Val(txtSDProfTax.Text)
+        txtSDTotalSalBoth.Text = Val(txtSDTotalSal.Text) + Val(txtSDTotalSalPreEmp.Text)
+        txtSDGTI.Text = Val(txtSDTaxableSalary.Text) + Val(txtSDOtherIncome.Text)
+        txtSDTotalTaxableIncome.Text = Val(txtSDGTI.Text) - Val(txtSD80CCE.Text) - Val(txtSD80CCF.Text) - Val(txtSD80CCG.Text) - Val(txtSDOtherIVA.Text)
+        txtSDTotalTax.Text = Val(txtSDTax.Text) + Val(txtSDSurcharge.Text) + Val(txtSDEduCess.Text)
+        txtSDNetTax.Text = Val(txtSDTotalTax.Text) - Val(txtSDRelief.Text)
+        txtSDTDS.Text = Val(txtSDTDSCurEmp.Text) + Val(txtSDTDSPreEmp.Text)
+        txtSDShortfall.Text = Val(txtSDNetTax.Text) - Val(txtSDTDS.Text)
+    End Sub
+
+    Private Sub txtSDEmpFrm_MaskInputRejected(sender As Object, e As MaskInputRejectedEventArgs) Handles txtSDEmpFrm.MaskInputRejected
+
+    End Sub
+
+    Private Sub cboSDDedName_LostFocus(sender As Object, e As EventArgs) Handles cboSDDedName.LostFocus
+        Call CtrlLostFocus(cboSDDedName)
+        If cboSDDedName.Text = vbNullString Then Exit Sub
+        'If Val(txtSDID.Text) = 0 And 
+        If cboSDDedName.Text <> vbNullString Then
+            Dim Itm As ListViewItem
+            Itm = lvwSD.FindItemWithText(cboSDDedName.Text)
+            If Itm Is Nothing Then
+                'do nothing
+            Else
+                MsgBox("Entry of chosen Deductee is already present")
+                cboSDDedName.SelectedIndex = -1
+                cboSDDedName.Focus()
+                Exit Sub
+            End If
+        End If
+        Dim rs As New DataSet
+        Dim i As Integer, DName As String
+        DName = UCase(cboSDDedName.Text)
+        rs = FetchDataSet("SELECT * FROM DeductMst WHERE CoId = " & selectedcoid & " And DName='" & DName & "'")
+        If rs.Tables(0).Rows.Count <= 0 Then
+            'not found., open deductee detail form..
+            frmDeducteeTDS.Show()
+            frmDeducteeTDS.Frm_typ = 24
+            'frmDeducteeTDS.Move(Me.Left + cboSDDedName.Left) + 100, (Me.Top + cboSDDedName.Top + cboSDDedName.Height + 650)
+            frmDeducteeTDS.txtDName.Text = cboSDDedName.Text
+            frmDeducteeTDS.optCo.Visible = False
+            frmDeducteeTDS.optCo.TabStop = False
+            frmDeducteeTDS.Show()
+            FillDeducteeCombo()
+
+            For i = 0 To cboSDDedName.SelectedIndex - 1
+                If cboSDDedName.SelectedIndex = DName Then
+                    cboSDDedName.SelectedIndex = i
+                    Exit Sub
+                End If
+            Next i
+            If i = cboSDDedName.SelectedIndex Then cboSDDedName.SelectedIndex = -1      'Not Found
+        Else
+            txtSDDedPAN.Text = rs.Tables(0).Rows(0)("DPan") & ""
+            txtSDDedPAN.Tag = rs.Tables(0).Rows(0)("DType")
+            Dim txt2Show As String
+            If Not (rs.Tables(0).Rows(0)("Category").ToString() = "") Then
+                Select Case UCase(rs.Tables(0).Rows(0)("Category"))
+                    Case "W"
+                        txt2Show = "W-Woman"
+                    Case "S"
+                        txt2Show = "S-Senior Citizen"
+                    Case Else
+                        txt2Show = "G-Other"
+                End Select
+            End If
+            txtSDDedCateg.Text = txt2Show
+        End If
+
+        rs.Dispose()
+
+    End Sub
+
+    Private Sub lvwSD_MouseUp(sender As Object, e As MouseEventArgs) Handles lvwSD.MouseUp
+        If e.Button = MouseButtons.Right Then
+            PopupmenuS.Show(lvwSD, New Point(e.X, e.Y))
+
+        End If
+    End Sub
+
+    Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
+        If lvwSD.SelectedIndices.Count = 0 Then Exit Sub
+        EditRow("SD")
+        EditModeSD()
+        cboSDDedName.Focus()
+    End Sub
+
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem4.Click
+        If lvwSD.SelectedIndices.Count = 0 Then Exit Sub
+        oSD = New ClsSalaryDetail24QObj
+
+        If oSD.Delete(lvwSD.SelectedItems(0).SubItems(24).Text) = True Then
+            MsgBox("This Record is further used, Cannot Delete", vbInformation, "Caution")
+            Exit Sub
+        End If
+        If MsgBox("Do you want to delete this row?", vbYesNo + vbQuestion + vbDefaultButton2, "DELETE DATA") = vbYes Then
+            'delete the row..
+            If oSD.Delete(lvwSD.SelectedItems(0).SubItems(24).Text) = True Then
+                lvwSD.SelectedItems(0).Remove()
+            End If
+        End If
+    End Sub
+
+    Private Sub cmdmismatch_Click(sender As Object, e As EventArgs) Handles cmdmismatch.Click
+        cmdmismatch_Click()
+    End Sub
+
+    Private Sub lvwSD_DoubleClick(sender As Object, e As EventArgs) Handles lvwSD.DoubleClick
+        Call EditRow("SD")
+        Call EditModeSD()
     End Sub
 End Class

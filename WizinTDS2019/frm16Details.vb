@@ -377,13 +377,14 @@ Public Class FRM16Detail
 
     Private Sub frm16Details_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim rst As New DataSet
-        Dim R As Integer
+        Dim R As Integer ', a As String
         ' Dim oForm16 As New clsForm16Details
         txt16FrmDt.Text = Format(FromDate, "dd/MM/yy")
         txt16ToDt.Text = Format(ToDate, "dd/MM/yy")
         txt16AY.Text = AY
         CopyCoDetails()
         Fill24PRNNo()
+        fill()
         'tabForm16.Tab = 0
         tabForm16.Enabled = False
         'Set the grids right...
@@ -499,8 +500,8 @@ Public Class FRM16Detail
         'Do While Not rst.EOF
         For k = 0 To rst.Tables(0).Rows.Count - 1
             grdPRNdet.Rows.Add()
-            grdPRNdet.Rows(k).Cells(0).Value = rst.Tables(0).Rows(0)("FrmType").ToString()
-            grdPRNdet.Rows(k).Cells(1).Value = IIf(String.IsNullOrEmpty(rst.Tables(0).Rows(0)("NewreceiptNO").ToString()), "", rst.Tables(0).Rows(0)("NewreceiptNO").ToString())
+            grdPRNdet.Rows(k).Cells(0).Value = rst.Tables(0).Rows(k)("FrmType").ToString()
+            grdPRNdet.Rows(k).Cells(1).Value = IIf(String.IsNullOrEmpty(rst.Tables(0).Rows(k)("NewreceiptNO").ToString()), "", rst.Tables(0).Rows(k)("NewreceiptNO").ToString())
             R = R + 1
             'rst.MoveNext
         Next k
@@ -513,7 +514,7 @@ Public Class FRM16Detail
         oCompany = oCompany.FetchCo(selectedcoid)
         With oCompany
             txt16CoName.Text = .CoName
-            txt16CoName.Tag = frmCoMst.txtCoName.Tag
+            txt16CoName.Tag = selectedcoid'frmCoMst.txtCoName.Tag
             txt16CoAdd1.Text = .CoAdd1
             txt16CoAdd2.Text = .CoAdd2
             txt16CoAdd3.Text = .CoAdd3
@@ -883,6 +884,10 @@ Public Class FRM16Detail
 
     Private Sub cbo16DedName_LostFocus(sender As Object, e As EventArgs) Handles cbo16DedName.LostFocus
         Call CtrlLostFocus(cbo16DedName)
+
+    End Sub
+
+    Private Sub fill()
         If cbo16DedName.Text = vbNullString Then Exit Sub
         If cbo16DedName.Text <> vbNullString Then
             '    Dim itm As ListItem
@@ -926,7 +931,6 @@ Public Class FRM16Detail
         rs.Dispose()
         rs = Nothing
     End Sub
-
     Private Sub txt16gross1_TextChanged(sender As Object, e As EventArgs) Handles txt16gross1.TextChanged
         CalculateSalaryNTax()
     End Sub
