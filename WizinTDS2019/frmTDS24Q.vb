@@ -4243,8 +4243,8 @@ excelerr:
     Private Sub cmdAddNewForm16_Click(sender As Object, e As EventArgs) Handles cmdAddNewForm16.Click
         FRM16Detail.Show()
         'frm16Details.Show()
-        'frm16Details.xMode = "A"
-        'frm16Details.FillDeducteeCombo(frm16Details.xMode)
+        FRM16Detail.xMode = "A"
+        FRM16Detail.FillDeducteeCombo(FRM16Detail.xMode)
         FRM16Detail.cmd16delete.Enabled = False
         FRM16Detail.Show()
     End Sub
@@ -5187,5 +5187,9 @@ excelerr:
     Private Sub lvwSD_DoubleClick(sender As Object, e As EventArgs) Handles lvwSD.DoubleClick
         Call EditRow("SD")
         Call EditModeSD()
+    End Sub
+
+    Private Sub cboDedName_MarginChanged(sender As Object, e As EventArgs) Handles cboDedName.MarginChanged
+
     End Sub
 End Class

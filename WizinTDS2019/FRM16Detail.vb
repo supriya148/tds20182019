@@ -482,11 +482,11 @@ Public Class FRM16Detail
         cbo16DedName.Items.Clear()
 
 
-        For I = 0 To rst.Tables(0).Rows.Count
-            cbo16DedName.DataSource = rst.Tables(0)
+        'For I = 0 To rst.Tables(0).Rows.Count
+        cbo16DedName.DataSource = rst.Tables(0)
             cbo16DedName.DisplayMember = "DName"
             cbo16DedName.ValueMember = "DId"
-        Next I
+        ' Next I
 
         rst.Dispose()
 
@@ -528,7 +528,7 @@ Public Class FRM16Detail
         End With
     End Sub
 
-    Private Sub cmbName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbo16DedName.SelectedIndexChanged
+    Private Sub cbo16DedName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbo16DedName.SelectedIndexChanged
 
     End Sub
 
@@ -695,33 +695,50 @@ Public Class FRM16Detail
     End Sub
 
     Private Sub cmdDedMast_Click(sender As Object, e As EventArgs) Handles cmdDedMast.Click
-        Dim i As Long, DFound As Boolean, OldId As Long
+        Dim i As Long, DFound As Boolean, OldId As Long, dname As String
+        Dim frm As New frmdeduteeTDSMST
         If cbo16DedName.SelectedIndex < 0 Then Exit Sub
-        frmdeduteeTDSMST.Show()
-        With frmdeduteeTDSMST
-            For i = 0 To .cboDName.SelectedIndex - 1
-                If .cboDName.SelectedIndex = cbo16DedName.SelectedItem(cbo16DedName.SelectedIndex) Then
-                    .cboDName.SelectedIndex = i
-                    OldId = cbo16DedName.SelectedItem(cbo16DedName.SelectedIndex)
-                    DFound = True
-                    Exit For
-                End If
-            Next i
-        End With
-        If DFound = True Then
-            frmdeduteeTDSMST.Show()
-        End If
-        'refill the combo with new data...
-        'Call FillDeducteeCombo
-        For i = 0 To cbo16DedName.SelectedIndex - 1
-            If cbo16DedName.Items.Add(i) = OldId Then
-                'select the selection again...
-                cbo16DedName.SelectedIndex = i
-                '        cbo16DedName.SetFocus
-                Exit For
+        'frmdeduteeTDSMST.Show()
+        frm.Frm_typ = "24Q"
+        frm.Show()
+        frm.Hide()
+        dname = cbo16DedName.Text
+        With frm
+            i = .cboDName.FindString(cbo16DedName.Text)
+            If i >= 0 Then
+                .cboDName.SelectedIndex = i
+
+                DFound = True
             End If
-        Next i
+            'For i = 0 To .cboDName.SelectedIndex - 1
+            '    If .cboDName.SelectedIndex = cbo16DedName.SelectedItem(cbo16DedName.SelectedIndex) Then
+            '        .cboDName.SelectedIndex = i
+            '        OldId = cbo16DedName.SelectedItem(cbo16DedName.SelectedIndex)
+            '        DFound = True
+            '        Exit For
+            '    End If
+            'Next i
+        End With
+        'If DFound = True Then
+        '    frmdeduteeTDSMST.Show()
+        'End If
+        If DFound = True Then frm.Show()
+        'refill the combo with new data...
+        Call FillDeducteeCombo(xMode)
+        'For i = 0 To cbo16DedName.SelectedIndex - 1
+        '    If cbo16DedName.Items.Add(i) = OldId Then
+        '        'select the selection again...
+        '        cbo16DedName.SelectedIndex = i
+        '        '        cbo16DedName.SetFocus
+        '        Exit For
+        '    End If
+        'Next i
         'cbo16DedName_LostFocus
+        i = cbo16DedName.FindString(dname)
+        If i >= 0 Then
+            cbo16DedName.SelectedIndex = i
+
+        End If
     End Sub
 
     Private Sub grd1680c_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680c.CellEndEdit

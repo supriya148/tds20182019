@@ -126,10 +126,10 @@
     <Compile Include="frm16A.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm16Details.designer.vb">
-      <DependentUpon>frm16Details.vb</DependentUpon>
+    <Compile Include="FRM16Detail.designer.vb">
+      <DependentUpon>FRM16Detail.vb</DependentUpon>
     </Compile>
-    <Compile Include="frm16Details.vb">
+    <Compile Include="FRM16Detail.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAannexPan.designer.vb">
@@ -373,8 +373,8 @@
       <DependentUpon>frm16A.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm16Details.resx">
-      <DependentUpon>frm16Details.vb</DependentUpon>
+    <EmbeddedResource Include="FRM16Detail.resx">
+      <DependentUpon>FRM16Detail.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAannexPan.resx">
