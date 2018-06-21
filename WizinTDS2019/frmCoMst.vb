@@ -122,7 +122,6 @@ Public Class frmCoMst
     Private Sub frmCoMst_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ' Me.Location = New Point(0, 0)
-        Dim ab As Double
         Dim MaxNoCompany As Integer
         Dim nds As New DataSet
 

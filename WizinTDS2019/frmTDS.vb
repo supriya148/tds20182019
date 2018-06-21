@@ -114,19 +114,19 @@ Public Class frmTDS
             .lvwDeductee.Items.Clear()
             .cmdNext.Enabled = False
             'Check quarter and form 16 usage check and then enable/disable Salary Detail tab accordingly.
-            'If .quter = "24Q4" Then
-            '    .tabMain.TabEnabled(5) = True
-            '    If frmCoMst.chkUseForm16.Value = vbChecked Then
-            '        .tabMain.TabEnabled(3) = False
-            '        .tabMain.TabEnabled(4) = True
-            '    Else
-            '        .tabMain.TabEnabled(3) = True
-            '        .tabMain.TabEnabled(4) = False
-            '    End If
+            ' If .quter = "24Q4" Then
+            ' .tabMain.TabEnabled(5) = True
+            ' If frmCoMst.chkUseForm16.Checked = True Then
+            '.tabMain.SelectedIndex(5).enabled = False
+            ' .tabMain.TabEnabled(4) = True
             'Else
-            '    .tabMain.TabEnabled(5) = False
-            '    .tabMain.TabEnabled(3) = False
-            '    .tabMain.TabEnabled(4) = False
+            ' .tabMain.TabEnabled(3) = True
+            '.tabMain.TabEnabled(4) = False
+            '  End If
+            'Else
+            '.tabMain.TabEnabled(5) = False
+            ' .tabMain.TabEnabled(3) = False
+            ' .tabMain.TabEnabled(4) = False
             'End If
             'Filling Challan in Deductee Detail
             Dim sql As String

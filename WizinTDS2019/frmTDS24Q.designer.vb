@@ -158,7 +158,7 @@ Partial Class frmTDS24Q
         Me.cmdShwfrm = New System.Windows.Forms.Button()
         Me.cboDedName = New System.Windows.Forms.ComboBox()
         Me.dtpAmtPayDt = New System.Windows.Forms.MaskedTextBox()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.xyx = New System.Windows.Forms.TabPage()
         Me.ChkHigRate = New System.Windows.Forms.CheckBox()
         Me.lvwSD = New System.Windows.Forms.ListView()
         Me.cmdmismatch = New System.Windows.Forms.Button()
@@ -324,7 +324,7 @@ Partial Class frmTDS24Q
         Me.framedt.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
+        Me.xyx.SuspendLayout()
         Me.TableLayoutPanel10.SuspendLayout()
         Me.TableLayoutPanel8.SuspendLayout()
         Me.TableLayoutPanel9.SuspendLayout()
@@ -346,7 +346,7 @@ Partial Class frmTDS24Q
         Me.tabMain.Controls.Add(Me.TabPage1)
         Me.tabMain.Controls.Add(Me.TabPage2)
         Me.tabMain.Controls.Add(Me.TabPage3)
-        Me.tabMain.Controls.Add(Me.TabPage4)
+        Me.tabMain.Controls.Add(Me.xyx)
         Me.tabMain.Controls.Add(Me.TabPage5)
         Me.tabMain.Controls.Add(Me.TabPage6)
         Me.tabMain.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2212,25 +2212,25 @@ Partial Class frmTDS24Q
         Me.dtpAmtPayDt.Size = New System.Drawing.Size(112, 13)
         Me.dtpAmtPayDt.TabIndex = 8
         '
-        'TabPage4
+        'xyx
         '
-        Me.TabPage4.BackColor = System.Drawing.Color.Lavender
-        Me.TabPage4.Controls.Add(Me.ChkHigRate)
-        Me.TabPage4.Controls.Add(Me.lvwSD)
-        Me.TabPage4.Controls.Add(Me.cmdmismatch)
-        Me.TabPage4.Controls.Add(Me.cmdSDCancel)
-        Me.TabPage4.Controls.Add(Me.cmdSD2XL)
-        Me.TabPage4.Controls.Add(Me.cmdSDAdd)
-        Me.TabPage4.Controls.Add(Me.TableLayoutPanel10)
-        Me.TabPage4.Controls.Add(Me.TableLayoutPanel8)
-        Me.TabPage4.Controls.Add(Me.TableLayoutPanel9)
-        Me.TabPage4.Controls.Add(Me.TableLayoutPanel7)
-        Me.TabPage4.Controls.Add(Me.TableLayoutPanel3)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 24)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(849, 497)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Annual Salary detail"
+        Me.xyx.BackColor = System.Drawing.Color.Lavender
+        Me.xyx.Controls.Add(Me.ChkHigRate)
+        Me.xyx.Controls.Add(Me.lvwSD)
+        Me.xyx.Controls.Add(Me.cmdmismatch)
+        Me.xyx.Controls.Add(Me.cmdSDCancel)
+        Me.xyx.Controls.Add(Me.cmdSD2XL)
+        Me.xyx.Controls.Add(Me.cmdSDAdd)
+        Me.xyx.Controls.Add(Me.TableLayoutPanel10)
+        Me.xyx.Controls.Add(Me.TableLayoutPanel8)
+        Me.xyx.Controls.Add(Me.TableLayoutPanel9)
+        Me.xyx.Controls.Add(Me.TableLayoutPanel7)
+        Me.xyx.Controls.Add(Me.TableLayoutPanel3)
+        Me.xyx.Location = New System.Drawing.Point(4, 24)
+        Me.xyx.Name = "xyx"
+        Me.xyx.Size = New System.Drawing.Size(849, 497)
+        Me.xyx.TabIndex = 3
+        Me.xyx.Text = "Annual Salary detail"
         '
         'ChkHigRate
         '
@@ -3107,6 +3107,7 @@ Partial Class frmTDS24Q
         Me.txttotdepos.Size = New System.Drawing.Size(137, 21)
         Me.txttotdepos.TabIndex = 61
         Me.txttotdepos.TabStop = False
+        Me.txttotdepos.Visible = False
         '
         'txtSDcount
         '
@@ -3115,6 +3116,7 @@ Partial Class frmTDS24Q
         Me.txtSDcount.Size = New System.Drawing.Size(120, 21)
         Me.txtSDcount.TabIndex = 60
         Me.txtSDcount.TabStop = False
+        Me.txtSDcount.Visible = False
         '
         'CHkSAFund
         '
@@ -3123,7 +3125,7 @@ Partial Class frmTDS24Q
         Me.CHkSAFund.Location = New System.Drawing.Point(20, 299)
         Me.CHkSAFund.Name = "CHkSAFund"
         Me.CHkSAFund.Size = New System.Drawing.Size(561, 20)
-        Me.CHkSAFund.TabIndex = 59
+        Me.CHkSAFund.TabIndex = 22
         Me.CHkSAFund.Text = "Whether Contribution Paid By Trustees of an Approved Superannuation Fund?"
         Me.CHkSAFund.UseVisualStyleBackColor = True
         '
@@ -3134,7 +3136,7 @@ Partial Class frmTDS24Q
         Me.ChkIncomeFromHouseProperty.Location = New System.Drawing.Point(20, 168)
         Me.ChkIncomeFromHouseProperty.Name = "ChkIncomeFromHouseProperty"
         Me.ChkIncomeFromHouseProperty.Size = New System.Drawing.Size(581, 20)
-        Me.ChkIncomeFromHouseProperty.TabIndex = 58
+        Me.ChkIncomeFromHouseProperty.TabIndex = 13
         Me.ChkIncomeFromHouseProperty.Text = "Whether Interest paid to the Lender Under Head ""Income From House Property""?"
         Me.ChkIncomeFromHouseProperty.UseVisualStyleBackColor = True
         '
@@ -3145,7 +3147,7 @@ Partial Class frmTDS24Q
         Me.ChkRent.Location = New System.Drawing.Point(23, 28)
         Me.ChkRent.Name = "ChkRent"
         Me.ChkRent.Size = New System.Drawing.Size(249, 20)
-        Me.ChkRent.TabIndex = 57
+        Me.ChkRent.TabIndex = 4
         Me.ChkRent.Text = "House Rent Exceeds One Lakh?"
         Me.ChkRent.UseVisualStyleBackColor = True
         '
@@ -3154,8 +3156,8 @@ Partial Class frmTDS24Q
         Me.cbo16Ded.FormattingEnabled = True
         Me.cbo16Ded.Location = New System.Drawing.Point(184, 5)
         Me.cbo16Ded.Name = "cbo16Ded"
-        Me.cbo16Ded.Size = New System.Drawing.Size(121, 23)
-        Me.cbo16Ded.TabIndex = 56
+        Me.cbo16Ded.Size = New System.Drawing.Size(214, 23)
+        Me.cbo16Ded.TabIndex = 0
         '
         'Label6
         '
@@ -3165,7 +3167,7 @@ Partial Class frmTDS24Q
         Me.Label6.Location = New System.Drawing.Point(24, 8)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(137, 16)
-        Me.Label6.TabIndex = 55
+        Me.Label6.TabIndex = 51
         Me.Label6.Text = "Name of Deductee"
         '
         'cmdExit
@@ -3175,7 +3177,7 @@ Partial Class frmTDS24Q
         Me.cmdExit.Location = New System.Drawing.Point(498, 470)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.Size = New System.Drawing.Size(75, 23)
-        Me.cmdExit.TabIndex = 54
+        Me.cmdExit.TabIndex = 31
         Me.cmdExit.Text = "Exit"
         Me.cmdExit.UseVisualStyleBackColor = True
         '
@@ -3186,18 +3188,19 @@ Partial Class frmTDS24Q
         Me.cmdDelete.Location = New System.Drawing.Point(382, 470)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
-        Me.cmdDelete.TabIndex = 53
+        Me.cmdDelete.TabIndex = 30
         Me.cmdDelete.Text = "Delete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdSave
         '
+        Me.cmdSave.Enabled = False
         Me.cmdSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdSave.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cmdSave.Location = New System.Drawing.Point(275, 470)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSave.TabIndex = 52
+        Me.cmdSave.TabIndex = 29
         Me.cmdSave.Text = "Save"
         Me.cmdSave.UseVisualStyleBackColor = True
         '
@@ -3228,14 +3231,15 @@ Partial Class frmTDS24Q
         Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
         Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
         Me.TableLayoutPanel16.Size = New System.Drawing.Size(824, 133)
-        Me.TableLayoutPanel16.TabIndex = 2
+        Me.TableLayoutPanel16.TabIndex = 3
         '
         'TxtAmtRepaid
         '
         Me.TxtAmtRepaid.Location = New System.Drawing.Point(6, 107)
         Me.TxtAmtRepaid.Name = "TxtAmtRepaid"
         Me.TxtAmtRepaid.Size = New System.Drawing.Size(236, 21)
-        Me.TxtAmtRepaid.TabIndex = 57
+        Me.TxtAmtRepaid.TabIndex = 26
+        Me.TxtAmtRepaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label84
         '
@@ -3245,15 +3249,16 @@ Partial Class frmTDS24Q
         Me.Label84.Location = New System.Drawing.Point(6, 3)
         Me.Label84.Name = "Label84"
         Me.Label84.Size = New System.Drawing.Size(216, 16)
-        Me.Label84.TabIndex = 38
+        Me.Label84.TabIndex = 68
         Me.Label84.Text = "Name of Superannuation Fund"
         '
         'TxtFundNm
         '
+        Me.TxtFundNm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtFundNm.Location = New System.Drawing.Point(6, 40)
         Me.TxtFundNm.Name = "TxtFundNm"
-        Me.TxtFundNm.Size = New System.Drawing.Size(183, 21)
-        Me.TxtFundNm.TabIndex = 40
+        Me.TxtFundNm.Size = New System.Drawing.Size(236, 21)
+        Me.TxtFundNm.TabIndex = 23
         '
         'Label85
         '
@@ -3263,7 +3268,7 @@ Partial Class frmTDS24Q
         Me.Label85.Location = New System.Drawing.Point(251, 3)
         Me.Label85.Name = "Label85"
         Me.Label85.Size = New System.Drawing.Size(260, 31)
-        Me.Label85.TabIndex = 41
+        Me.Label85.TabIndex = 69
         Me.Label85.Text = "Date From Which Employee has " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Contributed To Superannuation Fund"
         '
         'Label86
@@ -3274,7 +3279,7 @@ Partial Class frmTDS24Q
         Me.Label86.Location = New System.Drawing.Point(597, 3)
         Me.Label86.Name = "Label86"
         Me.Label86.Size = New System.Drawing.Size(216, 31)
-        Me.Label86.TabIndex = 43
+        Me.Label86.TabIndex = 70
         Me.Label86.Text = "Average Rate of Deduction of " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Tax During Preceeding three Years"
         '
         'Label87
@@ -3285,7 +3290,7 @@ Partial Class frmTDS24Q
         Me.Label87.Location = New System.Drawing.Point(6, 68)
         Me.Label87.Name = "Label87"
         Me.Label87.Size = New System.Drawing.Size(214, 33)
-        Me.Label87.TabIndex = 44
+        Me.Label87.TabIndex = 71
         Me.Label87.Text = "The Amount of Contribution Repaid on Account" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "of Principal and Interest From Supe" &
     "rannuation Fund" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
@@ -3297,24 +3302,24 @@ Partial Class frmTDS24Q
         Me.Label88.Location = New System.Drawing.Point(251, 68)
         Me.Label88.Name = "Label88"
         Me.Label88.Size = New System.Drawing.Size(260, 32)
-        Me.Label88.TabIndex = 46
+        Me.Label88.TabIndex = 72
         Me.Label88.Text = "Date To which Employee has " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Contributed To Superannuation Fund"
         '
         'txtContriFrm
         '
         Me.txtContriFrm.Location = New System.Drawing.Point(251, 40)
-        Me.txtContriFrm.Mask = "00/00/0000"
+        Me.txtContriFrm.Mask = "00/00/00"
         Me.txtContriFrm.Name = "txtContriFrm"
         Me.txtContriFrm.Size = New System.Drawing.Size(202, 21)
-        Me.txtContriFrm.TabIndex = 53
-        Me.txtContriFrm.ValidatingType = GetType(Date)
+        Me.txtContriFrm.TabIndex = 24
         '
         'TxtRateOfDeduction
         '
         Me.TxtRateOfDeduction.Location = New System.Drawing.Point(597, 40)
         Me.TxtRateOfDeduction.Name = "TxtRateOfDeduction"
         Me.TxtRateOfDeduction.Size = New System.Drawing.Size(179, 21)
-        Me.TxtRateOfDeduction.TabIndex = 54
+        Me.TxtRateOfDeduction.TabIndex = 25
+        Me.TxtRateOfDeduction.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label89
         '
@@ -3324,24 +3329,24 @@ Partial Class frmTDS24Q
         Me.Label89.Location = New System.Drawing.Point(597, 68)
         Me.Label89.Name = "Label89"
         Me.Label89.Size = New System.Drawing.Size(220, 33)
-        Me.Label89.TabIndex = 55
+        Me.Label89.TabIndex = 73
         Me.Label89.Text = "Amount of Tax Deducted on " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Repayment of Superannuation Fund"
         '
         'txtContriTo
         '
         Me.txtContriTo.Location = New System.Drawing.Point(251, 107)
-        Me.txtContriTo.Mask = "00/00/0000"
+        Me.txtContriTo.Mask = "00/00/00"
         Me.txtContriTo.Name = "txtContriTo"
         Me.txtContriTo.Size = New System.Drawing.Size(202, 21)
-        Me.txtContriTo.TabIndex = 56
-        Me.txtContriTo.ValidatingType = GetType(Date)
+        Me.txtContriTo.TabIndex = 27
         '
         'TxtTaxDeducted
         '
         Me.TxtTaxDeducted.Location = New System.Drawing.Point(597, 107)
         Me.TxtTaxDeducted.Name = "TxtTaxDeducted"
         Me.TxtTaxDeducted.Size = New System.Drawing.Size(177, 21)
-        Me.TxtTaxDeducted.TabIndex = 58
+        Me.TxtTaxDeducted.TabIndex = 28
+        Me.TxtTaxDeducted.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'TableLayoutPanel15
         '
@@ -3376,21 +3381,23 @@ Partial Class frmTDS24Q
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel15.Size = New System.Drawing.Size(764, 119)
-        Me.TableLayoutPanel15.TabIndex = 1
+        Me.TableLayoutPanel15.TabIndex = 2
         '
         'TxtLender1PAN
         '
+        Me.TxtLender1PAN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLender1PAN.Location = New System.Drawing.Point(202, 6)
         Me.TxtLender1PAN.Name = "TxtLender1PAN"
         Me.TxtLender1PAN.Size = New System.Drawing.Size(176, 21)
-        Me.TxtLender1PAN.TabIndex = 39
+        Me.TxtLender1PAN.TabIndex = 14
         '
         'TxtLender1Nm
         '
+        Me.TxtLender1Nm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLender1Nm.Location = New System.Drawing.Point(574, 6)
         Me.TxtLender1Nm.Name = "TxtLender1Nm"
-        Me.TxtLender1Nm.Size = New System.Drawing.Size(165, 21)
-        Me.TxtLender1Nm.TabIndex = 33
+        Me.TxtLender1Nm.Size = New System.Drawing.Size(184, 21)
+        Me.TxtLender1Nm.TabIndex = 15
         '
         'Label83
         '
@@ -3400,7 +3407,7 @@ Partial Class frmTDS24Q
         Me.Label83.Location = New System.Drawing.Point(6, 3)
         Me.Label83.Name = "Label83"
         Me.Label83.Size = New System.Drawing.Size(99, 16)
-        Me.Label83.TabIndex = 24
+        Me.Label83.TabIndex = 60
         Me.Label83.Text = "Lender1 PAN"
         '
         'Label81
@@ -3411,7 +3418,7 @@ Partial Class frmTDS24Q
         Me.Label81.Location = New System.Drawing.Point(6, 61)
         Me.Label81.Name = "Label81"
         Me.Label81.Size = New System.Drawing.Size(103, 16)
-        Me.Label81.TabIndex = 26
+        Me.Label81.TabIndex = 64
         Me.Label81.Text = "Lender3 PAN "
         '
         'Label82
@@ -3422,7 +3429,7 @@ Partial Class frmTDS24Q
         Me.Label82.Location = New System.Drawing.Point(6, 31)
         Me.Label82.Name = "Label82"
         Me.Label82.Size = New System.Drawing.Size(99, 16)
-        Me.Label82.TabIndex = 25
+        Me.Label82.TabIndex = 62
         Me.Label82.Text = "Lender2 PAN"
         '
         'Label80
@@ -3433,7 +3440,7 @@ Partial Class frmTDS24Q
         Me.Label80.Location = New System.Drawing.Point(6, 89)
         Me.Label80.Name = "Label80"
         Me.Label80.Size = New System.Drawing.Size(99, 16)
-        Me.Label80.TabIndex = 27
+        Me.Label80.TabIndex = 66
         Me.Label80.Text = "Lender4 PAN"
         '
         'Label79
@@ -3444,7 +3451,7 @@ Partial Class frmTDS24Q
         Me.Label79.Location = New System.Drawing.Point(398, 3)
         Me.Label79.Name = "Label79"
         Me.Label79.Size = New System.Drawing.Size(109, 16)
-        Me.Label79.TabIndex = 28
+        Me.Label79.TabIndex = 61
         Me.Label79.Text = "Lender1 Name"
         '
         'Label78
@@ -3455,7 +3462,7 @@ Partial Class frmTDS24Q
         Me.Label78.Location = New System.Drawing.Point(398, 31)
         Me.Label78.Name = "Label78"
         Me.Label78.Size = New System.Drawing.Size(109, 16)
-        Me.Label78.TabIndex = 29
+        Me.Label78.TabIndex = 63
         Me.Label78.Text = "Lender2 Name"
         '
         'Label77
@@ -3466,7 +3473,7 @@ Partial Class frmTDS24Q
         Me.Label77.Location = New System.Drawing.Point(398, 61)
         Me.Label77.Name = "Label77"
         Me.Label77.Size = New System.Drawing.Size(109, 16)
-        Me.Label77.TabIndex = 30
+        Me.Label77.TabIndex = 65
         Me.Label77.Text = "Lender3 Name"
         '
         'Label76
@@ -3477,52 +3484,58 @@ Partial Class frmTDS24Q
         Me.Label76.Location = New System.Drawing.Point(398, 89)
         Me.Label76.Name = "Label76"
         Me.Label76.Size = New System.Drawing.Size(109, 16)
-        Me.Label76.TabIndex = 31
+        Me.Label76.TabIndex = 67
         Me.Label76.Text = "Lender4 Name"
         '
         'TxtLender3PAN
         '
+        Me.TxtLender3PAN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLender3PAN.Location = New System.Drawing.Point(202, 64)
         Me.TxtLender3PAN.Name = "TxtLender3PAN"
         Me.TxtLender3PAN.Size = New System.Drawing.Size(176, 21)
-        Me.TxtLender3PAN.TabIndex = 34
+        Me.TxtLender3PAN.TabIndex = 18
         '
         'TxtLender4PAN
         '
+        Me.TxtLender4PAN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLender4PAN.Location = New System.Drawing.Point(202, 92)
         Me.TxtLender4PAN.Name = "TxtLender4PAN"
         Me.TxtLender4PAN.Size = New System.Drawing.Size(176, 21)
-        Me.TxtLender4PAN.TabIndex = 35
+        Me.TxtLender4PAN.TabIndex = 20
         '
         'TxtLender2Nm
         '
+        Me.TxtLender2Nm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLender2Nm.Location = New System.Drawing.Point(574, 34)
         Me.TxtLender2Nm.Name = "TxtLender2Nm"
-        Me.TxtLender2Nm.Size = New System.Drawing.Size(165, 21)
-        Me.TxtLender2Nm.TabIndex = 36
+        Me.TxtLender2Nm.Size = New System.Drawing.Size(184, 21)
+        Me.TxtLender2Nm.TabIndex = 17
         '
         'TxtLender3Nm
         '
+        Me.TxtLender3Nm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLender3Nm.Location = New System.Drawing.Point(574, 64)
         Me.TxtLender3Nm.Name = "TxtLender3Nm"
-        Me.TxtLender3Nm.Size = New System.Drawing.Size(165, 21)
-        Me.TxtLender3Nm.TabIndex = 37
+        Me.TxtLender3Nm.Size = New System.Drawing.Size(184, 21)
+        Me.TxtLender3Nm.TabIndex = 19
         '
         'TxtLender4Nm
         '
+        Me.TxtLender4Nm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLender4Nm.Location = New System.Drawing.Point(574, 92)
         Me.TxtLender4Nm.Name = "TxtLender4Nm"
-        Me.TxtLender4Nm.Size = New System.Drawing.Size(165, 21)
-        Me.TxtLender4Nm.TabIndex = 38
+        Me.TxtLender4Nm.Size = New System.Drawing.Size(184, 21)
+        Me.TxtLender4Nm.TabIndex = 21
         '
         'TxtLender2PAN
         '
         Me.TxtLender2PAN.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TxtLender2PAN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLender2PAN.Location = New System.Drawing.Point(202, 34)
         Me.TxtLender2PAN.Name = "TxtLender2PAN"
         Me.TxtLender2PAN.Size = New System.Drawing.Size(176, 21)
-        Me.TxtLender2PAN.TabIndex = 33
+        Me.TxtLender2PAN.TabIndex = 16
         '
         'TableLayoutPanel14
         '
@@ -3556,42 +3569,47 @@ Partial Class frmTDS24Q
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
         Me.TableLayoutPanel14.Size = New System.Drawing.Size(764, 117)
-        Me.TableLayoutPanel14.TabIndex = 0
+        Me.TableLayoutPanel14.TabIndex = 1
         '
         'TxtLL4Nm
         '
+        Me.TxtLL4Nm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLL4Nm.Location = New System.Drawing.Point(574, 92)
         Me.TxtLL4Nm.Name = "TxtLL4Nm"
-        Me.TxtLL4Nm.Size = New System.Drawing.Size(165, 21)
-        Me.TxtLL4Nm.TabIndex = 23
+        Me.TxtLL4Nm.Size = New System.Drawing.Size(184, 21)
+        Me.TxtLL4Nm.TabIndex = 12
         '
         'TxtLL3Nm
         '
+        Me.TxtLL3Nm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLL3Nm.Location = New System.Drawing.Point(574, 63)
         Me.TxtLL3Nm.Name = "TxtLL3Nm"
-        Me.TxtLL3Nm.Size = New System.Drawing.Size(165, 21)
-        Me.TxtLL3Nm.TabIndex = 22
+        Me.TxtLL3Nm.Size = New System.Drawing.Size(184, 21)
+        Me.TxtLL3Nm.TabIndex = 10
         '
         'TxtLL2Nm
         '
+        Me.TxtLL2Nm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLL2Nm.Location = New System.Drawing.Point(574, 36)
         Me.TxtLL2Nm.Name = "TxtLL2Nm"
-        Me.TxtLL2Nm.Size = New System.Drawing.Size(165, 21)
-        Me.TxtLL2Nm.TabIndex = 21
+        Me.TxtLL2Nm.Size = New System.Drawing.Size(184, 21)
+        Me.TxtLL2Nm.TabIndex = 8
         '
         'TxtLL1Nm
         '
+        Me.TxtLL1Nm.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLL1Nm.Location = New System.Drawing.Point(574, 6)
         Me.TxtLL1Nm.Name = "TxtLL1Nm"
-        Me.TxtLL1Nm.Size = New System.Drawing.Size(165, 21)
-        Me.TxtLL1Nm.TabIndex = 20
+        Me.TxtLL1Nm.Size = New System.Drawing.Size(184, 21)
+        Me.TxtLL1Nm.TabIndex = 6
         '
         'TxtLL1PAN
         '
+        Me.TxtLL1PAN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLL1PAN.Location = New System.Drawing.Point(202, 6)
         Me.TxtLL1PAN.Name = "TxtLL1PAN"
         Me.TxtLL1PAN.Size = New System.Drawing.Size(176, 21)
-        Me.TxtLL1PAN.TabIndex = 16
+        Me.TxtLL1PAN.TabIndex = 5
         '
         'Label686
         '
@@ -3601,7 +3619,7 @@ Partial Class frmTDS24Q
         Me.Label686.Location = New System.Drawing.Point(6, 89)
         Me.Label686.Name = "Label686"
         Me.Label686.Size = New System.Drawing.Size(139, 16)
-        Me.Label686.TabIndex = 10
+        Me.Label686.TabIndex = 58
         Me.Label686.Text = "Lan Lord4 PAN No."
         '
         'Label684
@@ -3612,7 +3630,7 @@ Partial Class frmTDS24Q
         Me.Label684.Location = New System.Drawing.Point(6, 60)
         Me.Label684.Name = "Label684"
         Me.Label684.Size = New System.Drawing.Size(139, 16)
-        Me.Label684.TabIndex = 9
+        Me.Label684.TabIndex = 56
         Me.Label684.Text = "Lan Lord3 PAN No."
         '
         'Label682
@@ -3623,7 +3641,7 @@ Partial Class frmTDS24Q
         Me.Label682.Location = New System.Drawing.Point(6, 33)
         Me.Label682.Name = "Label682"
         Me.Label682.Size = New System.Drawing.Size(139, 16)
-        Me.Label682.TabIndex = 8
+        Me.Label682.TabIndex = 54
         Me.Label682.Text = "Lan Lord2 PAN No."
         '
         'Label680
@@ -3634,7 +3652,7 @@ Partial Class frmTDS24Q
         Me.Label680.Location = New System.Drawing.Point(6, 3)
         Me.Label680.Name = "Label680"
         Me.Label680.Size = New System.Drawing.Size(139, 16)
-        Me.Label680.TabIndex = 7
+        Me.Label680.TabIndex = 52
         Me.Label680.Text = "Lan Lord1 PAN No."
         '
         'Label687
@@ -3645,7 +3663,7 @@ Partial Class frmTDS24Q
         Me.Label687.Location = New System.Drawing.Point(398, 89)
         Me.Label687.Name = "Label687"
         Me.Label687.Size = New System.Drawing.Size(121, 16)
-        Me.Label687.TabIndex = 14
+        Me.Label687.TabIndex = 59
         Me.Label687.Text = "Lan Lord4 Name"
         '
         'Label685
@@ -3656,7 +3674,7 @@ Partial Class frmTDS24Q
         Me.Label685.Location = New System.Drawing.Point(398, 60)
         Me.Label685.Name = "Label685"
         Me.Label685.Size = New System.Drawing.Size(121, 16)
-        Me.Label685.TabIndex = 13
+        Me.Label685.TabIndex = 57
         Me.Label685.Text = "Lan Lord3 Name"
         '
         'Label683
@@ -3667,7 +3685,7 @@ Partial Class frmTDS24Q
         Me.Label683.Location = New System.Drawing.Point(398, 33)
         Me.Label683.Name = "Label683"
         Me.Label683.Size = New System.Drawing.Size(121, 16)
-        Me.Label683.TabIndex = 12
+        Me.Label683.TabIndex = 55
         Me.Label683.Text = "Lan Lord2 Name"
         '
         'Label681
@@ -3678,29 +3696,32 @@ Partial Class frmTDS24Q
         Me.Label681.Location = New System.Drawing.Point(398, 3)
         Me.Label681.Name = "Label681"
         Me.Label681.Size = New System.Drawing.Size(121, 16)
-        Me.Label681.TabIndex = 11
+        Me.Label681.TabIndex = 53
         Me.Label681.Text = "Lan Lord1 Name"
         '
         'TxtLL2PAN
         '
+        Me.TxtLL2PAN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLL2PAN.Location = New System.Drawing.Point(202, 36)
         Me.TxtLL2PAN.Name = "TxtLL2PAN"
         Me.TxtLL2PAN.Size = New System.Drawing.Size(176, 21)
-        Me.TxtLL2PAN.TabIndex = 17
+        Me.TxtLL2PAN.TabIndex = 7
         '
         'TxtLL3PAN
         '
+        Me.TxtLL3PAN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLL3PAN.Location = New System.Drawing.Point(202, 63)
         Me.TxtLL3PAN.Name = "TxtLL3PAN"
         Me.TxtLL3PAN.Size = New System.Drawing.Size(176, 21)
-        Me.TxtLL3PAN.TabIndex = 18
+        Me.TxtLL3PAN.TabIndex = 9
         '
         'TxtLL4PAN
         '
+        Me.TxtLL4PAN.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.TxtLL4PAN.Location = New System.Drawing.Point(202, 92)
         Me.TxtLL4PAN.Name = "TxtLL4PAN"
         Me.TxtLL4PAN.Size = New System.Drawing.Size(176, 21)
-        Me.TxtLL4PAN.TabIndex = 19
+        Me.TxtLL4PAN.TabIndex = 11
         '
         'Label26
         '
@@ -3861,8 +3882,8 @@ Partial Class frmTDS24Q
         Me.TableLayoutPanel5.PerformLayout()
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanel4.PerformLayout()
-        Me.TabPage4.ResumeLayout(False)
-        Me.TabPage4.PerformLayout()
+        Me.xyx.ResumeLayout(False)
+        Me.xyx.PerformLayout()
         Me.TableLayoutPanel10.ResumeLayout(False)
         Me.TableLayoutPanel10.PerformLayout()
         Me.TableLayoutPanel8.ResumeLayout(False)
@@ -4034,7 +4055,7 @@ Partial Class frmTDS24Q
     Friend WithEvents cmdBack As Button
     Friend WithEvents cmdNext As Button
     Friend WithEvents Label2 As Label
-    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents xyx As TabPage
     Friend WithEvents ChkHigRate As CheckBox
     Friend WithEvents lvwSD As ListView
     Friend WithEvents cmdmismatch As Button
