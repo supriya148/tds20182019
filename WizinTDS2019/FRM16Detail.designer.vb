@@ -33,9 +33,27 @@ Partial Class FRM16Detail
         Me.cmdAddRem = New System.Windows.Forms.Button()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.grd16ManualTax = New System.Windows.Forms.DataGridView()
+        Me.Column25 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column26 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column28 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column27 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column29 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column30 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column31 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column32 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column33 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label53 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.grdchallanDetails = New System.Windows.Forms.DataGridView()
+        Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column19 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column20 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column22 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column23 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column24 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label52 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
@@ -90,12 +108,28 @@ Partial Class FRM16Detail
         Me.Label37 = New System.Windows.Forms.Label()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.grd16OtherIVA = New System.Windows.Forms.DataGridView()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column38 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.grd1680CCF = New System.Windows.Forms.DataGridView()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column36 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.grd1680CCG = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column37 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grd1680c = New System.Windows.Forms.DataGridView()
+        Me.Particulars = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GrossAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DeductibleAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtgrd80CCFCal = New System.Windows.Forms.TextBox()
         Me.txtgrd80CCGCal = New System.Windows.Forms.TextBox()
@@ -136,7 +170,13 @@ Partial Class FRM16Detail
         Me.txt16grosstotCurEmp = New System.Windows.Forms.TextBox()
         Me.txt16gross3 = New System.Windows.Forms.TextBox()
         Me.grd16otherIncome = New System.Windows.Forms.DataGridView()
+        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column35 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grd16allow = New System.Windows.Forms.DataGridView()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column34 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.tabBasicData = New System.Windows.Forms.TabPage()
@@ -185,46 +225,6 @@ Partial Class FRM16Detail
         Me.popupmenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnucontext = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Particulars = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GrossAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DeductibleAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column19 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column20 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column22 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column23 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column24 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column25 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column26 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column28 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column27 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column29 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column30 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column31 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column32 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column33 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column34 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column35 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column36 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column37 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column38 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage5.SuspendLayout()
         CType(Me.grd16ManualTax, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage4.SuspendLayout()
@@ -366,6 +366,51 @@ Partial Class FRM16Detail
         Me.grd16ManualTax.Size = New System.Drawing.Size(686, 380)
         Me.grd16ManualTax.TabIndex = 2
         '
+        'Column25
+        '
+        Me.Column25.HeaderText = "S.No"
+        Me.Column25.Name = "Column25"
+        '
+        'Column26
+        '
+        Me.Column26.HeaderText = "TDS Rs."
+        Me.Column26.Name = "Column26"
+        '
+        'Column28
+        '
+        Me.Column28.HeaderText = "Surch Rs."
+        Me.Column28.Name = "Column28"
+        '
+        'Column27
+        '
+        Me.Column27.HeaderText = "E Cess Rs."
+        Me.Column27.Name = "Column27"
+        '
+        'Column29
+        '
+        Me.Column29.HeaderText = "Total Tax deposited Rs."
+        Me.Column29.Name = "Column29"
+        '
+        'Column30
+        '
+        Me.Column30.HeaderText = "Cheque No."
+        Me.Column30.Name = "Column30"
+        '
+        'Column31
+        '
+        Me.Column31.HeaderText = "BSR Code"
+        Me.Column31.Name = "Column31"
+        '
+        'Column32
+        '
+        Me.Column32.HeaderText = "Date of tax deposited"
+        Me.Column32.Name = "Column32"
+        '
+        'Column33
+        '
+        Me.Column33.HeaderText = "Tr / Challan No."
+        Me.Column33.Name = "Column33"
+        '
         'Label53
         '
         Me.Label53.AutoSize = True
@@ -399,6 +444,51 @@ Partial Class FRM16Detail
         Me.grdchallanDetails.Name = "grdchallanDetails"
         Me.grdchallanDetails.Size = New System.Drawing.Size(687, 387)
         Me.grdchallanDetails.TabIndex = 1
+        '
+        'Column16
+        '
+        Me.Column16.HeaderText = "S.No"
+        Me.Column16.Name = "Column16"
+        '
+        'Column17
+        '
+        Me.Column17.HeaderText = "TDS Rs."
+        Me.Column17.Name = "Column17"
+        '
+        'Column18
+        '
+        Me.Column18.HeaderText = "Surch Rs."
+        Me.Column18.Name = "Column18"
+        '
+        'Column19
+        '
+        Me.Column19.HeaderText = "E Cess Rs. "
+        Me.Column19.Name = "Column19"
+        '
+        'Column20
+        '
+        Me.Column20.HeaderText = "Total Tax deposited Rs."
+        Me.Column20.Name = "Column20"
+        '
+        'Column21
+        '
+        Me.Column21.HeaderText = "Cheque No."
+        Me.Column21.Name = "Column21"
+        '
+        'Column22
+        '
+        Me.Column22.HeaderText = "BSR Code"
+        Me.Column22.Name = "Column22"
+        '
+        'Column23
+        '
+        Me.Column23.HeaderText = "Date of tax deposited"
+        Me.Column23.Name = "Column23"
+        '
+        'Column24
+        '
+        Me.Column24.HeaderText = "Tr / Challan No."
+        Me.Column24.Name = "Column24"
         '
         'Label52
         '
@@ -590,7 +680,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel1.ColumnCount = 3
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.89457!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.10543!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 435.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 439.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.txtTotTax, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.Label39, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label43, 0, 4)
@@ -620,7 +710,7 @@ Partial Class FRM16Detail
         'txtTotTax
         '
         Me.txtTotTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotTax.Location = New System.Drawing.Point(43, 131)
+        Me.txtTotTax.Location = New System.Drawing.Point(39, 131)
         Me.txtTotTax.MaxLength = 15
         Me.txtTotTax.Name = "txtTotTax"
         Me.txtTotTax.Size = New System.Drawing.Size(206, 21)
@@ -631,7 +721,7 @@ Partial Class FRM16Detail
         Me.Label39.AutoSize = True
         Me.Label39.Location = New System.Drawing.Point(6, 3)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(7, 29)
+        Me.Label39.Size = New System.Drawing.Size(5, 29)
         Me.Label39.TabIndex = 3
         Me.Label39.Text = "Total Taxable Income"
         '
@@ -640,7 +730,7 @@ Partial Class FRM16Detail
         Me.Label43.AutoSize = True
         Me.Label43.Location = New System.Drawing.Point(6, 128)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(7, 27)
+        Me.Label43.Size = New System.Drawing.Size(5, 27)
         Me.Label43.TabIndex = 8
         Me.Label43.Text = "Total Tax Payble"
         '
@@ -649,14 +739,14 @@ Partial Class FRM16Detail
         Me.Label40.AutoSize = True
         Me.Label40.Location = New System.Drawing.Point(6, 35)
         Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(7, 27)
+        Me.Label40.Size = New System.Drawing.Size(5, 27)
         Me.Label40.TabIndex = 2
         Me.Label40.Text = "Tax on Total Income"
         '
         'txtEd
         '
         Me.txtEd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtEd.Location = New System.Drawing.Point(43, 100)
+        Me.txtEd.Location = New System.Drawing.Point(39, 100)
         Me.txtEd.MaxLength = 15
         Me.txtEd.Name = "txtEd"
         Me.txtEd.Size = New System.Drawing.Size(206, 21)
@@ -665,7 +755,7 @@ Partial Class FRM16Detail
         'txtSurcharge
         '
         Me.txtSurcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSurcharge.Location = New System.Drawing.Point(43, 68)
+        Me.txtSurcharge.Location = New System.Drawing.Point(39, 68)
         Me.txtSurcharge.MaxLength = 15
         Me.txtSurcharge.Name = "txtSurcharge"
         Me.txtSurcharge.Size = New System.Drawing.Size(206, 21)
@@ -676,7 +766,7 @@ Partial Class FRM16Detail
         Me.Label41.AutoSize = True
         Me.Label41.Location = New System.Drawing.Point(6, 65)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(7, 29)
+        Me.Label41.Size = New System.Drawing.Size(5, 29)
         Me.Label41.TabIndex = 4
         Me.Label41.Text = "Surcharge"
         '
@@ -685,14 +775,14 @@ Partial Class FRM16Detail
         Me.Label42.AutoSize = True
         Me.Label42.Location = New System.Drawing.Point(6, 97)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(7, 28)
+        Me.Label42.Size = New System.Drawing.Size(5, 28)
         Me.Label42.TabIndex = 6
         Me.Label42.Text = "Education Cess"
         '
         'txtTax
         '
         Me.txtTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTax.Location = New System.Drawing.Point(43, 38)
+        Me.txtTax.Location = New System.Drawing.Point(39, 38)
         Me.txtTax.MaxLength = 15
         Me.txtTax.Name = "txtTax"
         Me.txtTax.Size = New System.Drawing.Size(206, 21)
@@ -701,34 +791,34 @@ Partial Class FRM16Detail
         'txt16Tax
         '
         Me.txt16Tax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Tax.Location = New System.Drawing.Point(22, 38)
+        Me.txt16Tax.Location = New System.Drawing.Point(20, 38)
         Me.txt16Tax.MaxLength = 15
         Me.txt16Tax.Name = "txt16Tax"
-        Me.txt16Tax.Size = New System.Drawing.Size(12, 21)
+        Me.txt16Tax.Size = New System.Drawing.Size(10, 21)
         Me.txt16Tax.TabIndex = 2
         '
         'txt16Surcharge
         '
         Me.txt16Surcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Surcharge.Location = New System.Drawing.Point(22, 68)
+        Me.txt16Surcharge.Location = New System.Drawing.Point(20, 68)
         Me.txt16Surcharge.MaxLength = 15
         Me.txt16Surcharge.Name = "txt16Surcharge"
-        Me.txt16Surcharge.Size = New System.Drawing.Size(12, 21)
+        Me.txt16Surcharge.Size = New System.Drawing.Size(10, 21)
         Me.txt16Surcharge.TabIndex = 4
         '
         'txt16EduCess
         '
         Me.txt16EduCess.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16EduCess.Location = New System.Drawing.Point(22, 100)
+        Me.txt16EduCess.Location = New System.Drawing.Point(20, 100)
         Me.txt16EduCess.MaxLength = 15
         Me.txt16EduCess.Name = "txt16EduCess"
-        Me.txt16EduCess.Size = New System.Drawing.Size(12, 21)
+        Me.txt16EduCess.Size = New System.Drawing.Size(10, 21)
         Me.txt16EduCess.TabIndex = 6
         '
         'Label51
         '
         Me.Label51.AutoSize = True
-        Me.Label51.Location = New System.Drawing.Point(43, 3)
+        Me.Label51.Location = New System.Drawing.Point(39, 3)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(202, 29)
         Me.Label51.TabIndex = 25
@@ -737,19 +827,19 @@ Partial Class FRM16Detail
         'txtincome
         '
         Me.txtincome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtincome.Location = New System.Drawing.Point(22, 6)
+        Me.txtincome.Location = New System.Drawing.Point(20, 6)
         Me.txtincome.MaxLength = 15
         Me.txtincome.Name = "txtincome"
-        Me.txtincome.Size = New System.Drawing.Size(12, 21)
+        Me.txtincome.Size = New System.Drawing.Size(10, 21)
         Me.txtincome.TabIndex = 1
         '
         'txt16TotalTax
         '
         Me.txt16TotalTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16TotalTax.Location = New System.Drawing.Point(22, 131)
+        Me.txt16TotalTax.Location = New System.Drawing.Point(20, 131)
         Me.txt16TotalTax.MaxLength = 15
         Me.txt16TotalTax.Name = "txt16TotalTax"
-        Me.txt16TotalTax.Size = New System.Drawing.Size(12, 21)
+        Me.txt16TotalTax.Size = New System.Drawing.Size(10, 21)
         Me.txt16TotalTax.TabIndex = 0
         '
         'cmdCopyCal
@@ -995,6 +1085,31 @@ Partial Class FRM16Detail
         Me.grd16OtherIVA.TabIndex = 13
         Me.grd16OtherIVA.TabStop = False
         '
+        'Column8
+        '
+        Me.Column8.HeaderText = "Particulars"
+        Me.Column8.Name = "Column8"
+        '
+        'Column38
+        '
+        Me.Column38.HeaderText = ""
+        Me.Column38.Name = "Column38"
+        '
+        'Column9
+        '
+        Me.Column9.HeaderText = "Gross Amount"
+        Me.Column9.Name = "Column9"
+        '
+        'Column10
+        '
+        Me.Column10.HeaderText = "Qualifying Amount"
+        Me.Column10.Name = "Column10"
+        '
+        'Column11
+        '
+        Me.Column11.HeaderText = "Deductible Amount"
+        Me.Column11.Name = "Column11"
+        '
         'Label35
         '
         Me.Label35.AutoSize = True
@@ -1014,6 +1129,26 @@ Partial Class FRM16Detail
         Me.grd1680CCF.Size = New System.Drawing.Size(283, 90)
         Me.grd1680CCF.TabIndex = 9
         Me.grd1680CCF.TabStop = False
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Particulars"
+        Me.Column3.Name = "Column3"
+        '
+        'Column6
+        '
+        Me.Column6.HeaderText = "Gross Amount"
+        Me.Column6.Name = "Column6"
+        '
+        'Column7
+        '
+        Me.Column7.HeaderText = "Deductible Amount"
+        Me.Column7.Name = "Column7"
+        '
+        'Column36
+        '
+        Me.Column36.HeaderText = ""
+        Me.Column36.Name = "Column36"
         '
         'Label33
         '
@@ -1045,6 +1180,26 @@ Partial Class FRM16Detail
         Me.grd1680CCG.TabIndex = 2
         Me.grd1680CCG.TabStop = False
         '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Particulars"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Gross Amount"
+        Me.Column4.Name = "Column4"
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Deductible Amount"
+        Me.Column5.Name = "Column5"
+        '
+        'Column37
+        '
+        Me.Column37.HeaderText = ""
+        Me.Column37.Name = "Column37"
+        '
         'grd1680c
         '
         Me.grd1680c.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -1055,6 +1210,21 @@ Partial Class FRM16Detail
         Me.grd1680c.Size = New System.Drawing.Size(283, 150)
         Me.grd1680c.TabIndex = 1
         Me.grd1680c.TabStop = False
+        '
+        'Particulars
+        '
+        Me.Particulars.HeaderText = "Particulars"
+        Me.Particulars.Name = "Particulars"
+        '
+        'GrossAmount
+        '
+        Me.GrossAmount.HeaderText = "Gross Amount"
+        Me.GrossAmount.Name = "GrossAmount"
+        '
+        'DeductibleAmount
+        '
+        Me.DeductibleAmount.HeaderText = "DeductibleAmount"
+        Me.DeductibleAmount.Name = "DeductibleAmount"
         '
         'Label29
         '
@@ -1476,6 +1646,21 @@ Partial Class FRM16Detail
         Me.grd16otherIncome.TabIndex = 33
         Me.grd16otherIncome.TabStop = False
         '
+        'Column14
+        '
+        Me.Column14.HeaderText = "Particulars"
+        Me.Column14.Name = "Column14"
+        '
+        'Column15
+        '
+        Me.Column15.HeaderText = "Rs."
+        Me.Column15.Name = "Column15"
+        '
+        'Column35
+        '
+        Me.Column35.HeaderText = ""
+        Me.Column35.Name = "Column35"
+        '
         'grd16allow
         '
         Me.grd16allow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -1485,6 +1670,21 @@ Partial Class FRM16Detail
         Me.grd16allow.Size = New System.Drawing.Size(267, 64)
         Me.grd16allow.TabIndex = 32
         Me.grd16allow.TabStop = False
+        '
+        'Column12
+        '
+        Me.Column12.HeaderText = "Allowance"
+        Me.Column12.Name = "Column12"
+        '
+        'Column13
+        '
+        Me.Column13.HeaderText = "Rs."
+        Me.Column13.Name = "Column13"
+        '
+        'Column34
+        '
+        Me.Column34.HeaderText = ""
+        Me.Column34.Name = "Column34"
         '
         'Label22
         '
@@ -2005,206 +2205,6 @@ Partial Class FRM16Detail
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(115, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
-        '
-        'Particulars
-        '
-        Me.Particulars.HeaderText = "Particulars"
-        Me.Particulars.Name = "Particulars"
-        '
-        'GrossAmount
-        '
-        Me.GrossAmount.HeaderText = "Gross Amount"
-        Me.GrossAmount.Name = "GrossAmount"
-        '
-        'DeductibleAmount
-        '
-        Me.DeductibleAmount.HeaderText = "DeductibleAmount"
-        Me.DeductibleAmount.Name = "DeductibleAmount"
-        '
-        'Column16
-        '
-        Me.Column16.HeaderText = "S.No"
-        Me.Column16.Name = "Column16"
-        '
-        'Column17
-        '
-        Me.Column17.HeaderText = "TDS Rs."
-        Me.Column17.Name = "Column17"
-        '
-        'Column18
-        '
-        Me.Column18.HeaderText = "Surch Rs."
-        Me.Column18.Name = "Column18"
-        '
-        'Column19
-        '
-        Me.Column19.HeaderText = "E Cess Rs. "
-        Me.Column19.Name = "Column19"
-        '
-        'Column20
-        '
-        Me.Column20.HeaderText = "Total Tax deposited Rs."
-        Me.Column20.Name = "Column20"
-        '
-        'Column21
-        '
-        Me.Column21.HeaderText = "Cheque No."
-        Me.Column21.Name = "Column21"
-        '
-        'Column22
-        '
-        Me.Column22.HeaderText = "BSR Code"
-        Me.Column22.Name = "Column22"
-        '
-        'Column23
-        '
-        Me.Column23.HeaderText = "Date of tax deposited"
-        Me.Column23.Name = "Column23"
-        '
-        'Column24
-        '
-        Me.Column24.HeaderText = "Tr / Challan No."
-        Me.Column24.Name = "Column24"
-        '
-        'Column25
-        '
-        Me.Column25.HeaderText = "S.No"
-        Me.Column25.Name = "Column25"
-        '
-        'Column26
-        '
-        Me.Column26.HeaderText = "TDS Rs."
-        Me.Column26.Name = "Column26"
-        '
-        'Column28
-        '
-        Me.Column28.HeaderText = "Surch Rs."
-        Me.Column28.Name = "Column28"
-        '
-        'Column27
-        '
-        Me.Column27.HeaderText = "E Cess Rs."
-        Me.Column27.Name = "Column27"
-        '
-        'Column29
-        '
-        Me.Column29.HeaderText = "Total Tax deposited Rs."
-        Me.Column29.Name = "Column29"
-        '
-        'Column30
-        '
-        Me.Column30.HeaderText = "Cheque No."
-        Me.Column30.Name = "Column30"
-        '
-        'Column31
-        '
-        Me.Column31.HeaderText = "BSR Code"
-        Me.Column31.Name = "Column31"
-        '
-        'Column32
-        '
-        Me.Column32.HeaderText = "Date of tax deposited"
-        Me.Column32.Name = "Column32"
-        '
-        'Column33
-        '
-        Me.Column33.HeaderText = "Tr / Challan No."
-        Me.Column33.Name = "Column33"
-        '
-        'Column12
-        '
-        Me.Column12.HeaderText = "Allowance"
-        Me.Column12.Name = "Column12"
-        '
-        'Column13
-        '
-        Me.Column13.HeaderText = "Rs."
-        Me.Column13.Name = "Column13"
-        '
-        'Column34
-        '
-        Me.Column34.HeaderText = ""
-        Me.Column34.Name = "Column34"
-        '
-        'Column14
-        '
-        Me.Column14.HeaderText = "Particulars"
-        Me.Column14.Name = "Column14"
-        '
-        'Column15
-        '
-        Me.Column15.HeaderText = "Rs."
-        Me.Column15.Name = "Column15"
-        '
-        'Column35
-        '
-        Me.Column35.HeaderText = ""
-        Me.Column35.Name = "Column35"
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Particulars"
-        Me.Column3.Name = "Column3"
-        '
-        'Column6
-        '
-        Me.Column6.HeaderText = "Gross Amount"
-        Me.Column6.Name = "Column6"
-        '
-        'Column7
-        '
-        Me.Column7.HeaderText = "Deductible Amount"
-        Me.Column7.Name = "Column7"
-        '
-        'Column36
-        '
-        Me.Column36.HeaderText = ""
-        Me.Column36.Name = "Column36"
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Particulars"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Gross Amount"
-        Me.Column4.Name = "Column4"
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Deductible Amount"
-        Me.Column5.Name = "Column5"
-        '
-        'Column37
-        '
-        Me.Column37.HeaderText = ""
-        Me.Column37.Name = "Column37"
-        '
-        'Column8
-        '
-        Me.Column8.HeaderText = "Particulars"
-        Me.Column8.Name = "Column8"
-        '
-        'Column38
-        '
-        Me.Column38.HeaderText = ""
-        Me.Column38.Name = "Column38"
-        '
-        'Column9
-        '
-        Me.Column9.HeaderText = "Gross Amount"
-        Me.Column9.Name = "Column9"
-        '
-        'Column10
-        '
-        Me.Column10.HeaderText = "Qualifying Amount"
-        Me.Column10.Name = "Column10"
-        '
-        'Column11
-        '
-        Me.Column11.HeaderText = "Deductible Amount"
-        Me.Column11.Name = "Column11"
         '
         'FRM16Detail
         '

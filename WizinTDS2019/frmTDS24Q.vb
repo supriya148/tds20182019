@@ -685,7 +685,7 @@ canerr:
         On Error Resume Next
         Dim i As Long
         If tabMain.SelectedIndex = 5 Then
-            FillDed
+            FillDed()
             ChkRent.Checked = False
             ChkIncomeFromHouseProperty.Checked = False
             CHkSAFund.Checked = False
@@ -2877,15 +2877,15 @@ canerr:
         i = 4
 
         For R = 0 To grids.Rows.Count - 1
-                j = 1
-                For c = 0 To grids.Columns.Count - 1
-                    xlSheet.Cells(i, j) = grids.Rows(R).Cells(c).Value
-                    xlSheet.Range(xlSheet.Cells(i, j), xlSheet.Cells(i, j)).BorderAround()
-                    'xlSheet.Range(xlSheet.Cells(3, 1), xlSheet.Cells(3, 1)).Font.Bold = True
-                    j = j + 1
-                Next
-                i = i + 1
+            j = 1
+            For c = 0 To grids.Columns.Count - 1
+                xlSheet.Cells(i, j) = grids.Rows(R).Cells(c).Value
+                xlSheet.Range(xlSheet.Cells(i, j), xlSheet.Cells(i, j)).BorderAround()
+                'xlSheet.Range(xlSheet.Cells(3, 1), xlSheet.Cells(3, 1)).Font.Bold = True
+                j = j + 1
             Next
+            i = i + 1
+        Next
 
         xlSheet.Cells(i, 1) = "Total"
         xlSheet.Range(xlSheet.Cells(i, 1), xlSheet.Cells(i, 2)).Merge()
@@ -4273,8 +4273,8 @@ excelerr:
     Private Sub cmdAddNewForm16_Click(sender As Object, e As EventArgs) Handles cmdAddNewForm16.Click
         FRM16Detail.Show()
         'frm16Details.Show()
-        'frm16Details.xMode = "A"
-        'frm16Details.FillDeducteeCombo(frm16Details.xMode)
+        FRM16Detail.xMode = "A"
+        FRM16Detail.FillDeducteeCombo(FRM16Detail.xMode)
         FRM16Detail.cmd16delete.Enabled = False
         FRM16Detail.Show()
     End Sub
@@ -4771,7 +4771,7 @@ excelerr:
                 'For i = 0 To 7
                 '    Label68.Visible = True
                 'Next
-                TableLayoutPanel14.Visible=True
+                TableLayoutPanel14.Visible = True
                 ChkRent.Checked = True
                 TxtLL1Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord1Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord1Name").ToString())
                 TxtLL2Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord2Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord2Name").ToString())
@@ -4851,7 +4851,7 @@ excelerr:
                     .SDID = lvwSD.SelectedItems(0).SubItems(29).Text
                 End If
             Else
-                    .SDID = 0
+                .SDID = 0
             End If
             .RetnID = Me.Tag
             .did = cboSDDedName.SelectedValue
