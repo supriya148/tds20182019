@@ -429,9 +429,8 @@ canerr:
         Dim oCoMst As New clsCoMst
         oCoMst = oCoMst.FetchCo(selectedcoid)
         ' Me.Location = New Point(221, 81)
-        Me.Location = New Point(180, 210)
+        'Me.Location = New Point(180, 210)
         Dim nds As New DataSet
-
         'Set the dates..
         dtpAmtPayDt.AutoSize = False
         dtpAmtPayDt.Height = 20
@@ -505,6 +504,9 @@ canerr:
             ChkIncomeFromHouseProperty.Enabled = True
             CHkSAFund.Enabled = True
         End If
+        TableLayoutPanel14.Visible = False
+        TableLayoutPanel15.Visible = False
+        TableLayoutPanel16.Visible = False
         tabMain.SelectedIndex = 0
     End Sub
 
@@ -662,9 +664,37 @@ canerr:
         'KeyAscii = CtrlKeyPress(chkBookEntry, KeyAscii, KeyPressDefault)
     End Sub
 
+    Public Sub FillDed()
+
+        Dim rst As New DataSet
+
+        rst.Dispose()
+
+        rst = FetchDataSet("select * from DeductMst Where (DId IN (SELECT DID FROM FORM16DETAILS WHERE RetnId = (SELECT RetnId FROM RETNMST WHERE CoId=" & selectedcoid & " AND FrmTYPE='24Q4')) OR DId IN (SELECT DID FROM SALARYDETAIL24Q WHERE RetnId = (SELECT RetnId FROM RETNMST WHERE CoId=" & selectedcoid & " AND FrmTYPE='24Q4')))  ORDER BY DName ")
+        cbo16Ded.Items.Clear()
+        For i = 0 To rst.Tables(0).Rows.Count - 1
+            cbo16Ded.Items.Add(rst.Tables(0).Rows(0)("DName") & "")
+            cbo16Ded.SelectedIndex = rst.Tables(0).Rows(0)("Did")
+
+
+        Next
+
+    End Sub
+
     Private Sub tabMain_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabMain.SelectedIndexChanged
         On Error Resume Next
         Dim i As Long
+        If tabMain.SelectedIndex = 5 Then
+            FillDed
+            ChkRent.Checked = False
+            ChkIncomeFromHouseProperty.Checked = False
+            CHkSAFund.Checked = False
+
+            ChkRent.Enabled = False
+            ChkIncomeFromHouseProperty.Enabled = False
+            CHkSAFund.Enabled = False
+        End If
+
         If tabMain.SelectedIndex <> 0 Then
 
 
@@ -4092,14 +4122,14 @@ excelerr:
         Dim transaction As OleDb.OleDbTransaction
         Dim cmd As New OleDb.OleDbCommand
         '    chkvalidation
-        If ChkRent.Checked = 1 And TxtLL1PAN.Text = "" Then
+        If ChkRent.Checked = True And TxtLL1PAN.Text = "" Then
             MsgBox("LandLord1 PAN Can't blank, if you wish to continue Please Untick 'House Rent Exceeds 1 Lakhs'")
             Exit Sub
         End If
-        If ChkIncomeFromHouseProperty.Checked = 1 And TxtLender1PAN.Text = "" Then
+        If ChkIncomeFromHouseProperty.Checked = True And TxtLender1PAN.Text = "" Then
             MsgBox("Lender1 PAN Can't blank, if you wish to continue Please Untick 'Income From House Property'?")
         End If
-        If TxtFundNm.Text = "" And CHkSAFund.Checked = 1 Then
+        If TxtFundNm.Text = "" And CHkSAFund.Checked = True Then
             MsgBox("Name Of Superannuation Fund can't Blank, if you wish to continue Please Untick 'Superannuation Fund'")
             Exit Sub
         End If
@@ -4108,7 +4138,7 @@ excelerr:
         rs.Dispose()
         ' End If
         rs = FetchDataSet(sql)
-        If Not rs.Tables(0).Rows.Count Then '.EOF Or Not rs.BOF Then
+        If rs.Tables(0).Rows.Count > 0 Then '.EOF Or Not rs.BOF Then
             sql = "DELETE FROM F16XTRADETAILS WHERE F16ID=" & rs.Tables(0).Rows(0)("F16ID")
             cmd.Connection = cn
             transaction = cn.BeginTransaction()
@@ -4129,13 +4159,13 @@ excelerr:
             'Cnn.Execute sql
         End If
         sql = "INSERT INTO F16XTRADETAILS (F16ID,DID,RETNID"
-        If (ChkRent.Checked = 1) Then
+        If (ChkRent.Checked = True) Then
             sql = sql & ",RENTEXCEEDS,LANDLORD1PAN,LANDLORD1NAME,LANDLORD2PAN,LANDLORD2NAME,LANDLORD3PAN,LANDLORD3NAME,LANDLORD4PAN,LANDLORD4NAME"
         End If
-        If ChkIncomeFromHouseProperty.Checked = 1 Then
+        If ChkIncomeFromHouseProperty.Checked = True Then
             sql = sql & ",INTTPAIDONHP,LENDER1PAN,LENDER1NAME,LENDER2PAN,LENDER2NAME,LENDER3PAN,LENDER3NAME,LENDER4PAN,LENDER4NAME"
         End If
-        If CHkSAFund.Checked = 1 Then
+        If CHkSAFund.Checked = True Then
             sql = sql & ",HASSAFUNDPAID,FUNDNAME,DATEFROM,DATETO,AMTREPAID,AVGRATE,TAXDEDAMT"
         Else
             sql = sql & ",AVGRATE"
@@ -4144,31 +4174,31 @@ excelerr:
         sql = sql & F16ID & ","
         sql = sql & did & ","
         sql = sql & RETN
-        If (ChkRent.Checked = 1) Then
-            sql = sql & IIf((ChkRent.Checked = 1), ",Yes", ",NO") & ","
-            sql = sql & "'" & IIf(TxtLL1PAN.ToString(), vbNullString, TxtLL1PAN) & "',"
-            sql = sql & "'" & IIf(TxtLL1Nm.ToString(), vbNullString, TxtLL1Nm) & "',"
-            sql = sql & "'" & IIf(TxtLL2PAN.ToString(), vbNullString, TxtLL2PAN) & "',"
-            sql = sql & "'" & IIf(TxtLL2Nm.ToString(), vbNullString, TxtLL2Nm) & "',"
-            sql = sql & "'" & IIf(TxtLL3PAN.ToString(), vbNullString, TxtLL3PAN) & "',"
-            sql = sql & "'" & IIf(TxtLL3Nm.ToString(), vbNullString, TxtLL3Nm) & "',"
-            sql = sql & "'" & IIf(TxtLL4PAN.ToString(), vbNullString, TxtLL4PAN) & "',"
-            sql = sql & "'" & IIf(TxtLL4Nm.ToString(), vbNullString, TxtLL4Nm) & "'"
+        If (ChkRent.Checked = True) Then
+            sql = sql & IIf((ChkRent.Checked = True), ",Yes", ",NO") & ","
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLL1PAN.Text)), vbNullString, TxtLL1PAN.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLL1Nm.Text)), vbNullString, TxtLL1Nm.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLL2PAN.Text)), vbNullString, TxtLL2PAN.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLL2Nm.Text)), vbNullString, TxtLL2Nm.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLL3PAN.Text)), vbNullString, TxtLL3PAN.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLL3Nm.Text)), vbNullString, TxtLL3Nm.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLL4PAN.Text)), vbNullString, TxtLL4PAN.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLL4Nm.Text)), vbNullString, TxtLL4Nm.Text) & "'"
         End If
-        If ChkIncomeFromHouseProperty.Checked = 1 Then
-            sql = sql & IIf((ChkIncomeFromHouseProperty.Checked = 1), ",Yes", ",NO") & ","
-            sql = sql & "'" & IIf(TxtLender1PAN.ToString(), vbNullString, TxtLender1PAN) & "',"
-            sql = sql & "'" & IIf(TxtLender1Nm.ToString(), vbNullString, TxtLender1Nm) & "',"
-            sql = sql & "'" & IIf(TxtLender2PAN.ToString(), vbNullString, TxtLender2PAN) & "',"
-            sql = sql & "'" & IIf(TxtLender2Nm.ToString(), vbNullString, TxtLender2Nm) & "',"
-            sql = sql & "'" & IIf(TxtLender3PAN.ToString(), vbNullString, TxtLender3PAN) & "',"
-            sql = sql & "'" & IIf(TxtLender3Nm.ToString(), vbNullString, TxtLender3Nm) & "',"
-            sql = sql & "'" & IIf(TxtLender4PAN.ToString(), vbNullString, TxtLender4PAN) & "',"
-            sql = sql & "'" & IIf(TxtLender4Nm.ToString(), vbNullString, TxtLender4Nm) & "'"
+        If ChkIncomeFromHouseProperty.Checked = True Then
+            sql = sql & IIf((ChkIncomeFromHouseProperty.Checked = True), ",Yes", ",NO") & ","
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLender1PAN.Text)), vbNullString, TxtLender1PAN.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLender1Nm.Text)), vbNullString, TxtLender1Nm.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLender2PAN.Text)), vbNullString, TxtLender2PAN.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLender2Nm.Text)), vbNullString, TxtLender2Nm.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLender3PAN.Text)), vbNullString, TxtLender3PAN.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLender3Nm.Text)), vbNullString, TxtLender3Nm.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLender4PAN.Text)), vbNullString, TxtLender4PAN.Text) & "',"
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtLender4Nm.Text)), vbNullString, TxtLender4Nm.Text) & "'"
         End If
-        If CHkSAFund.Checked = 1 Then
-            sql = sql & IIf((CHkSAFund.Checked = 1), ",Yes", ",NO") & ","
-            sql = sql & "'" & IIf(TxtFundNm.ToString(), vbNullString, TxtFundNm) & "',"
+        If CHkSAFund.Checked = True Then
+            sql = sql & IIf((CHkSAFund.Checked = True), ",Yes", ",NO") & ","
+            sql = sql & "'" & IIf((String.IsNullOrEmpty(TxtFundNm.Text)), vbNullString, TxtFundNm.Text) & "',"
             If txtContriFrm.Text = "__/__/__" Then
                 sql = sql & vbNull & ","
             Else
@@ -4179,9 +4209,9 @@ excelerr:
             Else
                 sql = sql & "#" & IIf(txtContriTo.Text = "__/__/__", vbNull, Format(CDate(txtContriTo.Text), "MM/dd/yy")) & "#,"
             End If
-            sql = sql & IIf(Val(TxtAmtRepaid) = 0, 0, TxtAmtRepaid) & ","
-            sql = sql & IIf(Val(TxtRateOfDeduction) = 0, 0, TxtRateOfDeduction) & ","
-            sql = sql & IIf(Val(TxtTaxDeducted) = 0, 0, TxtTaxDeducted) & ""
+            sql = sql & IIf(Val(TxtAmtRepaid.Text) = 0, 0, TxtAmtRepaid.Text) & ","
+            sql = sql & IIf(Val(TxtRateOfDeduction.Text) = 0, 0, TxtRateOfDeduction.Text) & ","
+            sql = sql & IIf(Val(TxtTaxDeducted.Text) = 0, 0, TxtTaxDeducted.Text) & ""
         Else
             sql = sql & ",0"
         End If
@@ -4243,8 +4273,8 @@ excelerr:
     Private Sub cmdAddNewForm16_Click(sender As Object, e As EventArgs) Handles cmdAddNewForm16.Click
         FRM16Detail.Show()
         'frm16Details.Show()
-        FRM16Detail.xMode = "A"
-        FRM16Detail.FillDeducteeCombo(FRM16Detail.xMode)
+        'frm16Details.xMode = "A"
+        'frm16Details.FillDeducteeCombo(frm16Details.xMode)
         FRM16Detail.cmd16delete.Enabled = False
         FRM16Detail.Show()
     End Sub
@@ -4677,9 +4707,22 @@ excelerr:
     Private Sub cbo16Ded_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbo16Ded.SelectedIndexChanged
 
         Dim rst, rs As New DataSet
+        If cbo16Ded.Text = "" Then
+            ChkRent.Enabled = False
+            ChkIncomeFromHouseProperty.Enabled = False
+            CHkSAFund.Enabled = False
+        Else
+            ChkRent.Enabled = True
+            ChkIncomeFromHouseProperty.Enabled = True
+            CHkSAFund.Enabled = True
+        End If
         rs.Dispose()
+        ChkRent.CheckState = 0
+        ChkIncomeFromHouseProperty.CheckState = 0
+        CHkSAFund.CheckState = 0
+
         rs = FetchDataSet("SELECT * FROM F16XtraDetails WHERE DID=(SELECT DID FROM DEDUCTMST WHERE DNAME='" & cbo16Ded.Text & "' AND COID=" & selectedcoid & ")")
-        If rs.Tables(0).Rows.Count Then
+        If rs.Tables(0).Rows.Count <= 0 Then
             TxtLL1Nm.Text = vbNullString
             TxtLL2Nm.Text = vbNullString
             TxtLL3Nm.Text = vbNullString
@@ -4697,8 +4740,8 @@ excelerr:
             TxtLender3PAN.Text = vbNullString
             TxtLender4PAN.Text = vbNullString
             TxtFundNm.Text = vbNullString
-            txtContriFrm.Mask = vbNullString
-            txtContriTo.Mask = vbNullString
+            txtContriFrm.Text = "__/__/__"
+            txtContriTo.Text = "__/__/__"
             TxtRateOfDeduction.Text = vbNullString
             TxtAmtRepaid.Text = vbNullString
             TxtTaxDeducted.Text = vbNullString
@@ -4706,7 +4749,7 @@ excelerr:
             rst.Dispose()
             'End If
             rst = FetchDataSet("SELECT F16ID,RetnId,DID FROM Form16Details WHERE DID=(SELECT DID FROM DEDUCTMST WHERE DNAME='" & cbo16Ded.Text & "' AND COID=" & selectedcoid & ")")
-            If Not rst.Tables(0).Rows.Count Then 'Not rst.BOF Then
+            If rst.Tables(0).Rows.Count > 0 Then 'Not rst.BOF Then
                 F16ID = rst.Tables(0).Rows(0)("F16ID")
                 RETN = rst.Tables(0).Rows(0)("RetnID")
                 did = rst.Tables(0).Rows(0)("did")
@@ -4725,19 +4768,19 @@ excelerr:
             did = rs.Tables(0).Rows(0)("did")
             If rs.Tables(0).Rows(0)("rentexceeds").ToString() = True Then
 
-                For i = 0 To 7
-                    Label68.Visible = True
-                Next
-
-                ChkRent.Checked = 1
-                TxtLL1Nm.Text = IIf((rs.Tables(0).Rows(0)("Landlord1Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord1Name").ToString())
-                TxtLL2Nm.Text = IIf((rs.Tables(0).Rows(0)("Landlord2Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord2Name").ToString())
-                TxtLL3Nm.Text = IIf((rs.Tables(0).Rows(0)("Landlord3Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord3Name").ToString())
-                TxtLL4Nm.Text = IIf((rs.Tables(0).Rows(0)("Landlord4Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord4Name").ToString())
-                TxtLL1PAN.Text = IIf((rs.Tables(0).Rows(0)("Landlord1PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord1PAN").ToString())
-                TxtLL2PAN.Text = IIf((rs.Tables(0).Rows(0)("LANDLORD2PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD2PAN").ToString())
-                TxtLL3PAN.Text = IIf((rs.Tables(0).Rows(0)("Landlord3PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD3PAN").ToString())
-                TxtLL4PAN.Text = IIf((rs.Tables(0).Rows(0)("Landlord4PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD4PAN").ToString())
+                'For i = 0 To 7
+                '    Label68.Visible = True
+                'Next
+                TableLayoutPanel14.Visible=True
+                ChkRent.Checked = True
+                TxtLL1Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord1Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord1Name").ToString())
+                TxtLL2Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord2Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord2Name").ToString())
+                TxtLL3Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord3Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord3Name").ToString())
+                TxtLL4Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord4Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord4Name").ToString())
+                TxtLL1PAN.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord1PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Landlord1PAN").ToString())
+                TxtLL2PAN.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("LANDLORD2PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD2PAN").ToString())
+                TxtLL3PAN.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord3PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD3PAN").ToString())
+                TxtLL4PAN.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Landlord4PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("LANDLORD4PAN").ToString())
 
                 TxtLL1Nm.Visible = True
                 TxtLL2Nm.Visible = True
@@ -4750,41 +4793,43 @@ excelerr:
 
             End If
             If rs.Tables(0).Rows(0)("InttPaidOnHP").ToString() = True Then
-                For i = 8 To 15
-                    Label68.Visible = True
-                Next
-                ChkIncomeFromHouseProperty.Checked = 1
-                TxtLender1PAN.Text = IIf((rs.Tables(0).Rows(0)("Lender1PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender1PAN").ToString())
-                TxtLender2PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender2PAN").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender2PAN").ToString())
-                TxtLender3PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender3PAN").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender3PAN").ToString())
-                TxtLender4PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender4PAN").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender4PAN").ToString())
-                TxtLender1PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender1Name").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender1Name").ToString())
-                TxtLender2PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender2Name").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender2Name").ToString())
-                TxtLender3PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender3Name").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender3Name").ToString())
-                TxtLender4PAN.Text = IIf(rs.Tables(0).Rows(0)("Lender4Name").ToString(), vbNullString, rs.Tables(0).Rows(0)("Lender4Name").ToString())
+                'For i = 8 To 15
+                '    Label68.Visible = True
+                'Next
+                TableLayoutPanel15.Visible = True
+                ChkIncomeFromHouseProperty.Checked = True
+                TxtLender1PAN.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Lender1PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender1PAN").ToString())
+                TxtLender2PAN.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Lender2PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender2PAN").ToString())
+                TxtLender3PAN.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Lender3PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender3PAN").ToString())
+                TxtLender4PAN.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Lender4PAN").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender4PAN").ToString())
+                TxtLender1Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Lender1Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender1Name").ToString())
+                TxtLender2Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Lender2Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender2Name").ToString())
+                TxtLender3Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Lender3Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender3Name").ToString())
+                TxtLender4Nm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("Lender4Name").ToString()), vbNullString, rs.Tables(0).Rows(0)("Lender4Name").ToString())
 
                 TxtLender1PAN.Visible = True
                 TxtLender2PAN.Visible = True
                 TxtLender3PAN.Visible = True
                 TxtLender4PAN.Visible = True
-                TxtLender1PAN.Visible = True
-                TxtLender2PAN.Visible = True
-                TxtLender3PAN.Visible = True
-                TxtLender4PAN.Visible = True
+                TxtLender1Nm.Visible = True
+                TxtLender2Nm.Visible = True
+                TxtLender3Nm.Visible = True
+                TxtLender4Nm.Visible = True
 
             End If
 
             If rs.Tables(0).Rows(0)("HasSAFundPaid").ToString = True Then
-                For i = 16 To 22
-                    Label68.Visible = True
-                Next
-                CHkSAFund.Checked = 1
-                TxtFundNm.Text = IIf(rs.Tables(0).Rows(0)("FundName").ToString(), vbNullString, rs.Tables(0).Rows(0)("FundName").ToString())
-                txtContriFrm.Text = IIf(rs.Tables(0).Rows(0)("DateFrom").ToString(), vbNullString, rs.Tables(0).Rows(0)("DateFrom").ToString())
-                txtContriTo.Text = IIf(rs.Tables(0).Rows(0)("DateTO").ToString(), vbNullString, rs.Tables(0).Rows(0)("DateTo").ToString())
-                TxtRateOfDeduction.Text = IIf(rs.Tables(0).Rows(0)("AvgRate").ToString(), vbNullString, rs.Tables(0).Rows(0)("AvgRate").ToString())
-                TxtAmtRepaid.Text = IIf(rs.Tables(0).Rows(0)("AmtRepaid").ToString(), vbNullString, rs.Tables(0).Rows(0)("AmtRepaid").ToString())
-                TxtTaxDeducted.Text = IIf(rs.Tables(0).Rows(0)("TaxDedAmt").ToString(), vbNullString, rs.Tables(0).Rows(0)("TaxDedAmt").ToString())
+                'For i = 16 To 22
+                '    Label68.Visible = True
+                'Next
+                TableLayoutPanel16.Visible = True
+                CHkSAFund.Checked = True
+                TxtFundNm.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("FundName").ToString()), vbNullString, rs.Tables(0).Rows(0)("FundName").ToString())
+                txtContriFrm.Text = Format(rs.Tables(0).Rows(0)("DateFrom"), "dd/MM/yy") 'IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("DateFrom").ToString()), vbNullString, rs.Tables(0).Rows(0)("DateFrom").ToString())
+                txtContriTo.Text = Format(rs.Tables(0).Rows(0)("DateTo"), "dd/MM/yy") 'IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("DateTO").ToString()), vbNullString, rs.Tables(0).Rows(0)("DateTo").ToString())
+                TxtRateOfDeduction.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("AvgRate").ToString()), vbNullString, rs.Tables(0).Rows(0)("AvgRate").ToString())
+                TxtAmtRepaid.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("AmtRepaid").ToString()), vbNullString, rs.Tables(0).Rows(0)("AmtRepaid").ToString())
+                TxtTaxDeducted.Text = IIf(String.IsNullOrEmpty(rs.Tables(0).Rows(0)("TaxDedAmt").ToString()), vbNullString, rs.Tables(0).Rows(0)("TaxDedAmt").ToString())
 
 
                 TxtFundNm.Visible = True
@@ -5189,7 +5234,523 @@ excelerr:
         Call EditModeSD()
     End Sub
 
-    Private Sub cboDedName_MarginChanged(sender As Object, e As EventArgs) Handles cboDedName.MarginChanged
-
+    Private Sub ChkRent_CheckedChanged(sender As Object, e As EventArgs) Handles ChkRent.CheckedChanged
+        If ChkRent.Checked = True Then
+            TableLayoutPanel14.Visible = True
+        Else
+            TableLayoutPanel14.Visible = False
+        End If
     End Sub
+
+    Private Sub CHkSAFund_CheckedChanged(sender As Object, e As EventArgs) Handles CHkSAFund.CheckedChanged
+        If CHkSAFund.Checked = True Then
+            TableLayoutPanel16.Visible = True
+        Else
+            TableLayoutPanel16.Visible = False
+        End If
+    End Sub
+
+    Private Sub ChkIncomeFromHouseProperty_CheckedChanged(sender As Object, e As EventArgs) Handles ChkIncomeFromHouseProperty.CheckedChanged
+        If ChkIncomeFromHouseProperty.Checked = True Then
+            TableLayoutPanel15.Visible = True
+        Else
+            TableLayoutPanel15.Visible = False
+        End If
+    End Sub
+    Public Sub savenable()
+        Dim flag As Integer
+        If (String.IsNullOrEmpty(TxtLL1PAN.Text) And Not String.IsNullOrEmpty(TxtLL1Nm.Text)) Or (TxtLL1PAN.Text = "" And TxtLL1Nm.Text <> "") Then
+            flag = 0
+        ElseIf Not String.IsNullOrEmpty(TxtLL1PAN.Text) And String.IsNullOrEmpty(TxtLL1Nm.Text) Or (TxtLL1PAN.Text <> "" And TxtLL1Nm.Text = "") Then
+            flag = 0
+        ElseIf (String.IsNullOrEmpty(TxtLL2PAN.Text) And Not String.IsNullOrEmpty(TxtLL2Nm.Text)) Or (TxtLL2PAN.Text = "" And TxtLL2Nm.Text <> "") Then
+            flag = 0
+        ElseIf Not String.IsNullOrEmpty(TxtLL2PAN.Text) And String.IsNullOrEmpty(TxtLL2Nm.Text) Or (TxtLL2PAN.Text <> "" And TxtLL2Nm.Text = "") Then
+            flag = 0
+        ElseIf (String.IsNullOrEmpty(TxtLL3PAN.Text) And Not String.IsNullOrEmpty(TxtLL3Nm.Text)) Or (TxtLL3PAN.Text = "" And TxtLL3Nm.Text <> "") Then
+            flag = 0
+        ElseIf Not String.IsNullOrEmpty(TxtLL3PAN.Text) And String.IsNullOrEmpty(TxtLL3Nm.Text) Or (TxtLL3PAN.Text <> "" And TxtLL3Nm.Text = "") Then
+            flag = 0
+        ElseIf (String.IsNullOrEmpty(TxtLL4PAN.Text) And Not String.IsNullOrEmpty(TxtLL4Nm.Text)) Or (TxtLL4PAN.Text = "" And TxtLL4Nm.Text <> "") Then
+            flag = 0
+        ElseIf Not String.IsNullOrEmpty(TxtLL4PAN.Text) And String.IsNullOrEmpty(TxtLL4Nm.Text) Or (TxtLL4PAN.Text <> "" And TxtLL4Nm.Text = "") Then
+            flag = 0
+        ElseIf (String.IsNullOrEmpty(TxtLender1PAN.Text) And Not String.IsNullOrEmpty(TxtLender1Nm.Text)) Or (TxtLender1PAN.Text = "" And TxtLender1Nm.Text <> "") Then
+            flag = 0
+        ElseIf Not String.IsNullOrEmpty(TxtLender1PAN.Text) And String.IsNullOrEmpty(TxtLender1Nm.Text) Or (TxtLender1PAN.Text <> "" And TxtLender1Nm.Text = "") Then
+            flag = 0
+        ElseIf (String.IsNullOrEmpty(TxtLender2PAN.Text) And Not String.IsNullOrEmpty(TxtLender2Nm.Text)) Or (TxtLender2PAN.Text = "" And TxtLender2Nm.Text <> "") Then
+            flag = 0
+        ElseIf Not String.IsNullOrEmpty(TxtLender2PAN.Text) And String.IsNullOrEmpty(TxtLender2Nm.Text) Or (TxtLender2PAN.Text <> "" And TxtLender2Nm.Text = "") Then
+            flag = 0
+        ElseIf (String.IsNullOrEmpty(TxtLender3PAN.Text) And Not String.IsNullOrEmpty(TxtLender3Nm.Text)) Or (TxtLender3PAN.Text = "" And TxtLender3Nm.Text <> "") Then
+            flag = 0
+        ElseIf Not String.IsNullOrEmpty(TxtLender3PAN.Text) And String.IsNullOrEmpty(TxtLender3Nm.Text) Or (TxtLender3PAN.Text <> "" And TxtLender3Nm.Text = "") Then
+            flag = 0
+        ElseIf (String.IsNullOrEmpty(TxtLender4PAN.Text) And Not String.IsNullOrEmpty(TxtLender4Nm.Text)) Or (TxtLender4PAN.Text = "" And TxtLender4Nm.Text <> "") Then
+            flag = 0
+        ElseIf Not String.IsNullOrEmpty(TxtLender4PAN.Text) And String.IsNullOrEmpty(TxtLender4Nm.Text) Or (TxtLender4PAN.Text <> "" And TxtLender4Nm.Text = "") Then
+            flag = 0
+        Else
+            flag = 1
+        End If
+
+        If flag = 1 Then
+            cmdSave.Enabled = True
+        End If
+    End Sub
+
+    Private Sub txtContriFrm_Validated(sender As Object, e As EventArgs) Handles txtContriFrm.Validated
+        If Not IsDate(txtContriFrm.Text) Then
+            MsgBox("Invalid Date", vbCritical)
+            sender = True
+        End If
+        savenable()
+    End Sub
+
+    Private Sub txtContriTo_Validated(sender As Object, e As EventArgs) Handles txtContriTo.Validated
+        If Not IsDate(txtContriTo.Text) Then
+            MsgBox("Invalid Date", vbCritical)
+            sender = True
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtFundNm_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtFundNm.KeyPress
+        If Char.IsLower(e.KeyChar) Then
+            TxtFundNm.SelectedText = Char.ToUpper(e.KeyChar)
+            e.Handled = True
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLender1Nm_lostFocus(sender As Object, e As EventArgs) Handles TxtLender1Nm.LostFocus
+        If String.IsNullOrEmpty(TxtLender1Nm.Text) Or TxtLender1Nm.Text = "" Then
+            TxtLender1Nm.Focus()
+        Else
+            TxtLender2PAN.Enabled = True
+            TxtLender2PAN.Focus()
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLender1PAN_LostFocus(sender As Object, e As EventArgs) Handles TxtLender1PAN.LostFocus
+        If Not String.IsNullOrEmpty(TxtLender1PAN.Text) And TxtLender1PAN.Text <> "" Then
+            If IsValidPAN(TxtLender1PAN.Text, True) Then
+                MsgBox("Invalid PAN... Please Enter a valid PAN No.")
+                TxtLender1PAN.Text = vbNullString
+                TxtLender1PAN.Focus()
+                ChkIncomeFromHouseProperty.CheckState = 0
+            Else
+                TxtLender1Nm.Enabled = True
+                TxtLender1Nm.Focus()
+            End If
+        Else
+            TxtLender1Nm.Enabled = False
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLender2Nm_LostFocus(sender As Object, e As EventArgs) Handles TxtLender2Nm.LostFocus
+        If String.IsNullOrEmpty(TxtLender2Nm.Text) Or TxtLender2Nm.Text = "" Then
+            TxtLender2Nm.Focus()
+        Else
+            TxtLender3PAN.Enabled = True
+            TxtLender3PAN.Focus()
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLender2PAN_LostFocus(sender As Object, e As EventArgs) Handles TxtLender2PAN.LostFocus
+        'If Not IsNull(TxtLender1PAN) Or Not IsNull(TxtLender1Nm) Then
+        If Not String.IsNullOrEmpty(TxtLender2PAN.Text) And TxtLender2PAN.Text <> "" Then
+            If IsValidPAN(TxtLender2PAN.Text, True) Then
+                MsgBox("Invalid PAN... Please Enter a valid PAN No.")
+                TxtLender2PAN.Text = vbNullString
+                TxtLender2PAN.Focus()
+                TxtLender2Nm.Enabled = False
+            Else
+                TxtLender2Nm.Enabled = True
+                TxtLender2Nm.Focus()
+            End If
+
+        Else
+            TxtLender2Nm.Enabled = False
+        End If
+        'End If
+    End Sub
+
+    Private Sub TxtLender3Nm_LostFocus(sender As Object, e As EventArgs) Handles TxtLender3Nm.LostFocus
+        If String.IsNullOrEmpty(TxtLender3Nm.Text) Or TxtLender3Nm.Text = "" Then
+            TxtLender3Nm.Focus()
+        Else
+            TxtLender4PAN.Enabled = True
+            TxtLender4PAN.Focus()
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLender3PAN_LostFocus(sender As Object, e As EventArgs) Handles TxtLender3PAN.LostFocus
+        If Not String.IsNullOrEmpty(TxtLender3PAN.Text) And TxtLender3PAN.Text <> "" Then
+            If IsValidPAN(TxtLender3PAN.Text, True) Then
+                MsgBox("Invalid PAN... Please Enter a valid PAN No.")
+                TxtLender3PAN.Text = vbNullString
+                TxtLender3PAN.Focus()
+            Else
+                TxtLender3Nm.Enabled = True
+                TxtLender3Nm.Focus()
+            End If
+            TxtLender3Nm.Enabled = False
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLender4Nm_LostFocus(sender As Object, e As EventArgs) Handles TxtLender4Nm.LostFocus
+        If String.IsNullOrEmpty(TxtLender4Nm.Text) Then
+            MsgBox("Invalid Please Enter a valid Name...")
+            TxtLender4Nm.Focus()
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLender4PAN_LostFocus(sender As Object, e As EventArgs) Handles TxtLender4PAN.LostFocus
+        If Not String.IsNullOrEmpty(TxtLender4PAN.Text) And TxtLender4PAN.Text <> "" Then
+            If IsValidPAN(TxtLender4PAN.Text, True) Then
+                MsgBox("Invalid PAN... Please Enter a valid PAN No.")
+                TxtLender4PAN.Text = vbNullString
+                TxtLender4PAN.Focus()
+            Else
+                TxtLender4Nm.Enabled = True
+                TxtLender4Nm.Focus()
+            End If
+        Else
+            TxtLender4Nm.Enabled = False
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLL1Nm_LostFocus(sender As Object, e As EventArgs) Handles TxtLL1Nm.LostFocus
+        If TxtLL1Nm.Text = vbNullString Then
+            MsgBox("Please Enter Valid Name of the LandLord...")
+        Else
+            TxtLL2PAN.Enabled = True
+            TxtLL2PAN.Focus()
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLL1PAN_LostFocus(sender As Object, e As EventArgs) Handles TxtLL1PAN.LostFocus
+        If Not String.IsNullOrEmpty(TxtLL1PAN.Text) And TxtLL1PAN.Text <> "" Then
+            If Not TxtLL1PAN.Text = "GOVERNMENT" Or Not TxtLL1PAN.Text = "NON RESIDENT" Or Not TxtLL1PAN.Text = "OTHER VALUE" Then
+                If IsValidPAN(TxtLL1PAN.Text, True) Then
+                    MsgBox("Invalid PAN... Please Enter a valid PAN No.")
+                    TxtLL1PAN.Text = vbNullString
+                    TxtLL1PAN.Focus()
+                Else
+                    TxtLL1Nm.Enabled = True
+                    TxtLL1Nm.Focus()
+                End If
+            Else
+                TxtLL1Nm.Enabled = True
+                TxtLL1Nm.Focus()
+            End If
+        Else
+            TxtLL1Nm.Enabled = False
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLL2Nm_LostFocus(sender As Object, e As EventArgs) Handles TxtLL2Nm.LostFocus
+        If TxtLL2Nm.Text = vbNullString Then
+            MsgBox("Please Enter Valid Name of the LandLord...")
+        Else
+            TxtLL3PAN.Enabled = True
+            TxtLL3PAN.Focus()
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLL2PAN_LostFocus(sender As Object, e As EventArgs) Handles TxtLL2PAN.LostFocus
+        If Not String.IsNullOrEmpty(TxtLL1PAN.Text) And Not String.IsNullOrEmpty(TxtLL1Nm.Text) And Not TxtLL1Nm.Text = "" And Not TxtLL1PAN.Text = "" Then
+            If Not String.IsNullOrEmpty(TxtLL2PAN.Text) And TxtLL2PAN.Text <> "" Then
+                If Not TxtLL2PAN.Text = "GOVERNMENT" Or Not TxtLL2PAN.Text = "NON RESIDENT" Or Not TxtLL2PAN.Text = "OTHER VALUE" Then
+                    If IsValidPAN(TxtLL2PAN.Text, True) Then
+                        MsgBox("Invalid PAN... Please Enter a valid PAN No.")
+                        TxtLL2PAN.Text = vbNullString
+                        'TxtLL2PAN.SetFocus
+                        TxtLL2Nm.Enabled = False
+                    Else
+                        TxtLL2Nm.Enabled = True
+                        TxtLL2Nm.Focus()
+                    End If
+                Else
+                    TxtLL2Nm.Enabled = True
+                    TxtLL2Nm.Focus()
+                End If
+            Else
+                TxtLL2Nm.Enabled = False
+            End If
+        Else
+            MsgBox("Please Enter the Previous Landlord Details")
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLL3Nm_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtLL3Nm.KeyPress
+        If Char.IsLower(e.KeyChar) Then
+            TxtLL3Nm.SelectedText = Char.ToUpper(e.KeyChar)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TxtLL3Nm_LostFocus(sender As Object, e As EventArgs) Handles TxtLL3Nm.LostFocus
+        If TxtLL3Nm.Text = vbNullString Then
+            MsgBox("Please Enter Valid Name of the LandLord...")
+        Else
+            TxtLL4PAN.Enabled = True
+            TxtLL4PAN.Focus()
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLL3PAN_LostFocus(sender As Object, e As EventArgs) Handles TxtLL3PAN.LostFocus
+        If Not String.IsNullOrEmpty(TxtLL3PAN.Text) And TxtLL3PAN.Text <> "" Then
+            If Not TxtLL3PAN.Text = "GOVERNMENT" Or Not TxtLL3PAN.Text = "NON RESIDENT" Or Not TxtLL3PAN.Text = "OTHER VALUE" Then
+                If IsValidPAN(TxtLL3PAN.Text, True) Then
+                    MsgBox("Invalid PAN... Please Enter a valid PAN No.")
+                    TxtLL3PAN.Text = vbNullString
+                    TxtLL3PAN.Focus()
+                Else
+                    TxtLL3Nm.Enabled = True
+                    TxtLL3Nm.Focus()
+                End If
+            Else
+                TxtLL3Nm.Enabled = True
+                TxtLL3Nm.Focus()
+            End If
+        Else
+            TxtLL3Nm.Enabled = False
+        End If
+
+        savenable()
+    End Sub
+
+    Private Sub TxtLL4Nm_LostFocus(sender As Object, e As EventArgs) Handles TxtLL4Nm.LostFocus
+        If TxtLL4Nm.Text = vbNullString Then
+            MsgBox("Please Enter Valid Name of the LandLord...")
+
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtLL4PAN_LostFocus(sender As Object, e As EventArgs) Handles TxtLL4PAN.LostFocus
+        If Not String.IsNullOrEmpty(TxtLL4PAN.Text) And TxtLL4PAN.Text <> "" Then
+            If Not TxtLL4PAN.Text = "GOVERNMENT" Or Not TxtLL4PAN.Text = "NON RESIDENT" Or Not TxtLL4PAN.Text = "OTHER VALUE" Then
+                If IsValidPAN(TxtLL4PAN.Text, True) Then
+                    MsgBox("Invalid PAN... Please Enter a valid PAN No.")
+                    TxtLL4PAN.Text = vbNullString
+                    TxtLL4PAN.Focus()
+                Else
+                    TxtLL4Nm.Enabled = True
+                    TxtLL4Nm.Focus()
+                End If
+            Else
+                TxtLL4Nm.Enabled = True
+                TxtLL4Nm.Focus()
+            End If
+        Else
+            TxtLL4Nm.Enabled = False
+        End If
+        'End If
+        savenable()
+    End Sub
+
+    Private Sub TxtRateOfDeduction_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtRateOfDeduction.KeyPress
+        If Asc(e.KeyChar) <> 13 AndAlso Asc(e.KeyChar) <> 8 AndAlso Not IsNumeric(e.KeyChar) Then
+            MessageBox.Show("Please enter numbers only")
+            e.Handled = True
+        End If
+        savenable()
+    End Sub
+
+    Private Sub TxtTaxDeducted_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtTaxDeducted.KeyPress
+        If Asc(e.KeyChar) <> 13 AndAlso Asc(e.KeyChar) <> 8 AndAlso Not IsNumeric(e.KeyChar) Then
+            MessageBox.Show("Please enter numbers only")
+            e.Handled = True
+        End If
+        savenable()
+    End Sub
+
+    Private Sub ChkIncomeFromHouseProperty_Click(sender As Object, e As EventArgs) Handles ChkIncomeFromHouseProperty.Click
+        Dim flag As Integer
+        If ChkIncomeFromHouseProperty.CheckState = 1 Then
+            TableLayoutPanel15.Visible = True
+            'For i = 8 To 15
+            '    Label68(i).Visible = True
+            'Next
+            TxtLender1PAN.Visible = True
+            TxtLender2PAN.Visible = True
+            TxtLender3PAN.Visible = True
+            TxtLender4PAN.Visible = True
+            TxtLender1Nm.Visible = True
+            TxtLender2Nm.Visible = True
+            TxtLender3Nm.Visible = True
+            TxtLender4Nm.Visible = True
+            If flag = 1 Then
+                TxtLender1PAN.Text = vbNullString
+                TxtLender2PAN.Text = vbNullString
+                TxtLender3PAN.Text = vbNullString
+                TxtLender4PAN.Text = vbNullString
+                TxtLender1Nm.Text = vbNullString
+                TxtLender2Nm.Text = vbNullString
+                TxtLender3Nm.Text = vbNullString
+                TxtLender4Nm.Text = vbNullString
+            End If
+        Else
+            Dim Str As String
+            Str = MsgBox("All the fields below will be cleared... Do you want to continue?", vbYesNo)
+            If Str = vbYes Then
+                TableLayoutPanel15.Visible = False
+                'For i = 8 To 15
+                '    Label68(i).Visible = False
+                'Next
+                TxtLender1PAN.Visible = False
+                TxtLender2PAN.Visible = False
+                TxtLender3PAN.Visible = False
+                TxtLender4PAN.Visible = False
+                TxtLender1Nm.Visible = False
+                TxtLender2Nm.Visible = False
+                TxtLender3Nm.Visible = False
+                TxtLender4Nm.Visible = False
+
+                TxtLender1PAN.Text = vbNullString
+                TxtLender2PAN.Text = vbNullString
+                TxtLender3PAN.Text = vbNullString
+                TxtLender4PAN.Text = vbNullString
+                TxtLender1Nm.Text = vbNullString
+                TxtLender2Nm.Text = vbNullString
+                TxtLender3Nm.Text = vbNullString
+                TxtLender4Nm.Text = vbNullString
+            Else
+                flag = 1
+                ChkIncomeFromHouseProperty.CheckState = 1
+            End If
+
+        End If
+        savenable()
+    End Sub
+
+    Private Sub ChkRent_Click(sender As Object, e As EventArgs) Handles ChkRent.Click
+        Dim flag As Integer
+        If ChkRent.CheckState = 1 Then
+            TableLayoutPanel14.Visible = True
+            'For i = 0 To 7
+            '    Label68(i).Visible = True
+            'Next
+            TxtLL1PAN.Visible = True
+            TxtLL2PAN.Visible = True
+            TxtLL3PAN.Visible = True
+            TxtLL4PAN.Visible = True
+            TxtLL1Nm.Visible = True
+            TxtLL2Nm.Visible = True
+            TxtLL3Nm.Visible = True
+            TxtLL4Nm.Visible = True
+            If flag = 1 Then
+                TxtLL1Nm.Text = vbNullString
+                TxtLL2Nm.Text = vbNullString
+                TxtLL3Nm.Text = vbNullString
+                TxtLL4Nm.Text = vbNullString
+                TxtLL1PAN.Text = vbNullString
+                TxtLL2PAN.Text = vbNullString
+                TxtLL3PAN.Text = vbNullString
+                TxtLL4PAN.Text = vbNullString
+            End If
+        Else
+            Dim Str As String
+            Str = MsgBox("All the fields below will be cleared... Do you want to continue?", vbYesNo)
+            If Str = vbYes Then
+                TableLayoutPanel15.Visible = False
+                'For i = 0 To 7
+                '    Label68(i).Visible = False
+                'Next
+                TxtLL1PAN.Visible = False
+                TxtLL2PAN.Visible = False
+                TxtLL3PAN.Visible = False
+                TxtLL4PAN.Visible = False
+                TxtLL1Nm.Visible = False
+                TxtLL2Nm.Visible = False
+                TxtLL3Nm.Visible = False
+                TxtLL4Nm.Visible = False
+                TxtLL1Nm.Text = vbNullString
+                TxtLL2Nm.Text = vbNullString
+                TxtLL3Nm.Text = vbNullString
+                TxtLL4Nm.Text = vbNullString
+                TxtLL1PAN.Text = vbNullString
+                TxtLL2PAN.Text = vbNullString
+                TxtLL3PAN.Text = vbNullString
+                TxtLL4PAN.Text = vbNullString
+            Else
+                flag = 0
+                ChkRent.CheckState = 1
+            End If
+
+        End If
+        savenable()
+    End Sub
+
+    Private Sub CHkSAFund_Click(sender As Object, e As EventArgs) Handles CHkSAFund.Click
+        Dim flag As Integer
+        If CHkSAFund.CheckState = 1 Then
+            TableLayoutPanel16.Visible = True
+            'For i = 16 To 21
+            '    Label68(i).Visible = True
+            'Next
+            TxtFundNm.Visible = True
+            txtContriFrm.Visible = True
+            txtContriTo.Visible = True
+            TxtRateOfDeduction.Visible = True
+            TxtAmtRepaid.Visible = True
+            TxtTaxDeducted.Visible = True
+
+            If flag = 1 Then
+                TxtFundNm.Text = vbNullString
+                txtContriFrm.Mask = "##/##/##"
+                txtContriTo.Mask = "##/##/##"
+                TxtRateOfDeduction.Text = vbNullString
+                TxtAmtRepaid.Text = vbNullString
+                TxtTaxDeducted.Text = vbNullString
+
+            End If
+        Else
+            Dim Str As String
+            Str = MsgBox("All the fields below will be cleared... Do you want to continue?", vbYesNo)
+            If Str = vbYes Then
+                TableLayoutPanel16.Visible = False
+                'For i = 16 To 21
+                '    Label68(i).Visible = False
+                'Next
+                TxtFundNm.Visible = False
+                txtContriFrm.Visible = False
+                txtContriTo.Visible = False
+                TxtRateOfDeduction.Visible = False
+                TxtAmtRepaid.Visible = False
+                TxtTaxDeducted.Visible = False
+                '        TxtGross.Visible = False
+
+                TxtFundNm.Text = vbNullString
+                txtContriFrm.Mask = "##/##/##"
+                txtContriTo.Mask = "##/##/##"
+                TxtRateOfDeduction.Text = vbNullString
+                TxtAmtRepaid.Text = vbNullString
+                TxtTaxDeducted.Text = vbNullString
+                '        TxtGross.Text = vbNullString
+            Else
+                flag = 1
+                CHkSAFund.CheckState = 1
+            End If
+        End If
+        savenable()
+    End Sub
+
+
 End Class
