@@ -530,6 +530,7 @@ canerr:
         nds = FetchDataSet("select DName,DId from DeductMst Where CoId = " & selectedcoid & "  ORDER BY DName ")
         cboDedName.DataSource = Nothing
         cboDedName.Items().Clear()
+        cboSDDedName.DataSource = Nothing
         cboSDDedName.Items().Clear()
         If nds.Tables(0).Rows.Count > 0 Then
             cboDedName.DataSource = nds.Tables(0)

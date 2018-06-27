@@ -8,7 +8,7 @@ Public Class frm16A
     Dim wrkst As Excel.Worksheet
     'Dim frmd As New frmMulSelDed
     Dim sqld As String
-    Dim WithEvents o16A As New Form16Details
+    Dim WithEvents o16A As New clsForm16Details
     Dim MainPath, SavePath As String
     Dim frmd As New frmMulSelDed
     'Dim fso As New FileSystemobject
@@ -849,7 +849,7 @@ Public Class frm16A
 
     Private Sub frm16A_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Main()
-        o16A = New Form16Details
+        o16A = New clsForm16Details
         filldeductee()
         'Dim DM As New frm16A
         'Dim ds, ds1 As New DataSet
