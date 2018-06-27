@@ -431,6 +431,16 @@ Public Class frmdeduteeTDSMST
                     frmTDS24Q.cboDedName.SelectedValue = oDed.did
                     frmTDS24Q.did = oDed.did
                     Me.Dispose()
+                Case "frm16"
+                    FRM16Detail.txt16pan.Text = txtDPAN.Text
+                    FRM16Detail.txt16pan.Tag = IIf(optCo.Checked = True, "C", "O")
+                    FRM16Detail.txtdesig.Text = txtDDesgn.Text
+                    FRM16Detail.txtDstatus.Text = Mid(cboCategory.Text, 1, 1)
+                    FRM16Detail.FillDeducteeCombo(FRM16Detail.xMode)
+
+                    FRM16Detail.cbo16DedName.SelectedValue = oDed.did
+                    'FRM16Detail.cbo16DedName.Focus()
+                    Me.Dispose()
             End Select
             ' MsgBox("Record saved successfully..")
             'Call fillDName()
@@ -466,6 +476,21 @@ Public Class frmdeduteeTDSMST
 
         nds.Dispose()
     End Sub
+
+    'Private Sub FillDeducteeCombofrm16()
+    '    Dim nds As New DataSet
+    '    nds = FetchDataSet("select DName,DId from DeductMst Where CoId = " & selectedcoid & "  ORDER BY DName ")
+    '    frmTDS24Q.cboDedName.DataSource = Nothing
+    '    frmTDS24Q.cboDedName.Items().Clear()
+    '    If nds.Tables(0).Rows.Count > 0 Then
+    '        frmTDS24Q.cboDedName.DataSource = nds.Tables(0)
+    '        frmTDS24Q.cboDedName.DisplayMember = "DName"
+    '        frmTDS24Q.cboDedName.ValueMember = "DId"
+    '    End If
+
+    '    nds.Dispose()
+    'End Sub
+
     Private Sub oDed_BeforeSave(Cancel As Boolean) Handles oDed.BeforeSave
         Dim nds As New DataSet
 

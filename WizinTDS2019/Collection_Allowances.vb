@@ -1,13 +1,13 @@
 ﻿Public Class Collection_Allowances
 
     'local variable to hold collection
-    Private mCol As Collection
+    Private mCol As New Collection
 
-    Public Function Add(ID As Long, F16ID As Long, TypeOfDetail As String, Particulars As String, GrossAmt As Double, QualifyAmt As Double, DeductibleAmt As Double, sKey As String) As clsForm16MoreDetails
+
+    Public Function Add(ID As Long, F16ID As Long, TypeOfDetail As String, Particulars As String, GrossAmt As Double, QualifyAmt As Double, DeductibleAmt As Double) As clsForm16MoreDetails
         'create a new object
         Dim objNewMember As clsForm16MoreDetails
         objNewMember = New clsForm16MoreDetails
-
 
         'set the properties passed into the method
         objNewMember.ID = ID
@@ -17,11 +17,11 @@
         objNewMember.GrossAmt = GrossAmt
         objNewMember.QualifyAmt = QualifyAmt
         objNewMember.DeductibleAmt = DeductibleAmt
-        If Len(sKey) = 0 Then
-            mCol.Add(objNewMember)
-        Else
-            mCol.Add(objNewMember, sKey)
-        End If
+        'If Len(sKey) = 0 Then
+        mCol.Add(objNewMember)
+        'Else
+        'mCol.Add(objNewMember, sKey)
+        'End If
 
 
         'return the object created
@@ -36,8 +36,9 @@
             Item = mCol(vntIndexKey)
         End Get
         Set()
-            'mCol(vntIndexKey) = vntIndexKey
+
         End Set
+
     End Property
 
     '    Public Property Get Item(vntIndexKey As Variant) As clsForm16MoreDetails

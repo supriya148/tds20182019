@@ -1,11 +1,24 @@
-﻿Imports System.Data.OleDb
+﻿Imports System.ComponentModel
+Imports System.Data.OleDb
+Imports System.IO
 
 Public Class FRM16Detail
-    Dim transaction As OleDb.OleDbTransaction
     Dim oCoObj As New clsCoMst
-    Dim oForm16 As New Form16Details
+    Dim WithEvents oForm16 As New clsForm16Details
+    Dim WithEvents oForm16More As New clsForm16MoreDetails
+    Dim oAllowances As New Collection_Allowances
+    Dim oOthIncomes As New Collection_OtherIncomes
+    Dim oSec80CDeductions As New Collection_Sec80CDed
+    Dim oChapter6ADeductions As New Collection_VI_A_Deductions
+    Dim oSec80CCFDeductions As New Collection_Sec80CCFDed
+    Dim oSec80CCGDeductions As New Collection_Sec80CCGDed
+    Public xMode As String
+    Dim taxcal As Boolean
+    Dim transaction As OleDb.OleDbTransaction
+
+    'Dim oForm16 As New Form16Details
     Dim frm As New frmdeduteeTDSMST
-    '  Dim ReadStream As TextStream,
+
     Dim AllowCboTxt As String, Sec80CcgCboTxt, OthIncCbotxt As String ' StlvwChallan.Items(0).SubItems(1).Textring, Sec80CcgCboTxt As String
     Dim Sec80CCboTxt As String, Sec80CcfCboTxt As String, Chp6aCboTxt As String, DataRead
     Private Sub frm16Details_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
@@ -16,8 +29,44 @@ Public Class FRM16Detail
         cbo16DedName.BackColor = Color.LightYellow
     End Sub
 
-    Private Sub cmbName_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbo16DedName.Leave
+    Private Sub cbo16DedName_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbo16DedName.Leave
         cbo16DedName.BackColor = Color.White
+        fill()
+        'If cbo16DedName.Text = vbNullString Then Exit Sub
+        'Dim nds As New DataSet
+        'Dim i As Integer, DName As String
+        'DName = UCase(cbo16DedName.Text)
+        'nds = FetchDataSet("SELECT * FROM DeductMst WHERE CoId = " & selectedcoid & " And DName='" & DName & "'")
+        'If nds.Tables(0).Rows.Count <= 0 Then
+        '    'not found., open deductee detail form..
+        '    frmDeducteeTDS.Show()
+        '    frmDeducteeTDS.Frm_typ = 24
+        '    'frmDeducteeTDS.Move(Me.Left + cbo16DedName.Left) + 100, (Me.Top + cbo16DedName.Top + cbo16DedName.Height + 650)
+        '    frmDeducteeTDS.txtDName.Text = cbo16DedName.Text
+        '    frmDeducteeTDS.optCo.Visible = False
+        '    frmDeducteeTDS.optCo.TabStop = False
+        '    frmDeducteeTDS.Show()
+        '    FillDeducteeCombo(xMode)
+        '    i = cbo16DedName.FindString(DName)
+        '    If i >= 0 Then
+        '        cbo16DedName.SelectedIndex = i
+        '    End If
+        '    'For i = 0 To cbo16DedName.ListCount - 1
+        '    '    If cbo16DedName.list(i) = DName Then
+        '    '        cbo16DedName.ListIndex = i
+        '    '        Exit Sub
+        '    '    End If
+        '    'Next i
+        '    If i = cbo16DedName.Items.Count Then cbo16DedName.SelectedIndex = -1      'Not Found
+        'Else
+
+        '    txt16pan.Text = nds.Tables(0).Rows(0)("DPan") & ""
+        '    txt16pan.Tag = nds.Tables(0).Rows(0)("DType")
+        'End If
+        'txtdesig.Text = nds.Tables(0).Rows(0)("DDesgn") & ""
+        'txtDstatus.Text = nds.Tables(0).Rows(0)("rs!Category")
+        'Call Autotaxcal()
+
     End Sub
     Private Sub txtName_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt16CoName.Enter
         txt16CoName.BackColor = Color.LightYellow
@@ -386,15 +435,10 @@ Public Class FRM16Detail
         Fill24PRNNo()
         fill()
         'tabForm16.Tab = 0
-        tabForm16.Enabled = False
+        'tabForm16.Enabled = False
         'Set the grids right...
 
-        '  grd16allow.ColHidden(2) = True
-        'grd16otherIncome.ColHidden(2) = True
-        'grd1680c.ColHidden(3) = True
-        'grd1680CCF.ColHidden(3) = True
-        'grd1680CCG.ColHidden(3) = True
-        'grd16OtherIVA.ColHidden(4) = True
+
 
         grd16allow.Columns(2).Visible = False
         grd1680c.Columns(2).Visible = False
@@ -402,60 +446,137 @@ Public Class FRM16Detail
         grd1680CCG.Columns(3).Visible = False
         grd16OtherIVA.Columns(4).Visible = False
         FillParaData()
-        '   grd16allSubTotal
+
         txtDstatus.Text = ""
 
         For R = 1 To grd16ManualTax.Rows.Count - 1
             grd16ManualTax.Rows(R).Cells(0).Value = R
         Next R
-        '     Autotaxcal
+
 
     End Sub
     Private Sub FillParaData()
         'read parameter data from the text file and fill the respective combos..
+        Dim ReadStream As StreamReader
+        Dim DataRead
+
+        Dim cmb As New DataGridViewComboBoxColumn()
+        cmb.Name = "Particulars"
+        cmb.Width = 200
+        cmb.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+        Dim cmbOthInc As New DataGridViewComboBoxColumn()
+        cmbOthInc.Name = "Particulars"
+        cmbOthInc.Width = 200
+
+        Dim cmbSec80C As New DataGridViewComboBoxColumn()
+        cmbSec80C.Name = "Particulars"
+        cmbSec80C.Width = 200
+        cmbSec80C.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+
+        Dim cmbSec80Ccf As New DataGridViewComboBoxColumn()
+        cmbSec80Ccf.Name = "Particulars"
+        cmbSec80Ccf.Width = 200
+        cmbSec80Ccf.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+
+        Dim cmbSec80Ccg As New DataGridViewComboBoxColumn()
+        cmbSec80Ccg.Name = "Particulars"
+        cmbSec80Ccg.Width = 200
+        cmbSec80Ccg.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+
+        Dim cmbChp6a As New DataGridViewComboBoxColumn()
+        cmbChp6a.Name = "Particulars"
+        cmbChp6a.Width = 200
+        cmbChp6a.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
 
         oCoObj = oCoObj.FetchCo(selectedcoid)
-        '* If fso.FileExists(Application.StartupPath & "\Database\Form16Parameters.txt") Then
-        '*ReadStream = fso.OpenTextFile(Application.StartupPath & "\Database\Form16Parameters.txt")
-        ' Do While Not ReadStream.AtEndOfStream
-        'DataRead = Split(ReadStream.ReadLine, ",")
-        'If DataRead(0) = "A" Then
-        'If DataRead(2) = "T" Then AllowCboTxt = AllowCboTxt & "|" & DataRead(1)
-        'ElseIf DataRead(0) = "O" Then
-        'If DataRead(2) = "T" Then OthIncCbotxt = OthIncCbotxt & "|" & DataRead(1)
-        'ElseIf DataRead(0) = "E" Then
-        'If DataRead(2) = "T" Then Sec80CCboTxt = Sec80CCboTxt & "|" & DataRead(1)
-        'ElseIf DataRead(0) = "V" Then
-        'If DataRead(2) = "T" Then Chp6aCboTxt = Chp6aCboTxt & "|" & DataRead(1)
-        'ElseIf DataRead(0) = "F" Then
-        'If DataRead(2) = "T" Then Sec80CcfCboTxt = Sec80CcfCboTxt & "|" & DataRead(1)
-        'ElseIf DataRead(0) = "G" Then
-        'If DataRead(2) = "T" Then Sec80CcgCboTxt = Sec80CcgCboTxt & "|" & DataRead(1)
-        'End If
-        'Loop
-        '  End If
-        '*  grd16allow.ColComboList(0) = "|" & AllowCboTxt
-        '  grd16otherIncome.ColComboList(0) = "|" & OthIncCbotxt
-        '  grd1680c.ColComboList(0) = "|" & Sec80CCboTxt
-        '  grd1680CCF.ColComboList(0) = "|" & Sec80CcfCboTxt
-        ' grd1680CCG.ColComboList(0) = "|" & Sec80CcgCboTxt
-        '  grd16OtherIVA.ColComboList(0) = "|" & Chp6aCboTxt
-        Dim cmb As New DataGridViewComboBoxColumn()
-        cmb.HeaderText = AllowCboTxt
-        cmb.Name = "cmb"
-        cmb.MaxDropDownItems = 1
-        cmb.Items.Add("allocbotxt")
+        grd16allow.ColumnCount = 0
+        grd16otherIncome.ColumnCount = 0
+        grd1680c.ColumnCount = 0
+        grd1680CCG.ColumnCount = 0
+        grd1680CCF.ColumnCount = 0
+        grd16OtherIVA.ColumnCount = 0
+
+        If File.Exists(Application.StartupPath & "\Database\Form16Parameters.txt") Then
+            ReadStream = File.OpenText(Application.StartupPath & "\Database\Form16Parameters.txt")
+            Do While Not ReadStream.EndOfStream
+
+                DataRead = Split(ReadStream.ReadLine, ",")
+                If DataRead(0) = "A" Then
+                    If DataRead(2) = "T" Then
+                        'AllowCboTxt = AllowCboTxt & "|" & DataRead(1)
+                        cmb.Items.Add(DataRead(1))
+                    End If
+                ElseIf DataRead(0) = "O" Then
+                    If DataRead(2) = "T" Then
+                        'OthIncCbotxt = OthIncCbotxt & "|" & DataRead(1)
+                        cmbOthInc.Items.Add(DataRead(1))
+                    End If
+                ElseIf DataRead(0) = "E" Then
+                    If DataRead(2) = "T" Then
+                        ' Sec80CCboTxt = Sec80CCboTxt & "|" & DataRead(1)
+                        cmbSec80C.Items.Add(DataRead(1))
+                    End If
+                ElseIf DataRead(0) = "V" Then
+                    If DataRead(2) = "T" Then
+                        'Chp6aCboTxt = Chp6aCboTxt & "|" & DataRead(1)
+                        cmbChp6a.Items.Add(DataRead(1))
+                    End If
+                ElseIf DataRead(0) = "F" Then
+                    If DataRead(2) = "T" Then
+                        'Sec80CcfCboTxt = Sec80CcfCboTxt & "|" & DataRead(1)
+                        cmbSec80Ccf.Items.Add(DataRead(1))
+                    End If
+                ElseIf DataRead(0) = "G" Then
+                    If DataRead(2) = "T" Then
+                        cmbSec80Ccg.Items.Add(DataRead(1))
+                        'Sec80CcgCboTxt = Sec80CcgCboTxt & "|" & DataRead(1)
+                    End If
+                End If
+            Loop
+        End If
+
+
+
         grd16allow.Columns.Add(cmb)
+        grd16allow.Columns.Add("Rs.", "Rs.")
+        grd16allow.Columns.Add("", "")
+        grd16allow.Columns.Add("", "")
+
+        grd16otherIncome.Columns.Add(cmbOthInc)
+        grd16otherIncome.Columns.Add("Rs.", "Rs.")
+        grd16otherIncome.Columns.Add("", "")
+        grd16otherIncome.Columns.Add("", "")
+
+        grd1680c.Columns.Add(cmbSec80C)
+        grd1680c.Columns.Add("Gross Amount", "Gross Amount")
+        grd1680c.Columns.Add("Deductible Amount", "Deductible Amount")
+        grd1680c.Columns.Add("", "")
+
+        grd1680CCG.Columns.Add(cmbSec80Ccg)
+        grd1680CCG.Columns.Add("Gross Amount", "Gross Amount")
+        grd1680CCG.Columns.Add("Deductible Amount", "Deductible Amount")
+
+        grd1680CCF.Columns.Add(cmbSec80Ccf)
+        grd1680CCF.Columns.Add("Gross Amount", "Gross Amount")
+        grd1680CCF.Columns.Add("Deductible Amount", "Deductible Amount")
+        grd1680CCF.Columns.Add("", "")
+
+        grd16OtherIVA.Columns.Add(cmbChp6a)
+        grd16OtherIVA.Columns.Add("Gross Amount", "Gross Amount")
+        grd16OtherIVA.Columns.Add("Qualifying Amount", "Qualifying Amount")
+        grd16OtherIVA.Columns.Add("Deductible Amount", "Deductible Amount")
+
+
+
+
+
+
+
     End Sub
 
-    Dim oAllowances As New Collection_Allowances
-    Dim oOthIncomes As New Collection_OtherIncomes
-    Dim oSec80CDeductions As New Collection_Sec80CDed
-    Dim oChapter6ADeductions As New Collection_VI_A_Deductions
-    Dim oSec80CCFDeductions As New Collection_Sec80CCFDed
-    Dim oSec80CCGDeductions As New Collection_Sec80CCGDed
 
-    Public xMode As String
+
+
     ' Dim fso As New FileSystemObject
     'Public Sub grd16allSubTotal()
     'With grd16allow
@@ -467,26 +588,27 @@ Public Class FRM16Detail
     '    .Redraw = True
     'End With
     'End Sub
-    Dim taxcal As Boolean
+
 
     Public Sub FillDeducteeCombo(Mode As String)
         Dim rst As New DataSet, opnStr As String
         If Mode = "A" Then
-            opnStr = "SELECT * FROM DeductMst WHERE Did Not IN (SELECT dID FROM Form16Details) AND CoID=" & selectedcoid & "  ORDER BY DName "
+            opnStr = "Select * FROM DeductMst WHERE Did Not In (Select dID FROM Form16Details) And CoID = " & selectedcoid & "  ORDER BY DName "
         Else
-            opnStr = "SELECT * FROM DeductMst WHERE CoID=" & selectedcoid & "  ORDER BY DName "
+            opnStr = "Select * FROM DeductMst WHERE CoID=" & selectedcoid & "  ORDER BY DName "
         End If
         rst = FetchDataSet(opnStr)
-        'cboDedName.Clear
+
         cbo16DedName.DataSource = Nothing
         cbo16DedName.Items.Clear()
 
 
         'For I = 0 To rst.Tables(0).Rows.Count
         cbo16DedName.DataSource = rst.Tables(0)
-            cbo16DedName.DisplayMember = "DName"
-            cbo16DedName.ValueMember = "DId"
+        cbo16DedName.DisplayMember = "DName"
+        cbo16DedName.ValueMember = "DId"
         ' Next I
+        cbo16DedName.SelectedIndex = -1
 
         rst.Dispose()
 
@@ -495,7 +617,7 @@ Public Class FRM16Detail
     Private Sub Fill24PRNNo()
         Dim R As Integer
         Dim rst As New DataSet
-        rst = FetchDataSet("select * from RetnMst Where CoId = " & selectedcoid & " and  Left(frmtype,2) = '24' ORDER BY FRMTYPE")
+        rst = FetchDataSet("Select * from RetnMst Where CoId = " & selectedcoid & " And  Left(frmtype,2) = '24' ORDER BY FRMTYPE")
         R = 1
         'Do While Not rst.EOF
         For k = 0 To rst.Tables(0).Rows.Count - 1
@@ -514,7 +636,7 @@ Public Class FRM16Detail
         oCompany = oCompany.FetchCo(selectedcoid)
         With oCompany
             txt16CoName.Text = .CoName
-            txt16CoName.Tag = selectedcoid'frmCoMst.txtCoName.Tag
+            txt16CoName.Tag = selectedcoid 'frmCoMst.txtCoName.Tag
             txt16CoAdd1.Text = .CoAdd1
             txt16CoAdd2.Text = .CoAdd2
             txt16CoAdd3.Text = .CoAdd3
@@ -622,26 +744,51 @@ Public Class FRM16Detail
     'End Sub
 
     Private Sub cmd16Save_Click(sender As Object, e As EventArgs) Handles cmd16Save.Click
-        If Val(txt16TaxableSalary.Text) > Val(txt16TaxableSalary.Text) Then
+        If Val(txt16TaxableSalary.Text) > Val(txtAllTax.Text) Then
             MsgBox("Taxable Salary is greater than Total Taxable Salary Of All Quarters.")
         End If
 
-        If Val(txt16TaxableSalary.Text) < Val(txt16TaxableSalary.Text) Then
+        If Val(txt16TaxableSalary.Text) < Val(txtAllTax.Text) Then
             MsgBox("Taxable Salary is less than Total Taxable Salary Of All Quarters.")
         End If
         CHECKTAXCAL()
 
         '    If taxcal = True Then
         Check80CTotals(Val(txtgrd80CCal.Text))
-        '*  Check80CCFTotals(Val(FRM16Detail.Text))
+        Check80CCFTotals(Val(txtgrd80CCFCal.Text))
         Check80CCGTotals(Val(txtgrd80CCGCal.Text))
 
         If xMode = "A" Then
-            If oForm16.Insert(oForm16, oAllowances, oOthIncomes, oSec80CDeductions, oSec80CCFDeductions, oSec80CCGDeductions, oChapter6ADeductions, grd16ManualTax, Val(txt16grosstotPreEmp), Val(txt16TaxPreEmp), IIf(chkHighRate.Checked = True, True, False)) = False Then
+            If oForm16.Insert(oForm16) = False Then
+                'If oForm16.Insert(oForm16, oAllowances, oOthIncomes, oSec80CDeductions, oSec80CCFDeductions, oSec80CCGDeductions, oChapter6ADeductions, grd16ManualTax, Val(txt16grosstotPreEmp.Text), Val(txt16TaxPreEmp.Text), IIf(chkHighRate.Checked = True, True, False)) = False Then
                 MsgBox("Unable to save data", vbCritical, "ERROR!!")
             Else
                 'Data Saved properly...exit this form...and return to main form
+                Dim R As Long
+
+
+                For R = 0 To grd16allow.Rows.Count - 1
+                    If grd16allow.Rows(R).Cells(0).Value <> Nothing Then
+                        If oForm16More.Insert(oForm16More, R, grd16allow, "A") = False Then
+                            MsgBox("Unable to save data", vbCritical, "ERROR!!")
+                            Exit For
+                        End If
+                    End If
+                Next R
+                For R = 0 To grd16otherIncome.Rows.Count - 1
+                    If grd16otherIncome.Rows(R).Cells(0).Value <> Nothing Then
+                        If oForm16More.Insert(oForm16More, R, grd16otherIncome, "O") = False Then
+                            MsgBox("Unable to save data", vbCritical, "ERROR!!")
+                            Exit For
+                        End If
+                    End If
+                Next R
+                'If oForm16More.Insert(oForm16More) = False Then  ', oAllowances, oOthIncomes, oSec80CDeductions, oSec80CCFDeductions, oSec80CCGDeductions, oChapter6ADeductions, grd16ManualTax, Val(txt16grosstotPreEmp.Text), Val(txt16TaxPreEmp.Text), IIf(chkHighRate.Checked = True, True, False)) = False Then
+                '    MsgBox("Unable to save data", vbCritical, "ERROR!!")
+                'Else
                 Me.Close()
+                'End If
+
             End If
         ElseIf xMode = "E" Then
             If oForm16.Update(oForm16, oAllowances, oOthIncomes, oSec80CDeductions, oSec80CCFDeductions, oSec80CCGDeductions, oChapter6ADeductions, grd16ManualTax, Val(txt16grosstotPreEmp), Val(txt16TaxPreEmp), IIf(chkHighRate.Checked = True, True, False)) = False Then
@@ -658,7 +805,7 @@ Public Class FRM16Detail
         '    taxcal = False
     End Sub
     Private Sub CHECKTAXCAL()
-        If txt16Tax.Text <> txtTax.Text Or txt16Surcharge.Text <> txtSurcharge.Text Or txt16EduCess.Text <> txtEd.Text Then
+        If Val(txt16Tax.Text) <> Val(txtTax.Text) Or Val(txt16Surcharge.Text) <> Val(txtSurcharge.Text) Or Val(txt16EduCess.Text) <> Val(txtEd.Text) Then
             MsgBox("Form16 Tax calculation not matched with Tax calculation asPer Law")
         End If
     End Sub
@@ -698,8 +845,8 @@ Public Class FRM16Detail
         Dim i As Long, DFound As Boolean, OldId As Long, dname As String
         Dim frm As New frmdeduteeTDSMST
         If cbo16DedName.SelectedIndex < 0 Then Exit Sub
-        'frmdeduteeTDSMST.Show()
-        frm.Frm_typ = "24Q"
+
+        frm.Frm_typ = "frm16"
         frm.Show()
         frm.Hide()
         dname = cbo16DedName.Text
@@ -710,107 +857,93 @@ Public Class FRM16Detail
 
                 DFound = True
             End If
-            'For i = 0 To .cboDName.SelectedIndex - 1
-            '    If .cboDName.SelectedIndex = cbo16DedName.SelectedItem(cbo16DedName.SelectedIndex) Then
-            '        .cboDName.SelectedIndex = i
-            '        OldId = cbo16DedName.SelectedItem(cbo16DedName.SelectedIndex)
-            '        DFound = True
-            '        Exit For
-            '    End If
-            'Next i
+
         End With
-        'If DFound = True Then
-        '    frmdeduteeTDSMST.Show()
-        'End If
+
         If DFound = True Then frm.Show()
         'refill the combo with new data...
         Call FillDeducteeCombo(xMode)
-        'For i = 0 To cbo16DedName.SelectedIndex - 1
-        '    If cbo16DedName.Items.Add(i) = OldId Then
-        '        'select the selection again...
-        '        cbo16DedName.SelectedIndex = i
-        '        '        cbo16DedName.SetFocus
-        '        Exit For
-        '    End If
-        'Next i
-        'cbo16DedName_LostFocus
+
+
         i = cbo16DedName.FindString(dname)
         If i >= 0 Then
             cbo16DedName.SelectedIndex = i
+            'cbo16DedName_Leave(sender, e)
 
         End If
+
     End Sub
 
     Private Sub grd1680c_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680c.CellEndEdit
         Call CalculateSalaryNTax()
     End Sub
-    Public Sub CalculateSalaryNTax()
-        Dim R As Long, TotalAllow As Double
-        Dim TotalOthInc As Double
-        Dim Total80C, TotalChapVIA As Integer
-        Dim Total80CCG, Total80CCF As Integer
-        'Calculate the Gross Total Salary
-        txt16grosstotCurEmp.Text = Val(txt16gross1.Text) + Val(txt16gross2.Text) + Val(txt16gross3.Text) '+ Val(txt16grosstotCurEmp.Text) + Val(txt16grosstotPreEmp.Text)
-        txt16grosstotBoth.Text = Val(txt16grosstotCurEmp.Text) + Val(txt16grosstotPreEmp.Text)
-        'Calculate total allowance and deduct from Gross Total Salary...to get Balance...
-        TotalAllow = 0
-        For R = 1 To grd16allow.Rows.Count - 1
-            TotalAllow = TotalAllow + grd16allow.Rows(R).Cells(1).Value.ToString()
-        Next R
-        txtallow.Text = TotalAllow
-        txt16bal.Text = Val(txt16grosstotBoth.Text) - TotalAllow
-        'Calculate Total Deduction of section 16
-        txtTotalDedct.Text = Val(txt16EntAllow.Text) + Val(txt16ProfTax.Text)
-        'now, calculate total taxable salary...
-        txt16TaxableSalary.Text = Val(txt16bal.Text) - Val(txtTotalDedct.Text)
-        'now calculate the sum of other incomes and to taxable salary to get gross total income
-        TotalOthInc = 0
-        For R = 1 To grd16otherIncome.Rows.Count - 1
-            TotalOthInc = TotalOthInc + grd16otherIncome.Rows(R).Cells(1).Value.ToString()
-        Next R
-        txt16GTI.Text = Val(txt16TaxableSalary.Text) + TotalOthInc
-        'now calculate the sum of other incomes and to taxable salary to get gross total income
-        Total80C = 0
-        For R = 1 To grd1680c.Rows.Count - 1
-            Total80C = Total80C + grd1680c.Rows(R).Cells(2).Value.ToString()
-        Next R
-        Total80CCF = 0
-        For R = 1 To grd1680CCF.Rows.Count - 1
-            Total80CCF = Total80CCF + grd1680CCF.Rows(R).Cells(2).Value.ToString()
-        Next R
-        Total80CCG = 0
-        For R = 1 To grd1680CCG.Rows.Count - 1
-            Total80CCG = Total80CCG + grd1680CCG.Rows(R).Cells(2).Value.ToString()
-        Next R
-        TotalChapVIA = 0
-        For R = 1 To grd16OtherIVA.Rows.Count - 1
-            TotalChapVIA = TotalChapVIA + grd16OtherIVA.Rows(R).Cells(3).Value.ToString()
-        Next R
-        txt1680c.Text = Total80C
-        txt1680CCF.Text = Total80CCF
-        txt1680CCG.Text = Total80CCG
-        txtT16OtherIVA.Text = TotalChapVIA
-        txt16otherIncome.Text = TotalOthInc
-        txt16OtherIVA.Text = Val(txt1680c.Text) + Val(txtT16OtherIVA.Text) + Val(txt1680CCF.Text) + txt1680CCG.Text
-        txt16TotalTaxableIncome.Text = Val(txt16GTI.Text) - Val(txt16OtherIVA.Text)
-        txtincome.Text = Val(txt16TotalTaxableIncome.Text)
-        'Now Calculate the taxes...
-        ' txt16Tax.Text = Val(txt16TaxCurEmp.Text) + Val(txt16TaxPreEmp.Text)
-        txt16TotalTax.Text = Val(txt16Tax.Text) + Val(txt16Surcharge.Text) + Val(txt16EduCess.Text)
-        txt16NetTax.Text = Val(txt16TotalTax.Text) - Val(txt16Relief.Text)
-        txt16totalTDS.Text = Val(txt16TDS1.Text) + Val(txt16TDS2.Text)
-        txtPayRef.Text = Val(txt16NetTax.Text) - Val(txt16totalTDS.Text) - Val(txt16TaxPreEmp)
-        Check80CTotals(Total80C)
-        'UpdateAutoCalcFields
-        '   Autotaxcal
-    End Sub
+    'Public Sub CalculateSalaryNTax()
+    '    Dim R As Long, TotalAllow As Double
+    '    Dim TotalOthInc As Double
+    '    Dim Total80C, TotalChapVIA As Integer
+    '    Dim Total80CCG, Total80CCF As Integer
+    '    'Calculate the Gross Total Salary
+    '    txt16grosstotCurEmp.Text = Val(txt16gross1.Text) + Val(txt16gross2.Text) + Val(txt16gross3.Text) '+ Val(txt16grosstotCurEmp.Text) + Val(txt16grosstotPreEmp.Text)
+    '    txt16grosstotBoth.Text = Val(txt16grosstotCurEmp.Text) + Val(txt16grosstotPreEmp.Text)
+    '    'Calculate total allowance and deduct from Gross Total Salary...to get Balance...
+    '    TotalAllow = 0
+    '    For R = 1 To grd16allow.Rows.Count - 1
+    '        TotalAllow = TotalAllow + Val(grd16allow.Rows(R).Cells(1).Value)
+    '    Next R
+    '    txtallow.Text = TotalAllow
+    '    txt16bal.Text = Val(txt16grosstotBoth.Text) - TotalAllow
+    '    'Calculate Total Deduction of section 16
+    '    txtTotalDedct.Text = Val(txt16EntAllow.Text) + Val(txt16ProfTax.Text)
+    '    'now, calculate total taxable salary...
+    '    txt16TaxableSalary.Text = Val(txt16bal.Text) - Val(txtTotalDedct.Text)
+    '    'now calculate the sum of other incomes and to taxable salary to get gross total income
+    '    TotalOthInc = 0
+    '    For R = 1 To grd16otherIncome.Rows.Count - 1
+    '        TotalOthInc = TotalOthInc + Val(grd16otherIncome.Rows(R).Cells(1).Value)
+    '    Next R
+    '    txt16GTI.Text = Val(txt16TaxableSalary.Text) + TotalOthInc
+    '    'now calculate the sum of other incomes and to taxable salary to get gross total income
+    '    Total80C = 0
+    '    For R = 1 To grd1680c.Rows.Count - 1
+    '        Total80C = Total80C + grd1680c.Rows(R).Cells(2).Value.ToString()
+    '    Next R
+    '    Total80CCF = 0
+    '    For R = 1 To grd1680CCF.Rows.Count - 1
+    '        Total80CCF = Total80CCF + grd1680CCF.Rows(R).Cells(2).Value.ToString()
+    '    Next R
+    '    Total80CCG = 0
+    '    For R = 1 To grd1680CCG.Rows.Count - 1
+    '        Total80CCG = Total80CCG + grd1680CCG.Rows(R).Cells(2).Value.ToString()
+    '    Next R
+    '    TotalChapVIA = 0
+    '    For R = 1 To grd16OtherIVA.Rows.Count - 1
+    '        TotalChapVIA = TotalChapVIA + grd16OtherIVA.Rows(R).Cells(3).Value.ToString()
+    '    Next R
+    '    txt1680c.Text = Total80C
+    '    txt1680CCF.Text = Total80CCF
+    '    txt1680CCG.Text = Total80CCG
+    '    txtT16OtherIVA.Text = TotalChapVIA
+    '    txt16otherIncome.Text = TotalOthInc
+    '    txt16OtherIVA.Text = Val(txt1680c.Text) + Val(txtT16OtherIVA.Text) + Val(txt1680CCF.Text) + txt1680CCG.Text
+    '    txt16TotalTaxableIncome.Text = Val(txt16GTI.Text) - Val(txt16OtherIVA.Text)
+    '    txtincome.Text = Val(txt16TotalTaxableIncome.Text)
+    '    'Now Calculate the taxes...
+    '    ' txt16Tax.Text = Val(txt16TaxCurEmp.Text) + Val(txt16TaxPreEmp.Text)
+    '    txt16TotalTax.Text = Val(txt16Tax.Text) + Val(txt16Surcharge.Text) + Val(txt16EduCess.Text)
+    '    txt16NetTax.Text = Val(txt16TotalTax.Text) - Val(txt16Relief.Text)
+    '    txt16totalTDS.Text = Val(txt16TDS1.Text) + Val(txt16TDS2.Text)
+    '    txtPayRef.Text = Val(txt16NetTax.Text) - Val(txt16totalTDS.Text) - Val(txt16TaxPreEmp.Text)
+    '    Check80CTotals(Total80C)
+    '    'UpdateAutoCalcFields
+    '    '   Autotaxcal
+    'End Sub
 
     Private Sub txtgrd80CCFCal_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
 
     End Sub
 
     Private Sub grd1680CCF_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680CCF.CellLeave
-        CalculateSalaryNTax()
+        'CalculateSalaryNTax()
     End Sub
 
     Private Sub grd16otherIncome_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles grd16otherIncome.CellContentClick
@@ -830,11 +963,11 @@ Public Class FRM16Detail
     End Sub
 
     Private Sub grd1680c_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680c.CellLeave
-        CalculateSalaryNTax()
+        'CalculateSalaryNTax()
     End Sub
 
     Private Sub grd1680CCG_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680CCG.CellLeave
-        CalculateSalaryNTax()
+        'CalculateSalaryNTax()
     End Sub
 
     Private Sub grd16ManualTax_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles grd16ManualTax.CellBeginEdit
@@ -892,11 +1025,11 @@ Public Class FRM16Detail
     End Sub
 
     Private Sub grd16OtherIVA_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles grd16OtherIVA.CellLeave
-        CalculateSalaryNTax()
+        'CalculateSalaryNTax()
     End Sub
 
     Private Sub grd16otherIncome_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles grd16otherIncome.CellLeave
-        CalculateSalaryNTax()
+        'CalculateSalaryNTax()
     End Sub
 
     Private Sub cbo16DedName_LostFocus(sender As Object, e As EventArgs) Handles cbo16DedName.LostFocus
@@ -996,7 +1129,7 @@ Public Class FRM16Detail
             End If
         End If
 
-        amt = txtincome.Text
+        amt = Val(txtincome.Text)
         While Not i = 0
             Select Case i
                 Case 1
@@ -1052,8 +1185,8 @@ Public Class FRM16Detail
         End If
         txtTax.Text = Math.Round(itax, 0)
         'txtSurcharge = 0
-        txtEd.Text = Math.Round(((itax + Val(txtSurcharge)) * 3) / 100, 0)
-        txtTotTax.Text = Val(txtTax) + Val(txtSurcharge) + Val(txtEd)
+        txtEd.Text = Math.Round(((itax + Val(txtSurcharge.Text)) * 3) / 100, 0)
+        txtTotTax.Text = Val(txtTax.Text) + Val(txtSurcharge.Text) + Val(txtEd.Text)
     End Sub
 
     Private Sub cbo16DedName_GotFocus(sender As Object, e As EventArgs) Handles cbo16DedName.GotFocus
@@ -1363,8 +1496,20 @@ Public Class FRM16Detail
         Call CtrlGotFocus(txt16totalTDS)
     End Sub
 
+    Private Sub Label24_Click(sender As Object, e As EventArgs) Handles Label24.Click
+
+    End Sub
+
+    Private Sub Label47_Click(sender As Object, e As EventArgs) Handles Label47.Click
+
+    End Sub
+
     Private Sub txt16totalTDS_LostFocus(sender As Object, e As EventArgs) Handles txt16totalTDS.LostFocus
         Call CtrlLostFocus(txt16totalTDS)
+    End Sub
+
+    Private Sub txtgrd80CCFCal_TextChanged(sender As Object, e As EventArgs) Handles txtgrd80CCFCal.TextChanged
+
     End Sub
 
     Private Sub grd16OtherIVA_KeyUp(sender As Object, e As KeyEventArgs) Handles grd16OtherIVA.KeyUp
@@ -1378,6 +1523,10 @@ Public Class FRM16Detail
         End If
     End Sub
 
+    Private Sub grd16allow_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles grd16allow.CellContentClick
+
+    End Sub
+
     Private Sub grd16OtherIVA_MouseUp(sender As Object, e As MouseEventArgs) Handles grd16OtherIVA.MouseUp
         'If e.Button = MouseButtons.Right Then
         '    If UCase(Me.ActiveControl.Name) <> "GRD16OTHERIVA" Then grd16OtherIVA.Focus()
@@ -1385,79 +1534,231 @@ Public Class FRM16Detail
         '         popupmenu mnucontext
         '    End If
     End Sub
-    'Private Sub oForm16_PrepareDataForSave(Cancel As Boolean)
-    '    With oForm16
-    '        If xMode = "E" Then
-    '            .F16ID = frmTDS24Q.lvwForm16.SelectedItems(0).SubItems(24).Text
-    '        End If
 
-    '        .did = cbo16DedName.Items.Add(cbo16DedName.SelectedIndex)
-    '        .RetnID = frmTDS24Q.Tag
-    '        .DDesgn = txtdesig.Text
-    '        .EmpFromDt = txt16FrmDt.Text
-    '        .EmpToDt = txt16ToDt.Text
-    '        .Gross1 = IIf(Val(txt16gross1.Text) = 0, 0, txt16gross1.Text)
-    '        .Gross2 = IIf(Val(txt16gross2.Text) = 0, 0, txt16gross2.Text)
-    '        .Gross3 = IIf(Val(txt16gross3.Text) = 0, 0, txt16gross3.Text)
-    '        .Sec16ii = IIf(Val(txt16EntAllow.Text) = 0, 0, txt16EntAllow.Text)
-    '        .Sec16iii = IIf(Val(txt16ProfTax.Text) = 0, 0, txt16ProfTax.Text)
-    '        .TaxAmt = IIf(Val(txt16Tax.Text) = 0, 0, txt16Tax.Text)
-    '        .Surcharge = IIf(Val(txt16Surcharge.Text) = 0, 0, txt16Surcharge.Text)
-    '        .ECess = IIf(Val(txt16EduCess.Text) = 0, 0, txt16EduCess.Text)
-    '        .Relief89 = IIf(Val(txt16Relief.Text) = 0, 0, txt16Relief.Text)
-    '        '        .SignByName = IIf(Trim(txtSignByName.Text) = vbNullString, "", txtSignByName.Text)
-    '        '        .SignByFatherName = IIf(Trim(txtSignByFatherName.Text) = vbNullString, "", txtSignByFatherName.Text)
-    '        '        .SignByCapacity = IIf(Trim(txtSignByCapacity.Text) = vbNullString, "", txtSignByCapacity.Text)
-    '        '        .PlaceOfForm = IIf(Trim(txtPlace.Text) = vbNullString, "", txtPlace.Text)
-    '        '        .DateOfForm = txtDate.Text
-    '        .TDSOnPerks = IIf(Val(txt16TDS2.Text) = 0, 0, txt16TDS2.Text)
-    '        .TotalSalaryPreEmp = IIf(Val(txt16grosstotPreEmp.Text) = 0, 0, txt16grosstotPreEmp.Text)
-    '        .TDSAmtPreEmp = IIf(Val(txt16TaxPreEmp.Text) = 0, 0, txt16TaxPreEmp.Text)
-    '        .HighRatePAN = IIf(chkHighRate.Checked = True, False, True)
-    '    End With
-    '    'Fill the allowances Collection..
-    '    Dim R As Long, c As Long
-    '    oAllowances.Clear()
 
-    '    'txt16TaxableSalary.Text = IIf((rs.Tables(0).Rows(0)("amtofpayment").ToString()), 0, rs.Tables(0).Rows(0)("amtofpayment"))
-    '    For R = 1 To grd16allow.Rows.Count - 1
-    '        '* oAllowances.Add IIf(Val(grd16allow.TextMatrix(R, 2)) = 0, 0, grd16allow.TextMatrix(R, 2)), oForm16.F16ID, "A", grd16allow.TextMatrix(R, 0), Val(grd16allow.TextMatrix(R, 1)), 0, 0
+    Private Sub oForm16_BeforeSave(Cancel As Boolean) Handles oForm16.BeforeSave
+        'check validatation before we save the data...if ok the use event prepareData for Save...
+        If Trim(txtdesig.Text) = vbNullString Then
+            MsgBox("Please enter proper designation of the employee", vbInformation, "Data Required")
+            'tabForm16.Tab = 0
+            Cancel = True
+            Exit Sub
+        ElseIf Val(txt16gross1.Text) = 0 Then
+            MsgBox("Please enter some salary amount", vbInformation, "Data Required")
+            txt16gross1.Focus()
+            Cancel = True
+            Exit Sub
+        End If
+        With grd16ManualTax
+            For R = 1 To grd16ManualTax.Rows.Count - 2
+                If Val(grd16ManualTax.Rows(R).Cells(1).Value) > 0 Then
 
-    '    Next R
-    '    'Fill the Other Income Collection..
-    '    oOthIncomes.Clear()
+                    If Len(.Rows(R).Cells(6).Value) < 6 Or Len(.Rows(R).Cells(6).Value) > 7 Then
+                        Cancel = True
+                        tabForm16.SelectedIndex = 5
+                    End If
+                    If Not IsDate(.Rows(R).Cells(7).Value) Then
+                        Cancel = True
+                        'tabForm16.Tab = 5
+                        tabForm16.SelectedIndex = 5
+                    Else
+                        If CDate(.Rows(R).Cells(7).Value) < FromDate Or CDate(.Rows(R).Cells(7).Value) > ToDate Then
+                            Cancel = True
+                            'tabForm16.Tab = 5
+                            tabForm16.SelectedIndex = 5
+                        End If
+                    End If
 
-    '    For R = 1 To grd16otherIncome.Rows.Count - 1
-    '        '*   oOthIncomes.Add IIf(Val(grd16otherIncome.TextMatrix(R, 2)) = 0, 0, grd16otherIncome.TextMatrix(R, 2)), oForm16.F16ID, "O", grd16otherIncome.TextMatrix(R, 0), Val(grd16otherIncome.TextMatrix(R, 1)), 0, 0
-    '    Next R
-    '    'Fill the 80C_deduction Collection..
-    '    oSec80CDeductions.Clear()
+                    If .Rows(R).Cells(8).Value <= 0 Or .Rows(R).Cells(8).Value = vbNullString Then
+                        Cancel = True
+                        'tabForm16.Tab = 5
+                        tabForm16.SelectedIndex = 5
+                    End If
+                End If
+            Next R
+        End With
+    End Sub
 
-    '    For R = 1 To grd1680c.Rows.Count - 1
-    '        ' *  oSec80CDeductions.Add IIf(Val(grd1680c.TextMatrix(R, 3)) = 0, 0, grd1680c.TextMatrix(R, 3)), oForm16.F16ID, "E", grd1680c.TextMatrix(R, 0), Val(grd1680c.TextMatrix(R, 1)), 0, Val(grd1680c.TextMatrix(R, 2))
-    '    Next R
 
-    '    'Fill the 80CCF_deduction Collection..
-    '    oSec80CCFDeductions.Clear()
+    Private Sub oForm16_PrepareDataForSave(Cancel As Boolean) Handles oForm16.PrepareDataForSave
+        With oForm16
+            If xMode = "E" Then
+                .F16ID = frmTDS24Q.lvwForm16.SelectedItems(0).SubItems(24).Text
+            End If
 
-    '    For R = 1 To grd1680CCF.Rows.Count - 1
-    '        ' *   oSec80CCFDeductions.Add IIf(Val(grd1680CCF.TextMatrix(R, 3)) = 0, 0, grd1680CCF.TextMatrix(R, 3)), "E", grd1680CCF.TextMatrix(R, 0), Val(grd1680CCF.TextMatrix(R, 1)), 0, Val(grd1680CCF.TextMatrix(R, 2)), oForm16.F16ID
-    '    Next R
+            .did = cbo16DedName.SelectedValue
+            .RetnID = frmTDS24Q.Tag
+            .DDesgn = txtdesig.Text
+            Dim dt As Date
+            dt = txt16FrmDt.Text
+            .EmpFromDt = dt.ToString("dd/MMM/yyyy")
+            dt = txt16ToDt.Text
+            .EmpToDt = dt.ToString("dd/MMM/yyyy")
 
-    '    'Fill the 80CCG_deduction Collection..
-    '    oSec80CCGDeductions.Clear()
+            .Gross1 = Val(txt16gross1.Text)
+            .Gross2 = Val(txt16gross2.Text)
+            .Gross3 = Val(txt16gross3.Text)
+            .Sec16ii = Val(txt16EntAllow.Text)
+            .Sec16iii = Val(txt16ProfTax.Text)
+            .TaxAmt = Val(txt16Tax.Text)
+            .Surcharge = Val(txt16Surcharge.Text)
+            .ECess = Val(txt16EduCess.Text)
+            .Relief89 = Val(txt16Relief.Text)
 
-    '    For R = 1 To grd1680CCG.Rows.Count - 1
-    '        ' *   oSec80CCGDeductions.Add IIf(Val(grd1680CCG.TextMatrix(R, 3)) = 0, 0, grd1680CCG.TextMatrix(R, 3)), oForm16.F16ID, "G", grd1680CCG.TextMatrix(R, 0), Val(grd1680CCG.TextMatrix(R, 1)), 0, Val(grd1680CCG.TextMatrix(R, 2))
-    '    Next R
+            .TDSOnPerks = Val(txt16TDS2.Text)
+            .TotalSalaryPreEmp = Val(txt16grosstotPreEmp.Text)
+            .TDSAmtPreEmp = Val(txt16TaxPreEmp.Text)
+            .HighRatePAN = IIf(chkHighRate.Checked = True, True, False)
+        End With
 
-    '    'Fill the Other VI-A_deduction Collection..
-    '    R = 1
-    '    oChapter6ADeductions.Clear()
+        'Fill the allowances Collection..
+        'Dim R As Long, c As Long
+        'oAllowances.Clear()
 
-    '    For R = 1 To grd16OtherIVA.Rows.Count - 1
-    '        ' * oChapter6ADeductions.Add IIf(Val(grd16OtherIVA.TextMatrix(R, 4)) = 0, 0, grd16OtherIVA.TextMatrix(R, 4)), oForm16.F16ID, "V", grd16OtherIVA.TextMatrix(R, 0), Val(grd16OtherIVA.TextMatrix(R, 1)), Val(grd16OtherIVA.TextMatrix(R, 2)), Val(grd16OtherIVA.TextMatrix(R, 3))
-    '    Next R
-    'End Sub
 
+        'For R = 1 To grd16allow.Rows.Count - 1
+        '    oAllowances.Add(IIf(Val(grd16allow.Rows(R).Cells(2).ValueType) = 0, 0, grd16allow.Rows(R).Cells(2).Value), oForm16.F16ID, "A", grd16allow.Rows(R).Cells(0).Value, Val(grd16allow.Rows(R).Cells(1).Value), 0, 0)
+        'Next R
+        ''Fill the Other Income Collection..
+        'oOthIncomes.Clear()
+
+        'For R = 1 To grd16otherIncome.Rows.Count - 1
+        '    oOthIncomes.Add(IIf(Val(grd16otherIncome.Rows(R).Cells(2).Value) = 0, 0, grd16otherIncome.Rows(R).Cells(2).Value), oForm16.F16ID, "O", grd16otherIncome.Rows(R).Cells(0).Value, Val(grd16otherIncome.Rows(R).Cells(1).Value), 0, 0)
+        'Next R
+        ''Fill the 80C_deduction Collection..
+        'oSec80CDeductions.Clear()
+
+        'For R = 1 To grd1680c.Rows.Count - 1
+        '    oSec80CDeductions.Add(IIf(Val(grd1680c.Rows(R).Cells(3).Value) = 0, 0, grd1680c.Rows(R).Cells(3).Value), oForm16.F16ID, "E", grd1680c.Rows(R).Cells(0).Value, Val(grd1680c.Rows(R).Cells(1).Value), 0, Val(grd1680c.Rows(R).Cells(2).Value))
+        'Next R
+
+        ''Fill the 80CCF_deduction Collection..
+        'oSec80CCFDeductions.Clear()
+
+        'For R = 1 To grd1680CCF.Rows.Count - 1
+        '    oSec80CCFDeductions.Add(IIf(Val(grd1680CCF.Rows(R).Cells(3).Value) = 0, 0, grd1680CCF.Rows(R).Cells(3).Value), "E", grd1680CCF.Rows(R).Cells(0).Value, Val(grd1680CCF.Rows(R).Cells(1).Value), 0, Val(grd1680CCF.Rows(R).Cells(2).Value), oForm16.F16ID)
+        'Next R
+
+        ''Fill the 80CCG_deduction Collection..
+        'oSec80CCGDeductions.Clear()
+
+        'For R = 1 To grd1680CCG.Rows.Count - 1
+        '    oSec80CCGDeductions.Add(IIf(Val(grd1680CCG.Rows(R).Cells(3).Value) = 0, 0, grd1680CCG.Rows(R).Cells(3).Value), oForm16.F16ID, "G", grd1680CCG.Rows(R).Cells(0).Value, Val(grd1680CCG.Rows(R).Cells(1).Value), 0, Val(grd1680CCG.Rows(R).Cells(2).Value))
+        'Next R
+
+        ''Fill the Other VI-A_deduction Collection..
+        'R = 1
+        'oChapter6ADeductions.Clear()
+
+        'For R = 1 To grd16OtherIVA.Rows.Count - 1
+        '    oChapter6ADeductions.Add(IIf(Val(grd16OtherIVA.Rows(R).Cells(4)) = 0, 0, grd16OtherIVA.Rows(R).Cells(4).Value), oForm16.F16ID, "V", grd16OtherIVA.Rows(R).Cells(0).Value, Val(grd16OtherIVA.Rows(R).Cells(1).Value), Val(grd16OtherIVA.Rows(R).Cells(2).Value), Val(grd16OtherIVA.Rows(R).Cells(3).Value))
+        'Next R
+    End Sub
+
+    Private Sub oForm16More_PrepareDataForSave(Cancel As Boolean, R As Long, grd As DataGridView) Handles oForm16More.PrepareDataForSave
+        With oForm16More
+            If xMode = "E" Then
+                .F16ID = frmTDS24Q.lvwForm16.SelectedItems(0).SubItems(24).Text
+            Else
+                .F16ID = oForm16.F16ID
+            End If
+
+            '.ID = IIf(Val(grd16allow.Rows(R).Cells(2).Value) = 0, 0, grd16allow.Rows(R).Cells(2).Value)
+            '.TypeOfDetail = TypeOfDetail
+            .Particulars = grd.Rows(R).Cells(0).Value
+            .GrossAmt = Val(grd.Rows(R).Cells(1).Value)
+            .QualifyAmt = Val(grd.Rows(R).Cells(2).Value)
+            .DeductibleAmt = Val(grd.Rows(R).Cells(3).Value)
+
+        End With
+    End Sub
+    Public Sub CalculateSalaryNTax()
+        Dim R As Long, TotalAllow As Double, TotalOthInc As Double, Total80CCF As Double
+        Dim Total80C As Double, TotalChapVIA As Double, Total80CCG As Double
+        'Calculate the Gross Total Salary
+        txt16grosstotCurEmp.Text = Val(txt16gross1.Text) + Val(txt16gross2.Text) + Val(txt16gross3.Text) '+ Val(txt16grosstotCurEmp.Text) + Val(txt16grosstotPreEmp.Text)
+        txt16grosstotBoth.Text = Val(txt16grosstotCurEmp.Text) + Val(txt16grosstotPreEmp.Text)
+        'Calculate total allowance and deduct from Gross Total Salary...to get Balance...
+        TotalAllow = 0
+        For R = 0 To grd16allow.Rows.Count - 1
+            TotalAllow = TotalAllow + grd16allow.Rows(R).Cells(1).Value
+        Next R
+        txtallow.Text = TotalAllow
+        txt16bal.Text = Val(txt16grosstotBoth.Text) - TotalAllow
+        'Calculate Total Deduction of section 16
+        txtTotalDedct.Text = Val(txt16EntAllow.Text) + Val(txt16ProfTax.Text)
+        'now, calculate total taxable salary...
+        txt16TaxableSalary.Text = Val(txt16bal.Text) - Val(txtTotalDedct.Text)
+        'now calculate the sum of other incomes and to taxable salary to get gross total income
+        TotalOthInc = 0
+        For R = 0 To grd16otherIncome.Rows.Count - 1
+            TotalOthInc = TotalOthInc + grd16otherIncome.Rows(R).Cells(1).Value
+        Next R
+        txt16GTI.Text = Val(txt16TaxableSalary.Text) + TotalOthInc
+        'now calculate the sum of other incomes and to taxable salary to get gross total income
+        Total80C = 0
+        For R = 0 To grd1680c.Rows.Count - 1
+            Total80C = Total80C + grd1680c.Rows(R).Cells(2).Value
+        Next R
+        Total80CCF = 0
+        For R = 0 To grd1680CCF.Rows.Count - 1
+            Total80CCF = Total80CCF + grd1680CCF.Rows(R).Cells(2).Value
+        Next R
+        Total80CCG = 0
+        For R = 0 To grd1680CCG.Rows.Count - 1
+            Total80CCG = Total80CCG + grd1680CCG.Rows(R).Cells(2).Value
+        Next R
+        TotalChapVIA = 0
+        For R = 0 To grd16OtherIVA.Rows.Count - 1
+            TotalChapVIA = TotalChapVIA + grd16OtherIVA.Rows(R).Cells(3).Value
+        Next R
+        'Sapna 270510
+        txt1680c.Text = Total80C
+        txt1680CCF.Text = Total80CCF
+        txt1680CCG.Text = Total80CCG
+        txtT16OtherIVA.Text = TotalChapVIA
+        txt16otherIncome.Text = TotalOthInc
+        txt16OtherIVA.Text = Total80C + TotalChapVIA + Val(txt1680CCF.Text) + Val(txt1680CCG.Text)
+        txt16TotalTaxableIncome.Text = Val(txt16GTI.Text) - Val(txt16OtherIVA.Text)
+        txtincome.Text = Val(txt16TotalTaxableIncome.Text)
+        'Now Calculate the taxes...
+        ' txt16Tax.Text = Val(txt16TaxCurEmp.Text) + Val(txt16TaxPreEmp.Text)
+        txt16TotalTax.Text = Val(txt16Tax.Text) + Val(txt16Surcharge.Text) + Val(txt16EduCess.Text)
+        txt16NetTax.Text = Val(txt16TotalTax.Text) - Val(txt16Relief.Text)
+        txt16totalTDS.Text = Val(txt16TDS1.Text) + Val(txt16TDS2.Text)
+        txtPayRef.Text = Val(txt16NetTax.Text) - Val(txt16totalTDS.Text) - Val(txt16TaxPreEmp.Text)
+        Check80CTotals(Total80C)
+        'UpdateAutoCalcFields
+        '   Autotaxcal
+    End Sub
+
+
+    Private Sub grd16allow_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles grd16allow.CellLeave
+        'CalculateSalaryNTax()
+    End Sub
+
+
+    Private Sub grd16allow_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grd16allow.CellValueChanged
+        CalculateSalaryNTax()
+    End Sub
+
+    Private Sub grd1680c_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680c.CellValueChanged
+        CalculateSalaryNTax()
+    End Sub
+
+    Private Sub grd1680CCF_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680CCF.CellValueChanged
+        CalculateSalaryNTax()
+    End Sub
+
+    Private Sub grd1680CCG_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680CCG.CellValueChanged
+        CalculateSalaryNTax()
+    End Sub
+
+    Private Sub grd16otherIncome_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grd16otherIncome.CellValueChanged
+        CalculateSalaryNTax()
+    End Sub
+
+    Private Sub grd16OtherIVA_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grd16OtherIVA.CellValueChanged
+        CalculateSalaryNTax()
+    End Sub
 End Class

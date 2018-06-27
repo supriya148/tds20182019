@@ -62,7 +62,6 @@ Partial Class FRM16Detail
         Me.Label45 = New System.Windows.Forms.Label()
         Me.txt16NetTax = New System.Windows.Forms.TextBox()
         Me.Label46 = New System.Windows.Forms.Label()
-        Me.txt16TDS1 = New System.Windows.Forms.TextBox()
         Me.Label47 = New System.Windows.Forms.Label()
         Me.txt16TDS2 = New System.Windows.Forms.TextBox()
         Me.Label48 = New System.Windows.Forms.Label()
@@ -71,6 +70,7 @@ Partial Class FRM16Detail
         Me.txt16TaxPreEmp = New System.Windows.Forms.TextBox()
         Me.Label50 = New System.Windows.Forms.Label()
         Me.txtPayRef = New System.Windows.Forms.TextBox()
+        Me.txt16TDS1 = New System.Windows.Forms.TextBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.txtTotTax = New System.Windows.Forms.TextBox()
         Me.Label39 = New System.Windows.Forms.Label()
@@ -171,12 +171,16 @@ Partial Class FRM16Detail
         Me.txt16gross3 = New System.Windows.Forms.TextBox()
         Me.grd16otherIncome = New System.Windows.Forms.DataGridView()
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column41 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column35 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grd16allow = New System.Windows.Forms.DataGridView()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column12 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column34 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column39 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column40 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.tabBasicData = New System.Windows.Forms.TabPage()
@@ -418,7 +422,7 @@ Partial Class FRM16Detail
         Me.Label53.ForeColor = System.Drawing.SystemColors.Highlight
         Me.Label53.Location = New System.Drawing.Point(0, 0)
         Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(747, 17)
+        Me.Label53.Size = New System.Drawing.Size(633, 17)
         Me.Label53.TabIndex = 1
         Me.Label53.Text = "Details of Tax Deducted && deposited into Central Government Account (in cases of" &
     " internally transfered employees.)"
@@ -438,10 +442,12 @@ Partial Class FRM16Detail
         '
         'grdchallanDetails
         '
+        Me.grdchallanDetails.BackgroundColor = System.Drawing.Color.Lavender
         Me.grdchallanDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdchallanDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24})
         Me.grdchallanDetails.Location = New System.Drawing.Point(4, 21)
         Me.grdchallanDetails.Name = "grdchallanDetails"
+        Me.grdchallanDetails.RowHeadersVisible = False
         Me.grdchallanDetails.Size = New System.Drawing.Size(687, 387)
         Me.grdchallanDetails.TabIndex = 1
         '
@@ -496,7 +502,7 @@ Partial Class FRM16Detail
         Me.Label52.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label52.Location = New System.Drawing.Point(3, 3)
         Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(455, 17)
+        Me.Label52.Size = New System.Drawing.Size(388, 17)
         Me.Label52.TabIndex = 0
         Me.Label52.Text = "Details of Tax Deducted && deposited into Central Government Account"
         '
@@ -516,16 +522,19 @@ Partial Class FRM16Detail
         '
         'TableLayoutPanel2
         '
-        Me.TableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
+        Me.TableLayoutPanel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.TableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
         Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.90756!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.09244!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 278.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Label44, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.txt16Relief, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Label45, 0, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.txt16NetTax, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Label46, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.txt16TDS1, 1, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.Label47, 0, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.txt16TDS2, 1, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.Label48, 0, 4)
@@ -534,77 +543,71 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel2.Controls.Add(Me.txt16TaxPreEmp, 1, 5)
         Me.TableLayoutPanel2.Controls.Add(Me.Label50, 0, 6)
         Me.TableLayoutPanel2.Controls.Add(Me.txtPayRef, 1, 6)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 167)
+        Me.TableLayoutPanel2.Controls.Add(Me.txt16TDS1, 1, 2)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 186)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 7
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.45901!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.54099!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(479, 215)
         Me.TableLayoutPanel2.TabIndex = 31
         '
         'Label44
         '
-        Me.Label44.AutoSize = True
         Me.Label44.Location = New System.Drawing.Point(6, 3)
         Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(116, 15)
+        Me.Label44.Size = New System.Drawing.Size(116, 24)
         Me.Label44.TabIndex = 10
         Me.Label44.Text = "Relief u/s Sec 89"
         '
         'txt16Relief
         '
+        Me.txt16Relief.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16Relief.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Relief.Location = New System.Drawing.Point(215, 6)
+        Me.txt16Relief.Location = New System.Drawing.Point(216, 6)
         Me.txt16Relief.MaxLength = 15
         Me.txt16Relief.Name = "txt16Relief"
-        Me.txt16Relief.Size = New System.Drawing.Size(258, 21)
+        Me.txt16Relief.Size = New System.Drawing.Size(272, 21)
         Me.txt16Relief.TabIndex = 1
         '
         'Label45
         '
-        Me.Label45.AutoSize = True
-        Me.Label45.Location = New System.Drawing.Point(6, 35)
+        Me.Label45.Location = New System.Drawing.Point(6, 30)
         Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(162, 15)
+        Me.Label45.Size = New System.Drawing.Size(162, 24)
         Me.Label45.TabIndex = 12
         Me.Label45.Text = "Net Income Tax Payable"
         '
         'txt16NetTax
         '
+        Me.txt16NetTax.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16NetTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16NetTax.Location = New System.Drawing.Point(215, 38)
+        Me.txt16NetTax.Location = New System.Drawing.Point(216, 33)
         Me.txt16NetTax.MaxLength = 15
         Me.txt16NetTax.Name = "txt16NetTax"
-        Me.txt16NetTax.Size = New System.Drawing.Size(258, 21)
+        Me.txt16NetTax.Size = New System.Drawing.Size(272, 21)
         Me.txt16NetTax.TabIndex = 2
         '
         'Label46
         '
-        Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(6, 64)
+        Me.Label46.Location = New System.Drawing.Point(6, 57)
         Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(103, 15)
+        Me.Label46.Size = New System.Drawing.Size(201, 28)
         Me.Label46.TabIndex = 14
         Me.Label46.Text = "TDS u/s 192(1)"
         '
-        'txt16TDS1
-        '
-        Me.txt16TDS1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16TDS1.Location = New System.Drawing.Point(215, 67)
-        Me.txt16TDS1.MaxLength = 15
-        Me.txt16TDS1.Name = "txt16TDS1"
-        Me.txt16TDS1.Size = New System.Drawing.Size(258, 21)
-        Me.txt16TDS1.TabIndex = 3
-        '
         'Label47
         '
-        Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(6, 94)
+        Me.Label47.Location = New System.Drawing.Point(6, 88)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(194, 26)
         Me.Label47.TabIndex = 16
@@ -612,75 +615,97 @@ Partial Class FRM16Detail
         '
         'txt16TDS2
         '
+        Me.txt16TDS2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16TDS2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txt16TDS2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt16TDS2.Location = New System.Drawing.Point(215, 97)
+        Me.txt16TDS2.Location = New System.Drawing.Point(216, 91)
         Me.txt16TDS2.MaxLength = 15
         Me.txt16TDS2.Name = "txt16TDS2"
-        Me.txt16TDS2.Size = New System.Drawing.Size(258, 22)
+        Me.txt16TDS2.Size = New System.Drawing.Size(272, 22)
         Me.txt16TDS2.TabIndex = 4
         '
         'Label48
         '
-        Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(6, 123)
+        Me.Label48.Location = New System.Drawing.Point(6, 117)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(103, 15)
+        Me.Label48.Size = New System.Drawing.Size(188, 28)
         Me.Label48.TabIndex = 18
         Me.Label48.Text = "Total TDS Paid"
         '
         'txt16totalTDS
         '
+        Me.txt16totalTDS.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16totalTDS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16totalTDS.Location = New System.Drawing.Point(215, 126)
+        Me.txt16totalTDS.Location = New System.Drawing.Point(216, 120)
         Me.txt16totalTDS.MaxLength = 15
         Me.txt16totalTDS.Name = "txt16totalTDS"
-        Me.txt16totalTDS.Size = New System.Drawing.Size(258, 21)
+        Me.txt16totalTDS.Size = New System.Drawing.Size(272, 21)
         Me.txt16totalTDS.TabIndex = 5
         '
         'Label49
         '
-        Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(6, 155)
+        Me.Label49.BackColor = System.Drawing.Color.Aquamarine
+        Me.Label49.Location = New System.Drawing.Point(6, 148)
         Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(178, 15)
+        Me.Label49.Size = New System.Drawing.Size(178, 24)
         Me.Label49.TabIndex = 20
         Me.Label49.Text = "TDS for Previous Employer"
         '
         'txt16TaxPreEmp
         '
+        Me.txt16TaxPreEmp.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16TaxPreEmp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16TaxPreEmp.Location = New System.Drawing.Point(215, 158)
+        Me.txt16TaxPreEmp.Location = New System.Drawing.Point(216, 151)
         Me.txt16TaxPreEmp.MaxLength = 15
         Me.txt16TaxPreEmp.Name = "txt16TaxPreEmp"
-        Me.txt16TaxPreEmp.Size = New System.Drawing.Size(258, 21)
+        Me.txt16TaxPreEmp.Size = New System.Drawing.Size(272, 21)
         Me.txt16TaxPreEmp.TabIndex = 6
         '
         'Label50
         '
-        Me.Label50.AutoSize = True
-        Me.Label50.Location = New System.Drawing.Point(6, 184)
+        Me.Label50.Location = New System.Drawing.Point(6, 180)
         Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(171, 15)
+        Me.Label50.Size = New System.Drawing.Size(171, 24)
         Me.Label50.TabIndex = 22
         Me.Label50.Text = "Tax Payable / Refundable"
         '
         'txtPayRef
         '
+        Me.txtPayRef.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPayRef.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPayRef.Location = New System.Drawing.Point(215, 187)
+        Me.txtPayRef.Location = New System.Drawing.Point(216, 183)
         Me.txtPayRef.MaxLength = 15
         Me.txtPayRef.Name = "txtPayRef"
-        Me.txtPayRef.Size = New System.Drawing.Size(258, 21)
+        Me.txtPayRef.Size = New System.Drawing.Size(272, 21)
         Me.txtPayRef.TabIndex = 7
+        '
+        'txt16TDS1
+        '
+        Me.txt16TDS1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txt16TDS1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16TDS1.Location = New System.Drawing.Point(216, 60)
+        Me.txt16TDS1.MaxLength = 15
+        Me.txt16TDS1.Name = "txt16TDS1"
+        Me.txt16TDS1.Size = New System.Drawing.Size(272, 21)
+        Me.txt16TDS1.TabIndex = 3
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
+        Me.TableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
         Me.TableLayoutPanel1.ColumnCount = 3
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.89457!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.10543!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 439.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.26028!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.73973!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.txtTotTax, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.Label39, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label43, 0, 4)
@@ -696,7 +721,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel1.Controls.Add(Me.Label51, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.txtincome, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.txt16TotalTax, 1, 4)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 5
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.6129!))
@@ -710,10 +735,10 @@ Partial Class FRM16Detail
         'txtTotTax
         '
         Me.txtTotTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotTax.Location = New System.Drawing.Point(39, 131)
+        Me.txtTotTax.Location = New System.Drawing.Point(278, 131)
         Me.txtTotTax.MaxLength = 15
         Me.txtTotTax.Name = "txtTotTax"
-        Me.txtTotTax.Size = New System.Drawing.Size(206, 21)
+        Me.txtTotTax.Size = New System.Drawing.Size(175, 21)
         Me.txtTotTax.TabIndex = 26
         '
         'Label39
@@ -721,7 +746,7 @@ Partial Class FRM16Detail
         Me.Label39.AutoSize = True
         Me.Label39.Location = New System.Drawing.Point(6, 3)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(5, 29)
+        Me.Label39.Size = New System.Drawing.Size(125, 15)
         Me.Label39.TabIndex = 3
         Me.Label39.Text = "Total Taxable Income"
         '
@@ -730,7 +755,7 @@ Partial Class FRM16Detail
         Me.Label43.AutoSize = True
         Me.Label43.Location = New System.Drawing.Point(6, 128)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(5, 27)
+        Me.Label43.Size = New System.Drawing.Size(97, 15)
         Me.Label43.TabIndex = 8
         Me.Label43.Text = "Total Tax Payble"
         '
@@ -739,26 +764,26 @@ Partial Class FRM16Detail
         Me.Label40.AutoSize = True
         Me.Label40.Location = New System.Drawing.Point(6, 35)
         Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(5, 27)
+        Me.Label40.Size = New System.Drawing.Size(118, 15)
         Me.Label40.TabIndex = 2
         Me.Label40.Text = "Tax on Total Income"
         '
         'txtEd
         '
         Me.txtEd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtEd.Location = New System.Drawing.Point(39, 100)
+        Me.txtEd.Location = New System.Drawing.Point(278, 100)
         Me.txtEd.MaxLength = 15
         Me.txtEd.Name = "txtEd"
-        Me.txtEd.Size = New System.Drawing.Size(206, 21)
+        Me.txtEd.Size = New System.Drawing.Size(175, 21)
         Me.txtEd.TabIndex = 7
         '
         'txtSurcharge
         '
         Me.txtSurcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSurcharge.Location = New System.Drawing.Point(39, 68)
+        Me.txtSurcharge.Location = New System.Drawing.Point(278, 68)
         Me.txtSurcharge.MaxLength = 15
         Me.txtSurcharge.Name = "txtSurcharge"
-        Me.txtSurcharge.Size = New System.Drawing.Size(206, 21)
+        Me.txtSurcharge.Size = New System.Drawing.Size(175, 21)
         Me.txtSurcharge.TabIndex = 5
         '
         'Label41
@@ -766,7 +791,7 @@ Partial Class FRM16Detail
         Me.Label41.AutoSize = True
         Me.Label41.Location = New System.Drawing.Point(6, 65)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(5, 29)
+        Me.Label41.Size = New System.Drawing.Size(64, 15)
         Me.Label41.TabIndex = 4
         Me.Label41.Text = "Surcharge"
         '
@@ -775,78 +800,93 @@ Partial Class FRM16Detail
         Me.Label42.AutoSize = True
         Me.Label42.Location = New System.Drawing.Point(6, 97)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(5, 28)
+        Me.Label42.Size = New System.Drawing.Size(92, 15)
         Me.Label42.TabIndex = 6
         Me.Label42.Text = "Education Cess"
         '
         'txtTax
         '
         Me.txtTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTax.Location = New System.Drawing.Point(39, 38)
+        Me.txtTax.Location = New System.Drawing.Point(278, 38)
         Me.txtTax.MaxLength = 15
         Me.txtTax.Name = "txtTax"
-        Me.txtTax.Size = New System.Drawing.Size(206, 21)
+        Me.txtTax.Size = New System.Drawing.Size(175, 21)
         Me.txtTax.TabIndex = 3
         '
         'txt16Tax
         '
+        Me.txt16Tax.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16Tax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Tax.Location = New System.Drawing.Point(20, 38)
+        Me.txt16Tax.Location = New System.Drawing.Point(201, 38)
         Me.txt16Tax.MaxLength = 15
         Me.txt16Tax.Name = "txt16Tax"
-        Me.txt16Tax.Size = New System.Drawing.Size(10, 21)
+        Me.txt16Tax.Size = New System.Drawing.Size(68, 21)
         Me.txt16Tax.TabIndex = 2
         '
         'txt16Surcharge
         '
+        Me.txt16Surcharge.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16Surcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Surcharge.Location = New System.Drawing.Point(20, 68)
+        Me.txt16Surcharge.Location = New System.Drawing.Point(201, 68)
         Me.txt16Surcharge.MaxLength = 15
         Me.txt16Surcharge.Name = "txt16Surcharge"
-        Me.txt16Surcharge.Size = New System.Drawing.Size(10, 21)
+        Me.txt16Surcharge.Size = New System.Drawing.Size(68, 21)
         Me.txt16Surcharge.TabIndex = 4
         '
         'txt16EduCess
         '
+        Me.txt16EduCess.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16EduCess.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16EduCess.Location = New System.Drawing.Point(20, 100)
+        Me.txt16EduCess.Location = New System.Drawing.Point(201, 100)
         Me.txt16EduCess.MaxLength = 15
         Me.txt16EduCess.Name = "txt16EduCess"
-        Me.txt16EduCess.Size = New System.Drawing.Size(10, 21)
+        Me.txt16EduCess.Size = New System.Drawing.Size(68, 21)
         Me.txt16EduCess.TabIndex = 6
         '
         'Label51
         '
         Me.Label51.AutoSize = True
-        Me.Label51.Location = New System.Drawing.Point(39, 3)
+        Me.Label51.Location = New System.Drawing.Point(278, 3)
         Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(202, 29)
+        Me.Label51.Size = New System.Drawing.Size(170, 29)
         Me.Label51.TabIndex = 25
         Me.Label51.Text = "Auto Calculated Data - just for " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "verification purpose only."
         '
         'txtincome
         '
+        Me.txtincome.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtincome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtincome.Location = New System.Drawing.Point(20, 6)
+        Me.txtincome.Location = New System.Drawing.Point(201, 6)
         Me.txtincome.MaxLength = 15
         Me.txtincome.Name = "txtincome"
-        Me.txtincome.Size = New System.Drawing.Size(10, 21)
+        Me.txtincome.Size = New System.Drawing.Size(68, 21)
         Me.txtincome.TabIndex = 1
         '
         'txt16TotalTax
         '
+        Me.txt16TotalTax.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16TotalTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16TotalTax.Location = New System.Drawing.Point(20, 131)
+        Me.txt16TotalTax.Location = New System.Drawing.Point(201, 131)
         Me.txt16TotalTax.MaxLength = 15
         Me.txt16TotalTax.Name = "txt16TotalTax"
-        Me.txt16TotalTax.Size = New System.Drawing.Size(10, 21)
+        Me.txt16TotalTax.Size = New System.Drawing.Size(68, 21)
         Me.txt16TotalTax.TabIndex = 0
         '
         'cmdCopyCal
         '
-        Me.cmdCopyCal.Location = New System.Drawing.Point(488, 92)
+        Me.cmdCopyCal.Location = New System.Drawing.Point(488, 13)
         Me.cmdCopyCal.Name = "cmdCopyCal"
-        Me.cmdCopyCal.Size = New System.Drawing.Size(80, 36)
+        Me.cmdCopyCal.Size = New System.Drawing.Size(148, 36)
         Me.cmdCopyCal.TabIndex = 30
         Me.cmdCopyCal.TabStop = False
         Me.cmdCopyCal.Text = "Copy Calculation"
@@ -856,7 +896,7 @@ Partial Class FRM16Detail
         '
         Me.chkHighRate.AutoSize = True
         Me.chkHighRate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkHighRate.Location = New System.Drawing.Point(12, 388)
+        Me.chkHighRate.Location = New System.Drawing.Point(12, 401)
         Me.chkHighRate.Name = "chkHighRate"
         Me.chkHighRate.Size = New System.Drawing.Size(185, 17)
         Me.chkHighRate.TabIndex = 24
@@ -915,7 +955,7 @@ Partial Class FRM16Detail
         Me.Label31.AutoSize = True
         Me.Label31.Location = New System.Drawing.Point(6, 3)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(146, 15)
+        Me.Label31.Size = New System.Drawing.Size(125, 15)
         Me.Label31.TabIndex = 4
         Me.Label31.Text = "Sec 80C,80CC... Total"
         '
@@ -943,7 +983,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 1
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(293, 33)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(303, 33)
         Me.TableLayoutPanel6.TabIndex = 2
         '
         'Label32
@@ -951,7 +991,7 @@ Partial Class FRM16Detail
         Me.Label32.AutoSize = True
         Me.Label32.Location = New System.Drawing.Point(6, 3)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(115, 15)
+        Me.Label32.Size = New System.Drawing.Size(100, 15)
         Me.Label32.TabIndex = 6
         Me.Label32.Text = "Sec 80CCG Total"
         '
@@ -961,10 +1001,10 @@ Partial Class FRM16Detail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt1680CCG.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt1680CCG.Location = New System.Drawing.Point(158, 6)
+        Me.txt1680CCG.Location = New System.Drawing.Point(164, 6)
         Me.txt1680CCG.MaxLength = 15
         Me.txt1680CCG.Name = "txt1680CCG"
-        Me.txt1680CCG.Size = New System.Drawing.Size(129, 21)
+        Me.txt1680CCG.Size = New System.Drawing.Size(133, 21)
         Me.txt1680CCG.TabIndex = 0
         '
         'TableLayoutPanel5
@@ -975,7 +1015,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.35714!))
         Me.TableLayoutPanel5.Controls.Add(Me.Label34, 0, 0)
         Me.TableLayoutPanel5.Controls.Add(Me.txt1680CCF, 1, 0)
-        Me.TableLayoutPanel5.Location = New System.Drawing.Point(9, 323)
+        Me.TableLayoutPanel5.Location = New System.Drawing.Point(9, 377)
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -987,7 +1027,7 @@ Partial Class FRM16Detail
         Me.Label34.AutoSize = True
         Me.Label34.Location = New System.Drawing.Point(6, 3)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(125, 15)
+        Me.Label34.Size = New System.Drawing.Size(107, 15)
         Me.Label34.TabIndex = 10
         Me.Label34.Text = "Sec 80CCF... Total"
         '
@@ -1012,76 +1052,96 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel3.Controls.Add(Me.txtT16OtherIVA, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.Label37, 0, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.Label38, 0, 2)
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(303, 303)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(303, 339)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 3
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.54099!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.45901!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(283, 89)
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(307, 89)
         Me.TableLayoutPanel3.TabIndex = 4
         '
         'Label36
         '
+        Me.Label36.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label36.AutoSize = True
         Me.Label36.Location = New System.Drawing.Point(6, 3)
         Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(86, 23)
+        Me.Label36.Size = New System.Drawing.Size(110, 26)
         Me.Label36.TabIndex = 1
         Me.Label36.Text = "Chaper VI-A Total"
         '
         'txt16TotalTaxableIncome
         '
+        Me.txt16TotalTaxableIncome.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16TotalTaxableIncome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16TotalTaxableIncome.Location = New System.Drawing.Point(115, 61)
+        Me.txt16TotalTaxableIncome.Location = New System.Drawing.Point(125, 66)
         Me.txt16TotalTaxableIncome.MaxLength = 15
         Me.txt16TotalTaxableIncome.Name = "txt16TotalTaxableIncome"
-        Me.txt16TotalTaxableIncome.Size = New System.Drawing.Size(162, 21)
+        Me.txt16TotalTaxableIncome.Size = New System.Drawing.Size(176, 21)
         Me.txt16TotalTaxableIncome.TabIndex = 4
         '
         'txt16OtherIVA
         '
+        Me.txt16OtherIVA.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16OtherIVA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16OtherIVA.Location = New System.Drawing.Point(115, 32)
+        Me.txt16OtherIVA.Location = New System.Drawing.Point(125, 35)
         Me.txt16OtherIVA.MaxLength = 15
         Me.txt16OtherIVA.Name = "txt16OtherIVA"
-        Me.txt16OtherIVA.Size = New System.Drawing.Size(162, 21)
+        Me.txt16OtherIVA.Size = New System.Drawing.Size(176, 21)
         Me.txt16OtherIVA.TabIndex = 3
         '
         'txtT16OtherIVA
         '
+        Me.txtT16OtherIVA.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtT16OtherIVA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtT16OtherIVA.Location = New System.Drawing.Point(115, 6)
+        Me.txtT16OtherIVA.Location = New System.Drawing.Point(125, 6)
         Me.txtT16OtherIVA.MaxLength = 15
         Me.txtT16OtherIVA.Name = "txtT16OtherIVA"
-        Me.txtT16OtherIVA.Size = New System.Drawing.Size(162, 21)
+        Me.txtT16OtherIVA.Size = New System.Drawing.Size(176, 21)
         Me.txtT16OtherIVA.TabIndex = 2
         '
         'Label37
         '
+        Me.Label37.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label37.AutoSize = True
-        Me.Label37.Location = New System.Drawing.Point(6, 29)
+        Me.Label37.Location = New System.Drawing.Point(6, 32)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(97, 26)
+        Me.Label37.Size = New System.Drawing.Size(110, 28)
         Me.Label37.TabIndex = 15
         Me.Label37.Text = "Total Chapter VI-A " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "deductions"
         '
         'Label38
         '
+        Me.Label38.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(6, 58)
+        Me.Label38.Location = New System.Drawing.Point(6, 63)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(90, 15)
+        Me.Label38.Size = New System.Drawing.Size(110, 23)
         Me.Label38.TabIndex = 16
         Me.Label38.Text = "Total Income"
         '
         'grd16OtherIVA
         '
+        Me.grd16OtherIVA.BackgroundColor = System.Drawing.Color.Lavender
         Me.grd16OtherIVA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd16OtherIVA.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column8, Me.Column38, Me.Column9, Me.Column10, Me.Column11})
-        Me.grd16OtherIVA.Location = New System.Drawing.Point(303, 227)
+        Me.grd16OtherIVA.Location = New System.Drawing.Point(303, 243)
         Me.grd16OtherIVA.Name = "grd16OtherIVA"
-        Me.grd16OtherIVA.Size = New System.Drawing.Size(283, 70)
+        Me.grd16OtherIVA.RowHeadersVisible = False
+        Me.grd16OtherIVA.Size = New System.Drawing.Size(307, 90)
         Me.grd16OtherIVA.TabIndex = 13
         Me.grd16OtherIVA.TabStop = False
         '
@@ -1113,20 +1173,21 @@ Partial Class FRM16Detail
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label35.Location = New System.Drawing.Point(303, 211)
+        Me.Label35.Location = New System.Drawing.Point(303, 227)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(229, 17)
+        Me.Label35.Size = New System.Drawing.Size(194, 15)
         Me.Label35.TabIndex = 12
         Me.Label35.Text = "Other Sections Under Chapter VI-A"
         '
         'grd1680CCF
         '
+        Me.grd1680CCF.BackgroundColor = System.Drawing.Color.Lavender
         Me.grd1680CCF.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd1680CCF.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column6, Me.Column7, Me.Column36})
-        Me.grd1680CCF.Location = New System.Drawing.Point(9, 227)
+        Me.grd1680CCF.Location = New System.Drawing.Point(9, 243)
         Me.grd1680CCF.Name = "grd1680CCF"
-        Me.grd1680CCF.Size = New System.Drawing.Size(283, 90)
+        Me.grd1680CCF.RowHeadersVisible = False
+        Me.grd1680CCF.Size = New System.Drawing.Size(283, 128)
         Me.grd1680CCF.TabIndex = 9
         Me.grd1680CCF.TabStop = False
         '
@@ -1153,30 +1214,30 @@ Partial Class FRM16Detail
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label33.Location = New System.Drawing.Point(9, 211)
+        Me.Label33.Location = New System.Drawing.Point(9, 227)
         Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(251, 17)
+        Me.Label33.Size = New System.Drawing.Size(212, 15)
         Me.Label33.TabIndex = 8
         Me.Label33.Text = "Sections 80CCF - Infrastructure bonds"
         '
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label30.Location = New System.Drawing.Point(303, 13)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(274, 17)
+        Me.Label30.Size = New System.Drawing.Size(234, 15)
         Me.Label30.TabIndex = 3
         Me.Label30.Text = "Sections 80CCG - Equity Savings Scheme"
         '
         'grd1680CCG
         '
+        Me.grd1680CCG.BackgroundColor = System.Drawing.Color.Lavender
         Me.grd1680CCG.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd1680CCG.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Column4, Me.Column5, Me.Column37})
         Me.grd1680CCG.Location = New System.Drawing.Point(303, 29)
         Me.grd1680CCG.Name = "grd1680CCG"
-        Me.grd1680CCG.Size = New System.Drawing.Size(293, 150)
+        Me.grd1680CCG.RowHeadersVisible = False
+        Me.grd1680CCG.Size = New System.Drawing.Size(303, 150)
         Me.grd1680CCG.TabIndex = 2
         Me.grd1680CCG.TabStop = False
         '
@@ -1202,11 +1263,13 @@ Partial Class FRM16Detail
         '
         'grd1680c
         '
+        Me.grd1680c.BackgroundColor = System.Drawing.Color.Lavender
         Me.grd1680c.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd1680c.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Particulars, Me.GrossAmount, Me.DeductibleAmount})
         Me.grd1680c.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.grd1680c.Location = New System.Drawing.Point(6, 29)
         Me.grd1680c.Name = "grd1680c"
+        Me.grd1680c.RowHeadersVisible = False
         Me.grd1680c.Size = New System.Drawing.Size(283, 150)
         Me.grd1680c.TabIndex = 1
         Me.grd1680c.TabStop = False
@@ -1229,10 +1292,9 @@ Partial Class FRM16Detail
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label29.Location = New System.Drawing.Point(6, 13)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(265, 17)
+        Me.Label29.Size = New System.Drawing.Size(227, 15)
         Me.Label29.TabIndex = 2
         Me.Label29.Text = "Sections 80C,80CCC and 80CCD Details"
         '
@@ -1280,7 +1342,7 @@ Partial Class FRM16Detail
         '
         'txtAllTax
         '
-        Me.txtAllTax.Location = New System.Drawing.Point(488, 411)
+        Me.txtAllTax.Location = New System.Drawing.Point(539, 409)
         Me.txtAllTax.Name = "txtAllTax"
         Me.txtAllTax.Size = New System.Drawing.Size(125, 21)
         Me.txtAllTax.TabIndex = 35
@@ -1288,9 +1350,9 @@ Partial Class FRM16Detail
         'Label54
         '
         Me.Label54.AutoSize = True
-        Me.Label54.Location = New System.Drawing.Point(330, 412)
+        Me.Label54.Location = New System.Drawing.Point(341, 412)
         Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(152, 15)
+        Me.Label54.Size = New System.Drawing.Size(129, 15)
         Me.Label54.TabIndex = 34
         Me.Label54.Text = "Taxable Salary All Qtrs"
         '
@@ -1298,18 +1360,18 @@ Partial Class FRM16Detail
         '
         Me.TableLayoutPanel10.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
         Me.TableLayoutPanel10.ColumnCount = 2
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.93502!))
-        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.06498!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.61371!))
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.38629!))
         Me.TableLayoutPanel10.Controls.Add(Me.Label20, 0, 0)
         Me.TableLayoutPanel10.Controls.Add(Me.Label21, 0, 1)
         Me.TableLayoutPanel10.Controls.Add(Me.txt16bal, 1, 1)
         Me.TableLayoutPanel10.Controls.Add(Me.txtallow, 1, 0)
-        Me.TableLayoutPanel10.Location = New System.Drawing.Point(9, 319)
+        Me.TableLayoutPanel10.Location = New System.Drawing.Point(7, 354)
         Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
         Me.TableLayoutPanel10.RowCount = 2
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.57143!))
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.42857!))
-        Me.TableLayoutPanel10.Size = New System.Drawing.Size(280, 59)
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(324, 59)
         Me.TableLayoutPanel10.TabIndex = 2
         '
         'Label20
@@ -1317,7 +1379,7 @@ Partial Class FRM16Detail
         Me.Label20.AutoSize = True
         Me.Label20.Location = New System.Drawing.Point(6, 3)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(76, 26)
+        Me.Label20.Size = New System.Drawing.Size(93, 15)
         Me.Label20.TabIndex = 14
         Me.Label20.Text = "Allowance Total"
         '
@@ -1326,44 +1388,44 @@ Partial Class FRM16Detail
         Me.Label21.AutoSize = True
         Me.Label21.Location = New System.Drawing.Point(6, 32)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(59, 15)
+        Me.Label21.Size = New System.Drawing.Size(52, 15)
         Me.Label21.TabIndex = 15
         Me.Label21.Text = "Balance"
         '
         'txt16bal
         '
         Me.txt16bal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16bal.Location = New System.Drawing.Point(100, 35)
+        Me.txt16bal.Location = New System.Drawing.Point(146, 35)
         Me.txt16bal.MaxLength = 15
         Me.txt16bal.Name = "txt16bal"
-        Me.txt16bal.Size = New System.Drawing.Size(173, 21)
+        Me.txt16bal.Size = New System.Drawing.Size(172, 21)
         Me.txt16bal.TabIndex = 3
         '
         'txtallow
         '
         Me.txtallow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtallow.Location = New System.Drawing.Point(100, 6)
+        Me.txtallow.Location = New System.Drawing.Point(146, 6)
         Me.txtallow.MaxLength = 15
         Me.txtallow.Name = "txtallow"
-        Me.txtallow.Size = New System.Drawing.Size(173, 21)
+        Me.txtallow.Size = New System.Drawing.Size(172, 21)
         Me.txtallow.TabIndex = 2
         '
         'TableLayoutPanel9
         '
         Me.TableLayoutPanel9.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
         Me.TableLayoutPanel9.ColumnCount = 2
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.89796!))
-        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.10204!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.97561!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.02439!))
         Me.TableLayoutPanel9.Controls.Add(Me.Label28, 0, 1)
         Me.TableLayoutPanel9.Controls.Add(Me.Label27, 0, 0)
         Me.TableLayoutPanel9.Controls.Add(Me.txt16otherIncome, 1, 0)
         Me.TableLayoutPanel9.Controls.Add(Me.txt16GTI, 1, 1)
-        Me.TableLayoutPanel9.Location = New System.Drawing.Point(333, 340)
+        Me.TableLayoutPanel9.Location = New System.Drawing.Point(337, 339)
         Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
         Me.TableLayoutPanel9.RowCount = 2
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(243, 59)
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(325, 59)
         Me.TableLayoutPanel9.TabIndex = 4
         '
         'Label28
@@ -1371,7 +1433,7 @@ Partial Class FRM16Detail
         Me.Label28.AutoSize = True
         Me.Label28.Location = New System.Drawing.Point(6, 31)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(84, 25)
+        Me.Label28.Size = New System.Drawing.Size(113, 15)
         Me.Label28.TabIndex = 31
         Me.Label28.Text = "Gross Total Income"
         '
@@ -1380,34 +1442,34 @@ Partial Class FRM16Detail
         Me.Label27.AutoSize = True
         Me.Label27.Location = New System.Drawing.Point(6, 3)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(97, 25)
+        Me.Label27.Size = New System.Drawing.Size(111, 15)
         Me.Label27.TabIndex = 28
         Me.Label27.Text = "Other Income Total"
         '
         'txt16otherIncome
         '
         Me.txt16otherIncome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16otherIncome.Location = New System.Drawing.Point(114, 6)
+        Me.txt16otherIncome.Location = New System.Drawing.Point(201, 6)
         Me.txt16otherIncome.MaxLength = 15
         Me.txt16otherIncome.Name = "txt16otherIncome"
-        Me.txt16otherIncome.Size = New System.Drawing.Size(123, 21)
+        Me.txt16otherIncome.Size = New System.Drawing.Size(118, 21)
         Me.txt16otherIncome.TabIndex = 0
         '
         'txt16GTI
         '
         Me.txt16GTI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16GTI.Location = New System.Drawing.Point(114, 34)
+        Me.txt16GTI.Location = New System.Drawing.Point(201, 34)
         Me.txt16GTI.MaxLength = 15
         Me.txt16GTI.Name = "txt16GTI"
-        Me.txt16GTI.Size = New System.Drawing.Size(123, 21)
+        Me.txt16GTI.Size = New System.Drawing.Size(118, 21)
         Me.txt16GTI.TabIndex = 1
         '
         'TableLayoutPanel8
         '
         Me.TableLayoutPanel8.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
         Me.TableLayoutPanel8.ColumnCount = 2
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.57143!))
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.42857!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.75758!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.24242!))
         Me.TableLayoutPanel8.Controls.Add(Me.Label24, 0, 0)
         Me.TableLayoutPanel8.Controls.Add(Me.Label26, 0, 1)
         Me.TableLayoutPanel8.Controls.Add(Me.Label25, 0, 2)
@@ -1416,94 +1478,117 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel8.Controls.Add(Me.txt16ProfTax, 1, 1)
         Me.TableLayoutPanel8.Controls.Add(Me.txt16TaxableSalary, 1, 3)
         Me.TableLayoutPanel8.Controls.Add(Me.txtTotalDedct, 1, 2)
-        Me.TableLayoutPanel8.Location = New System.Drawing.Point(331, 29)
+        Me.TableLayoutPanel8.Location = New System.Drawing.Point(331, 10)
         Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
         Me.TableLayoutPanel8.RowCount = 4
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.72414!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.27586!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.03175!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.96825!))
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(248, 113)
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23.0!))
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(333, 113)
         Me.TableLayoutPanel8.TabIndex = 3
         '
         'Label24
         '
-        Me.Label24.AutoSize = True
+        Me.Label24.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label24.Location = New System.Drawing.Point(6, 3)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(101, 25)
+        Me.Label24.Size = New System.Drawing.Size(174, 23)
         Me.Label24.TabIndex = 21
         Me.Label24.Text = "Entertainment Allowance"
         '
         'Label26
         '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(6, 31)
+        Me.Label26.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label26.Location = New System.Drawing.Point(6, 29)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(86, 24)
+        Me.Label26.Size = New System.Drawing.Size(174, 27)
         Me.Label26.TabIndex = 19
         Me.Label26.Text = "Tax On Employment"
         '
         'Label25
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(6, 58)
+        Me.Label25.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label25.Location = New System.Drawing.Point(6, 59)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(79, 24)
+        Me.Label25.Size = New System.Drawing.Size(174, 24)
         Me.Label25.TabIndex = 20
         Me.Label25.Text = "Total Deductions"
         '
         'Label23
         '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(6, 85)
+        Me.Label23.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label23.Location = New System.Drawing.Point(6, 86)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(102, 15)
+        Me.Label23.Size = New System.Drawing.Size(174, 24)
         Me.Label23.TabIndex = 22
         Me.Label23.Text = "Taxable Salary"
         '
         'txt16EntAllow
         '
+        Me.txt16EntAllow.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16EntAllow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16EntAllow.Location = New System.Drawing.Point(125, 6)
+        Me.txt16EntAllow.Location = New System.Drawing.Point(189, 6)
         Me.txt16EntAllow.MaxLength = 15
         Me.txt16EntAllow.Name = "txt16EntAllow"
-        Me.txt16EntAllow.Size = New System.Drawing.Size(117, 21)
+        Me.txt16EntAllow.Size = New System.Drawing.Size(138, 21)
         Me.txt16EntAllow.TabIndex = 1
         '
         'txt16ProfTax
         '
+        Me.txt16ProfTax.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16ProfTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16ProfTax.Location = New System.Drawing.Point(125, 34)
+        Me.txt16ProfTax.Location = New System.Drawing.Point(189, 32)
         Me.txt16ProfTax.MaxLength = 15
         Me.txt16ProfTax.Name = "txt16ProfTax"
-        Me.txt16ProfTax.Size = New System.Drawing.Size(117, 21)
+        Me.txt16ProfTax.Size = New System.Drawing.Size(138, 21)
         Me.txt16ProfTax.TabIndex = 2
         '
         'txt16TaxableSalary
         '
+        Me.txt16TaxableSalary.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16TaxableSalary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16TaxableSalary.Location = New System.Drawing.Point(125, 88)
+        Me.txt16TaxableSalary.Location = New System.Drawing.Point(189, 89)
         Me.txt16TaxableSalary.MaxLength = 15
         Me.txt16TaxableSalary.Name = "txt16TaxableSalary"
-        Me.txt16TaxableSalary.Size = New System.Drawing.Size(117, 21)
+        Me.txt16TaxableSalary.Size = New System.Drawing.Size(138, 21)
         Me.txt16TaxableSalary.TabIndex = 4
         '
         'txtTotalDedct
         '
+        Me.txtTotalDedct.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTotalDedct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalDedct.Location = New System.Drawing.Point(125, 61)
+        Me.txtTotalDedct.Location = New System.Drawing.Point(189, 62)
         Me.txtTotalDedct.MaxLength = 15
         Me.txtTotalDedct.Name = "txtTotalDedct"
-        Me.txtTotalDedct.Size = New System.Drawing.Size(117, 21)
+        Me.txtTotalDedct.Size = New System.Drawing.Size(138, 21)
         Me.txtTotalDedct.TabIndex = 3
         '
         'TableLayoutPanel7
         '
+        Me.TableLayoutPanel7.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TableLayoutPanel7.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
         Me.TableLayoutPanel7.ColumnCount = 2
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.26354!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.73646!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.99373!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.00627!))
         Me.TableLayoutPanel7.Controls.Add(Me.Label4, 0, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.Label14, 0, 1)
         Me.TableLayoutPanel7.Controls.Add(Me.Label15, 0, 2)
@@ -1516,103 +1601,128 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel7.Controls.Add(Me.txt16grosstotPreEmp, 1, 4)
         Me.TableLayoutPanel7.Controls.Add(Me.txt16grosstotCurEmp, 1, 3)
         Me.TableLayoutPanel7.Controls.Add(Me.txt16gross3, 1, 2)
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(9, 26)
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(9, 11)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
         Me.TableLayoutPanel7.RowCount = 6
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26.0!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27.0!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(280, 190)
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21.0!))
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(322, 191)
         Me.TableLayoutPanel7.TabIndex = 1
         '
         'Label4
         '
-        Me.Label4.AutoSize = True
+        Me.Label4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.Location = New System.Drawing.Point(6, 3)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(95, 30)
+        Me.Label4.Size = New System.Drawing.Size(175, 30)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Salary as per provisions " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "contained in section 17(1)"
         '
         'Label14
         '
-        Me.Label14.AutoSize = True
+        Me.Label14.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label14.Location = New System.Drawing.Point(6, 36)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(119, 30)
+        Me.Label14.Size = New System.Drawing.Size(175, 30)
         Me.Label14.TabIndex = 1
         Me.Label14.Text = "Value of perquisites under" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "section 17(2)"
         '
         'Label15
         '
-        Me.Label15.AutoSize = True
+        Me.Label15.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label15.Location = New System.Drawing.Point(6, 69)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(128, 26)
+        Me.Label15.Size = New System.Drawing.Size(175, 30)
         Me.Label15.TabIndex = 2
         Me.Label15.Text = "Profits in lieu of salary" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "under section17(3)"
         '
         'Label16
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(6, 98)
+        Me.Label16.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label16.Location = New System.Drawing.Point(6, 102)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(128, 28)
+        Me.Label16.Size = New System.Drawing.Size(175, 30)
         Me.Label16.TabIndex = 4
         Me.Label16.Text = "Total Gross Salary By" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Current Employer"
         '
         'Label17
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(6, 129)
+        Me.Label17.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label17.BackColor = System.Drawing.Color.Aquamarine
+        Me.Label17.Location = New System.Drawing.Point(6, 135)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(128, 28)
+        Me.Label17.Size = New System.Drawing.Size(175, 28)
         Me.Label17.TabIndex = 5
         Me.Label17.Text = "Total Gross Salary By" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Previous Employer"
         '
         'Label18
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(6, 160)
+        Me.Label18.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label18.Location = New System.Drawing.Point(6, 166)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(124, 15)
+        Me.Label18.Size = New System.Drawing.Size(175, 22)
         Me.Label18.TabIndex = 6
         Me.Label18.Text = "Total Gross Salary"
         '
         'txt16gross1
         '
+        Me.txt16gross1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16gross1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16gross1.Location = New System.Drawing.Point(147, 6)
+        Me.txt16gross1.Location = New System.Drawing.Point(190, 6)
         Me.txt16gross1.MaxLength = 15
         Me.txt16gross1.Name = "txt16gross1"
-        Me.txt16gross1.Size = New System.Drawing.Size(127, 21)
+        Me.txt16gross1.Size = New System.Drawing.Size(126, 21)
         Me.txt16gross1.TabIndex = 0
         '
         'txt16gross2
         '
+        Me.txt16gross2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16gross2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16gross2.Location = New System.Drawing.Point(147, 39)
+        Me.txt16gross2.Location = New System.Drawing.Point(190, 39)
         Me.txt16gross2.MaxLength = 15
         Me.txt16gross2.Name = "txt16gross2"
-        Me.txt16gross2.Size = New System.Drawing.Size(127, 21)
+        Me.txt16gross2.Size = New System.Drawing.Size(126, 21)
         Me.txt16gross2.TabIndex = 1
         '
         'txt16grosstotBoth
         '
+        Me.txt16grosstotBoth.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16grosstotBoth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16grosstotBoth.Location = New System.Drawing.Point(147, 163)
+        Me.txt16grosstotBoth.Location = New System.Drawing.Point(190, 169)
         Me.txt16grosstotBoth.MaxLength = 15
         Me.txt16grosstotBoth.Name = "txt16grosstotBoth"
-        Me.txt16grosstotBoth.Size = New System.Drawing.Size(127, 21)
+        Me.txt16grosstotBoth.Size = New System.Drawing.Size(126, 21)
         Me.txt16grosstotBoth.TabIndex = 5
         '
         'txt16grosstotPreEmp
         '
+        Me.txt16grosstotPreEmp.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16grosstotPreEmp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16grosstotPreEmp.Location = New System.Drawing.Point(147, 132)
+        Me.txt16grosstotPreEmp.Location = New System.Drawing.Point(190, 138)
         Me.txt16grosstotPreEmp.MaxLength = 15
         Me.txt16grosstotPreEmp.Name = "txt16grosstotPreEmp"
         Me.txt16grosstotPreEmp.Size = New System.Drawing.Size(126, 21)
@@ -1620,8 +1730,11 @@ Partial Class FRM16Detail
         '
         'txt16grosstotCurEmp
         '
+        Me.txt16grosstotCurEmp.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16grosstotCurEmp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16grosstotCurEmp.Location = New System.Drawing.Point(147, 101)
+        Me.txt16grosstotCurEmp.Location = New System.Drawing.Point(190, 105)
         Me.txt16grosstotCurEmp.MaxLength = 15
         Me.txt16grosstotCurEmp.Name = "txt16grosstotCurEmp"
         Me.txt16grosstotCurEmp.Size = New System.Drawing.Size(126, 21)
@@ -1629,20 +1742,28 @@ Partial Class FRM16Detail
         '
         'txt16gross3
         '
+        Me.txt16gross3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16gross3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16gross3.Location = New System.Drawing.Point(147, 72)
+        Me.txt16gross3.Location = New System.Drawing.Point(190, 72)
         Me.txt16gross3.MaxLength = 15
         Me.txt16gross3.Name = "txt16gross3"
-        Me.txt16gross3.Size = New System.Drawing.Size(127, 21)
+        Me.txt16gross3.Size = New System.Drawing.Size(126, 21)
         Me.txt16gross3.TabIndex = 2
         '
         'grd16otherIncome
         '
+        Me.grd16otherIncome.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grd16otherIncome.BackgroundColor = System.Drawing.Color.Lavender
         Me.grd16otherIncome.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grd16otherIncome.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column15, Me.Column35})
-        Me.grd16otherIncome.Location = New System.Drawing.Point(331, 161)
+        Me.grd16otherIncome.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column41, Me.Column15, Me.Column35, Me.DataGridViewTextBoxColumn2})
+        Me.grd16otherIncome.Location = New System.Drawing.Point(337, 164)
         Me.grd16otherIncome.Name = "grd16otherIncome"
-        Me.grd16otherIncome.Size = New System.Drawing.Size(245, 173)
+        Me.grd16otherIncome.RowHeadersVisible = False
+        Me.grd16otherIncome.Size = New System.Drawing.Size(327, 173)
         Me.grd16otherIncome.TabIndex = 33
         Me.grd16otherIncome.TabStop = False
         '
@@ -1650,59 +1771,94 @@ Partial Class FRM16Detail
         '
         Me.Column14.HeaderText = "Particulars"
         Me.Column14.Name = "Column14"
+        Me.Column14.Width = 200
+        '
+        'Column41
+        '
+        Me.Column41.HeaderText = ""
+        Me.Column41.Name = "Column41"
+        Me.Column41.Visible = False
         '
         'Column15
         '
         Me.Column15.HeaderText = "Rs."
         Me.Column15.Name = "Column15"
+        Me.Column15.Width = 120
         '
         'Column35
         '
         Me.Column35.HeaderText = ""
         Me.Column35.Name = "Column35"
         '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = ""
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
         'grd16allow
         '
+        Me.grd16allow.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grd16allow.BackgroundColor = System.Drawing.Color.Lavender
         Me.grd16allow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grd16allow.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column12, Me.Column13, Me.Column34})
-        Me.grd16allow.Location = New System.Drawing.Point(9, 249)
+        Me.grd16allow.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column12, Me.Column13, Me.Column34, Me.Column39, Me.Column40})
+        Me.grd16allow.Location = New System.Drawing.Point(6, 238)
         Me.grd16allow.Name = "grd16allow"
-        Me.grd16allow.Size = New System.Drawing.Size(267, 64)
+        Me.grd16allow.RowHeadersVisible = False
+        Me.grd16allow.Size = New System.Drawing.Size(325, 113)
         Me.grd16allow.TabIndex = 32
         Me.grd16allow.TabStop = False
         '
         'Column12
         '
+        Me.Column12.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
+        Me.Column12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Column12.HeaderText = "Allowance"
         Me.Column12.Name = "Column12"
+        Me.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column12.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column12.Width = 200
         '
         'Column13
         '
         Me.Column13.HeaderText = "Rs."
         Me.Column13.Name = "Column13"
+        Me.Column13.Width = 120
         '
         'Column34
         '
         Me.Column34.HeaderText = ""
         Me.Column34.Name = "Column34"
+        Me.Column34.Visible = False
+        '
+        'Column39
+        '
+        Me.Column39.HeaderText = ""
+        Me.Column39.Name = "Column39"
+        Me.Column39.Visible = False
+        '
+        'Column40
+        '
+        Me.Column40.HeaderText = ""
+        Me.Column40.Name = "Column40"
+        Me.Column40.Visible = False
         '
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label22.Location = New System.Drawing.Point(331, 145)
+        Me.Label22.Location = New System.Drawing.Point(336, 145)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(328, 17)
+        Me.Label22.Size = New System.Drawing.Size(257, 15)
         Me.Label22.TabIndex = 23
         Me.Label22.Text = "Other Income(s)                                                      "
         '
         'Label19
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label19.Location = New System.Drawing.Point(9, 231)
+        Me.Label19.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.Label19.Location = New System.Drawing.Point(9, 219)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(357, 17)
+        Me.Label19.Size = New System.Drawing.Size(322, 21)
         Me.Label19.TabIndex = 13
         Me.Label19.Text = "Less: Allowance to the extent exempt under section 10"
         '
@@ -1755,7 +1911,7 @@ Partial Class FRM16Detail
         Me.Label9.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label9.Location = New System.Drawing.Point(6, 3)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(106, 32)
+        Me.Label9.Size = New System.Drawing.Size(108, 32)
         Me.Label9.TabIndex = 2
         Me.Label9.Text = "Designation of the Employee"
         '
@@ -1766,13 +1922,14 @@ Partial Class FRM16Detail
         Me.Label10.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label10.Location = New System.Drawing.Point(6, 43)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(106, 32)
+        Me.Label10.Size = New System.Drawing.Size(91, 32)
         Me.Label10.TabIndex = 5
         Me.Label10.Text = "PAN No. of the Employee"
         '
         'txt16pan
         '
         Me.txt16pan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16pan.Enabled = False
         Me.txt16pan.Location = New System.Drawing.Point(124, 46)
         Me.txt16pan.MaxLength = 10
         Me.txt16pan.Name = "txt16pan"
@@ -1782,6 +1939,7 @@ Partial Class FRM16Detail
         'txtdesig
         '
         Me.txtdesig.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtdesig.Enabled = False
         Me.txtdesig.Location = New System.Drawing.Point(124, 6)
         Me.txtdesig.MaxLength = 25
         Me.txtdesig.Name = "txtdesig"
@@ -1826,7 +1984,7 @@ Partial Class FRM16Detail
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(6, 3)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(40, 15)
+        Me.Label11.Size = New System.Drawing.Size(36, 15)
         Me.Label11.TabIndex = 4
         Me.Label11.Text = "From"
         '
@@ -1841,6 +1999,7 @@ Partial Class FRM16Detail
         'txt16AY
         '
         Me.txt16AY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16AY.Enabled = False
         Me.txt16AY.Location = New System.Drawing.Point(127, 78)
         Me.txt16AY.MaxLength = 10
         Me.txt16AY.Name = "txt16AY"
@@ -1853,7 +2012,7 @@ Partial Class FRM16Detail
         Me.Label13.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label13.Location = New System.Drawing.Point(6, 75)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(87, 30)
+        Me.Label13.Size = New System.Drawing.Size(76, 30)
         Me.Label13.TabIndex = 0
         Me.Label13.Text = "Assessment " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Year"
         '
@@ -1870,7 +2029,7 @@ Partial Class FRM16Detail
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(6, 40)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(23, 15)
+        Me.Label12.Size = New System.Drawing.Size(21, 15)
         Me.Label12.TabIndex = 1
         Me.Label12.Text = "To"
         '
@@ -1885,14 +2044,14 @@ Partial Class FRM16Detail
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.GroupBox1.Location = New System.Drawing.Point(3, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(412, 311)
+        Me.GroupBox1.Size = New System.Drawing.Size(412, 388)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Basic Information"
         '
         'TableLayoutPanel18
         '
-        Me.TableLayoutPanel18.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset
+        Me.TableLayoutPanel18.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
         Me.TableLayoutPanel18.ColumnCount = 2
         Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -1908,22 +2067,24 @@ Partial Class FRM16Detail
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(5, 2)
+        Me.Label5.Location = New System.Drawing.Point(6, 3)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(65, 15)
+        Me.Label5.Size = New System.Drawing.Size(57, 15)
         Me.Label5.TabIndex = 7
         Me.Label5.Text = "Pin Code"
         '
         'txt16CoPin
         '
-        Me.txt16CoPin.Location = New System.Drawing.Point(78, 5)
+        Me.txt16CoPin.Enabled = False
+        Me.txt16CoPin.Location = New System.Drawing.Point(72, 6)
         Me.txt16CoPin.Name = "txt16CoPin"
         Me.txt16CoPin.Size = New System.Drawing.Size(102, 21)
         Me.txt16CoPin.TabIndex = 8
         '
         'TableLayoutPanel17
         '
-        Me.TableLayoutPanel17.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset
+        Me.TableLayoutPanel17.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.TableLayoutPanel17.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
         Me.TableLayoutPanel17.ColumnCount = 2
         Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
@@ -1938,8 +2099,7 @@ Partial Class FRM16Detail
         '
         'State
         '
-        Me.State.AutoSize = True
-        Me.State.Location = New System.Drawing.Point(5, 2)
+        Me.State.Location = New System.Drawing.Point(6, 3)
         Me.State.Name = "State"
         Me.State.Size = New System.Drawing.Size(40, 15)
         Me.State.TabIndex = 5
@@ -1947,10 +2107,14 @@ Partial Class FRM16Detail
         '
         'cbo16CoState
         '
+        Me.cbo16CoState.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbo16CoState.Enabled = False
         Me.cbo16CoState.FormattingEnabled = True
-        Me.cbo16CoState.Location = New System.Drawing.Point(53, 5)
+        Me.cbo16CoState.Location = New System.Drawing.Point(55, 6)
         Me.cbo16CoState.Name = "cbo16CoState"
-        Me.cbo16CoState.Size = New System.Drawing.Size(143, 23)
+        Me.cbo16CoState.Size = New System.Drawing.Size(145, 23)
         Me.cbo16CoState.TabIndex = 1
         '
         'TableLayoutPanel13
@@ -1978,7 +2142,7 @@ Partial Class FRM16Detail
         Me.Label6.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label6.Location = New System.Drawing.Point(6, 3)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(164, 17)
+        Me.Label6.Size = New System.Drawing.Size(141, 17)
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "PAN No. of the Deductor"
         '
@@ -1989,13 +2153,14 @@ Partial Class FRM16Detail
         Me.Label7.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label7.Location = New System.Drawing.Point(202, 3)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(163, 17)
+        Me.Label7.Size = New System.Drawing.Size(140, 17)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "TAN No. of the Deductor"
         '
         'txt16CoPan
         '
         Me.txt16CoPan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16CoPan.Enabled = False
         Me.txt16CoPan.Location = New System.Drawing.Point(6, 30)
         Me.txt16CoPan.MaxLength = 10
         Me.txt16CoPan.Name = "txt16CoPan"
@@ -2005,6 +2170,7 @@ Partial Class FRM16Detail
         'txt16CoTan
         '
         Me.txt16CoTan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16CoTan.Enabled = False
         Me.txt16CoTan.Location = New System.Drawing.Point(202, 30)
         Me.txt16CoTan.MaxLength = 10
         Me.txt16CoTan.Name = "txt16CoTan"
@@ -2013,10 +2179,10 @@ Partial Class FRM16Detail
         '
         'TableLayoutPanel11
         '
-        Me.TableLayoutPanel11.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
+        Me.TableLayoutPanel11.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
         Me.TableLayoutPanel11.ColumnCount = 2
-        Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.62783!))
-        Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.37217!))
+        Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.7635!))
+        Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.2365!))
         Me.TableLayoutPanel11.Controls.Add(Me.Label2, 0, 0)
         Me.TableLayoutPanel11.Controls.Add(Me.Label3, 0, 1)
         Me.TableLayoutPanel11.Controls.Add(Me.txt16CoName, 1, 0)
@@ -2026,7 +2192,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel11.RowCount = 2
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.84615!))
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 71.15385!))
-        Me.TableLayoutPanel11.Size = New System.Drawing.Size(312, 107)
+        Me.TableLayoutPanel11.Size = New System.Drawing.Size(392, 107)
         Me.TableLayoutPanel11.TabIndex = 0
         '
         'Label2
@@ -2035,13 +2201,12 @@ Partial Class FRM16Detail
         Me.Label2.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label2.Location = New System.Drawing.Point(6, 3)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(71, 28)
+        Me.Label2.Size = New System.Drawing.Size(96, 15)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Employer &Name"
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label3.Location = New System.Drawing.Point(6, 34)
         Me.Label3.Name = "Label3"
@@ -2051,78 +2216,112 @@ Partial Class FRM16Detail
         '
         'txt16CoName
         '
+        Me.txt16CoName.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16CoName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16CoName.Location = New System.Drawing.Point(113, 6)
+        Me.txt16CoName.Enabled = False
+        Me.txt16CoName.Location = New System.Drawing.Point(115, 6)
         Me.txt16CoName.MaxLength = 75
         Me.txt16CoName.Name = "txt16CoName"
-        Me.txt16CoName.Size = New System.Drawing.Size(192, 21)
+        Me.txt16CoName.Size = New System.Drawing.Size(271, 21)
         Me.txt16CoName.TabIndex = 0
         '
         'Panel1
         '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.txt16CoAdd5)
         Me.Panel1.Controls.Add(Me.txt16CoAdd4)
         Me.Panel1.Controls.Add(Me.txt16CoAdd3)
         Me.Panel1.Controls.Add(Me.txt16CoAdd2)
         Me.Panel1.Controls.Add(Me.txt16CoAdd1)
-        Me.Panel1.Location = New System.Drawing.Point(113, 37)
+        Me.Panel1.Location = New System.Drawing.Point(115, 37)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(193, 64)
+        Me.Panel1.Size = New System.Drawing.Size(271, 64)
         Me.Panel1.TabIndex = 5
         '
         'txt16CoAdd5
         '
+        Me.txt16CoAdd5.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16CoAdd5.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txt16CoAdd5.Enabled = False
         Me.txt16CoAdd5.Location = New System.Drawing.Point(0, 52)
         Me.txt16CoAdd5.MaxLength = 25
         Me.txt16CoAdd5.Name = "txt16CoAdd5"
-        Me.txt16CoAdd5.Size = New System.Drawing.Size(193, 14)
+        Me.txt16CoAdd5.Size = New System.Drawing.Size(271, 14)
         Me.txt16CoAdd5.TabIndex = 4
         '
         'txt16CoAdd4
         '
+        Me.txt16CoAdd4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16CoAdd4.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txt16CoAdd4.Enabled = False
         Me.txt16CoAdd4.Location = New System.Drawing.Point(0, 39)
         Me.txt16CoAdd4.MaxLength = 25
         Me.txt16CoAdd4.Name = "txt16CoAdd4"
-        Me.txt16CoAdd4.Size = New System.Drawing.Size(193, 14)
+        Me.txt16CoAdd4.Size = New System.Drawing.Size(271, 14)
         Me.txt16CoAdd4.TabIndex = 3
         '
         'txt16CoAdd3
         '
+        Me.txt16CoAdd3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16CoAdd3.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txt16CoAdd3.Enabled = False
         Me.txt16CoAdd3.Location = New System.Drawing.Point(0, 26)
         Me.txt16CoAdd3.MaxLength = 25
         Me.txt16CoAdd3.Name = "txt16CoAdd3"
-        Me.txt16CoAdd3.Size = New System.Drawing.Size(193, 14)
+        Me.txt16CoAdd3.Size = New System.Drawing.Size(271, 14)
         Me.txt16CoAdd3.TabIndex = 2
         '
         'txt16CoAdd2
         '
+        Me.txt16CoAdd2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16CoAdd2.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txt16CoAdd2.Enabled = False
         Me.txt16CoAdd2.Location = New System.Drawing.Point(0, 13)
         Me.txt16CoAdd2.MaxLength = 25
         Me.txt16CoAdd2.Name = "txt16CoAdd2"
-        Me.txt16CoAdd2.Size = New System.Drawing.Size(193, 14)
+        Me.txt16CoAdd2.Size = New System.Drawing.Size(271, 14)
         Me.txt16CoAdd2.TabIndex = 1
         '
         'txt16CoAdd1
         '
+        Me.txt16CoAdd1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16CoAdd1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txt16CoAdd1.Enabled = False
         Me.txt16CoAdd1.Location = New System.Drawing.Point(0, 0)
         Me.txt16CoAdd1.MaxLength = 25
         Me.txt16CoAdd1.Name = "txt16CoAdd1"
-        Me.txt16CoAdd1.Size = New System.Drawing.Size(193, 14)
+        Me.txt16CoAdd1.Size = New System.Drawing.Size(271, 14)
         Me.txt16CoAdd1.TabIndex = 0
         '
         'grdPRNdet
         '
-        Me.grdPRNdet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdPRNdet.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grdPRNdet.BackgroundColor = System.Drawing.Color.Lavender
+        Me.grdPRNdet.ColumnHeadersHeight = 30
+        Me.grdPRNdet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.grdPRNdet.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2})
-        Me.grdPRNdet.Location = New System.Drawing.Point(190, 225)
+        Me.grdPRNdet.Enabled = False
+        Me.grdPRNdet.Location = New System.Drawing.Point(175, 221)
         Me.grdPRNdet.Name = "grdPRNdet"
+        Me.grdPRNdet.RowHeadersVisible = False
         Me.grdPRNdet.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.grdPRNdet.Size = New System.Drawing.Size(212, 163)
+        Me.grdPRNdet.Size = New System.Drawing.Size(227, 161)
         Me.grdPRNdet.TabIndex = 14
         Me.grdPRNdet.TabStop = False
         '
@@ -2130,13 +2329,12 @@ Partial Class FRM16Detail
         '
         Me.Column1.HeaderText = "Quarter"
         Me.Column1.Name = "Column1"
-        Me.Column1.Width = 80
         '
         'Column2
         '
         Me.Column2.HeaderText = "Acknowledgement No."
         Me.Column2.Name = "Column2"
-        Me.Column2.Width = 90
+        Me.Column2.Width = 120
         '
         'Label8
         '
@@ -2145,7 +2343,7 @@ Partial Class FRM16Detail
         Me.Label8.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label8.Location = New System.Drawing.Point(6, 221)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(190, 92)
+        Me.Label8.Size = New System.Drawing.Size(163, 92)
         Me.Label8.TabIndex = 13
         Me.Label8.Text = "Acknowledgement Ns. of all " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "quarterly statments of TDS " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "under sub-section (3) o" &
     "f " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "section 200 as provided by " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "TIN Facilitation Centre or " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "NSDL web-site"
@@ -2158,7 +2356,7 @@ Partial Class FRM16Detail
         Me.tabForm16.Controls.Add(Me.TabPage3)
         Me.tabForm16.Controls.Add(Me.TabPage4)
         Me.tabForm16.Controls.Add(Me.TabPage5)
-        Me.tabForm16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.tabForm16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabForm16.ItemSize = New System.Drawing.Size(64, 18)
         Me.tabForm16.Location = New System.Drawing.Point(15, 74)
         Me.tabForm16.Name = "tabForm16"
@@ -2211,7 +2409,7 @@ Partial Class FRM16Detail
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Lavender
-        Me.ClientSize = New System.Drawing.Size(713, 574)
+        Me.ClientSize = New System.Drawing.Size(713, 577)
         Me.Controls.Add(Me.txtgrd80CCFCal)
         Me.Controls.Add(Me.txtgrd80CCGCal)
         Me.Controls.Add(Me.txtDstatus)
@@ -2278,7 +2476,6 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel18.ResumeLayout(False)
         Me.TableLayoutPanel18.PerformLayout()
         Me.TableLayoutPanel17.ResumeLayout(False)
-        Me.TableLayoutPanel17.PerformLayout()
         Me.TableLayoutPanel13.ResumeLayout(False)
         Me.TableLayoutPanel13.PerformLayout()
         Me.TableLayoutPanel11.ResumeLayout(False)
@@ -2455,8 +2652,6 @@ Partial Class FRM16Detail
     Friend WithEvents txt16FrmDt As MaskedTextBox
     Friend WithEvents txt16CoPin As TextBox
     Friend WithEvents Label11 As Label
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Particulars As DataGridViewTextBoxColumn
     Friend WithEvents GrossAmount As DataGridViewTextBoxColumn
     Friend WithEvents DeductibleAmount As DataGridViewTextBoxColumn
@@ -2478,12 +2673,6 @@ Partial Class FRM16Detail
     Friend WithEvents Column22 As DataGridViewTextBoxColumn
     Friend WithEvents Column23 As DataGridViewTextBoxColumn
     Friend WithEvents Column24 As DataGridViewTextBoxColumn
-    Friend WithEvents Column14 As DataGridViewTextBoxColumn
-    Friend WithEvents Column15 As DataGridViewTextBoxColumn
-    Friend WithEvents Column35 As DataGridViewTextBoxColumn
-    Friend WithEvents Column12 As DataGridViewTextBoxColumn
-    Friend WithEvents Column13 As DataGridViewTextBoxColumn
-    Friend WithEvents Column34 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column38 As DataGridViewTextBoxColumn
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
@@ -2497,4 +2686,16 @@ Partial Class FRM16Detail
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column37 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column12 As DataGridViewComboBoxColumn
+    Friend WithEvents Column13 As DataGridViewTextBoxColumn
+    Friend WithEvents Column34 As DataGridViewTextBoxColumn
+    Friend WithEvents Column39 As DataGridViewTextBoxColumn
+    Friend WithEvents Column40 As DataGridViewTextBoxColumn
+    Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents Column41 As DataGridViewTextBoxColumn
+    Friend WithEvents Column15 As DataGridViewTextBoxColumn
+    Friend WithEvents Column35 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
 End Class

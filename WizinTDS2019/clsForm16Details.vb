@@ -1,6 +1,6 @@
 Imports System.Data.OleDb
 
-Public Class Form16Details
+Public Class clsForm16Details
     'Dim oF16Challan As New clsF16Challan
     'local variable(s) to hold property value(s)
     Private mvarF16ID As Long 'local copy
@@ -33,6 +33,7 @@ Public Class Form16Details
     'To fire this event, use RaiseEvent with the following syntax:
     'RaiseEvent PrepareDataForSave[(arg1, arg2, ... , argn)]
     Public Event PrepareDataForSave(Cancel As Boolean)
+    Public Event PrepareDataForSaveOther(Cancel As Boolean)
     'local variable(s) to hold property value(s)
     Private mvarSignByName As String 'local copy
     Private mvarSignByFatherName As String 'local copy
@@ -55,6 +56,84 @@ Public Class Form16Details
     Private mvarCoName As String 'local copy
     Private mvarPR24Name As String
     Private mvarPR24Desg As String
+
+    Private mvarTypeOfDetail As String 'local copy
+    Private mvarParticulars As String 'local copy
+    Private mvarGrossAmt As Double 'local copy
+    Private mvarQualifyAmt As Double 'local copy
+    Private mvarDeductibleAmt As Double 'local copy
+    'local variable(s) to hold property value(s)
+    Private mvarID As Long 'local copy
+
+    Public Property ID As String
+        Get
+            'used when retrieving value of a property, on the right side of an assignment.
+            'Syntax: Debug.Print X.Category
+            ID = mvarID
+        End Get
+        Set(ByVal vData As String)
+            mvarID = vData
+        End Set
+    End Property
+
+
+    Public Property DeductibleAmt As String
+        Get
+            'used when retrieving value of a property, on the right side of an assignment.
+            'Syntax: Debug.Print X.DPin
+            DeductibleAmt = mvarDeductibleAmt
+        End Get
+        Set(ByVal vData As String)
+            mvarDeductibleAmt = vData
+        End Set
+    End Property
+
+
+    Public Property QualifyAmt As String
+        Get
+            'used when retrieving value of a property, on the right side of an assignment.
+            'Syntax: Debug.Print X.DPin
+            QualifyAmt = mvarQualifyAmt
+        End Get
+        Set(ByVal vData As String)
+            mvarQualifyAmt = vData
+        End Set
+    End Property
+
+    Public Property GrossAmt As String
+        Get
+            'used when retrieving value of a property, on the right side of an assignment.
+            'Syntax: Debug.Print X.DPin
+            GrossAmt = mvarGrossAmt
+        End Get
+        Set(ByVal vData As String)
+            mvarGrossAmt = vData
+        End Set
+    End Property
+
+    Public Property Particulars As String
+        Get
+            'used when retrieving value of a property, on the right side of an assignment.
+            'Syntax: Debug.Print X.Category
+            Particulars = mvarParticulars
+        End Get
+        Set(ByVal vData As String)
+            mvarParticulars = vData
+        End Set
+    End Property
+
+
+    Public Property TypeOfDetail As String
+        Get
+            'used when retrieving value of a property, on the right side of an assignment.
+            'Syntax: Debug.Print X.Category
+            TypeOfDetail = mvarTypeOfDetail
+        End Get
+        Set(ByVal vData As String)
+            mvarTypeOfDetail = vData
+        End Set
+    End Property
+
 
     Public Property HighRatePAN As String
         Get
@@ -244,7 +323,7 @@ Public Class Form16Details
         End Set
     End Property
 
-    Public Function Update(ByVal F16Details As Form16Details, Allowances As Collection_Allowances,
+    Public Function Update(ByVal F16Details As clsForm16Details, Allowances As Collection_Allowances,
     OtherIncomes As Collection_OtherIncomes, Sec80CDeductions As Collection_Sec80CDed,
     sec80CCFDeductions As Collection_Sec80CCFDed, sec80CCGDeductions As Collection_Sec80CCGDed,
     VI_A_Deductions As Collection_VI_A_Deductions, grdF16 As DataGridView, TotalSalaryPreEmp As Double, TDSAmtPreEmp As Double, HighRatePAN As Boolean) As Boolean
@@ -410,8 +489,8 @@ UpErr:
     Public Function MaxID() As Long
         Dim nds As New DataSet
         nds = FetchDataSet("Select Max(F16Id) as Id From Form16Details")
-        If Not String.IsNullOrEmpty(nds.Tables(0).Rows(0)("id").Value) Then
-            MaxID = nds.Tables(0).Rows(0)("id").Value
+        If Not String.IsNullOrEmpty(nds.Tables(0).Rows(0)("id")) Then
+            MaxID = nds.Tables(0).Rows(0)("id")
         Else
             MaxID = 0
         End If
@@ -419,23 +498,26 @@ UpErr:
         nds = Nothing
     End Function
 
-    Public Function Insert(F16Details As Form16Details, Allowances As Collection_Allowances,
-    OtherIncomes As Collection_OtherIncomes, Sec80CDeductions As Collection_Sec80CDed,
-    sec80CCFDeductions As Collection_Sec80CCFDed, sec80CCGDeductions As Collection_Sec80CCGDed,
-    VI_A_Deductions As Collection_VI_A_Deductions, grdF16 As DataGridView, TotalSalaryPreEmp As Double, TDSAmtPreEmp As Double, HighRatePAN As Boolean) As Boolean
-        '    , Allowances As Collection_Allowances,
-        'OtherIncomes As Collection_OtherIncomes, Sec80CDeductions As Collection_Sec80CDed,
-        'sec80CCFDeductions As Collection_Sec80CCFDed, sec80CCGDeductions As Collection_Sec80CCGDed,
-        'VI_A_Deductions As Collection_VI_A_Deductions, grdF16 As Variant, TotalSalaryPreEmp As Double, TDSAmtPreEmp As Double, HighRatePAN As Boolean) As Boolean
+    'Public Function Insert(F16Details As clsForm16Details, Allowances As Collection_Allowances,
+    'OtherIncomes As Collection_OtherIncomes, Sec80CDeductions As Collection_Sec80CDed,
+    'sec80CCFDeductions As Collection_Sec80CCFDed, sec80CCGDeductions As Collection_Sec80CCGDed,
+    'VI_A_Deductions As Collection_VI_A_Deductions, grdF16 As DataGridView, TotalSalaryPreEmp As Double, TDSAmtPreEmp As Double, HighRatePAN As Boolean) As Boolean
+
+    Public Function Insert(F16Details As clsForm16Details) As Boolean
         'On Error GoTo InErr
-        Dim sql As String ', cnl As Boolean
-        'Dim sql_OthInc As String, sql_Allw As String, sql_sec80C As String, sql_sec80CCF As String, sql_6A As String
-        'Dim sql_sec80CCG As String
-        ' Dim MoreDetails As New clsForm16MoreDetails
-        'cnl = False : RaiseEvent BeforeSave(cnl)
-        'If cnl = True Then Exit Function
-        'cnl = False : RaiseEvent PrepareDataForSave(cnl)
-        'If cnl = True Then Exit Function
+        Dim sql As String, cnl As Boolean
+
+
+        cnl = False : RaiseEvent BeforeSave(cnl)
+        If cnl = True Then
+            Insert = False
+            Exit Function
+        End If
+        cnl = False : RaiseEvent PrepareDataForSave(cnl)
+        If cnl = True Then
+            Insert = False
+            Exit Function
+        End If
         'Master Data of Form 16
         With F16Details
             .F16ID = .MaxID + 1
@@ -444,9 +526,9 @@ UpErr:
         & .F16ID & "," _
         & IIf(.did = 0, 0, .did) & "," _
         & IIf(.RetnID = 0, 0, .RetnID) & ",'" _
-        & IIf(Trim(.DDesgn) = "", "", .DDesgn) & "', #" _
-        & Format(.EmpFromDt, "dd/MMM/yyyy") & "#,#" _
-        & Format(.EmpToDt, "dd/MMM/yyyy") & "#," _
+        & IIf(Trim(.DDesgn) = "", "", .DDesgn) & "',#" _
+        & .EmpFromDt & "#,#" _
+        & .EmpToDt & "#," _
         & IIf(.Gross1 = 0, 0, .Gross1) & "," _
         & IIf(.Gross2 = 0, 0, .Gross2) & "," _
         & IIf(.Gross3 = 0, 0, .Gross3) & "," _
@@ -475,114 +557,152 @@ UpErr:
             End Try
         End With
     End Function
+    Public Function insert_Allowances(F16Details As clsForm16Details, Allowances As Collection_Allowances,
+    OtherIncomes As Collection_OtherIncomes, Sec80CDeductions As Collection_Sec80CDed,
+    sec80CCFDeductions As Collection_Sec80CCFDed, sec80CCGDeductions As Collection_Sec80CCGDed,
+    VI_A_Deductions As Collection_VI_A_Deductions, grdF16 As DataGridView, TotalSalaryPreEmp As Double, TDSAmtPreEmp As Double, HighRatePAN As Boolean) As Boolean
 
-    'Master Data written sucessfully, now write Allowances Data of Form 16
-    '    Dim Allw As Long
-    '            For Allw = 1 To Allowances.Count
-    '                Allowances(Allw).ID = MoreDetails.MaxID + 1
-    '                sql_Allw = "Insert into Form16MoreDetails (ID, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
-    '                " Values ( " _
-    '                & Allowances(Allw).ID & "," _
-    '                & .F16ID & "," _
-    '                & "'A','" _
-    '                & IIf(Trim(Allowances(Allw).Particulars) = "", "", Allowances(Allw).Particulars) & "'," _
-    '                & IIf(Allowances(Allw).GrossAmt = 0, 0, Allowances(Allw).GrossAmt) & "," _
-    '                & IIf(Allowances(Allw).QualifyAmt = 0, 0, Allowances(Allw).QualifyAmt) & "," _
-    '                & IIf(Allowances(Allw).DeductibleAmt = 0, 0, Allowances(Allw).DeductibleAmt) & ")"
-    '                Cnn.Execute sql_Allw
-    '        Next
-    '            'Allowances Data written sucessfully, now write Other Income Data of Form 16
-    '            Dim OthInc As Long
-    '            For OthInc = 1 To OtherIncomes.Count
-    '                OtherIncomes(OthInc).ID = MoreDetails.MaxID + 1
-    '                sql_OthInc = "Insert into Form16MoreDetails (id, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
-    '                " Values ( " _
-    '                & OtherIncomes(OthInc).ID & "," _
-    '                & .F16ID & "," _
-    '                & "'O','" _
-    '                & IIf(Trim(OtherIncomes(OthInc).Particulars) = "", "", OtherIncomes(OthInc).Particulars) & "'," _
-    '                & IIf(OtherIncomes(OthInc).GrossAmt = 0, 0, OtherIncomes(OthInc).GrossAmt) & "," _
-    '                & IIf(OtherIncomes(OthInc).QualifyAmt = 0, 0, OtherIncomes(OthInc).QualifyAmt) & "," _
-    '                & IIf(OtherIncomes(OthInc).DeductibleAmt = 0, 0, OtherIncomes(OthInc).DeductibleAmt) & ")"
-    '                Cnn.Execute sql_OthInc
-    '        Next
-    '            'Other Income written sucessfully, now write Section 80C Data of Form 16
-    '            Dim Sec80C As Long
-    '            For Sec80C = 1 To Sec80CDeductions.Count
-    '                Sec80CDeductions(Sec80C).ID = MoreDetails.MaxID + 1
-    '                sql_sec80C = "Insert into Form16MoreDetails (id, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
-    '                " Values ( " _
-    '                & Sec80CDeductions(Sec80C).ID & "," _
-    '                & .F16ID & "," _
-    '                & "'E','" _
-    '                & IIf(Trim(Sec80CDeductions(Sec80C).Particulars) = "", "", Sec80CDeductions(Sec80C).Particulars) & "'," _
-    '                & IIf(Sec80CDeductions(Sec80C).GrossAmt = 0, 0, Sec80CDeductions(Sec80C).GrossAmt) & "," _
-    '                & IIf(Sec80CDeductions(Sec80C).QualifyAmt = 0, 0, Sec80CDeductions(Sec80C).QualifyAmt) & "," _
-    '                & IIf(Sec80CDeductions(Sec80C).DeductibleAmt = 0, 0, Sec80CDeductions(Sec80C).DeductibleAmt) & ")"
-    '                Cnn.Execute sql_sec80C
-    '        Next
-    '            'Sec 80C data written sucessfully, now write 80CCF Data of Form 16
-    '            Dim Sec80CCF As Long
-    '            For Sec80CCF = 1 To sec80CCFDeductions.Count
-    '                sec80CCFDeductions(Sec80CCF).ID = MoreDetails.MaxID + 1
-    '                sql_sec80CCF = "Insert into Form16MoreDetails (id, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
-    '                " Values ( " _
-    '                & sec80CCFDeductions(Sec80CCF).ID & "," _
-    '                & .F16ID & "," _
-    '                & "'F','" _
-    '                & IIf(Trim(sec80CCFDeductions(Sec80CCF).Particulars) = "", "", sec80CCFDeductions(Sec80CCF).Particulars) & "'," _
-    '                & IIf(sec80CCFDeductions(Sec80CCF).GrossAmt = 0, 0, sec80CCFDeductions(Sec80CCF).GrossAmt) & "," _
-    '                & IIf(sec80CCFDeductions(Sec80CCF).QualifyAmt = 0, 0, sec80CCFDeductions(Sec80CCF).QualifyAmt) & "," _
-    '                & IIf(sec80CCFDeductions(Sec80CCF).DeductibleAmt = 0, 0, sec80CCFDeductions(Sec80CCF).DeductibleAmt) & ")"
-    '                Cnn.Execute sql_sec80CCF
-    '        Next
-    '            'Sec 80CCF data written sucessfully, now write 80CCG Data of Form 16
-    '            Dim Sec80CCG As Long
-    '            For Sec80CCG = 1 To sec80CCGDeductions.Count
-    '                sec80CCGDeductions(Sec80CCG).ID = MoreDetails.MaxID + 1
-    '                sql_sec80CCG = "Insert into Form16MoreDetails (id, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
-    '                " Values ( " _
-    '                & sec80CCGDeductions(Sec80CCG).ID & "," _
-    '                & .F16ID & "," _
-    '                & "'G','" _
-    '                & IIf(Trim(sec80CCGDeductions(Sec80CCG).Particulars) = "", "", sec80CCGDeductions(Sec80CCG).Particulars) & "'," _
-    '                & IIf(sec80CCGDeductions(Sec80CCG).GrossAmt = 0, 0, sec80CCGDeductions(Sec80CCG).GrossAmt) & "," _
-    '                & IIf(sec80CCGDeductions(Sec80CCG).QualifyAmt = 0, 0, sec80CCGDeductions(Sec80CCG).QualifyAmt) & "," _
-    '                & IIf(sec80CCGDeductions(Sec80CCG).DeductibleAmt = 0, 0, sec80CCGDeductions(Sec80CCG).DeductibleAmt) & ")"
-    '                Cnn.Execute sql_sec80CCG
-    '        Next
-    '            'Sec 80CCG data written sucessfully, now write Chapter VI-A Data of Form 16
-    '            Dim Chp6A As Long
-    '            For Chp6A = 1 To VI_A_Deductions.Count
-    '                VI_A_Deductions(Chp6A).ID = MoreDetails.MaxID + 1
-    '                sql_6A = "Insert into Form16MoreDetails (id,F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt)" &
-    '                " Values ( " _
-    '                & VI_A_Deductions(Chp6A).ID & "," _
-    '                & .F16ID & "," _
-    '                & "'V','" _
-    '                & IIf(Trim(VI_A_Deductions(Chp6A).Particulars) = "", "", VI_A_Deductions(Chp6A).Particulars) & "'," _
-    '                & IIf(VI_A_Deductions(Chp6A).GrossAmt = 0, 0, VI_A_Deductions(Chp6A).GrossAmt) & "," _
-    '                & IIf(VI_A_Deductions(Chp6A).QualifyAmt = 0, 0, VI_A_Deductions(Chp6A).QualifyAmt) & "," _
-    '                & IIf(VI_A_Deductions(Chp6A).DeductibleAmt = 0, 0, VI_A_Deductions(Chp6A).DeductibleAmt) & ")"
-    '                Cnn.Execute sql_6A
-    '        Next
+        Dim sql As String, cnl As Boolean
 
-    '            Dim R As Integer
-    '            For R = 1 To grdF16.Rows - 2
-    '                If grdF16.ValueMatrix(R, 1) > 0 Then
-    '                    oF16Challan.Insert.F16ID, grdF16.ValueMatrix(R, 1), grdF16.ValueMatrix(R, 2), grdF16.ValueMatrix(R, 3), grdF16.ValueMatrix(R, 5), grdF16.ValueMatrix(R, 8), grdF16.ValueMatrix(R, 6), grdF16.TextMatrix(R, 7), vbNullString
-    '            End If
-    '            Next R
 
-    '            RaiseEvent AfterSave()
-    '            Insert = True
-    '        End With
-    '        Exit Function
-    'InErr:
-    '        MsgBox Err.Description, , Err.Number
-    '    Insert = False
-    '    End Function
+        cnl = False : RaiseEvent PrepareDataForSaveOther(cnl)
+        If cnl = True Then
+            insert_Allowances = False
+            Exit Function
+        End If
+        'Master Data of Form 16
+        With F16Details
 
+        End With
+
+
+
+
+        'Master Data written sucessfully, Now write Allowances Data of Form 16
+        Dim Allw As Long
+        Dim MoreDetails As New clsForm16MoreDetails
+        Dim sql_OthInc As String, sql_Allw As String, sql_sec80C As String, sql_sec80CCF As String, sql_6A As String
+        Dim sql_sec80CCG As String
+        For Allw = 1 To Allowances.Count
+            Allowances.Item(Allw).ID = MoreDetails.MaxID + 1
+            'Allowances(Allw).ID = MoreDetails.MaxID + 1
+            sql_Allw = "Insert into Form16MoreDetails (ID, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
+            " Values ( " _
+            & Allowances.Item(Allw).ID & "," _
+            & Allowances.Item(Allw).F16ID & "," _
+            & "'A','" _
+            & IIf(Trim(Allowances.Item(Allw).Particulars) = "", "", Allowances.Item(Allw).Particulars) & "'," _
+            & IIf(Allowances.Item(Allw).GrossAmt = 0, 0, Allowances.Item(Allw).GrossAmt) & "," _
+            & IIf(Allowances.Item(Allw).QualifyAmt = 0, 0, Allowances.Item(Allw).QualifyAmt) & "," _
+            & IIf(Allowances.Item(Allw).DeductibleAmt = 0, 0, Allowances.Item(Allw).DeductibleAmt) & ")"
+
+            Dim cmd As New OleDbCommand
+            Try
+                cmd.CommandText = sql_Allw
+                cmd.Connection = cn
+                cmd.ExecuteNonQuery()
+                insert_Allowances = True
+            Catch ex As Exception
+                Dim merror As String
+                merror = ex.Message
+                MsgBox(merror)
+                insert_Allowances = False
+            End Try
+
+
+        Next
+        ''Allowances Data written sucessfully, now write Other Income Data of Form 16
+        'Dim OthInc As Long
+        'For OthInc = 1 To OtherIncomes.Count
+        '    OtherIncomes(OthInc).ID = MoreDetails.MaxID + 1
+        '    sql_OthInc = "Insert into Form16MoreDetails (id, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
+        '    " Values ( " _
+        '    & OtherIncomes(OthInc).ID & "," _
+        '    & .F16ID & "," _
+        '    & "'O','" _
+        '    & IIf(Trim(OtherIncomes(OthInc).Particulars) = "", "", OtherIncomes(OthInc).Particulars) & "'," _
+        '    & IIf(OtherIncomes(OthInc).GrossAmt = 0, 0, OtherIncomes(OthInc).GrossAmt) & "," _
+        '    & IIf(OtherIncomes(OthInc).QualifyAmt = 0, 0, OtherIncomes(OthInc).QualifyAmt) & "," _
+        '    & IIf(OtherIncomes(OthInc).DeductibleAmt = 0, 0, OtherIncomes(OthInc).DeductibleAmt) & ")"
+        '    Cnn.Execute sql_OthInc
+        '        Next
+        ''Other Income written sucessfully, now write Section 80C Data of Form 16
+        'Dim Sec80C As Long
+        'For Sec80C = 1 To Sec80CDeductions.Count
+        '    Sec80CDeductions(Sec80C).ID = MoreDetails.MaxID + 1
+        '    sql_sec80C = "Insert into Form16MoreDetails (id, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
+        '    " Values ( " _
+        '    & Sec80CDeductions(Sec80C).ID & "," _
+        '    & .F16ID & "," _
+        '    & "'E','" _
+        '    & IIf(Trim(Sec80CDeductions(Sec80C).Particulars) = "", "", Sec80CDeductions(Sec80C).Particulars) & "'," _
+        '    & IIf(Sec80CDeductions(Sec80C).GrossAmt = 0, 0, Sec80CDeductions(Sec80C).GrossAmt) & "," _
+        '    & IIf(Sec80CDeductions(Sec80C).QualifyAmt = 0, 0, Sec80CDeductions(Sec80C).QualifyAmt) & "," _
+        '    & IIf(Sec80CDeductions(Sec80C).DeductibleAmt = 0, 0, Sec80CDeductions(Sec80C).DeductibleAmt) & ")"
+        '    Cnn.Execute sql_sec80C
+        '        Next
+        ''Sec 80C data written sucessfully, now write 80CCF Data of Form 16
+        'Dim Sec80CCF As Long
+        'For Sec80CCF = 1 To sec80CCFDeductions.Count
+        '    sec80CCFDeductions(Sec80CCF).ID = MoreDetails.MaxID + 1
+        '    sql_sec80CCF = "Insert into Form16MoreDetails (id, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
+        '    " Values ( " _
+        '    & sec80CCFDeductions(Sec80CCF).ID & "," _
+        '    & .F16ID & "," _
+        '    & "'F','" _
+        '    & IIf(Trim(sec80CCFDeductions(Sec80CCF).Particulars) = "", "", sec80CCFDeductions(Sec80CCF).Particulars) & "'," _
+        '    & IIf(sec80CCFDeductions(Sec80CCF).GrossAmt = 0, 0, sec80CCFDeductions(Sec80CCF).GrossAmt) & "," _
+        '    & IIf(sec80CCFDeductions(Sec80CCF).QualifyAmt = 0, 0, sec80CCFDeductions(Sec80CCF).QualifyAmt) & "," _
+        '    & IIf(sec80CCFDeductions(Sec80CCF).DeductibleAmt = 0, 0, sec80CCFDeductions(Sec80CCF).DeductibleAmt) & ")"
+        '    Cnn.Execute sql_sec80CCF
+        '        Next
+        ''Sec 80CCF data written sucessfully, now write 80CCG Data of Form 16
+        'Dim Sec80CCG As Long
+        'For Sec80CCG = 1 To sec80CCGDeductions.Count
+        '    sec80CCGDeductions(Sec80CCG).ID = MoreDetails.MaxID + 1
+        '    sql_sec80CCG = "Insert into Form16MoreDetails (id, F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt) " &
+        '    " Values ( " _
+        '    & sec80CCGDeductions(Sec80CCG).ID & "," _
+        '    & .F16ID & "," _
+        '    & "'G','" _
+        '    & IIf(Trim(sec80CCGDeductions(Sec80CCG).Particulars) = "", "", sec80CCGDeductions(Sec80CCG).Particulars) & "'," _
+        '    & IIf(sec80CCGDeductions(Sec80CCG).GrossAmt = 0, 0, sec80CCGDeductions(Sec80CCG).GrossAmt) & "," _
+        '    & IIf(sec80CCGDeductions(Sec80CCG).QualifyAmt = 0, 0, sec80CCGDeductions(Sec80CCG).QualifyAmt) & "," _
+        '    & IIf(sec80CCGDeductions(Sec80CCG).DeductibleAmt = 0, 0, sec80CCGDeductions(Sec80CCG).DeductibleAmt) & ")"
+        '    Cnn.Execute sql_sec80CCG
+        '        Next
+        ''Sec 80CCG data written sucessfully, now write Chapter VI-A Data of Form 16
+        'Dim Chp6A As Long
+        'For Chp6A = 1 To VI_A_Deductions.Count
+        '    VI_A_Deductions(Chp6A).ID = MoreDetails.MaxID + 1
+        '    sql_6A = "Insert into Form16MoreDetails (id,F16ID,TypeOfDetail,Particulars,GrossAmt,QualifyAmt,DeductibleAmt)" &
+        '    " Values ( " _
+        '    & VI_A_Deductions(Chp6A).ID & "," _
+        '    & .F16ID & "," _
+        '    & "'V','" _
+        '    & IIf(Trim(VI_A_Deductions(Chp6A).Particulars) = "", "", VI_A_Deductions(Chp6A).Particulars) & "'," _
+        '    & IIf(VI_A_Deductions(Chp6A).GrossAmt = 0, 0, VI_A_Deductions(Chp6A).GrossAmt) & "," _
+        '    & IIf(VI_A_Deductions(Chp6A).QualifyAmt = 0, 0, VI_A_Deductions(Chp6A).QualifyAmt) & "," _
+        '    & IIf(VI_A_Deductions(Chp6A).DeductibleAmt = 0, 0, VI_A_Deductions(Chp6A).DeductibleAmt) & ")"
+        '    Cnn.Execute sql_6A
+        '        Next
+
+        'Dim R As Integer
+        'For R = 1 To grdF16.Rows - 2
+        '    If grdF16.ValueMatrix(R, 1) > 0 Then
+        '        oF16Challan.Insert.F16ID, grdF16.ValueMatrix(R, 1), grdF16.ValueMatrix(R, 2), grdF16.ValueMatrix(R, 3), grdF16.ValueMatrix(R, 5), grdF16.ValueMatrix(R, 8), grdF16.ValueMatrix(R, 6), grdF16.TextMatrix(R, 7), vbNullString
+        '            End If
+        'Next R
+
+        '        RaiseEvent AfterSave()
+        '        insert_Allowances = True
+        '        'End With
+        '        Exit Function
+        'InErr:
+        '        MsgBox(Err.Description, , Err.Number)
+        '        insert_Allowances = False
+
+    End Function
     Public Function Delete(ByVal ID As String) As Boolean
         Dim cnl As Boolean
         Dim cmd As New OleDbCommand
@@ -611,8 +731,8 @@ DelErr:
     End Function
 
 
-    Public Function Fetch(ByVal dname As String) As Form16Details
-        Dim DM As New Form16Details
+    Public Function Fetch(ByVal dname As String) As clsForm16Details
+        Dim DM As New clsForm16Details
         Dim ds As New DataSet
         ds = FetchDataSet("SELECT CoMst.*, DeductMst.DId, DeductMst.DName, Form16Details.*
 FROM CoMst INNER JOIN (DeductMst INNER JOIN Form16Details ON DeductMst.DId = Form16Details.DId) ON CoMst.CoID = DeductMst.CoID where DName like'" & dname & "'")

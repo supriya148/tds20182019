@@ -2,7 +2,7 @@
     'local variable to hold collection
     Private mCol As Collection
 
-    Public Function Add(ID As Long, F16ID As Long, TypeOfDetail As String, Particulars As String, GrossAmt As Double, QualifyAmt As Double, DeductibleAmt As Double, sKey As String) As clsForm16MoreDetails
+    Public Function Add(ID As Long, F16ID As Long, TypeOfDetail As String, Particulars As String, GrossAmt As Double, QualifyAmt As Double, DeductibleAmt As Double, Optional sKey As String = "") As clsForm16MoreDetails
         'create a new object
         Dim objNewMember As clsForm16MoreDetails
         objNewMember = New clsForm16MoreDetails
