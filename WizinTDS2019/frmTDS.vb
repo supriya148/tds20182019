@@ -393,7 +393,7 @@ Public Class frmTDS
                 Itm.SubItems.Add((IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("Relief89")), vbNullString, nds.Tables(0).Rows(0)("Relief89").ToString())))
                 Itm.SubItems.Add(Val(Itm.SubItems(19).Text) - Val(Itm.SubItems(20).Text))
 
-                '' changed on: 28/04/2009; by Prakash as Changes in WizinTDS 2009 for TDS Yearly Column;
+                ' changed on: 28/04/2009; by Prakash as Changes in WizinTDS 2009 for TDS Yearly Column;
                 ''         Itm.SubItems(20) = IIf(IsNull(rstTDSSum!SumTax), 0, rstTDSSum!SumTax) + IIf(IsNull(rstTDSSum!SumSur), 0, rstTDSSum!SumSur) + _
                 ''                            IIf(IsNull(rstTDSSum!SumECess), 0, rstTDSSum!SumECess)
 
