@@ -7,7 +7,6 @@ Imports System.Data.OleDb
 Imports System.Data
 Imports System.String
 Imports System.ComponentModel
-Imports WizinTDS2018
 
 Public Class frmTDS
     Public ConvertWhich As String
@@ -105,7 +104,7 @@ Public Class frmTDS
         End If
     End Sub
 
-    Private Sub Load24QData(rID As Long)
+    Public Sub Load24QData(rID As Long)
         Dim obj As New clsDeductee24QObj
         Dim i As Long
         Dim nds As New DataSet
@@ -114,19 +113,19 @@ Public Class frmTDS
             .lvwDeductee.Items.Clear()
             .cmdNext.Enabled = False
             'Check quarter and form 16 usage check and then enable/disable Salary Detail tab accordingly.
-            ' If .quter = "24Q4" Then
-            ' .tabMain.TabEnabled(5) = True
-            ' If frmCoMst.chkUseForm16.Checked = True Then
-            '.tabMain.SelectedIndex(5).enabled = False
-            ' .tabMain.TabEnabled(4) = True
+            'If .quter = "24Q4" Then
+            '    .tabMain.TabEnabled(5) = True
+            '    If frmCoMst.chkUseForm16.Value = vbChecked Then
+            '        .tabMain.TabEnabled(3) = False
+            '        .tabMain.TabEnabled(4) = True
+            '    Else
+            '        .tabMain.TabEnabled(3) = True
+            '        .tabMain.TabEnabled(4) = False
+            '    End If
             'Else
-            ' .tabMain.TabEnabled(3) = True
-            '.tabMain.TabEnabled(4) = False
-            '  End If
-            'Else
-            '.tabMain.TabEnabled(5) = False
-            ' .tabMain.TabEnabled(3) = False
-            ' .tabMain.TabEnabled(4) = False
+            '    .tabMain.TabEnabled(5) = False
+            '    .tabMain.TabEnabled(3) = False
+            '    .tabMain.TabEnabled(4) = False
             'End If
             'Filling Challan in Deductee Detail
             Dim sql As String
@@ -143,9 +142,7 @@ Public Class frmTDS
                 dt.ToString("dd/MM/yy")
                 .cboChallanNo.Items.Add(nds.Tables(0).Rows(i)(1) & " - " & dt)
                 .cboChallanNo.SelectedValue = nds.Tables(0).Rows(i)("ChallanID")
-
             Next i
-
 
             'Filling BSR Code in Challan Detail
             nds = FetchDataSet("select BankBrCode from BankMst WHERE CoID=" & selectedcoid & " order by BankBrCode")
@@ -261,297 +258,195 @@ Public Class frmTDS
             Next
 
             ' .txtTDSRate.Enabled = False
+            ' End With
+            nds.Dispose()
+
+            'Load SALARY DETAILS TAB...
+
+            nds = FetchDataSet("SELECT SD.*, DM.* FROM SalaryDetail24Q AS SD " &
+        "INNER JOIN DeductMst AS DM ON SD.DId = DM.DId WHERE RetnID=" & rID)
+
+            For i = 0 To nds.Tables(0).Rows.Count - 1
+                Dim dt1, dt2 As Date
+                'SectionChecked24(nds.Tables(0).Rows(i)("Sec").ToString())
+                Dim Itm As New ListViewItem()
+                'Itm = .lvwSD.ListItems.Add(, , rst!DName)
+                Itm.Text = nds.Tables(0).Rows(i)("DName").ToString()
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("DPAN").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Category").ToString())
+                dt1 = nds.Tables(0).Rows(i)("EmpFromDt").ToString()
+                dt1.ToString("dd/MMM/yyyy")
+                Itm.SubItems.Add(dt1)
+                dt2 = nds.Tables(0).Rows(i)("EmpToDt").ToString()
+                dt2.ToString("dd/MMM/yyyy")
+                Itm.SubItems.Add(dt2)
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("TotalSalary").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec16ii").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec16iii").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("TotalSalaryPreEmp").ToString())
+                Itm.SubItems.Add(Val(Itm.SubItems(5).Text) - Val(Itm.SubItems(6).Text) - Val(Itm.SubItems(7).Text) + Val(Itm.SubItems(8).Text))
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("OtherIncome").ToString())
+                Itm.SubItems.Add(Val(Itm.SubItems(9).Text) + Val(Itm.SubItems(10).Text))
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec80CCEAmt").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec80CCFAmt").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec80CCGAmt").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("OtherVIA").ToString())
+                Itm.SubItems.Add(Val(Itm.SubItems(11).Text) - Val(Itm.SubItems(12).Text) - Val(Itm.SubItems(13).Text) - Val(Itm.SubItems(14).Text) - Val(Itm.SubItems(15).Text))
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("TaxAmt").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Surcharge").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("ECess").ToString())
+                Itm.SubItems.Add(Val(Itm.SubItems(17).Text) + Val(Itm.SubItems(18).Text) + Val(Itm.SubItems(19).Text))
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Relief89").ToString())
+                Itm.SubItems.Add(Val(Itm.SubItems(20).Text) - Val(Itm.SubItems(21).Text))
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("TDSAmt").ToString())
+                Itm.SubItems.Add(Val(Itm.SubItems(22).Text) - Val(Itm.SubItems(23).Text))
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("TotalSalaryPreEmp").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("TDSAmtPreEmp").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("HighRatePAN").ToString())
+                'Itm.SubItems(8) = Val(Itm.SubItems(5)) - Val(Itm.SubItems(6)) - Val(Itm.SubItems(7)) + Val(Itm.SubItems(25))
+                '          Itm.SubItems(8) = Val(Itm.SubItems(5)) - Val(Itm.SubItems(6)) - Val(Itm.SubItems(7)) + Val(Itm.SubItems(25))
+                '          Itm.SubItems(10) = Val(Itm.SubItems(8)) + Val(Itm.SubItems(9))
+
+                Itm.SubItems.Add((nds.Tables(0).Rows(i)("TDSAmtPreEmp") + nds.Tables(0).Rows(i)("TDSAmt")))
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("SDID").ToString())
+                .lvwSD.Items.Add(Itm)
+                'rst.MoveNext
+            Next
+
+            nds.Dispose()
+
+            'Load FORM 16 DETAILS TAB...
+            Dim rstTmp, rstTDSSum As New DataSet
+            Dim mTotAllw As Double
+            Dim TotalTDSFromChallan As Double, TotalF16Challan As Double
+
+            nds = FetchDataSet("SELECT DeductMst.*, Form16Details.* " &
+          "FROM DeductMst INNER JOIN Form16Details ON DeductMst.DId = Form16Details.DId " &
+          " WHERE Form16Details.RetnID = " & rID)
+
+            .lvwForm16.Items.Clear()
+
+            For i = 0 To nds.Tables(0).Rows.Count - 1
+                Dim dt1, dt2 As New Date
+                Dim Itm As New ListViewItem()
+                rstTDSSum = FetchDataSet("SELECT sum(D24.TaxAmt) as SumTax, sum(D24.Surcharge) as SumSur, Sum(D24.ECess)as SumECess " &
+                 " FROM Challan24Q AS C24 INNER JOIN Deductee24Q AS D24 ON C24.ChallanID = D24.ChallanId WHERE D24.DId= " & nds.Tables(0).Rows(0)("DeductMst.DiD") & ";")
+                Itm.Text = nds.Tables(0).Rows(i)("DName").ToString()
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("DPAN").ToString())
+                Itm.SubItems.Add(nds.Tables(0).Rows(i)("Category").ToString())
+                dt1 = nds.Tables(0).Rows(i)("EmpFromDt").ToString()
+                dt1.ToString("dd/MMM/yyyy")
+                Itm.SubItems.Add(dt1)
+                dt2 = nds.Tables(0).Rows(i)("EmpToDt").ToString()
+                dt2.ToString("dd/MMM/yyyy")
+                Itm.SubItems.Add(dt2)
+                Itm.SubItems.Add(((IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(i)("Gross1")), 0, (nds.Tables(0).Rows(i)("Gross1"))) + IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(i)("Gross2")), 0, nds.Tables(0).Rows(i)("Gross2"))) + IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(i)("Gross3")), 0, nds.Tables(0).Rows(i)("Gross3"))))
+                Itm.SubItems.Add("")
+                Itm.SubItems.Add(IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(i)("Sec16ii")), vbNullString, nds.Tables(0).Rows(i)("Sec16ii").ToString()))
+                Itm.SubItems.Add(IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(i)("Sec16iii")), vbNullString, nds.Tables(0).Rows(i)("Sec16iii").ToString()))
+                Itm.SubItems.Add("")
+                Itm.SubItems.Add("") '10
+                Itm.SubItems.Add("") '11
+                Itm.SubItems.Add("") '12
+                Itm.SubItems.Add("") '13
+                Itm.SubItems.Add("") '14
+                'Commented Row
+                mTotAllw = 0
+                rstTmp.Dispose()
+                rstTmp = FetchDataSet("SELECT * from Form16MoreDetails WHERE F16ID=" & nds.Tables(0).Rows(0)("F16ID"))
+                'Itm.SubItems.Add(Val(Itm.SubItems(5).Text) - Val(Itm.SubItems(7).Text) - Val(Itm.SubItems(8).Text) - mTotAllw)
+                For j = 0 To rstTmp.Tables(0).Rows.Count - 1
+
+                    If rstTmp.Tables(0).Rows(j)("TypeOfDetail").ToString() = "A" Then
+                        mTotAllw = mTotAllw + CDbl(IIf(String.IsNullOrEmpty(rstTmp.Tables(0).Rows(j)("GrossAmt").ToString()), 0, rstTmp.Tables(0).Rows(j)("GrossAmt").ToString()))
+                    ElseIf rstTmp.Tables(0).Rows(j)("TypeOfDetail").ToString() = "O" Then
+                        Dim c As Integer
+                        c = Val(Itm.SubItems(10).Text) + CDbl(IIf(String.IsNullOrEmpty(rstTmp.Tables(0).Rows(j)("GrossAmt").ToString()), 0, rstTmp.Tables(0).Rows(j)("GrossAmt").ToString()))
+                        Itm.SubItems(10).Text = c
+                    ElseIf rstTmp.Tables(0).Rows(j)("TypeOfDetail").ToString() = "E" Then
+                        Dim c As Integer
+                        c = Val(Itm.SubItems(12).Text) + CDbl(IIf(String.IsNullOrEmpty(rstTmp.Tables(0).Rows(j)("DeductibleAmt").ToString() = 0), 0, rstTmp.Tables(0).Rows(j)("DeductibleAmt").ToString()))
+                        Itm.SubItems(12).Text = c
+                    ElseIf rstTmp.Tables(0).Rows(j)("TypeOfDetail").ToString() = "F" Then
+                        Dim c As Integer
+                        c = Val(Itm.SubItems(13).Text) + CDbl(IIf(String.IsNullOrEmpty(rstTmp.Tables(0).Rows(j)("DeductibleAmt").ToString() = 0), 0, rstTmp.Tables(0).Rows(j)("DeductibleAmt").ToString()))
+                        Itm.SubItems(13).Text = c
+                    ElseIf rstTmp.Tables(0).Rows(j)("TypeOfDetail").ToString() = "V" Then
+                        Dim d As Integer
+                        d = Val(Itm.SubItems(14).Text) + CDbl(IIf(String.IsNullOrEmpty(rstTmp.Tables(0).Rows(j)("DeductibleAmt").ToString() = 0), 0, rstTmp.Tables(0).Rows(j)("DeductibleAmt").ToString()))
+                        Itm.SubItems(14).Text = d
+                    End If
+                Next
+                Itm.SubItems(6).Text = mTotAllw
+                TotalF16Challan = 0
+                rstTmp.Dispose()
+                rstTmp = FetchDataSet("Select sum(F.TaxAmt) as SumTax, sum(F.Surcharge) as SumSur, Sum(F.ECess)as SumECess from F16Challan as F WHERE F.F16ID=" & nds.Tables(0).Rows(0)("F16ID") & "")
+                Dim b = Val(Itm.SubItems(5).Text) - Val(Itm.SubItems(7).Text) - Val(Itm.SubItems(8).Text) - mTotAllw
+                Itm.SubItems(9).Text = b
+                Dim e = Val(Itm.SubItems(9).Text) + Val(Itm.SubItems(10).Text)
+                Itm.SubItems(11).Text = e
+                Itm.SubItems.Add(Val(Itm.SubItems(11).Text) - Val(Itm.SubItems(12).Text) - Val(Itm.SubItems(13).Text) - Val(Itm.SubItems(14).Text))
+                Itm.SubItems.Add(IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("TaxAmt")), 0, nds.Tables(0).Rows(0)("TaxAmt").ToString()))
+                Itm.SubItems.Add(IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("Surcharge")), 0, nds.Tables(0).Rows(0)("Surcharge").ToString()))
+                Itm.SubItems.Add(IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("ECess")), 0, nds.Tables(0).Rows(0)("ECess").ToString()))
+                Itm.SubItems.Add(Val(Itm.SubItems(16).Text) + Val(Itm.SubItems(17).Text) + Val(Itm.SubItems(18).Text))
+                Itm.SubItems.Add((IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("Relief89")), vbNullString, nds.Tables(0).Rows(0)("Relief89").ToString())))
+                Itm.SubItems.Add(Val(Itm.SubItems(19).Text) - Val(Itm.SubItems(20).Text))
+
+                '' changed on: 28/04/2009; by Prakash as Changes in WizinTDS 2009 for TDS Yearly Column;
+                ''         Itm.SubItems(20) = IIf(IsNull(rstTDSSum!SumTax), 0, rstTDSSum!SumTax) + IIf(IsNull(rstTDSSum!SumSur), 0, rstTDSSum!SumSur) + _
+                ''                            IIf(IsNull(rstTDSSum!SumECess), 0, rstTDSSum!SumECess)
+
+                TotalTDSFromChallan = IIf(String.IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumTax").ToString()), 0, (rstTDSSum.Tables(0).Rows(0)("SumTax"))) + IIf(String.IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumSur").ToString()), 0, rstTDSSum.Tables(0).Rows(0)("SumSur")) + IIf(String.IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumECess").ToString()), 0, rstTDSSum.Tables(0).Rows(0)("SumECess"))
+                TotalF16Challan = IIf(String.IsNullOrEmpty(rstTmp.Tables(0).Rows(0)("SumTax").ToString()), 0, (rstTmp.Tables(0).Rows(0)("SumTax").ToString())) + IIf(String.IsNullOrEmpty(rstTmp.Tables(0).Rows(0)("SumSur").ToString()), 0, rstTmp.Tables(0).Rows(0)("SumSur").ToString()) + IIf(String.IsNullOrEmpty(rstTmp.Tables(0).Rows(0)("SumECess").ToString()), 0, rstTmp.Tables(0).Rows(0)("SumECess").ToString())
+
+                Itm.SubItems.Add(TotalTDSFromChallan + TotalF16Challan) 'IIf(IsNull(rst!TDSAmt), vbNullString, rst!TDSAmt)
+                Itm.SubItems.Add("")
+                Itm.SubItems.Add(nds.Tables(0).Rows(0)("F16ID"))
+                Itm.SubItems.Add(IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("TotalSalaryPreEmp").ToString()), vbNullString, (nds.Tables(0).Rows(0)("TotalSalaryPreEmp").ToString())))
+                Itm.SubItems.Add(IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("TDSAmtPreEmp").ToString()), vbNullString, (nds.Tables(0).Rows(0)("TDSAmtPreEmp").ToString())))
+                Dim a = Val(Itm.SubItems(21).Text) - ((IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("TDSOnPerks").ToString()), vbNullString, nds.Tables(0).Rows(0)("TDSOnPerks").ToString())) + Val(Itm.SubItems(22).Text)) - Val(Itm.SubItems(26).Text)
+                Itm.SubItems(23).Text = a
+                Itm.SubItems.Add(IIf(String.IsNullOrEmpty(nds.Tables(0).Rows(0)("HighRatePAN").ToString()), vbNullString, nds.Tables(0).Rows(0)("HighRatePAN").ToString()))
+                .lvwForm16.Items.Add(Itm)
+                rstTDSSum.Dispose()
+            Next i
+            nds.Dispose()
+            nds = Nothing
+            'Itm = Nothing
         End With
 
-        nds.Dispose()
-        'With frmTDS24Q
-        '    'Filling Challan in Deductee Detail
-        '    .lvwChallan.Items.Clear()
-        '    .lvwDeductee.Items.Clear()
-        '    Dim sql As String
-        '    sql = " SELECT challanid,BankChallanNo,DtOfChallan" _
-        '& " FROM Challan24Q WHERE (BankChallanNo<>Null and BankChallanNo<>0) " _
-        '& " UNION ALL SELECT challanid,TranVouNo,DtOfChallan " _
-        '& " FROM Challan24Q WHERE (TranVouNo<>Null and TranVouNo<>0) AND RetnID=" & rID & " order by ChallanID"
-        '    nds = FetchDataSet(sql)
-
-        '    .cboChallanNo.Items.Clear()
-        '    Dim dt As Date
-        '    For i = 0 To nds.Tables(0).Rows.Count - 1
-        '        dt = nds.Tables(0).Rows(i)("DtOfChallan")
-        '        dt.ToString("dd/MM/yy")
-        '        .cboChallanNo.Items.Add(nds.Tables(0).Rows(i)(1) & " - " & dt)
-        '        .cboChallanNo.SelectedValue = nds.Tables(0).Rows(i)("ChallanID")
-
-        '    Next i
-
-        '    'Filling BSR Code in Challan Detail
-        '    nds = FetchDataSet("select BankBrCode from BankMst WHERE CoID=" & selectedcoid & " order by BankBrCode")
-        '    .cboBankBrCode.Items.Clear()
-
-        '    For i = 0 To nds.Tables(0).Rows.Count - 1
-        '        .cboBankBrCode.Items.Add(nds.Tables(0).Rows(i)("BankBrCode"))
-        '    Next i
-
-        '    'Load challan Details..
-
-        '    nds = FetchDataSet("SELECT * FROM Challan24Q WHERE RetnID=" & rID)
-
-        '    For i = 0 To nds.Tables(0).Rows.Count - 1
-        '        If nds.Tables(0).Rows(i)("Sec").ToString() <> "" Then
-        '            SectionChecked24(nds.Tables(0).Rows(i)("Sec").ToString())
-
-        '        End If
-        '        Dim tot As Double
-        '        tot = IIf(nds.Tables(0).Rows(i)("TaxAmt") = vbNull, vbNullString, nds.Tables(0).Rows(i)("TaxAmt")) + IIf(nds.Tables(0).Rows(i)("Surcharge") = vbNull, vbNullString, nds.Tables(0).Rows(i)("Surcharge")) + IIf(nds.Tables(0).Rows(i)("ECess") = vbNull, vbNullString, nds.Tables(0).Rows(i)("ECess")) + IIf(nds.Tables(0).Rows(i)("Interest") = vbNull, vbNullString, nds.Tables(0).Rows(i)("Interest")) &
-        '            +IIf(nds.Tables(0).Rows(i)("Others") = vbNull, vbNullString, nds.Tables(0).Rows(i)("Others")) + IIf(nds.Tables(0).Rows(i)("AFees") = vbNull, vbNullString, nds.Tables(0).Rows(i)("AFees"))
-
-        '        Dim newitem As New ListViewItem()
-        '        newitem.Text = nds.Tables(0).Rows(i)("Sec").ToString() 'first column
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("TaxAmt").ToString()) 'second column
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("Surcharge").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("ECess").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("Interest").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("Others").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("AFees").ToString())
-        '        newitem.SubItems.Add(tot)
-        '        'newitem.SubItems.Add(nds.Tables(0).Rows(i)("ChqDDNo").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("IsBookEntry").ToString())
-        '        'newitem.SubItems.Add(Format(Val(nds.Tables(0).Rows(i)("BankChallanNo")), "00000"))
-        '        newitem.SubItems.Add((SetFormat("00000", nds.Tables(0).Rows(i)("BankChallanNo").ToString())))
-        '        'newitem.SubItems.Add(nds.Tables(0).Rows(i)("BankChallanNo").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("TranVouNo").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("BankBrCode").ToString())
-        '        dt = nds.Tables(0).Rows(i)("DtOfChallan").ToString()
-        '        dt.ToString("dd/mm/yy")
-        '        newitem.SubItems.Add(dt)
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("Remark").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("MinorHead").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("ChallanID").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("AInterest").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("AOthers").ToString())
-        '        .lvwChallan.Items.Add(newitem)
-
-        '    Next
-        '    nds.Dispose()
-
-        '    'Load DEDUCTEE Details..
-        '    nds = FetchDataSet("Select DT.*, DM.* From Deductee24Q As DT " &
-        '                        "INNER Join DeductMst As DM On dt.DId = DM.DId Where RetnID = " & rID & " And CoId = " & selectedcoid & " Order By dt.id24Q ")
-
-        '    For i = 0 To nds.Tables(0).Rows.Count - 1
-        '        SectionChecked24(nds.Tables(0).Rows(i)("Sec").ToString())
-        '        Dim newitem As New ListViewItem()
-        '        newitem.Text = nds.Tables(0).Rows(i)("Sec").ToString() 'first column
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("DName").ToString()) 'second column
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("DPan").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("AmtOfPayment").ToString())
-        '        dt = nds.Tables(0).Rows(i)("DtOfPayment").ToString()
-        '        dt.ToString("dd/MMM/yyyy")
-        '        newitem.SubItems.Add(dt)
-        '        'newitem.SubItems.Add(nds.Tables(0).Rows(i)("IsBookEntry").ToString())
-        '        'newitem.SubItems.Add(nds.Tables(0).Rows(i)("RateOfTDS").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("TaxAmt").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("Surcharge").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("ECess").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("TotalTaxDeposited").ToString())
-        '        dt = nds.Tables(0).Rows(i)("DtOfDeduction").ToString()
-        '        dt.ToString("dd/MMM/yyyy")
-        '        newitem.SubItems.Add(dt)
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("TotalTaxDeducted").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("ChallanID").ToString())
-        '        Dim chlno As String
-        '        chlno = obj.getChallanNo(Val(nds.Tables(0).Rows(i)("ChallanID")))
-        '        newitem.SubItems.Add(chlno)
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("Remark").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("CertNo").ToString())
-        '        newitem.SubItems.Add(nds.Tables(0).Rows(i)("ID24Q").ToString())
-        '        .lvwDeductee.Items.Add(newitem)
-
-        '        If nds.Tables(0).Rows(i)("PANVerified") = False Then
-        '            newitem.SubItems.Item(2).ForeColor = Color.Magenta
-        '        End If
-
-        '    Next
-        '    nds.Dispose()
-
-        '    'Load SALARY DETAILS TAB...
-
-        '    nds = FetchDataSet("SELECT SD.*, DM.* FROM SalaryDetail24Q AS SD " &
-        '"INNER JOIN DeductMst AS DM ON SD.DId = DM.DId WHERE RetnID=" & rID)
-
-        '    For i = 0 To nds.Tables(0).Rows.Count - 1
-        '        Dim dt1, dt2 As Date
-        '        'SectionChecked24(nds.Tables(0).Rows(i)("Sec").ToString())
-        '        Dim Itm As New ListViewItem()
-        '        'Itm = .lvwSD.ListItems.Add(, , rst!DName)
-        '        Itm.Text = nds.Tables(0).Rows(i)("DName").ToString()
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("DPAN").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Category").ToString())
-        '        dt1 = nds.Tables(0).Rows(i)("EmpFromDt").ToString()
-        '        dt1.ToString("dd/MMM/yyyy")
-        '        Itm.SubItems.Add(dt1)
-        '        dt2 = nds.Tables(0).Rows(i)("EmpToDt").ToString()
-        '        dt2.ToString("dd/MMM/yyyy")
-        '        Itm.SubItems.Add(dt2)
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("TotalSalary").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec16ii").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec16iii").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("TotalSalaryPreEmp").ToString())
-        '        Itm.SubItems.Add(Val(Itm.SubItems(5).Text) - Val(Itm.SubItems(6).Text) - Val(Itm.SubItems(7).Text) + Val(Itm.SubItems(8).Text))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("OtherIncome").ToString())
-        '        Itm.SubItems.Add(Val(Itm.SubItems(9).Text) + Val(Itm.SubItems(10).Text))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec80CCEAmt").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec80CCFAmt").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec80CCGAmt").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("OtherVIA").ToString())
-        '        Itm.SubItems.Add(Val(Itm.SubItems(11).Text) - Val(Itm.SubItems(12).Text) - Val(Itm.SubItems(13).Text) - Val(Itm.SubItems(14).Text) - Val(Itm.SubItems(15).Text))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("TaxAmt").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Surcharge").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("ECess").ToString())
-        '        Itm.SubItems.Add(Val(Itm.SubItems(17).Text) + Val(Itm.SubItems(18).Text) + Val(Itm.SubItems(19).Text))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Relief89").ToString())
-        '        Itm.SubItems.Add(Val(Itm.SubItems(20).Text) - Val(Itm.SubItems(21).Text))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("TDSAmt").ToString())
-        '        Itm.SubItems.Add(Val(Itm.SubItems(22).Text) - Val(Itm.SubItems(23).Text))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("TDSAmtPreEmp").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("HighRatePAN").ToString())
-        '        'Itm.SubItems(8) = Val(Itm.SubItems(5)) - Val(Itm.SubItems(6)) - Val(Itm.SubItems(7)) + Val(Itm.SubItems(25))
-        '        '          Itm.SubItems(8) = Val(Itm.SubItems(5)) - Val(Itm.SubItems(6)) - Val(Itm.SubItems(7)) + Val(Itm.SubItems(25))
-        '        '          Itm.SubItems(10) = Val(Itm.SubItems(8)) + Val(Itm.SubItems(9))
-
-
-        '        Itm.SubItems.Add((nds.Tables(0).Rows(i)("TDSAmtPreEmp") + nds.Tables(0).Rows(i)("TDSAmt")))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("SDID").ToString())
-        '        .lvwSD.Items.Add(Itm)
-        '        'rst.MoveNext
-        '    Next
-
-        '    nds.Dispose()
-
-        '    'Load FORM 16 DETAILS TAB...
-        '    Dim rstTmp, rstTDSSum As New DataSet
-        '    Dim mTotAllw As Double
-        '    Dim TotalTDSFromChallan As Double, TotalF16Challan As Double
-
-        '    nds = FetchDataSet("SELECT DeductMst.*, Form16Details.* " &
-        '  "FROM DeductMst INNER JOIN Form16Details ON DeductMst.DId = Form16Details.DId " &
-        '  " WHERE Form16Details.RetnID = " & rID)
-
-        '    '.lvwForm16.ListItems.Clear
-        '    For i = 0 To nds.Tables(0).Rows.Count - 1
-        '        Dim dt1, dt2 As New Date
-        '        Dim Itm As New ListViewItem()
-        '        rstTDSSum = FetchDataSet("SELECT sum(D24.TaxAmt) as SumTax, sum(D24.Surcharge) as SumSur, Sum(D24.ECess)as SumECess " &
-        '         " FROM Challan24Q AS C24 INNER JOIN Deductee24Q AS D24 ON " &
-        '         " C24.ChallanID = D24.ChallanId WHERE D24.DId=" &
-        '          nds.Tables(0).Rows(0)("DeductMst.DiD").Value & ";")
-        '        Itm.Text = nds.Tables(0).Rows(i)("DName").ToString()
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("DPAN").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Category").ToString())
-        '        dt1 = nds.Tables(0).Rows(i)("EmpFromDt").ToString()
-        '        dt1.ToString("dd/MMM/yyyy")
-        '        Itm.SubItems.Add(dt1)
-        '        dt2 = nds.Tables(0).Rows(i)("EmpToDt").ToString()
-        '        dt2.ToString("dd/MMM/yyyy")
-        '        Itm.SubItems.Add(dt2)
-        '        Itm.SubItems.Add((nds.Tables(0).Rows(i)("Gross1").ToString()) + (nds.Tables(0).Rows(i)("Gross2").ToString()) + (nds.Tables(0).Rows(i)("Gross3").ToString()))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec16ii").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(i)("Sec16iii").ToString())
-        '        'Itm.SubItems(8) = Val(Itm.SubItems(5)) - Val(Itm.SubItems(6)) - Val(Itm.SubItems(7))
-        '        'Commented Row
-        '        mTotAllw = 0
-        '        'If rstTmp.State = adStateOpen Then 
-        '        rstTmp.Dispose()
-        '        rstTmp = FetchDataSet("SELECT * from Form16MoreDetails WHERE F16ID=" & nds.Tables(0).Rows(0)("F16ID"))
-        '        For j = 0 To rstTmp.Tables(0).Rows.Count
-        '            If rstTmp.Tables(0).Rows(0)("TypeOfDetail").ToString() = "A" Then
-        '                mTotAllw = mTotAllw + CDbl(rstTmp.Tables(0).Rows(0)("GrossAmt").ToString())
-        '            ElseIf rstTmp.Tables(0).Rows(0)("TypeOfDetail").ToString() = "O" Then
-        '                Itm.SubItems.Add(Val(Itm.SubItems(10)) + CDbl(rstTmp.Tables(0).Rows(0)("GrossAmt").ToString()))
-        '            ElseIf rstTmp.Tables(0).Rows(0)("TypeOfDetail").ToString() = "E" Then
-        '                Itm.SubItems.Add(Val(Itm.SubItems(12)) + CDbl(rstTmp.Tables(0).Rows(0)("GrossAmt").ToString()))
-        '            ElseIf rstTmp.Tables(0).Rows(0)("TypeOfDetail").ToString() = "F" Then
-        '                Itm.SubItems.Add(Val(Itm.SubItems(13)) + CDbl(rstTmp.Tables(0).Rows(0)("DeductibleAmt").ToString()))
-        '            ElseIf rstTmp.Tables(0).Rows(0)("TypeOfDetail").ToString() = "V" Then
-        '                Itm.SubItems.Add(Val(Itm.SubItems(14)) + CDbl(rstTmp.Tables(0).Rows(0)("DeductibleAmt").ToString()))
-        '            End If
-        '            'rstTmp.MoveNext
-        '        Next
-        '        Itm.SubItems(6) = IIf(IsNullOrEmpty(mTotAllw), vbNullString, mTotAllw)
-        '        TotalF16Challan = 0
-        '        'If rstTmp.State = 1 Then 
-        '        rstTmp.Dispose()
-        '        rstTmp = FetchDataSet("Select sum(F.TaxAmt) as SumTax, sum(F.Surcharge) as SumSur, Sum(F.ECess)as SumECess from F16Challan as F WHERE F.F16ID=" & nds.Tables(0).Rows(0)("F16ID") & "")
-        '        Itm.SubItems.Add(Val(Itm.SubItems(5)) - Val(Itm.SubItems(7)) - Val(Itm.SubItems(8)) - mTotAllw)
-        '        Itm.SubItems.Add(Val(Itm.SubItems(9)) + Val(Itm.SubItems(10)))
-        '        Itm.SubItems.Add(Val(Itm.SubItems(11)) - Val(Itm.SubItems(12)) - Val(Itm.SubItems(13)) - Val(Itm.SubItems(14)))
-        '        Itm.SubItems.Add(IsNullOrEmpty(nds.Tables(0).Rows(0)("TaxAmt")))
-        '        Itm.SubItems.Add(IsNullOrEmpty(nds.Tables(0).Rows(0)("Surcharge")))
-        '        Itm.SubItems.Add(IsNullOrEmpty(nds.Tables(0).Rows(0)("ECess")))
-        '        Itm.SubItems.Add(Val(Itm.SubItems(16)) + Val(Itm.SubItems(17)) + Val(Itm.SubItems(18)))
-        '        Itm.SubItems.Add(IsNullOrEmpty(nds.Tables(0).Rows(0)("Relief89")))
-        '        Itm.SubItems.Add(Val(Itm.SubItems(19)) - Val(Itm.SubItems(20)))
-
-        '        ' changed on: 28/04/2009; by Prakash as Changes in WizinTDS 2009 for TDS Yearly Column;
-        '        '         Itm.SubItems(20) = IIf(IsNull(rstTDSSum!SumTax), 0, rstTDSSum!SumTax) + IIf(IsNull(rstTDSSum!SumSur), 0, rstTDSSum!SumSur) + _
-        '        '                            IIf(IsNull(rstTDSSum!SumECess), 0, rstTDSSum!SumECess)
-
-        '        TotalTDSFromChallan = IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumTax")) + (IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumSur"))) +
-        '                       IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumECess"))
-        '        TotalF16Challan = IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumTax")) + (IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumSur"))) +
-        '                       IsNullOrEmpty(rstTDSSum.Tables(0).Rows(0)("SumECess"))
-
-        '        Itm.SubItems.Add(TotalTDSFromChallan + TotalF16Challan) 'IIf(IsNull(rst!TDSAmt), vbNullString, rst!TDSAmt)
-        '        '         Itm.SubItems(23) = Val(Itm.SubItems(21)) - Val(Itm.SubItems(22))
-        '        '         Itm.SubItems(24) = rst!F16ID
-
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(0)("F16ID"))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(0)("TotalSalaryPreEmp").ToString())
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(0)("TDSAmtPreEmp").ToString())
-        '        Itm.SubItems.Add(Val(Itm.SubItems(21)) - (IsNullOrEmpty(nds.Tables(0).Rows(0)("TDSOnPerks")) + Val(Itm.SubItems(22))) - Val(Itm.SubItems(26)))
-        '        Itm.SubItems.Add(nds.Tables(0).Rows(0)("HighRatePAN").ToString())
-        '        .lvwForm16.Items.Add(Itm)
-        '        'rst.MoveNext
-        '        'If rstTDSSum.State = adStateOpen Then 
-        '        rstTDSSum.Dispose()
-        '    Next i
-        '    nds.Dispose()
-        '    nds = Nothing
-        '    'Itm = Nothing
-        'End With
-
     End Sub
 
-    Private Sub ToolStripMenuItem6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ToolStripMenuItem6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         frmChlDeDetails.Show()
     End Sub
 
-    Private Sub ToolStripMenuItem7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ToolStripMenuItem7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         frmDDetails.Show()
     End Sub
 
-    Private Sub ToolStripMenuItem20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ToolStripMenuItem20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         frmChlDeDetails.Show()
     End Sub
 
-    Private Sub ToolStripMenuItem13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ToolStripMenuItem13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         frmChlDeDetails.Show()
     End Sub
 
-    Private Sub DeducteeAllocationReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub DeducteeAllocationReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         frmChlDeDetails.Show()
     End Sub
 
-    Private Sub ToolStripMenuItem21_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ToolStripMenuItem21_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         frmDDetails.Show()
     End Sub
 
-    Private Sub ToolStripMenuItem14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ToolStripMenuItem14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         frmDDetails.Show()
     End Sub
 
-    Private Sub ChallanAllocationReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ChallanAllocationReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         frmDDetails.Show()
     End Sub
 
@@ -714,7 +609,7 @@ Public Class frmTDS
                 Else
                     dt = nds.Tables(0).Rows(i)("DtOfDeduction").ToString()
 
-                    newitem.SubItems.Add(dt.ToString("dd/MMM/yyyy"))
+                newitem.SubItems.Add(dt.ToString("dd/MMM/yyyy"))
                 End If
                 newitem.SubItems.Add(nds.Tables(0).Rows(i)("TotalTaxDeposited").ToString())
                 newitem.SubItems.Add(nds.Tables(0).Rows(i)("ChallanID").ToString())
@@ -1105,7 +1000,7 @@ canerr:
 
                     dt = nds.Tables(0).Rows(i)("DtOfDeduction").ToString()
 
-                    newitem.SubItems.Add(dt.ToString("dd/MMM/yyyy"))
+                newitem.SubItems.Add(dt.ToString("dd/MMM/yyyy"))
                 End If
                 newitem.SubItems.Add(nds.Tables(0).Rows(i)("TotalTaxDeposited").ToString())
                 newitem.SubItems.Add(nds.Tables(0).Rows(i)("ChallanID").ToString())
@@ -1302,7 +1197,7 @@ canerr:
                 Else
                     dt = nds.Tables(0).Rows(i)("DtOfDeduction").ToString()
 
-                    newitem.SubItems.Add(dt.ToString("dd/MMM/yyyy")) '11
+                newitem.SubItems.Add(dt.ToString("dd/MMM/yyyy")) '11
                 End If
                 newitem.SubItems.Add(nds.Tables(0).Rows(i)("TotalTaxDeposited").ToString()) '12
                 newitem.SubItems.Add(nds.Tables(0).Rows(i)("ChallanID").ToString()) '13
@@ -1660,7 +1555,7 @@ canerr:
         frmtermscond.Show()
     End Sub
 
-    Private Sub TANRegistrationToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub TANRegistrationToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         'frmOnlineTanReg.Show()
     End Sub
 
@@ -1715,13 +1610,6 @@ canerr:
         ' Me.Size = Screen.PrimaryScreen.WorkingArea.Size
         'Me.Location = New Point(180, 220)
         'Dim fso As New FileSystemObject
-        Dim nds As New DataSet
-        nds = FetchDataSet("select DName,DId from DeductMst Where CoId = " & selectedcoid & "  ORDER BY DName ")
-        If nds.Tables(0).Rows.Count >= 1 Then
-            MaterDedcToolStripMenuItem.Enabled = True
-        Else
-            MaterDedcToolStripMenuItem.Enabled = False
-        End If
         Dim txtStream As StreamReader
         txtStream = File.OpenText(Application.StartupPath & "\Support\ReleaseNotes.txt")
         If Not txtStream.EndOfStream Then
@@ -2249,7 +2137,7 @@ canerr:
     End Sub
 
     Private Sub EmailUsYourSuggestionqueriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmailUsYourSuggestionqueriesToolStripMenuItem.Click
-        Process.Start("mailto:jak_tds@rediffmail.com, jak_tds@yahoo.com")
+        Process.Start("mailto:jakinfo_ngp@sancharnet.in, jak_tds@yahoo.com")
         'OpenEmailClient("jakinfo_ngp@sancharnet.in, jak_tds@yahoo.com")
     End Sub
 

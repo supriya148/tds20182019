@@ -54,8 +54,10 @@ Partial Class frmTDS
         Me.ReturnForQuarter2ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReturnForQuarter3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReturnForQuarter4ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TANAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TANLoginToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChallanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GoToOnlineChallanWebsiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GoToTRACESWbsiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GoToTRACESWbsiteToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.UtilitiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StandartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ValidationUtilityFromNSDLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -66,10 +68,8 @@ Partial Class frmTDS
         Me.BlankCorrectionFrom27BToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisclaimerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BlankCorrectionFrom27BToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChallanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GoToOnlineChallanWebsiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GoToTRACESWbsiteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GoToTRACESWbsiteToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TANAccountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TANLoginToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeductorsManualNSDLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeductorsChecklistWizinTDSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -100,7 +100,7 @@ Partial Class frmTDS
         Me.MenuStrip1.BackColor = System.Drawing.Color.Lavender
         Me.MenuStrip1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MastersToolStripMenuItem, Me.mnuForm24DataEntryQ1, Me.ToolStripMenuItem15, Me.ToolStripMenuItem8, Me.Form24QToolStripMenuItem, Me.TANAccountToolStripMenuItem, Me.UtilitiesToolStripMenuItem, Me.ChallanToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MastersToolStripMenuItem, Me.mnuForm24DataEntryQ1, Me.ToolStripMenuItem15, Me.ToolStripMenuItem8, Me.Form24QToolStripMenuItem, Me.ChallanToolStripMenuItem, Me.UtilitiesToolStripMenuItem, Me.TANAccountToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -109,6 +109,7 @@ Partial Class frmTDS
         Me.MenuStrip1.Size = New System.Drawing.Size(919, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
+        Me.MenuStrip1.UseWaitCursor = True
         '
         'MastersToolStripMenuItem
         '
@@ -124,50 +125,50 @@ Partial Class frmTDS
         Me.MaterDedcToolStripMenuItem.ImageTransparentColor = System.Drawing.SystemColors.Control
         Me.MaterDedcToolStripMenuItem.Name = "MaterDedcToolStripMenuItem"
         Me.MaterDedcToolStripMenuItem.RightToLeftAutoMirrorImage = True
-        Me.MaterDedcToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.MaterDedcToolStripMenuItem.Text = "Modify Deductee Details "
+        Me.MaterDedcToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.MaterDedcToolStripMenuItem.Text = "Master Deductee Details "
         Me.MaterDedcToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'BankMasterToolStripMenuItem
         '
         Me.BankMasterToolStripMenuItem.Name = "BankMasterToolStripMenuItem"
-        Me.BankMasterToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.BankMasterToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.BankMasterToolStripMenuItem.Text = "Bank Master"
         '
         'VerifyDeducteePANToolStripMenuItem
         '
         Me.VerifyDeducteePANToolStripMenuItem.Name = "VerifyDeducteePANToolStripMenuItem"
-        Me.VerifyDeducteePANToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.VerifyDeducteePANToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.VerifyDeducteePANToolStripMenuItem.Text = "Verify Deductee PAN"
         '
         'CertificateDetailsToolStripMenuItem
         '
         Me.CertificateDetailsToolStripMenuItem.Name = "CertificateDetailsToolStripMenuItem"
-        Me.CertificateDetailsToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.CertificateDetailsToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.CertificateDetailsToolStripMenuItem.Text = "Certificate Details"
         '
         'TanRegistrastionDetailsToolStripMenuItem1
         '
         Me.TanRegistrastionDetailsToolStripMenuItem1.Name = "TanRegistrastionDetailsToolStripMenuItem1"
-        Me.TanRegistrastionDetailsToolStripMenuItem1.Size = New System.Drawing.Size(193, 22)
+        Me.TanRegistrastionDetailsToolStripMenuItem1.Size = New System.Drawing.Size(194, 22)
         Me.TanRegistrastionDetailsToolStripMenuItem1.Text = "Tan Registrastion Details"
         '
         'DeducteeListToolStripMenuItem1
         '
         Me.DeducteeListToolStripMenuItem1.Name = "DeducteeListToolStripMenuItem1"
-        Me.DeducteeListToolStripMenuItem1.Size = New System.Drawing.Size(193, 22)
+        Me.DeducteeListToolStripMenuItem1.Size = New System.Drawing.Size(194, 22)
         Me.DeducteeListToolStripMenuItem1.Text = "Deductee's List"
         '
         'ChallanDetailsToolStripMenuItem
         '
         Me.ChallanDetailsToolStripMenuItem.Name = "ChallanDetailsToolStripMenuItem"
-        Me.ChallanDetailsToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.ChallanDetailsToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ChallanDetailsToolStripMenuItem.Text = "Challan Details"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'mnuForm24DataEntryQ1
@@ -298,19 +299,31 @@ Partial Class frmTDS
         Me.ReturnForQuarter4ToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.ReturnForQuarter4ToolStripMenuItem.Text = "Return for Quarter 4"
         '
-        'TANAccountToolStripMenuItem
+        'ChallanToolStripMenuItem
         '
-        Me.TANAccountToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TANLoginToolStripMenuItem})
-        Me.TANAccountToolStripMenuItem.Image = Global.WizinTDS2019.My.Resources.Resources.images21
-        Me.TANAccountToolStripMenuItem.Name = "TANAccountToolStripMenuItem"
-        Me.TANAccountToolStripMenuItem.Size = New System.Drawing.Size(100, 20)
-        Me.TANAccountToolStripMenuItem.Text = "TAN Account"
+        Me.ChallanToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GoToOnlineChallanWebsiteToolStripMenuItem, Me.GoToTRACESWbsiteToolStripMenuItem, Me.GoToTRACESWbsiteToolStripMenuItem1})
+        Me.ChallanToolStripMenuItem.Image = Global.WizinTDS2019.My.Resources.Resources.globe
+        Me.ChallanToolStripMenuItem.Name = "ChallanToolStripMenuItem"
+        Me.ChallanToolStripMenuItem.Size = New System.Drawing.Size(79, 20)
+        Me.ChallanToolStripMenuItem.Text = "Websites"
         '
-        'TANLoginToolStripMenuItem
+        'GoToOnlineChallanWebsiteToolStripMenuItem
         '
-        Me.TANLoginToolStripMenuItem.Name = "TANLoginToolStripMenuItem"
-        Me.TANLoginToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-        Me.TANLoginToolStripMenuItem.Text = "TAN Login"
+        Me.GoToOnlineChallanWebsiteToolStripMenuItem.Name = "GoToOnlineChallanWebsiteToolStripMenuItem"
+        Me.GoToOnlineChallanWebsiteToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.GoToOnlineChallanWebsiteToolStripMenuItem.Text = "Go to Online Challan Website"
+        '
+        'GoToTRACESWbsiteToolStripMenuItem
+        '
+        Me.GoToTRACESWbsiteToolStripMenuItem.Name = "GoToTRACESWbsiteToolStripMenuItem"
+        Me.GoToTRACESWbsiteToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
+        Me.GoToTRACESWbsiteToolStripMenuItem.Text = "Go to TIN website"
+        '
+        'GoToTRACESWbsiteToolStripMenuItem1
+        '
+        Me.GoToTRACESWbsiteToolStripMenuItem1.Name = "GoToTRACESWbsiteToolStripMenuItem1"
+        Me.GoToTRACESWbsiteToolStripMenuItem1.Size = New System.Drawing.Size(213, 22)
+        Me.GoToTRACESWbsiteToolStripMenuItem1.Text = "Go to TRACES website"
         '
         'UtilitiesToolStripMenuItem
         '
@@ -322,7 +335,6 @@ Partial Class frmTDS
         '
         'StandartToolStripMenuItem
         '
-        Me.StandartToolStripMenuItem.Enabled = False
         Me.StandartToolStripMenuItem.Name = "StandartToolStripMenuItem"
         Me.StandartToolStripMenuItem.Size = New System.Drawing.Size(201, 22)
         Me.StandartToolStripMenuItem.Text = "Standard Items for form 16 "
@@ -375,31 +387,19 @@ Partial Class frmTDS
         Me.BlankCorrectionFrom27BToolStripMenuItem1.Size = New System.Drawing.Size(201, 22)
         Me.BlankCorrectionFrom27BToolStripMenuItem1.Text = "Disclaimer"
         '
-        'ChallanToolStripMenuItem
+        'TANAccountToolStripMenuItem
         '
-        Me.ChallanToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GoToOnlineChallanWebsiteToolStripMenuItem, Me.GoToTRACESWbsiteToolStripMenuItem, Me.GoToTRACESWbsiteToolStripMenuItem1})
-        Me.ChallanToolStripMenuItem.Image = Global.WizinTDS2019.My.Resources.Resources.globe
-        Me.ChallanToolStripMenuItem.Name = "ChallanToolStripMenuItem"
-        Me.ChallanToolStripMenuItem.Size = New System.Drawing.Size(79, 20)
-        Me.ChallanToolStripMenuItem.Text = "Websites"
+        Me.TANAccountToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TANLoginToolStripMenuItem})
+        Me.TANAccountToolStripMenuItem.Image = Global.WizinTDS2019.My.Resources.Resources.images21
+        Me.TANAccountToolStripMenuItem.Name = "TANAccountToolStripMenuItem"
+        Me.TANAccountToolStripMenuItem.Size = New System.Drawing.Size(100, 20)
+        Me.TANAccountToolStripMenuItem.Text = "TAN Account"
         '
-        'GoToOnlineChallanWebsiteToolStripMenuItem
+        'TANLoginToolStripMenuItem
         '
-        Me.GoToOnlineChallanWebsiteToolStripMenuItem.Name = "GoToOnlineChallanWebsiteToolStripMenuItem"
-        Me.GoToOnlineChallanWebsiteToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
-        Me.GoToOnlineChallanWebsiteToolStripMenuItem.Text = "Go to Online Challan Website"
-        '
-        'GoToTRACESWbsiteToolStripMenuItem
-        '
-        Me.GoToTRACESWbsiteToolStripMenuItem.Name = "GoToTRACESWbsiteToolStripMenuItem"
-        Me.GoToTRACESWbsiteToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
-        Me.GoToTRACESWbsiteToolStripMenuItem.Text = "Go to TIN website"
-        '
-        'GoToTRACESWbsiteToolStripMenuItem1
-        '
-        Me.GoToTRACESWbsiteToolStripMenuItem1.Name = "GoToTRACESWbsiteToolStripMenuItem1"
-        Me.GoToTRACESWbsiteToolStripMenuItem1.Size = New System.Drawing.Size(213, 22)
-        Me.GoToTRACESWbsiteToolStripMenuItem1.Text = "Go to TRACES website"
+        Me.TANLoginToolStripMenuItem.Name = "TANLoginToolStripMenuItem"
+        Me.TANLoginToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.TANLoginToolStripMenuItem.Text = "TAN Login"
         '
         'HelpToolStripMenuItem
         '
@@ -587,7 +587,7 @@ Partial Class frmTDS
         Me.TLPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
         Me.TLPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
         Me.TLPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
-        Me.TLPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 134.0!))
+        Me.TLPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 122.0!))
         Me.TLPanel.Controls.Add(Me.txtRcptNo, 5, 0)
         Me.TLPanel.Controls.Add(Me.lblrprn, 4, 0)
         Me.TLPanel.Controls.Add(Me.txtdate, 1, 0)
@@ -634,7 +634,7 @@ Partial Class frmTDS
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.MaximizeBox = False
         Me.Name = "frmTDS"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "TDS Details"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()

@@ -4274,9 +4274,12 @@ excelerr:
     Private Sub cmdAddNewForm16_Click(sender As Object, e As EventArgs) Handles cmdAddNewForm16.Click
         FRM16Detail.Show()
         'frm16Details.Show()
+
+        FRM16Detail.Hide()
         FRM16Detail.xMode = "A"
         FRM16Detail.FillDeducteeCombo(FRM16Detail.xMode)
         FRM16Detail.cmd16delete.Enabled = False
+
         FRM16Detail.Show()
     End Sub
 
@@ -5752,6 +5755,78 @@ excelerr:
         End If
         savenable()
     End Sub
+    Public Sub FillFrm16DataUsingDID(DedID As Long)
+        Dim frm As New frm16A
 
+        Dim i As Long, rst As New DataSet, rstTmp As New DataSet, TmpDID As Long
+        TmpDID = DedID    'rst.Fields("Form16Details.DID")
+        rstTmp = FetchDataSet("SELECT * from DeductMst WHERE DId=" & TmpDID)
+        With FRM16Detail
+            .cbo16DedName.Enabled = False
+            .tabForm16.Enabled = True
+            .txt16pan.Text = rstTmp.Tables(0).Rows(0)("DPan")
+            .txtdesig.Text = rstTmp.Tables(0).Rows(0)("DDesgn")
+            'Load Type of Assessee - for calculating tax only..
+            .txtDstatus.Text = rstTmp.Tables(0).Rows(0)("Category")
+            'now the challan details...
+            Dim CRow As Long, TotalTDSFromChallan As Double
+            Dim totTaxAmt As Double, totSurcharge As Double, totECess As Double
+            'MsgBox(FRM16Detail.grdchallanDetails.RowCount)
+            rstTmp = FetchDataSet("SELECT D24.RetnID, D24.DId, D24.TaxAmt, D24.Surcharge, D24.ECess, C24.ChqDDNo, C24.BankBrCode," &
+                " C24.DtOfChallan, C24.BankChallanNo FROM Challan24Q AS C24 INNER JOIN Deductee24Q AS D24 ON " &
+                " C24.ChallanID = D24.ChallanId WHERE D24.DId=" & TmpDID)
+            CRow = 0
+            .grdchallanDetails.RowCount = 1
+            '.grdchallanDetails.Row = 1
+            TotalTDSFromChallan = 0
+            With .grdchallanDetails
+                For i = 0 To rstTmp.Tables(0).Rows.Count - 1
+
+                    CRow = CRow + 1
+
+                    .Rows.Add()
+
+                    .Rows(CRow - 1).Cells(0).Value = CRow
+                    .Rows(CRow - 1).Cells(1).Value = rstTmp.Tables(0).Rows(i)("TaxAmt")
+                    totTaxAmt = totTaxAmt + rstTmp.Tables(0).Rows(i)("TaxAmt")
+                    .Rows(CRow - 1).Cells(2).Value = rstTmp.Tables(0).Rows(i)("Surcharge")
+                    totSurcharge = totSurcharge + rstTmp.Tables(0).Rows(i)("Surcharge")
+                    .Rows(CRow - 1).Cells(3).Value = rstTmp.Tables(0).Rows(i)("ECess")
+                    totECess = totECess + rstTmp.Tables(0).Rows(i)("ECess")
+                    .Rows(CRow - 1).Cells(4).Value = (Val(.Rows(CRow - 1).Cells(1).Value) + Val(.Rows(CRow - 1).Cells(2).Value) + Val(.Rows(CRow - 1).Cells(3).Value))
+                    .Rows(CRow - 1).Cells(5).Value = rstTmp.Tables(0).Rows(i)("ChqDDNo").ToString()
+                    .Rows(CRow - 1).Cells(6).Value = rstTmp.Tables(0).Rows(i)("BankBrCode").ToString()
+                    .Rows(CRow - 1).Cells(7).Value = Format(rstTmp.Tables(0).Rows(i)("DtOfChallan"), "dd/MM/yyyy")
+                    .Rows(CRow - 1).Cells(8).Value = rstTmp.Tables(0).Rows(i)("BankChallanNo")
+
+                    TotalTDSFromChallan = TotalTDSFromChallan + Val(rstTmp.Tables(0).Rows(i)("TaxAmt")) + Val(rstTmp.Tables(0).Rows(i)("Surcharge")) + Val(rstTmp.Tables(0).Rows(i)("ECess"))
+
+                Next
+
+                Dim rw As Integer = .Rows.GetLastRow(DataGridViewElementStates.None)
+                .Rows(rw).Cells(0).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(0).Value = "Total:"
+                .Rows(rw).Cells(1).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(1).Value = Format(totTaxAmt, "##0")
+                .Rows(rw).Cells(2).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(2).Value = Format(totSurcharge, "##0")
+                .Rows(rw).Cells(3).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(3).Value = Format(totECess, "##0")
+                .Rows(rw).Cells(4).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(4).Value = Format(TotalTDSFromChallan, "##0")
+
+
+            End With
+            '        .grdchallanDetails.Subtotal flexSTSum, -1, 1, "##0", , vbRed, False, "Total:"
+            '.grdchallanDetails.Subtotal flexSTSum, -1, 2, "##0", , vbRed, False, "Total:"
+            '.grdchallanDetails.Subtotal flexSTSum, -1, 3, "##0", , vbRed, False, "Total:"
+            '.grdchallanDetails.Subtotal flexSTSum, -1, 4, "##0", , vbRed, False, "Total:"
+
+            .txt16TDS1.Text = TotalTDSFromChallan
+
+            ' now recalculate all text boxes
+            .CalculateSalaryNTax()
+        End With
+    End Sub
 
 End Class

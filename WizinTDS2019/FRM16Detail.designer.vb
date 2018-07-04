@@ -170,7 +170,7 @@ Partial Class FRM16Detail
         Me.txt16grosstotCurEmp = New System.Windows.Forms.TextBox()
         Me.txt16gross3 = New System.Windows.Forms.TextBox()
         Me.grd16otherIncome = New System.Windows.Forms.DataGridView()
-        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column14 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Column41 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column35 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -352,6 +352,7 @@ Partial Class FRM16Detail
         'TabPage5
         '
         Me.TabPage5.BackColor = System.Drawing.Color.Lavender
+        Me.TabPage5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.TabPage5.Controls.Add(Me.grd16ManualTax)
         Me.TabPage5.Controls.Add(Me.Label53)
         Me.TabPage5.ForeColor = System.Drawing.SystemColors.HotTrack
@@ -363,17 +364,25 @@ Partial Class FRM16Detail
         '
         'grd16ManualTax
         '
-        Me.grd16ManualTax.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grd16ManualTax.AllowUserToDeleteRows = False
+        Me.grd16ManualTax.BackgroundColor = System.Drawing.Color.Lavender
+        Me.grd16ManualTax.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
         Me.grd16ManualTax.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column25, Me.Column26, Me.Column28, Me.Column27, Me.Column29, Me.Column30, Me.Column31, Me.Column32, Me.Column33})
+        Me.grd16ManualTax.GridColor = System.Drawing.Color.Black
         Me.grd16ManualTax.Location = New System.Drawing.Point(5, 18)
         Me.grd16ManualTax.Name = "grd16ManualTax"
+        Me.grd16ManualTax.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.grd16ManualTax.RowHeadersVisible = False
         Me.grd16ManualTax.Size = New System.Drawing.Size(686, 380)
         Me.grd16ManualTax.TabIndex = 2
         '
         'Column25
         '
+        Me.Column25.Frozen = True
         Me.Column25.HeaderText = "S.No"
         Me.Column25.Name = "Column25"
+        Me.Column25.ReadOnly = True
+        Me.Column25.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
         'Column26
         '
@@ -443,8 +452,8 @@ Partial Class FRM16Detail
         'grdchallanDetails
         '
         Me.grdchallanDetails.BackgroundColor = System.Drawing.Color.Lavender
-        Me.grdchallanDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdchallanDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24})
+        Me.grdchallanDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.grdchallanDetails.Location = New System.Drawing.Point(4, 21)
         Me.grdchallanDetails.Name = "grdchallanDetails"
         Me.grdchallanDetails.RowHeadersVisible = False
@@ -529,7 +538,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble
         Me.TableLayoutPanel2.ColumnCount = 2
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 278.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 308.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Label44, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.txt16Relief, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Label45, 0, 1)
@@ -574,7 +583,7 @@ Partial Class FRM16Detail
         Me.txt16Relief.Location = New System.Drawing.Point(216, 6)
         Me.txt16Relief.MaxLength = 15
         Me.txt16Relief.Name = "txt16Relief"
-        Me.txt16Relief.Size = New System.Drawing.Size(272, 21)
+        Me.txt16Relief.Size = New System.Drawing.Size(302, 21)
         Me.txt16Relief.TabIndex = 1
         '
         'Label45
@@ -594,7 +603,7 @@ Partial Class FRM16Detail
         Me.txt16NetTax.Location = New System.Drawing.Point(216, 33)
         Me.txt16NetTax.MaxLength = 15
         Me.txt16NetTax.Name = "txt16NetTax"
-        Me.txt16NetTax.Size = New System.Drawing.Size(272, 21)
+        Me.txt16NetTax.Size = New System.Drawing.Size(302, 21)
         Me.txt16NetTax.TabIndex = 2
         '
         'Label46
@@ -623,7 +632,7 @@ Partial Class FRM16Detail
         Me.txt16TDS2.Location = New System.Drawing.Point(216, 91)
         Me.txt16TDS2.MaxLength = 15
         Me.txt16TDS2.Name = "txt16TDS2"
-        Me.txt16TDS2.Size = New System.Drawing.Size(272, 22)
+        Me.txt16TDS2.Size = New System.Drawing.Size(302, 22)
         Me.txt16TDS2.TabIndex = 4
         '
         'Label48
@@ -643,7 +652,7 @@ Partial Class FRM16Detail
         Me.txt16totalTDS.Location = New System.Drawing.Point(216, 120)
         Me.txt16totalTDS.MaxLength = 15
         Me.txt16totalTDS.Name = "txt16totalTDS"
-        Me.txt16totalTDS.Size = New System.Drawing.Size(272, 21)
+        Me.txt16totalTDS.Size = New System.Drawing.Size(302, 21)
         Me.txt16totalTDS.TabIndex = 5
         '
         'Label49
@@ -664,7 +673,7 @@ Partial Class FRM16Detail
         Me.txt16TaxPreEmp.Location = New System.Drawing.Point(216, 151)
         Me.txt16TaxPreEmp.MaxLength = 15
         Me.txt16TaxPreEmp.Name = "txt16TaxPreEmp"
-        Me.txt16TaxPreEmp.Size = New System.Drawing.Size(272, 21)
+        Me.txt16TaxPreEmp.Size = New System.Drawing.Size(302, 21)
         Me.txt16TaxPreEmp.TabIndex = 6
         '
         'Label50
@@ -684,7 +693,7 @@ Partial Class FRM16Detail
         Me.txtPayRef.Location = New System.Drawing.Point(216, 183)
         Me.txtPayRef.MaxLength = 15
         Me.txtPayRef.Name = "txtPayRef"
-        Me.txtPayRef.Size = New System.Drawing.Size(272, 21)
+        Me.txtPayRef.Size = New System.Drawing.Size(302, 21)
         Me.txtPayRef.TabIndex = 7
         '
         'txt16TDS1
@@ -696,7 +705,7 @@ Partial Class FRM16Detail
         Me.txt16TDS1.Location = New System.Drawing.Point(216, 60)
         Me.txt16TDS1.MaxLength = 15
         Me.txt16TDS1.Name = "txt16TDS1"
-        Me.txt16TDS1.Size = New System.Drawing.Size(272, 21)
+        Me.txt16TDS1.Size = New System.Drawing.Size(302, 21)
         Me.txt16TDS1.TabIndex = 3
         '
         'TableLayoutPanel1
@@ -705,7 +714,7 @@ Partial Class FRM16Detail
         Me.TableLayoutPanel1.ColumnCount = 3
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.26028!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.73973!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.txtTotTax, 2, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.Label39, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Label43, 0, 4)
@@ -735,7 +744,7 @@ Partial Class FRM16Detail
         'txtTotTax
         '
         Me.txtTotTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotTax.Location = New System.Drawing.Point(278, 131)
+        Me.txtTotTax.Location = New System.Drawing.Point(238, 131)
         Me.txtTotTax.MaxLength = 15
         Me.txtTotTax.Name = "txtTotTax"
         Me.txtTotTax.Size = New System.Drawing.Size(175, 21)
@@ -771,7 +780,7 @@ Partial Class FRM16Detail
         'txtEd
         '
         Me.txtEd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtEd.Location = New System.Drawing.Point(278, 100)
+        Me.txtEd.Location = New System.Drawing.Point(238, 100)
         Me.txtEd.MaxLength = 15
         Me.txtEd.Name = "txtEd"
         Me.txtEd.Size = New System.Drawing.Size(175, 21)
@@ -780,7 +789,7 @@ Partial Class FRM16Detail
         'txtSurcharge
         '
         Me.txtSurcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSurcharge.Location = New System.Drawing.Point(278, 68)
+        Me.txtSurcharge.Location = New System.Drawing.Point(238, 68)
         Me.txtSurcharge.MaxLength = 15
         Me.txtSurcharge.Name = "txtSurcharge"
         Me.txtSurcharge.Size = New System.Drawing.Size(175, 21)
@@ -807,7 +816,7 @@ Partial Class FRM16Detail
         'txtTax
         '
         Me.txtTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTax.Location = New System.Drawing.Point(278, 38)
+        Me.txtTax.Location = New System.Drawing.Point(238, 38)
         Me.txtTax.MaxLength = 15
         Me.txtTax.Name = "txtTax"
         Me.txtTax.Size = New System.Drawing.Size(175, 21)
@@ -819,10 +828,10 @@ Partial Class FRM16Detail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16Tax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Tax.Location = New System.Drawing.Point(201, 38)
+        Me.txt16Tax.Location = New System.Drawing.Point(173, 38)
         Me.txt16Tax.MaxLength = 15
         Me.txt16Tax.Name = "txt16Tax"
-        Me.txt16Tax.Size = New System.Drawing.Size(68, 21)
+        Me.txt16Tax.Size = New System.Drawing.Size(56, 21)
         Me.txt16Tax.TabIndex = 2
         '
         'txt16Surcharge
@@ -831,10 +840,10 @@ Partial Class FRM16Detail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16Surcharge.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16Surcharge.Location = New System.Drawing.Point(201, 68)
+        Me.txt16Surcharge.Location = New System.Drawing.Point(173, 68)
         Me.txt16Surcharge.MaxLength = 15
         Me.txt16Surcharge.Name = "txt16Surcharge"
-        Me.txt16Surcharge.Size = New System.Drawing.Size(68, 21)
+        Me.txt16Surcharge.Size = New System.Drawing.Size(56, 21)
         Me.txt16Surcharge.TabIndex = 4
         '
         'txt16EduCess
@@ -843,16 +852,16 @@ Partial Class FRM16Detail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16EduCess.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16EduCess.Location = New System.Drawing.Point(201, 100)
+        Me.txt16EduCess.Location = New System.Drawing.Point(173, 100)
         Me.txt16EduCess.MaxLength = 15
         Me.txt16EduCess.Name = "txt16EduCess"
-        Me.txt16EduCess.Size = New System.Drawing.Size(68, 21)
+        Me.txt16EduCess.Size = New System.Drawing.Size(56, 21)
         Me.txt16EduCess.TabIndex = 6
         '
         'Label51
         '
         Me.Label51.AutoSize = True
-        Me.Label51.Location = New System.Drawing.Point(278, 3)
+        Me.Label51.Location = New System.Drawing.Point(238, 3)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(170, 29)
         Me.Label51.TabIndex = 25
@@ -864,10 +873,10 @@ Partial Class FRM16Detail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtincome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtincome.Location = New System.Drawing.Point(201, 6)
+        Me.txtincome.Location = New System.Drawing.Point(173, 6)
         Me.txtincome.MaxLength = 15
         Me.txtincome.Name = "txtincome"
-        Me.txtincome.Size = New System.Drawing.Size(68, 21)
+        Me.txtincome.Size = New System.Drawing.Size(56, 21)
         Me.txtincome.TabIndex = 1
         '
         'txt16TotalTax
@@ -876,10 +885,10 @@ Partial Class FRM16Detail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16TotalTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txt16TotalTax.Location = New System.Drawing.Point(201, 131)
+        Me.txt16TotalTax.Location = New System.Drawing.Point(173, 131)
         Me.txt16TotalTax.MaxLength = 15
         Me.txt16TotalTax.Name = "txt16TotalTax"
-        Me.txt16TotalTax.Size = New System.Drawing.Size(68, 21)
+        Me.txt16TotalTax.Size = New System.Drawing.Size(56, 21)
         Me.txt16TotalTax.TabIndex = 0
         '
         'cmdCopyCal
@@ -1136,8 +1145,8 @@ Partial Class FRM16Detail
         'grd16OtherIVA
         '
         Me.grd16OtherIVA.BackgroundColor = System.Drawing.Color.Lavender
-        Me.grd16OtherIVA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd16OtherIVA.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column8, Me.Column38, Me.Column9, Me.Column10, Me.Column11})
+        Me.grd16OtherIVA.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.grd16OtherIVA.Location = New System.Drawing.Point(303, 243)
         Me.grd16OtherIVA.Name = "grd16OtherIVA"
         Me.grd16OtherIVA.RowHeadersVisible = False
@@ -1182,8 +1191,8 @@ Partial Class FRM16Detail
         'grd1680CCF
         '
         Me.grd1680CCF.BackgroundColor = System.Drawing.Color.Lavender
-        Me.grd1680CCF.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd1680CCF.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column6, Me.Column7, Me.Column36})
+        Me.grd1680CCF.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.grd1680CCF.Location = New System.Drawing.Point(9, 243)
         Me.grd1680CCF.Name = "grd1680CCF"
         Me.grd1680CCF.RowHeadersVisible = False
@@ -1232,8 +1241,9 @@ Partial Class FRM16Detail
         'grd1680CCG
         '
         Me.grd1680CCG.BackgroundColor = System.Drawing.Color.Lavender
-        Me.grd1680CCG.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grd1680CCG.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.grd1680CCG.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.Column4, Me.Column5, Me.Column37})
+        Me.grd1680CCG.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.grd1680CCG.Location = New System.Drawing.Point(303, 29)
         Me.grd1680CCG.Name = "grd1680CCG"
         Me.grd1680CCG.RowHeadersVisible = False
@@ -1264,9 +1274,8 @@ Partial Class FRM16Detail
         'grd1680c
         '
         Me.grd1680c.BackgroundColor = System.Drawing.Color.Lavender
-        Me.grd1680c.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd1680c.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Particulars, Me.GrossAmount, Me.DeductibleAmount})
-        Me.grd1680c.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.grd1680c.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.grd1680c.Location = New System.Drawing.Point(6, 29)
         Me.grd1680c.Name = "grd1680c"
         Me.grd1680c.RowHeadersVisible = False
@@ -1395,6 +1404,7 @@ Partial Class FRM16Detail
         'txt16bal
         '
         Me.txt16bal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16bal.Enabled = False
         Me.txt16bal.Location = New System.Drawing.Point(146, 35)
         Me.txt16bal.MaxLength = 15
         Me.txt16bal.Name = "txt16bal"
@@ -1404,6 +1414,7 @@ Partial Class FRM16Detail
         'txtallow
         '
         Me.txtallow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtallow.Enabled = False
         Me.txtallow.Location = New System.Drawing.Point(146, 6)
         Me.txtallow.MaxLength = 15
         Me.txtallow.Name = "txtallow"
@@ -1449,6 +1460,7 @@ Partial Class FRM16Detail
         'txt16otherIncome
         '
         Me.txt16otherIncome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16otherIncome.Enabled = False
         Me.txt16otherIncome.Location = New System.Drawing.Point(201, 6)
         Me.txt16otherIncome.MaxLength = 15
         Me.txt16otherIncome.Name = "txt16otherIncome"
@@ -1458,6 +1470,7 @@ Partial Class FRM16Detail
         'txt16GTI
         '
         Me.txt16GTI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16GTI.Enabled = False
         Me.txt16GTI.Location = New System.Drawing.Point(201, 34)
         Me.txt16GTI.MaxLength = 15
         Me.txt16GTI.Name = "txt16GTI"
@@ -1562,6 +1575,7 @@ Partial Class FRM16Detail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txt16TaxableSalary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txt16TaxableSalary.Enabled = False
         Me.txt16TaxableSalary.Location = New System.Drawing.Point(189, 89)
         Me.txt16TaxableSalary.MaxLength = 15
         Me.txt16TaxableSalary.Name = "txt16TaxableSalary"
@@ -1574,6 +1588,7 @@ Partial Class FRM16Detail
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTotalDedct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalDedct.Enabled = False
         Me.txtTotalDedct.Location = New System.Drawing.Point(189, 62)
         Me.txtTotalDedct.MaxLength = 15
         Me.txtTotalDedct.Name = "txtTotalDedct"
@@ -1760,6 +1775,7 @@ Partial Class FRM16Detail
         Me.grd16otherIncome.BackgroundColor = System.Drawing.Color.Lavender
         Me.grd16otherIncome.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd16otherIncome.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column14, Me.Column41, Me.Column15, Me.Column35, Me.DataGridViewTextBoxColumn2})
+        Me.grd16otherIncome.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.grd16otherIncome.Location = New System.Drawing.Point(337, 164)
         Me.grd16otherIncome.Name = "grd16otherIncome"
         Me.grd16otherIncome.RowHeadersVisible = False
@@ -1769,31 +1785,37 @@ Partial Class FRM16Detail
         '
         'Column14
         '
+        Me.Column14.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
+        Me.Column14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Column14.HeaderText = "Particulars"
         Me.Column14.Name = "Column14"
+        Me.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column14.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.Column14.Width = 200
         '
         'Column41
         '
-        Me.Column41.HeaderText = ""
+        Me.Column41.HeaderText = "Rs."
         Me.Column41.Name = "Column41"
-        Me.Column41.Visible = False
         '
         'Column15
         '
-        Me.Column15.HeaderText = "Rs."
+        Me.Column15.HeaderText = ""
         Me.Column15.Name = "Column15"
+        Me.Column15.Visible = False
         Me.Column15.Width = 120
         '
         'Column35
         '
         Me.Column35.HeaderText = ""
         Me.Column35.Name = "Column35"
+        Me.Column35.Visible = False
         '
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.HeaderText = ""
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.Visible = False
         '
         'grd16allow
         '
@@ -1803,6 +1825,7 @@ Partial Class FRM16Detail
         Me.grd16allow.BackgroundColor = System.Drawing.Color.Lavender
         Me.grd16allow.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grd16allow.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column12, Me.Column13, Me.Column34, Me.Column39, Me.Column40})
+        Me.grd16allow.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.grd16allow.Location = New System.Drawing.Point(6, 238)
         Me.grd16allow.Name = "grd16allow"
         Me.grd16allow.RowHeadersVisible = False
@@ -2655,15 +2678,6 @@ Partial Class FRM16Detail
     Friend WithEvents Particulars As DataGridViewTextBoxColumn
     Friend WithEvents GrossAmount As DataGridViewTextBoxColumn
     Friend WithEvents DeductibleAmount As DataGridViewTextBoxColumn
-    Friend WithEvents Column25 As DataGridViewTextBoxColumn
-    Friend WithEvents Column26 As DataGridViewTextBoxColumn
-    Friend WithEvents Column28 As DataGridViewTextBoxColumn
-    Friend WithEvents Column27 As DataGridViewTextBoxColumn
-    Friend WithEvents Column29 As DataGridViewTextBoxColumn
-    Friend WithEvents Column30 As DataGridViewTextBoxColumn
-    Friend WithEvents Column31 As DataGridViewTextBoxColumn
-    Friend WithEvents Column32 As DataGridViewTextBoxColumn
-    Friend WithEvents Column33 As DataGridViewTextBoxColumn
     Friend WithEvents Column16 As DataGridViewTextBoxColumn
     Friend WithEvents Column17 As DataGridViewTextBoxColumn
     Friend WithEvents Column18 As DataGridViewTextBoxColumn
@@ -2693,9 +2707,18 @@ Partial Class FRM16Detail
     Friend WithEvents Column34 As DataGridViewTextBoxColumn
     Friend WithEvents Column39 As DataGridViewTextBoxColumn
     Friend WithEvents Column40 As DataGridViewTextBoxColumn
-    Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents Column14 As DataGridViewComboBoxColumn
     Friend WithEvents Column41 As DataGridViewTextBoxColumn
     Friend WithEvents Column15 As DataGridViewTextBoxColumn
     Friend WithEvents Column35 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column25 As DataGridViewTextBoxColumn
+    Friend WithEvents Column26 As DataGridViewTextBoxColumn
+    Friend WithEvents Column28 As DataGridViewTextBoxColumn
+    Friend WithEvents Column27 As DataGridViewTextBoxColumn
+    Friend WithEvents Column29 As DataGridViewTextBoxColumn
+    Friend WithEvents Column30 As DataGridViewTextBoxColumn
+    Friend WithEvents Column31 As DataGridViewTextBoxColumn
+    Friend WithEvents Column32 As DataGridViewTextBoxColumn
+    Friend WithEvents Column33 As DataGridViewTextBoxColumn
 End Class

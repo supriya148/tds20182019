@@ -6,17 +6,18 @@ Public Class FRM16Detail
     Dim oCoObj As New clsCoMst
     Dim WithEvents oForm16 As New clsForm16Details
     Dim WithEvents oForm16More As New clsForm16MoreDetails
-    Dim oAllowances As New Collection_Allowances
-    Dim oOthIncomes As New Collection_OtherIncomes
-    Dim oSec80CDeductions As New Collection_Sec80CDed
-    Dim oChapter6ADeductions As New Collection_VI_A_Deductions
-    Dim oSec80CCFDeductions As New Collection_Sec80CCFDed
-    Dim oSec80CCGDeductions As New Collection_Sec80CCGDed
+    Dim WithEvents oF16Challan As New clsF16Challan
+    'Dim oAllowances As New Collection_Allowances
+    'Dim oOthIncomes As New Collection_OtherIncomes
+    'Dim oSec80CDeductions As New Collection_Sec80CDed
+    'Dim oChapter6ADeductions As New Collection_VI_A_Deductions
+    'Dim oSec80CCFDeductions As New Collection_Sec80CCFDed
+    'Dim oSec80CCGDeductions As New Collection_Sec80CCGDed
     Public xMode As String
     Dim taxcal As Boolean
     Dim transaction As OleDb.OleDbTransaction
 
-    'Dim oForm16 As New Form16Details
+
     Dim frm As New frmdeduteeTDSMST
 
     Dim AllowCboTxt As String, Sec80CcgCboTxt, OthIncCbotxt As String ' StlvwChallan.Items(0).SubItems(1).Textring, Sec80CcgCboTxt As String
@@ -440,11 +441,11 @@ Public Class FRM16Detail
 
 
 
-        grd16allow.Columns(2).Visible = False
-        grd1680c.Columns(2).Visible = False
-        grd1680CCF.Columns(3).Visible = False
-        grd1680CCG.Columns(3).Visible = False
-        grd16OtherIVA.Columns(4).Visible = False
+        'grd16allow.Columns(2).Visible = False
+        'grd1680c.Columns(2).Visible = False
+        'grd1680CCF.Columns(3).Visible = False
+        'grd1680CCG.Columns(3).Visible = False
+        'grd16OtherIVA.Columns(4).Visible = False
         FillParaData()
 
         txtDstatus.Text = ""
@@ -464,9 +465,11 @@ Public Class FRM16Detail
         cmb.Name = "Particulars"
         cmb.Width = 200
         cmb.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+
         Dim cmbOthInc As New DataGridViewComboBoxColumn()
         cmbOthInc.Name = "Particulars"
         cmbOthInc.Width = 200
+        cmb.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
 
         Dim cmbSec80C As New DataGridViewComboBoxColumn()
         cmbSec80C.Name = "Particulars"
@@ -534,39 +537,52 @@ Public Class FRM16Detail
                 End If
             Loop
         End If
-
+        'grd16allow.ColHidden(2) = True
+        'grd16otherIncome.ColHidden(2) = True
+        'grd1680c.ColHidden(3) = True
+        'grd1680CCF.ColHidden(3) = True
+        'grd1680CCG.ColHidden(3) = True
+        'grd16OtherIVA.ColHidden(4) = True
 
 
         grd16allow.Columns.Add(cmb)
         grd16allow.Columns.Add("Rs.", "Rs.")
-        grd16allow.Columns.Add("", "")
-        grd16allow.Columns.Add("", "")
+        grd16allow.Columns.Add("col1", "col1")
+        grd16allow.Columns("col1").Visible = False
+        grd16allow.Columns.Add("col2", "col2")
+        grd16allow.Columns("col2").Visible = False
 
         grd16otherIncome.Columns.Add(cmbOthInc)
         grd16otherIncome.Columns.Add("Rs.", "Rs.")
-        grd16otherIncome.Columns.Add("", "")
-        grd16otherIncome.Columns.Add("", "")
+        grd16otherIncome.Columns.Add("col3", "col3")
+        grd16otherIncome.Columns("col3").Visible = False
+        grd16otherIncome.Columns.Add("col4", "col4")
+        grd16otherIncome.Columns("col4").Visible = False
 
         grd1680c.Columns.Add(cmbSec80C)
         grd1680c.Columns.Add("Gross Amount", "Gross Amount")
         grd1680c.Columns.Add("Deductible Amount", "Deductible Amount")
-        grd1680c.Columns.Add("", "")
+        grd1680c.Columns.Add("col1", "col1")
+        grd1680c.Columns("col1").Visible = False
 
         grd1680CCG.Columns.Add(cmbSec80Ccg)
         grd1680CCG.Columns.Add("Gross Amount", "Gross Amount")
         grd1680CCG.Columns.Add("Deductible Amount", "Deductible Amount")
+        grd1680CCG.Columns.Add("col1", "col1")
+        grd1680CCG.Columns("col1").Visible = False
 
         grd1680CCF.Columns.Add(cmbSec80Ccf)
         grd1680CCF.Columns.Add("Gross Amount", "Gross Amount")
         grd1680CCF.Columns.Add("Deductible Amount", "Deductible Amount")
-        grd1680CCF.Columns.Add("", "")
+        grd1680CCF.Columns.Add("col1", "col1")
+        grd1680CCF.Columns("col1").Visible = False
 
         grd16OtherIVA.Columns.Add(cmbChp6a)
         grd16OtherIVA.Columns.Add("Gross Amount", "Gross Amount")
         grd16OtherIVA.Columns.Add("Qualifying Amount", "Qualifying Amount")
         grd16OtherIVA.Columns.Add("Deductible Amount", "Deductible Amount")
 
-
+        grd16ManualTax.Columns(0).Frozen = True
 
 
 
@@ -783,26 +799,69 @@ Public Class FRM16Detail
                         End If
                     End If
                 Next R
-                'If oForm16More.Insert(oForm16More) = False Then  ', oAllowances, oOthIncomes, oSec80CDeductions, oSec80CCFDeductions, oSec80CCGDeductions, oChapter6ADeductions, grd16ManualTax, Val(txt16grosstotPreEmp.Text), Val(txt16TaxPreEmp.Text), IIf(chkHighRate.Checked = True, True, False)) = False Then
-                '    MsgBox("Unable to save data", vbCritical, "ERROR!!")
-                'Else
+
+                For R = 0 To grd1680c.Rows.Count - 1
+                    If grd1680c.Rows(R).Cells(0).Value <> Nothing Then
+                        If oForm16More.Insert(oForm16More, R, grd1680c, "E") = False Then
+                            MsgBox("Unable to save data", vbCritical, "ERROR!!")
+                            Exit For
+                        End If
+                    End If
+                Next R
+
+                For R = 0 To grd1680CCF.Rows.Count - 1
+                    If grd1680CCF.Rows(R).Cells(0).Value <> Nothing Then
+                        If oForm16More.Insert(oForm16More, R, grd1680CCF, "E") = False Then
+                            MsgBox("Unable to save data", vbCritical, "ERROR!!")
+                            Exit For
+                        End If
+                    End If
+                Next R
+
+                For R = 0 To grd1680CCG.Rows.Count - 1
+                    If grd1680CCG.Rows(R).Cells(0).Value <> Nothing Then
+                        If oForm16More.Insert(oForm16More, R, grd1680CCG, "G") = False Then
+                            MsgBox("Unable to save data", vbCritical, "ERROR!!")
+                            Exit For
+                        End If
+                    End If
+                Next R
+
+
+                For R = 0 To grd16OtherIVA.Rows.Count - 1
+                    If grd16OtherIVA.Rows(R).Cells(0).Value <> Nothing Then
+                        If oForm16More.Insert(oForm16More, R, grd16OtherIVA, "V") = False Then
+                            MsgBox("Unable to save data", vbCritical, "ERROR!!")
+                            Exit For
+                        End If
+                    End If
+                Next R
+
+                For R = 1 To grd16ManualTax.Rows.Count - 2
+                    If grd16ManualTax.Rows(R).Cells(1).Value <> Nothing Then
+                        If oF16Challan.Insert(F16ID, grd16ManualTax.Rows(R).Cells(1).Value, grd16ManualTax.Rows(R).Cells(2).Value, grd16ManualTax.Rows(R).Cells(3).Value, grd16ManualTax.Rows(R).Cells(5).Value, grd16ManualTax.Rows(R).Cells(8).Value, grd16ManualTax.Rows(R).Cells(6).Value, grd16ManualTax.Rows(R).Cells(7).Value, vbNullString) = False Then
+                            MsgBox("Unable to save data", vbCritical, "ERROR!!")
+                            Exit For
+                        End If
+                    End If
+                Next R
+
                 Me.Close()
-                'End If
+
 
             End If
         ElseIf xMode = "E" Then
-            If oForm16.Update(oForm16, oAllowances, oOthIncomes, oSec80CDeductions, oSec80CCFDeductions, oSec80CCGDeductions, oChapter6ADeductions, grd16ManualTax, Val(txt16grosstotPreEmp), Val(txt16TaxPreEmp), IIf(chkHighRate.Checked = True, True, False)) = False Then
-                MsgBox("Unable to save data", vbCritical, "ERROR!!")
-            Else
-                'Data Saved properly...exit this form...and return to main form
-                Me.Close()
-            End If
-        Else
-            MsgBox("Critical Error - xMode not Set n Save Click, Call JAK and report this error!", vbCritical, "FATAL ERROR!")
+            '    If oForm16.Update(oForm16, oAllowances, oOthIncomes, oSec80CDeductions, oSec80CCFDeductions, oSec80CCGDeductions, oChapter6ADeductions, grd16ManualTax, Val(txt16grosstotPreEmp), Val(txt16TaxPreEmp), IIf(chkHighRate.Checked = True, True, False)) = False Then
+            '        MsgBox("Unable to save data", vbCritical, "ERROR!!")
+            '    Else
+            '        'Data Saved properly...exit this form...and return to main form
+            '        Me.Close()
+            '    End If
+            'Else
+            '    MsgBox("Critical Error - xMode not Set n Save Click, Call JAK and report this error!", vbCritical, "FATAL ERROR!")
         End If
 
-        '    End If
-        '    taxcal = False
+
     End Sub
     Private Sub CHECKTAXCAL()
         If Val(txt16Tax.Text) <> Val(txtTax.Text) Or Val(txt16Surcharge.Text) <> Val(txtSurcharge.Text) Or Val(txt16EduCess.Text) <> Val(txtEd.Text) Then
@@ -972,52 +1031,64 @@ Public Class FRM16Detail
 
     Private Sub grd16ManualTax_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles grd16ManualTax.CellBeginEdit
         Dim i As Integer, col As Integer
-        With grd16ManualTax
-            If grd16ManualTax.Rows.Count > 0 And grd16ManualTax.Rows(i).Cells(1).Value > 0 Then
-                '        If Col = 5 Then
-                '            If Len(.TextMatrix(Row, 5)) < 6 Or Len(.TextMatrix(Row, 5)) > 6 Then
-                '                MsgBox "Invalid Cheque number!", 0 + 16
-                '                .EditText = .TextMatrix(Row, 6)
-                '                Exit Sub
-                '            End If
-                '        End If
-                If col = 6 Then
-                    If Len(.Rows(i).Cells(6).Value) < 6 Or Len(.Rows(i).Cells(6).Value) > 7 Then
-                        MsgBox("Length of Bank BSR Code should be 7 Character.", 0 + 16)
-                        '* .EditText = .Rows(i).Cells(6).Value
-                        Exit Sub
-                    End If
-                End If
-                If col = 7 Then
-                    If Not IsDate(.Rows(i).Cells(7).Value) Then
-                        MsgBox("Invalid Date!", 0 + 16)
-                        '*.EditText = .Rows(i).Cells(7).Value
-                        Exit Sub
-                    End If
-                    If .Rows(i).Cells(7).Value = "  /  /    " Or (CDate(.Rows(i).Cells(7).Value) < FromDate Or CDate(.Rows(i).Cells(7).Value) > ToDate) Then
-                        MsgBox("Invalid Date!", 0 + 16)
-                        '.EditText = .TextMatrix(Row, 7)
-                        '.EditCell
-                        Exit Sub
-                    End If
-                End If
-                grd16ManualTax.Rows(i).Cells(4).Value = grd16ManualTax.Rows(i).Cells(1).Value + grd16ManualTax.Rows(i).Cells(2).Value + grd16ManualTax.Rows(i).Cells(3).Value
-            End If
-        End With
-        If grd16ManualTax.Columns.Count < grd16ManualTax.Columns.Count - 1 Then
-            If grd16ManualTax.Columns.Count = 3 Then
-                grd16ManualTax.ColumnCount = grd16ManualTax.Columns.Count + 2
-            Else
-                grd16ManualTax.ColumnCount = grd16ManualTax.Columns.Count + 1
-            End If
+        col = e.ColumnIndex
+        i = e.RowIndex
+        If i <> grd16ManualTax.Rows.GetLastRow(DataGridViewElementStates.None) Then
+            grd16ManualTax.Rows(i).Cells(0).Value = i + 1
         End If
-        ' *       grd16ManualTax.Redraw = True
-        '        grd16ManualTax.Subtotal flexSTSum, -1, 1, "##0", , vbRed, False, "Total:"
-        'grd16ManualTax.Subtotal flexSTSum, -1, 2, "##0", , vbRed, False, "Total:"
-        'grd16ManualTax.Subtotal flexSTSum, -1, 3, "##0", , vbRed, False, "Total:"
-        'grd16ManualTax.Subtotal flexSTSum, -1, 4, "##0", , vbRed, False, "Total:"
-        Dim r As Integer = grdchallanDetails.RowCount - 1
-        txt16TDS1.Text = grdchallanDetails.Rows(r).Cells(4).Value + grd16ManualTax.Rows(r).Cells(4).Value
+
+        'With grd16ManualTax
+        '    If i > -1 And grd16ManualTax.Rows(i).Cells(1).Value > 0 Then
+        '        '        If Col = 5 Then
+        '        '            If Len(.TextMatrix(Row, 5)) < 6 Or Len(.TextMatrix(Row, 5)) > 6 Then
+        '        '                MsgBox "Invalid Cheque number!", 0 + 16
+        '        '                .EditText = .TextMatrix(Row, 6)
+        '        '                Exit Sub
+        '        '            End If
+        '        '        End If
+        '        If col = 6 Then
+        '            If (Len(.Rows(i).Cells(6).Value) < 6 Or Len(.Rows(i).Cells(6).Value) > 7) And Len(.Rows(i).Cells(6).Value) > 0 Then
+        '                MsgBox("Length of Bank BSR Code should be 7 Character.", 0 + 16)
+        '                '* .EditText = .Rows(i).Cells(6).Value
+        '                e.Cancel = True
+        '                .Item(6, 1).Selected = True
+        '                Exit Sub
+        '            End If
+        '        End If
+        '        If col = 7 Then
+        '            If Not IsDate(.Rows(i).Cells(7).Value) Then
+        '                MsgBox("Invalid Date!", 0 + 16)
+        '                '*.EditText = .Rows(i).Cells(7).Value
+        '                e.Cancel = True
+        '                Exit Sub
+        '            End If
+        '            If .Rows(i).Cells(7).Value = "  /  /    " Or (CDate(.Rows(i).Cells(7).Value) < FromDate Or CDate(.Rows(i).Cells(7).Value) > ToDate) Then
+        '                MsgBox("Invalid Date!", 0 + 16)
+        '                e.Cancel = True
+        '                '.EditText = .TextMatrix(Row, 7)
+        '                '.EditCell
+        '                Exit Sub
+        '            End If
+        '        End If
+        '        grd16ManualTax.Rows(i).Cells(4).Value = grd16ManualTax.Rows(i).Cells(1).Value + grd16ManualTax.Rows(i).Cells(2).Value + grd16ManualTax.Rows(i).Cells(3).Value
+        '    End If
+        'End With
+        'If col < grd16ManualTax.Columns.Count - 1 Then
+        '    If col = 3 Then
+        '        grd16ManualTax.Columns.Item(col + 2).Selected = True
+        '    Else
+        '        grd16ManualTax.Columns.Item(col + 1).Selected = True
+        '    End If
+        'End If
+
+        '' *       grd16ManualTax.Redraw = True
+        ''        grd16ManualTax.Subtotal flexSTSum, -1, 1, "##0", , vbRed, False, "Total:"
+        ''grd16ManualTax.Subtotal flexSTSum, -1, 2, "##0", , vbRed, False, "Total:"
+        ''grd16ManualTax.Subtotal flexSTSum, -1, 3, "##0", , vbRed, False, "Total:"
+        ''grd16ManualTax.Subtotal flexSTSum, -1, 4, "##0", , vbRed, False, "Total:"
+
+        'Dim r As Integer = grdchallanDetails.RowCount - 1
+        'txt16TDS1.Text = grdchallanDetails.Rows(r).Cells(4).Value + grd16ManualTax.Rows(grd16ManualTax.RowCount - 1).Cells(4).Value
     End Sub
 
     Private Sub txt16EntAllow_TextChanged(sender As Object, e As EventArgs) Handles txt16EntAllow.TextChanged
@@ -1750,6 +1821,10 @@ Public Class FRM16Detail
         CalculateSalaryNTax()
     End Sub
 
+    Private Sub grd16ManualTax_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles grd16ManualTax.CellContentClick
+
+    End Sub
+
     Private Sub grd1680CCG_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grd1680CCG.CellValueChanged
         CalculateSalaryNTax()
     End Sub
@@ -1760,5 +1835,232 @@ Public Class FRM16Detail
 
     Private Sub grd16OtherIVA_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles grd16OtherIVA.CellValueChanged
         CalculateSalaryNTax()
+    End Sub
+
+    Private Sub cbo16DedName_Validating(sender As Object, e As CancelEventArgs) Handles cbo16DedName.Validating
+        Dim rs As New DataSet
+        If cbo16DedName.SelectedIndex = -1 Or Trim(cbo16DedName.Text) = "" Then
+            MsgBox("Please select a deductee first..", vbInformation, "No Deductee Selected")
+            tabForm16.Enabled = False
+            e.Cancel = True
+        Else
+            tabForm16.Enabled = True
+            Call frmTDS24Q.FillFrm16DataUsingDID(cbo16DedName.SelectedValue)
+        End If
+
+        rs = FetchDataSet("SELECT SUM(amtofpayment) FROM Deductee24Q WHERE DID=" & cbo16DedName.SelectedValue)
+        txtAllTax.Text = rs.Tables(0).Rows(0)(0).ToString()
+        rs.Dispose()
+    End Sub
+
+    Private Sub FRM16Detail_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        'update the parent form...when we unload this form...so that the parent form reflects updated data...
+        If Not frmTDS24Q.Tag = vbNullString Then
+            Call frmTDS.Load24QData(frmTDS24Q.Tag)
+        End If
+        Me.Dispose()
+    End Sub
+
+    Private Sub grd16ManualTax_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles grd16ManualTax.CellEndEdit
+        Dim i As Integer, col As Integer
+        col = e.ColumnIndex
+        i = e.RowIndex
+        With grd16ManualTax
+
+            '    If i > -1 And .Rows(i).Cells(1).Value > 0 Then
+            '        '        If Col = 5 Then
+            '        '            If Len(.TextMatrix(Row, 5)) < 6 Or Len(.TextMatrix(Row, 5)) > 6 Then
+            '        '                MsgBox "Invalid Cheque number!", 0 + 16
+            '        '                .EditText = .TextMatrix(Row, 6)
+            '        '                Exit Sub
+            '        '            End If
+            '        '        End If
+
+            '        If col = 6 Then
+            '            If Len(.Rows(i).Cells(6).Value) < 6 Or Len(.Rows(i).Cells(6).Value) > 7 Then
+            '                MsgBox("Length of Bank BSR Code should be 7 Character.", 0 + 16)
+            '                .Rows(i).Cells(6).Value = ""
+            '                .CurrentCell = .Rows(i).Cells(6)
+            '                .CurrentCell.Selected = True
+            '                .BeginEdit(True)
+
+            '                Exit Sub
+            '            End If
+            '        End If
+            '        If col = 7 Then
+            '            If Not IsDate(.Rows(i).Cells(7).Value) Then
+            '                MsgBox("Invalid Date!", 0 + 16)
+            '                .Rows(i).Cells(7).Value = "  /  /    "
+
+            '                .CurrentCell = .Rows(i).Cells(7)
+            '                .CurrentCell.Selected = True
+            '                .BeginEdit(True)
+
+            '                Exit Sub
+            '            End If
+            '            If .Rows(i).Cells(7).Value = "  /  /    " Or (CDate(.Rows(i).Cells(7).Value) < FromDate Or CDate(.Rows(i).Cells(7).Value) > ToDate) Then
+            '                MsgBox("Invalid Date!", 0 + 16)
+            '                .CurrentCell = .Rows(i).Cells(7)
+            '                .CurrentCell.Selected = True
+            '                .BeginEdit(True)
+            '                Exit Sub
+            '            End If
+            '        End If
+            '        .Rows(i).Cells(4).Value = Val(.Rows(i).Cells(1).Value) + Val(.Rows(i).Cells(2).Value) + Val(.Rows(i).Cells(3).Value)
+            '    End If
+
+            '    If col < .Columns.Count - 1 Then
+            '        If col = 3 Then
+            '            .Columns.Item(col + 2).Selected = True
+            '        Else
+            '            .Columns.Item(col + 1).Selected = True
+            '        End If
+            '    End If
+            Dim totTDS As Double, totSUR As Double, totECESS As Double, tot As Double
+            totTDS = 0
+            totSUR = 0
+            totECESS = 0
+            tot = 0
+            For i = 0 To .Rows.Count - 2
+                totTDS = totTDS + Val(.Rows(i).Cells(1).Value)
+                totSUR = totSUR + Val(.Rows(i).Cells(2).Value)
+                totECESS = totECESS + Val(.Rows(i).Cells(3).Value)
+                tot = tot + Val(.Rows(i).Cells(4).Value)
+            Next
+            Dim rw As Integer = .Rows.GetLastRow(DataGridViewElementStates.None)
+            If .Rows.Count > 1 Then
+
+                .Rows(rw).Cells(0).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(0).Value = "Total:"
+                .Rows(rw).Cells(1).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(1).Value = Format(totTDS, "##0")
+                .Rows(rw).Cells(2).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(2).Value = Format(totSUR, "##0")
+                .Rows(rw).Cells(3).Style.ForeColor = Color.Red
+                .Rows(rw).Cells(3).Value = Format(totECESS, "##0")
+                .Rows(rw).Cells(4).Value = Format(tot, "##0")
+                .Rows(rw).Cells(4).Style.ForeColor = Color.Red
+            End If
+            txt16TDS1.Text = grdchallanDetails.Rows(grdchallanDetails.Rows.GetLastRow(DataGridViewElementStates.None)).Cells(4).Value + grd16ManualTax.Rows(rw).Cells(4).Value
+        End With
+
+    End Sub
+
+    Private Sub grd16ManualTax_Validating(sender As Object, e As CancelEventArgs) Handles grd16ManualTax.Validating
+        'Dim i As Integer, totTDS As Double, totSUR As Double, totECESS As Double
+        'With grd16ManualTax
+        '    For i = 0 To .Rows.Count - 1
+        '        totTDS = totTDS + Val(.Rows(i).Cells(1).Value)
+        '        totSUR = totSUR + Val(.Rows(i).Cells(2).Value)
+        '        totECESS = totECESS + Val(.Rows(i).Cells(3).Value)
+
+        '    Next
+
+        '    Dim rw As Integer = .Rows.GetLastRow(DataGridViewElementStates.None)
+        '    .Rows(rw).Cells(0).Style.ForeColor = Color.Red
+        '    .Rows(rw).Cells(0).Value = "Total:"
+        '    .Rows(rw).Cells(1).Style.ForeColor = Color.Red
+        '    .Rows(rw).Cells(1).Value = Format(totTDS, "##0")
+        '    .Rows(rw).Cells(2).Style.ForeColor = Color.Red
+        '    .Rows(rw).Cells(2).Value = Format(totSUR, "##0")
+        '    .Rows(rw).Cells(3).Style.ForeColor = Color.Red
+        '    .Rows(rw).Cells(3).Value = Format(totECESS, "##0")
+        '    'txt16TDS1.Text = grdchallanDetails.Rows(r).Cells(4).Value + grd16ManualTax.Rows(grd16ManualTax.RowCount - 1).Cells(4).Value
+
+        'End With
+
+    End Sub
+
+    Private Sub grd16ManualTax_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles grd16ManualTax.CellValidating
+        Dim i As Integer, col As Integer
+        col = e.ColumnIndex
+        i = e.RowIndex
+
+        With grd16ManualTax
+
+            If i > -1 And .Rows(i).Cells(1).Value > 0 And .Rows.GetLastRow(DataGridViewElementStates.None) <> i Then
+
+
+                If col = 6 Then
+                    If Len(e.FormattedValue) < 6 Or Len(e.FormattedValue) > 7 Then
+                        MsgBox("Length of Bank BSR Code should be 7 Character.", 0 + 16)
+                        e.Cancel = True
+
+
+                        Exit Sub
+                    End If
+                End If
+                If col = 7 Then
+                    If Not IsDate(e.FormattedValue) Then
+                        MsgBox("Invalid Date!", 0 + 16)
+                        e.Cancel = True
+
+
+                        Exit Sub
+                    End If
+                    If e.FormattedValue = "  /  /    " Or (CDate(e.FormattedValue) < FromDate Or CDate(e.FormattedValue) > ToDate) Then
+                        MsgBox("Invalid Date!", 0 + 16)
+                        e.Cancel = True
+
+                        Exit Sub
+                    End If
+                End If
+                .Rows(i).Cells(4).Value = Val(.Rows(i).Cells(1).Value) + Val(.Rows(i).Cells(2).Value) + Val(.Rows(i).Cells(3).Value)
+            End If
+
+            If col < .Columns.Count - 1 Then
+                If col = 3 Then
+                    .Columns.Item(col + 2).Selected = True
+                Else
+                    .Columns.Item(col + 1).Selected = True
+                End If
+            End If
+        End With
+    End Sub
+
+    Private Sub grd16ManualTax_KeyDown(sender As Object, e As KeyEventArgs) Handles grd16ManualTax.KeyDown
+
+    End Sub
+
+    Private Sub grd16ManualTax_KeyUp(sender As Object, e As KeyEventArgs) Handles grd16ManualTax.KeyUp
+        Dim R As Integer
+        With grd16ManualTax
+            R = .CurrentCell.RowIndex
+            If e.KeyCode = Keys.Down Then
+
+                If R = .Rows.GetLastRow(DataGridViewElementStates.None) Then
+
+                    If .Rows(R - 1).Cells(1).Value > 0 Then
+                        If .Rows(R - 1).Cells(6).Value <> Nothing And .Rows(R - 1).Cells(7).Value <> Nothing And .Rows(R - 1).Cells(8).Value <> Nothing Then
+                            .Rows.Add()
+                            .CurrentCell = .Rows(.Rows.GetLastRow(DataGridViewElementStates.None) - 1).Cells(1)
+                            .Rows(.Rows.GetLastRow(DataGridViewElementStates.None) - 1).Cells(1).Selected = True
+
+                        End If
+                    End If
+                End If
+            End If
+        End With
+    End Sub
+
+
+    Private Sub TabPage5_Click(sender As Object, e As EventArgs) Handles TabPage5.Click
+
+    End Sub
+
+    Private Sub TabPage5_Enter(sender As Object, e As EventArgs) Handles TabPage5.Enter
+        Dim r As Integer
+        r = grd16ManualTax.Rows.GetLastRow(DataGridViewElementStates.None)
+        If r > 0 Then
+            grd16ManualTax.CurrentCell = grd16ManualTax.Rows(r - 1).Cells(1)
+            grd16ManualTax.Rows(r - 1).Cells(1).Selected = True
+        Else
+            grd16ManualTax.CurrentCell = grd16ManualTax.Rows(r).Cells(1)
+            grd16ManualTax.Rows(r).Cells(1).Selected = True
+        End If
+    End Sub
+
+    Private Sub TabPage5_GotFocus(sender As Object, e As EventArgs) Handles TabPage5.GotFocus
+
     End Sub
 End Class
