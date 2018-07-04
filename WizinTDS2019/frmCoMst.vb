@@ -1507,10 +1507,12 @@ Public Class frmCoMst
     Private Sub cmbDeduStatus_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboGovtDetails.SelectedIndexChanged
         If Mode <> "X" Then
             Try
-                If cboGovtDetails.SelectedValue = "A" Or cboGovtDetails.SelectedValue = "S" Or cboGovtDetails.SelectedValue = "D" Or cboGovtDetails.SelectedValue = "E" Or cboGovtDetails.SelectedValue = "N" Or cboGovtDetails.SelectedValue = "L" Or cboGovtDetails.SelectedValue = "G" Or cboGovtDetails.SelectedValue = "H" Then
-                    cmdGovtDetails.Enabled = True
-                Else
-                    cmdGovtDetails.Enabled = False
+                If cboGovtDetails.SelectedText <> "" Then
+                    If cboGovtDetails.SelectedText = "A" Or cboGovtDetails.SelectedText = "S" Or cboGovtDetails.SelectedText = "D" Or cboGovtDetails.SelectedText = "E" Or cboGovtDetails.SelectedText = "N" Or cboGovtDetails.SelectedText = "L" Or cboGovtDetails.SelectedValue = "G" Or cboGovtDetails.SelectedText = "H" Then
+                        cmdGovtDetails.Enabled = True
+                    Else
+                        cmdGovtDetails.Enabled = False
+                    End If
                 End If
             Catch
             End Try

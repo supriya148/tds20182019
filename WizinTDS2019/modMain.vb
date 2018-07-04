@@ -67,7 +67,7 @@ Module modMain
         If UCase(startpath) <> UCase(InstallPath) Then
             'Check for lan path..
             If Left(Application.StartupPath, 2) = "\\" Or Left(Application.StartupPath, 2) = "//" Then
-                If UCase(Left(Application.StartupPath, 23)) <> UCase(Replace(InstallPath, ":", "")) Then
+                If UCase(Right(Application.StartupPath, 23)) <> UCase(Replace(InstallPath, ":", "")) Then
                     IsPathOk = False
                 Else
                     IsPathOk = True
